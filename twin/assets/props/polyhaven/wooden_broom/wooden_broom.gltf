@@ -1,0 +1,409 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.1.20",
+    "version": "2.0"
+  },
+  "extensionsUsed": [
+    "KHR_materials_clearcoat"
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "wooden_broom_bristles"
+    },
+    {
+      "mesh": 1,
+      "name": "wooden_broom_handle"
+    },
+    {
+      "mesh": 2,
+      "name": "wooden_broom"
+    }
+  ],
+  "materials": [
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "name": "wooden_broom_bristles",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      }
+    },
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.10000000149011612
+        }
+      },
+      "name": "wooden_broom",
+      "normalTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicRoughnessTexture": {
+          "index": 3
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "Mesh.016",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1
+        }
+      ]
+    },
+    {
+      "name": "Mesh.017",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 8,
+            "NORMAL": 9,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 1
+        },
+        {
+          "attributes": {
+            "POSITION": 12,
+            "NORMAL": 13,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "wooden_broom_bristles_diff-wooden_broom_bristles_alpha",
+      "uri": "textures/wooden_broom_bristles_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "wooden_broom_nor_gl",
+      "uri": "textures/wooden_broom_nor_gl_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "wooden_broom_diff",
+      "uri": "textures/wooden_broom_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "wooden_broom_metal-wooden_broom_rough",
+      "uri": "textures/wooden_broom_arm_1k.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 2656,
+      "max": [
+        0.24511872231960297,
+        -0.05074693635106087,
+        0.056257061660289764
+      ],
+      "min": [
+        -0.24511872231960297,
+        -0.12228141725063324,
+        -0.05625704303383827
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2656,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 2656,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 4416,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 2189,
+      "max": [
+        0.014300190843641758,
+        1.3312864303588867,
+        0.013471000827848911
+      ],
+      "min": [
+        -0.014091200195252895,
+        -0.04106910154223442,
+        -0.01406374666839838
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 2189,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 2189,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5123,
+      "count": 10206,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5126,
+      "count": 4291,
+      "max": [
+        0.20716148614883423,
+        0.03868750482797623,
+        0.024454161524772644
+      ],
+      "min": [
+        -0.20716148614883423,
+        -0.05344630777835846,
+        -0.024454155936837196
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5126,
+      "count": 4291,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 10,
+      "componentType": 5126,
+      "count": 4291,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 11,
+      "componentType": 5123,
+      "count": 16812,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 12,
+      "componentType": 5126,
+      "count": 4095,
+      "max": [
+        0.23087503015995026,
+        -0.05116988718509674,
+        0.0450943186879158
+      ],
+      "min": [
+        -0.23087503015995026,
+        -0.12093688547611237,
+        -0.04509430006146431
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 13,
+      "componentType": 5126,
+      "count": 4095,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 14,
+      "componentType": 5126,
+      "count": 4095,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 15,
+      "componentType": 5123,
+      "count": 11340,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 31872,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 31872,
+      "byteOffset": 31872,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 21248,
+      "byteOffset": 63744,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 8832,
+      "byteOffset": 84992,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 26268,
+      "byteOffset": 93824,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 26268,
+      "byteOffset": 120092,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 17512,
+      "byteOffset": 146360,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 20412,
+      "byteOffset": 163872,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 51492,
+      "byteOffset": 184284,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 51492,
+      "byteOffset": 235776,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 34328,
+      "byteOffset": 287268,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 33624,
+      "byteOffset": 321596,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 49140,
+      "byteOffset": 355220,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 49140,
+      "byteOffset": 404360,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 32760,
+      "byteOffset": 453500,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 22680,
+      "byteOffset": 486260,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 508940,
+      "uri": "wooden_broom.bin"
+    }
+  ]
+}

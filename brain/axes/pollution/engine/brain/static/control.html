@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock Twin — Controls</title>
+<style>
+  :root { --bg: #0f1419; --panel: #171e26; --line: #26313d; --text: #e6edf3; --muted: #8b98a5;
+          --red: #ef4444; --green: #22c55e; --orange: #f97316; --blue: #4aa3ff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 16px; }
+  h1 { font-size: 18px; margin: 0 0 4px; } p.note { color: var(--muted); margin: 0 0 16px; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+  .card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; }
+  button { background: #222c37; color: var(--text); border: 1px solid var(--line); border-radius: 6px;
+           padding: 8px 10px; margin: 0 6px 6px 0; cursor: pointer; font: inherit; font-size: 14px; }
+  button:hover { border-color: var(--blue); }
+  button.attack { border-color: var(--red); } button.fix { border-color: var(--green); }
+  select { background: #222c37; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 7px; font: inherit; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; }
+  td, th { padding: 4px 6px; border-bottom: 1px solid var(--line); text-align: left; }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; }
+  .lie { color: var(--red); font-weight: 600; }
+  #notes { font: 13px ui-monospace, Consolas, monospace; color: var(--muted); white-space: pre-wrap; }
+  #msg { margin: 10px 0; min-height: 1.4em; color: var(--orange); }
+</style>
+</head>
+<body>
+<h1>Mock Twin · demo controls</h1>
+<p class="note">Test scaffolding only: these buttons act on the mock Twin and mock Guardian. The Brain is not told anything — it only sees what arrives over HTTP. City time <b id="clock">--:--</b> · <a style="color:var(--blue)" href="http://127.0.0.1:8100/timeline" target="_blank">open timeline</a></p>
+<div class="grid">
+  <div class="card">
+    <h2>Pick a bin</h2>
+    <select id="bin"></select>
+    <h2 style="margin-top:14px">Attack and incident</h2>
+    <button class="attack" data-a="spoof" data-v="98">Fake reading: report 98%</button>
+    <button class="fix" data-a="unspoof">Stop the fake</button>
+    <button data-a="surge">Real incident: bin fills fast</button>
+    <h2 style="margin-top:8px">Sensor</h2>
+    <button data-a="silence">Sensor goes silent</button>
+    <button class="fix" data-a="unsilence">Sensor sends again</button>
+    <button data-a="malformed">Send a malformed reading</button>
+  </div>
+  <div class="card">
+    <h2>Partners</h2>
+    <button class="attack" data-a="guardian_down">Guardian down</button>
+    <button class="fix" data-a="guardian_up">Guardian back</button><br>
+    <button class="attack" data-a="twin_offline">Twin refuses dispatches</button>
+    <button class="fix" data-a="twin_online">Twin accepts again</button>
+    <h2 style="margin-top:8px">Simulation</h2>
+    <button data-a="pause">Pause</button><button data-a="resume">Resume</button>
+    <div id="msg"></div>
+    <div id="notes"></div>
+  </div>
+  <div class="card">
+    <h2>Air quality</h2>
+    <button class="attack" data-a="air_spike" data-s="AIR-05">Fake PM2.5 spike on AIR-05 (schools)</button>
+    <button class="attack" data-a="air_cap" data-s="AIR-07">Plant caps its sensor AIR-07</button>
+    <button class="fix" data-a="air_stop">Stop the air fakes</button><br>
+    <button data-a="air_release" data-s="D">Real release in zone D (plant)</button>
+    <button class="fix" data-a="air_release_stop">Release over</button>
+    <table style="margin-top:8px"><thead><tr><th>sensor</th><th>zone</th><th>real PM2.5</th><th>reported</th></tr></thead><tbody id="airbody"></tbody></table>
+    <div id="lots" style="margin-top:8px; font-size:14px; color:var(--muted)"></div>
+  </div>
+  <div class="card">
+    <h2>The truth inside the Twin</h2>
+    <table><thead><tr><th>bin</th><th>real</th><th>reported</th><th>overflow</th></tr></thead><tbody id="tbody"></tbody></table>
+    <div id="trucks" style="margin-top:8px; font-size:14px"></div>
+  </div>
+</div>
+<script>
+(() => {
+  const sel = document.getElementById("bin"), msg = document.getElementById("msg");
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  document.querySelectorAll("button[data-a]").forEach(b => b.addEventListener("click", async () => {
+    const body = {action: b.dataset.a};
+    if (b.dataset.s) body.sensor_id = b.dataset.s;
+    else if (!["guardian_down","guardian_up","twin_offline","twin_online","pause","resume","air_stop","air_release_stop"].includes(b.dataset.a)) body.sensor_id = sel.value;
+    if (b.dataset.v) body.value = Number(b.dataset.v);
+    try {
+      const r = await fetch("/v1/control", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+      const j = await r.json(); msg.textContent = j.done || j.error;
+    } catch (e) { msg.textContent = "mock Twin unreachable"; }
+    refresh();
+  }));
+  async function refresh() {
+    try {
+      const s = await fetch("/v1/status", {cache: "no-store"}).then(r => r.json());
+      document.getElementById("clock").textContent = s.city_time.slice(11, 16) + (s.paused ? " (paused)" : "");
+      const ids = Object.keys(s.bins);
+      if (sel.options.length !== ids.length) { const keep = sel.value || "b06";
+        sel.innerHTML = ids.map(i => `<option${i === keep ? " selected" : ""}>${esc(i)}</option>`).join(""); }
+      document.getElementById("tbody").innerHTML = ids.map(i => { const b = s.bins[i];
+        return `<tr><td>${esc(i)}${b.silent ? " 🔇" : ""}</td><td>${b.real_pct}%</td>
+          <td class="${b.reported_pct != null ? "lie" : ""}">${b.reported_pct != null ? b.reported_pct + "%" : "="}</td>
+          <td>${b.overflow_kg ? b.overflow_kg + " kg" : "—"}</td></tr>`; }).join("");
+      document.getElementById("trucks").innerHTML = Object.entries(s.trucks).map(([k, t]) =>
+        `<b>${esc(k)}</b> at ${esc(t.node)} · ${esc(t.status)} · ${t.load_kg} kg`).join("<br>") +
+        `<br><span style="color:var(--muted)">Guardian ${s.guardian_down ? "DOWN" : "up"} · Twin ${s.twin_offline ? "refusing dispatches" : "accepting dispatches"}</span>`;
+      document.getElementById("airbody").innerHTML = Object.entries(s.air || {}).map(([k, a]) =>
+        `<tr><td>${esc(k)}</td><td>${esc(a.zone)}</td><td>${a.real_pm25}</td>
+         <td class="${a.reported_pm25 != null ? "lie" : ""}">${a.reported_pm25 != null ? a.reported_pm25 : "="}</td></tr>`).join("");
+      document.getElementById("lots").textContent = "Car parks: " + Object.entries(s.barriers || {}).map(([l, m]) => `${l} ${m}`).join(" · ");
+      document.getElementById("notes").textContent = s.notes.slice().reverse().join("\n");
+    } catch (e) { msg.textContent = "mock Twin unreachable"; }
+  }
+  refresh(); setInterval(refresh, 1000);
+})();
+</script>
+</body>
+</html>

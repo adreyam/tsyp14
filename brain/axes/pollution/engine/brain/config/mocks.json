@@ -1,0 +1,7 @@
+{
+  "_comment": "Mock Twin and mock Guardian, to run the City Brain alone over HTTP. One tick = 5 city minutes.",
+  "twin":      { "host": "127.0.0.1", "port": 8200, "tick_real_s": 1.0, "trucks": 2, "truck_capacity_kg": 200 },
+  "guardian":  { "host": "127.0.0.1", "port": 8300 },
+  "brain_url": "http://127.0.0.1:8100",
+  "auth":      { "brain_token_env": "BRAIN_TOKEN", "twin_token_env": "TWIN_TOKEN" }
+}

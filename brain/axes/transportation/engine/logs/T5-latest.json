@@ -1,0 +1,45 @@
+{
+ "id": "T5",
+ "started": "2026-11-05T22:55:21.303Z",
+ "finished": "2026-11-05T22:55:33.368Z",
+ "pass": true,
+ "checks": [
+  {
+   "text": "d2 is parked with an active session",
+   "ok": true
+  },
+  {
+   "text": "the Brain received the verdict and isolated the barrier",
+   "ok": true
+  },
+  {
+   "text": "the Brain WITHHELD the 'open barrier' command and said why",
+   "ok": true
+  },
+  {
+   "text": "no 'open' command for that barrier reached the Twin",
+   "ok": true
+  },
+  {
+   "text": "the administration got a notice (ACTUATOR_QUARANTINED)",
+   "ok": true
+  },
+  {
+   "text": "the car is still waiting at the exit",
+   "ok": true
+  },
+  {
+   "text": "manual override accepted",
+   "ok": true
+  },
+  {
+   "text": "the override is logged and the Twin received the command",
+   "ok": true
+  },
+  {
+   "text": "the car left the lot",
+   "ok": true
+  }
+ ],
+ "log": "T5-20261105-235521.log"
+}

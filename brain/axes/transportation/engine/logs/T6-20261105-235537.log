@@ -1,0 +1,20 @@
+# scenario T6 Duplicate RFID: a second car arrives with the tag of a car that is already parked.
+# started 2026-11-05T22:55:37.532Z
+2026-11-05T22:55:37.532Z [TEST    ] scenario_start: T6 Duplicate RFID: a second car arrives with the tag of a car that is already parked.  (ref T6)
+2026-11-05T22:55:46.338Z [ACTUATOR] command: open barrier:P04-ENT1 {'lot_id': 'P04'} - ticket / exit authorised
+2026-11-05T22:55:46.341Z [ACTUATOR] command_ack: barrier:P04-ENT1 open -> Twin: HTTP 202
+2026-11-05T22:55:59.371Z [BRAIN   ] alert: DUPLICATE_ENTRY at P07-ENT1: Vehicle d6 (RFID_D06) tried to enter at P07-ENT1 while session TKT-P04-20261105-BF0497 is active in lot P04.  (ref P07-ENT1)
+2026-11-05T22:56:00.259Z [TEST    ] check_pass: the gate refused d13 (lane BLOCKED)  (ref T6)
+2026-11-05T22:56:00.271Z [TEST    ] check_pass: the alert DUPLICATE_ENTRY is on the timeline  (ref T6)
+2026-11-05T22:56:00.278Z [TEST    ] check_pass: the Brain reported the security event to the Guardian  (ref T6)
+2026-11-05T22:56:04.286Z [TEST    ] check_pass: the entrance barrier did NOT open for the duplicate (no 'open' command sent to the Twin while the lane is blocked)  (ref T6)
+2026-11-05T22:56:04.303Z [TEST    ] check_pass: the administrator allowed a visitor card  (ref T6)
+2026-11-05T22:56:04.520Z [ACTUATOR] command: open barrier:P07-ENT1 {'lot_id': 'P07'} - ticket / exit authorised
+2026-11-05T22:56:04.525Z [ACTUATOR] command_ack: barrier:P07-ENT1 open -> Twin: HTTP 202
+2026-11-05T22:56:05.031Z [TEST    ] check_pass: d13 received a ticket with a temporary card (not the registered tag)  (ref T6)
+2026-11-05T22:56:07.217Z [TEST    ] check_pass: d13 parked  (ref T6)
+2026-11-05T22:56:09.042Z [ACTUATOR] command: open barrier:P07-EXIT1 {'lot_id': 'P07'} - ticket / exit authorised
+2026-11-05T22:56:09.045Z [ACTUATOR] command_ack: barrier:P07-EXIT1 open -> Twin: HTTP 202
+2026-11-05T22:56:09.315Z [TEST    ] check_pass: d13 left with the card returned (session closed)  (ref T6)
+2026-11-05T22:56:09.321Z [TEST    ] scenario_end: T6 PASS (8/8 checks)  (ref T6)
+# finished 2026-11-05T22:56:09.321Z  RESULT PASS

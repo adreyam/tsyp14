@@ -1,0 +1,17 @@
+SCENARIO TR03 · Signal failure at a junction
+Result: STOPPED   Source: live   Duration: 2 s   Stopped at 1.7 s
+
+What it tests: A junction's signal controller fails in zone K (INCIDENTS trigger signal_failure at
+  Junction_r6_c6); the Twin sends a police car to direct the traffic.
+
+WHAT HAPPENED (time from the start of the run)
+
++   3 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 12 km/h (limit 12) for 3 readings
+                           in a row
+                   +   3 s  command: signal r6c4 north-south green -> done
+
+BY AXIS
+  transportation   1 decision(s),   1 command(s),  0 refused / not sent
+
+Full record (every reading, verdict and answer, one JSON per line): TR03-20261108-203109.jsonl

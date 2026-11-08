@@ -1,0 +1,153 @@
+{
+  "id": "PO03",
+  "name": "Garbage truck round",
+  "interaction": "Twin → Brain (waste, the truck drives)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "Three bins of zone J fill up (WGT-T005, T006 above 75 %, T009 above 90 %): the Brain orders one garbage-truck round for zone J, starting at the zone's first container (BIN-24), and empties the fullest bin at once.",
+  "expected": {
+    "twin": "The containers of zone J fill up; the garbage truck leaves the sanitation depot and drives a round of zone J's containers (BIN-24 first) along the roads, the camera riding with it; each container it tips reads empty again.",
+    "guardian": "Trusted.",
+    "brain": "Pollution: three bins above 75 % in one zone: order a garbage-truck round for zone J (INCIDENTS trigger garbage_collection from BIN-24); WGT-T009 above 90 %: a crew empties it now."
+  },
+  "how_to_verify": "Top bar pollution: 'Garbage truck round …' then resolved; map and Twin camera follow the truck; logs/PO03-*.jsonl. On the live Twin the scenario fills zone J's containers (WASTE fill, device API) so the Brain orders the round itself; it also starts it at BIN-24 in case the Brain's round cooldown is still running (the Twin keeps one round at a time, so it is never doubled).",
+  "duration_s": 90,
+  "speed": 4,
+  "live_duration_s": 300,
+  "steps": [
+    {
+      "at": 2,
+      "do": "twin_command",
+      "id": "WASTE",
+      "command": "fill",
+      "value": {
+        "zone": "J",
+        "levels": [
+          58,
+          62,
+          55,
+          60
+        ]
+      },
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 4,
+      "do": "ramp",
+      "device": "WGT-T005",
+      "metric": "fill_level",
+      "to": 82,
+      "over": 6,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 4,
+      "do": "ramp",
+      "device": "WGT-T006",
+      "metric": "fill_level",
+      "to": 82,
+      "over": 6,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 4,
+      "do": "ramp",
+      "device": "WGT-T009",
+      "metric": "fill_level",
+      "to": 96,
+      "over": 6,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 5,
+      "do": "twin_command",
+      "id": "WASTE",
+      "command": "fill",
+      "value": {
+        "zone": "J",
+        "levels": [
+          86,
+          82,
+          79,
+          84
+        ]
+      },
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 9,
+      "do": "twin_command",
+      "id": "INCIDENTS",
+      "command": "trigger",
+      "value": {
+        "kind": "garbage_collection",
+        "bin": "BIN-24",
+        "zone": "J",
+        "x": -183.3,
+        "z": 46.5
+      },
+      "modes": [
+        "live"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "expect": "situation",
+      "axis": "pollution",
+      "kind": "garbage_round"
+    },
+    {
+      "expect": "action",
+      "action_type": "garbage_round",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "record",
+      "kind": "action",
+      "contains": "zone J",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "WGT-T009",
+      "command": "empty",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "only_zone",
+      "zone": "J",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py PO03   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "pollution",
+  "focus": {
+    "zone": "J",
+    "follow": "units"
+  }
+}

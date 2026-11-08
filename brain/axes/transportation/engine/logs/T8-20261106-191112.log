@@ -1,0 +1,14 @@
+# scenario T8 A traffic jam: 300 extra cars flood the city; the trained signals must cope and the city must get moving again.
+# started 2026-11-06T18:11:12.966Z
+2026-11-06T18:11:12.967Z [TEST    ] scenario_start: T8 A traffic jam: 300 extra cars flood the city; the trained signals must cope and the city must get moving again.  (ref T8)
+2026-11-06T18:11:16.140Z [BRAIN   ] jam: TRAFFIC JAM TEST: 300 extra cars enter within 60 s (signals: train mode)
+2026-11-06T18:11:16.145Z [TEST    ] check_pass: the Brain accepted the jam test  (ref T8)
+2026-11-06T18:11:20.235Z [TEST    ] check_pass: all 300 extra cars entered the city  (ref T8)
+2026-11-06T18:11:20.268Z [TEST    ] check_pass: a real jam formed (cars standing still rose from 45 to 92)  (ref T8)
+2026-11-06T18:12:04.972Z [BRAIN   ] jam: jam test finished: worst moment 159 cars standing still, city moving again after 850 s
+2026-11-06T18:12:05.442Z [TEST    ] check_pass: the city got moving again (standing cars back to normal)  (ref T8)
+2026-11-06T18:12:05.445Z [TEST    ] check_pass: it recovered within 20 simulated minutes (850 s) [threshold chosen by the team, change in run.py]  (ref T8)
+2026-11-06T18:12:05.456Z [TEST    ] check_pass: the timeline recorded the start and the end of the jam  (ref T8)
+2026-11-06T18:12:05.468Z [TEST    ] check_pass: signal learning/policy kept running during the jam  (ref T8)
+2026-11-06T18:12:05.485Z [TEST    ] scenario_end: T8 PASS (7/7 checks)  (ref T8)
+# finished 2026-11-06T18:12:05.486Z  RESULT PASS

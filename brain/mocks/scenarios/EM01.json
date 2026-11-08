@@ -1,0 +1,109 @@
+{
+  "id": "EM01",
+  "name": "Building fire",
+  "interaction": "Twin → Brain (three axes on one event)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "A building catches fire in zone C (INCIDENTS trigger building_fire, zone C). The Twin opens the incident and sends its first units; the Brain sends every kind of emergency vehicle.",
+  "expected": {
+    "twin": "Units leave their stations and drive to the fire along the roads (no unit appears at the scene); the Twin resolves the incident once the crews are done.",
+    "guardian": "Incident trusted.",
+    "brain": "Emergency: one more fire engine, an ambulance and a police car (every kind of emergency vehicle); asks transportation (A2A green_wave) for every unit on its way, and energy (A2A isolate_feeder) for the building. Transportation: the junctions ahead of each unit turn green and go back to their cycle once it is past. Energy: isolates zone C's feeder and re-energises it when the fire is out. Everything happens in zone C (the green waves follow the units from their stations)."
+  },
+  "how_to_verify": "Map: the engines drive from the fire station along the roads, the junctions ahead of them turn green; timeline: A2A lines emergency → transportation / energy and their answers; logs/EM01-*.jsonl. On the live Twin the incident's place is chosen by the Twin, so zones and actuators can differ from the mock run; the live checks only test what does not depend on the place.",
+  "duration_s": 80,
+  "speed": 4,
+  "live_duration_s": 300,
+  "steps": [
+    {
+      "at": 2,
+      "do": "twin_command",
+      "id": "INCIDENTS",
+      "command": "trigger",
+      "value": {
+        "kind": "building_fire",
+        "zone": "C",
+        "x": 110,
+        "z": -300
+      }
+    }
+  ],
+  "checks": [
+    {
+      "expect": "action",
+      "agent": "emergency",
+      "action_type": "dispatch_unit"
+    },
+    {
+      "expect": "record",
+      "kind": "action",
+      "contains": "fire unit"
+    },
+    {
+      "expect": "record",
+      "kind": "action",
+      "contains": "ambulance unit"
+    },
+    {
+      "expect": "record",
+      "kind": "action",
+      "contains": "police unit"
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "emergency → transportation: green_wave"
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "action_type": "green_wave"
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "green_wave completed"
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "emergency → energy: isolate_feeder"
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "command": "reset_cycle",
+      "modes": [
+        "mock"
+      ],
+      "action_type": "green_wave"
+    },
+    {
+      "expect": "action",
+      "agent": "energy",
+      "action_type": "isolate_feeder",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "only_zone",
+      "zone": "C",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py EM01   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "emergency",
+  "focus": {
+    "zone": "C",
+    "follow": "units"
+  }
+}

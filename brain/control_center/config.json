@@ -1,0 +1,32 @@
+{
+  "_comment": "Where each axis backend runs. start_all starts them on these ports. Tokens are read from environment variables, never written here.",
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 8765
+  },
+  "backends": {
+    "waste_air": {
+      "url": "http://127.0.0.1:8100",
+      "console": "/timeline",
+      "controls_url": "http://127.0.0.1:8200",
+      "token_env": "ORCHESTRATOR_TOKEN"
+    },
+    "energy": {
+      "url": "http://127.0.0.1:8400",
+      "console": "/",
+      "api_key_env": "ENERGY_AGENT_KEY"
+    },
+    "transport": {
+      "url": "http://127.0.0.1:8000",
+      "console": "/",
+      "twin_url": "http://127.0.0.1:9001",
+      "agent_key_env": "AGENT_KEY",
+      "agent_key_default": "dev-agent-key"
+    },
+    "brain": {
+      "url": "http://127.0.0.1:8500",
+      "token_env": "BRAIN_TOKEN",
+      "token_default": "tsyp14-brain-dev-token"
+    }
+  }
+}

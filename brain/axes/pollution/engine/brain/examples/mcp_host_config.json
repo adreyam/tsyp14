@@ -1,0 +1,16 @@
+{
+  "_comment": "Add the City Brain to an MCP host or orchestrator. Replace the cwd with the full path of the brain/ folder. Proxy mode needs the Brain service running and the same ORCHESTRATOR_TOKEN; use --offline for the what-if tools and scenarios only.",
+  "mcpServers": {
+    "city-brain": {
+      "command": "python",
+      "args": ["-m", "src.agent_mcp", "--url", "http://127.0.0.1:8100"],
+      "cwd": "C:/path/to/triplet-XX/brain",
+      "env": { "ORCHESTRATOR_TOKEN": "<same token as the Brain service>" }
+    },
+    "city-brain-offline": {
+      "command": "python",
+      "args": ["-m", "src.agent_mcp", "--offline"],
+      "cwd": "C:/path/to/triplet-XX/brain"
+    }
+  }
+}

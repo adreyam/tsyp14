@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SMART-SIG live training</title>
+<style>
+:root{--bg:#0f1720;--panel:#17212c;--ink:#e6edf3;--mute:#8b9bab;--line:#2a3846;--blue:#4aa3ff;--green:#3ddc84;--red:#ff5d5d;--amber:#ffc24a;--teal:#2ec4b6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,Segoe UI,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+h1{font-size:16px;margin:0 8px 0 0}.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--mute)}.pill b{color:var(--ink)}
+main{display:grid;grid-template-columns:minmax(380px,1.1fr) minmax(380px,1fr);gap:12px;padding:12px 16px}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}
+.card h2{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin:0 0 6px}
+canvas{width:100%;display:block;background:#0b121a;border-radius:6px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}
+button{background:#22303e;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}button:hover{background:#2b3c4e}button.on{border-color:var(--blue);color:var(--blue)}button.danger{border-color:var(--red);color:var(--red)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.kpi{background:#121b25;border:1px solid var(--line);border-radius:8px;padding:8px}.kpi small{color:var(--mute);display:block}.kpi b{font-size:20px}
+.good{color:var(--green)}.bad{color:var(--red)}
+ul{margin:0;padding:0;list-style:none;max-height:150px;overflow:auto;font:12px ui-monospace,Consolas,monospace}li{padding:2px 0;border-bottom:1px solid #1d2a37}
+.legend span{margin-right:12px;color:var(--mute)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+</style></head><body>
+<header><h1>SMART-SIG live training</h1>
+<span class="pill">run <b id="run">-</b></span><span class="pill">episode <b id="ep">0</b> / <b id="target">0</b></span>
+<span class="pill">scenario <b id="scn">-</b> (<span id="prof">-</span>)</span><span class="pill">exploration <b id="eps">-</b></span>
+<span class="pill">Q states <b id="qs">0</b></span><span class="pill" id="emerg">emergency priority <b>ON</b></span><span class="pill" id="resumed" style="display:none"></span></header>
+<main>
+<section>
+ <div class="card"><h2>Live intersection map &nbsp; <span id="clock" style="text-transform:none"></span></h2>
+  <canvas id="map" width="900" height="640"></canvas>
+  <div class="legend" style="margin-top:6px"><span><i class="dot" style="background:#7fb2e5"></i>car</span><span><i class="dot" style="background:#c79b5f"></i>truck</span><span><i class="dot" style="background:#ff2d55"></i>ambulance</span><span><i class="dot" style="background:var(--amber);border-radius:2px"></i>signal held for ambulance</span></div>
+  <div class="ctl"><button id="pause">Pause</button><span style="color:var(--mute)">speed</span>
+   <button data-s="2">2x</button><button data-s="10">10x</button><button data-s="30" class="on">30x</button><button data-s="100">100x</button><button data-s="0">Max</button>
+   <span style="flex:1"></span><button class="danger" id="stop">Save &amp; stop</button></div></div>
+ <div class="card" style="margin-top:12px"><h2>Emergency priority: transmitter → receiver → signal</h2>
+  <div style="color:var(--mute);margin-bottom:4px">packets sent <b id="sent" style="color:var(--ink)">0</b> · lost <b id="lost" style="color:var(--ink)">0</b></div><ul id="evt"></ul></div>
+</section>
+<section>
+ <div class="kpis">
+  <div class="kpi"><small>Mean wait, agent (validation)</small><b id="k1">-</b></div>
+  <div class="kpi"><small>Mean wait, fixed-time</small><b id="k2">-</b></div>
+  <div class="kpi"><small>Improvement</small><b id="k3">-</b></div>
+  <div class="kpi"><small>Ambulance wait (agent / fixed)</small><b id="k4">-</b></div></div>
+ <div class="card"><h2>Mean waiting time per vehicle (s), lower is better</h2><canvas id="c1" width="640" height="250"></canvas></div>
+ <div class="card" style="margin-top:12px"><h2>Ambulance waiting time per episode (s)</h2><canvas id="c2" width="640" height="190"></canvas></div>
+ <div class="card" style="margin-top:12px"><h2>Exploration (epsilon) and learned states</h2><canvas id="c3" width="640" height="170"></canvas></div>
+</section></main>
+<script>
+const $=id=>document.getElementById(id);let MAP=null,speed=30;
+function send(o){fetch('/control',{method:'POST',body:JSON.stringify(o)}).catch(()=>{})}
+document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{send({speed:+b.dataset.s});document.querySelectorAll('[data-s]').forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+let paused=false;$('pause').onclick=()=>{paused=!paused;send({paused});$('pause').textContent=paused?'Resume':'Pause'};
+$('stop').onclick=()=>{if(confirm('Finish saving and stop training?'))send({stop:true})};
+fetch('/map').then(r=>r.json()).then(m=>MAP=m);
+function tx(p,w,h){const[b0,b1,b2,b3]=MAP.bbox,pad=50,s=Math.min((w-2*pad)/(b2-b0),(h-2*pad)/(b3-b1));return[pad+(p[0]-b0)*s+((w-2*pad)-(b2-b0)*s)/2,h-pad-(p[1]-b1)*s-((h-2*pad)-(b3-b1)*s)/2,s]}
+const cv=$('map'),cx=cv.getContext('2d');
+function drawMap(S){const w=cv.width,h=cv.height;cx.clearRect(0,0,w,h);if(!MAP)return;
+ cx.lineCap='round';cx.strokeStyle='#26384a';cx.lineWidth=14;
+ for(const e of MAP.edges){cx.beginPath();e.shape.forEach((p,i)=>{const q=tx(p,w,h);i?cx.lineTo(q[0],q[1]):cx.moveTo(q[0],q[1])});cx.stroke()}
+ if(!S)return;
+ for(const n of MAP.tls){const q=tx([n.x,n.y],w,h),sg=S.signals[n.id];if(!sg)continue;
+  const g=(sg.state.match(/[Gg]/g)||[]).length,y=(sg.state.match(/y/g)||[]).length;
+  cx.beginPath();cx.arc(q[0],q[1],17,0,7);cx.fillStyle=sg.priority?'#ffc24a':(y?'#e8b923':(g?'#2fbf71':'#d34a4a'));cx.globalAlpha=.9;cx.fill();cx.globalAlpha=1;
+  cx.fillStyle='#071018';cx.font='bold 11px system-ui';cx.textAlign='center';cx.fillText(sg.priority?'EV':n.id.slice(-2),q[0],q[1]+4);
+  if(sg.stage&&sg.stage!=='IDLE'){cx.fillStyle='#ffc24a';cx.font='11px system-ui';cx.fillText(sg.stage,q[0],q[1]-24)}}
+ const sc=tx([0,0],w,h)[2];
+ for(const v of S.vehicles){const q=tx([v[0],v[1]],w,h),a=v[3]==='A';cx.save();cx.translate(q[0],q[1]);cx.rotate((v[2]-90)*Math.PI/180);
+  const L=(a?7:v[3]==='T'?9:5)*Math.max(1,sc*1.3)/1.3,W=a?6:4;cx.fillStyle=a?'#ff2d55':v[3]==='T'?'#c79b5f':'#7fb2e5';cx.fillRect(-L/2,-W/2,L,W);
+  if(a){cx.strokeStyle='#fff';cx.lineWidth=1.5;cx.strokeRect(-L/2-3,-W/2-3,L+6,W+6)}cx.restore()}}
+function line(c,series,opt){const x=c.getContext('2d'),w=c.width,h=c.height,L=44,B=24,T=8,R=10;x.clearRect(0,0,w,h);
+ const all=series.flatMap(s=>s.pts.filter(p=>p[1]!=null));if(!all.length){x.fillStyle='#8b9bab';x.fillText('waiting for data...',L,h/2);return}
+ let x0=Math.min(...all.map(p=>p[0])),x1=Math.max(...all.map(p=>p[0])),y1=Math.max(...all.map(p=>p[1]))*1.1||1,y0=0;if(x1===x0)x1=x0+1;
+ const X=v=>L+(v-x0)/(x1-x0)*(w-L-R),Y=v=>h-B-(v-y0)/(y1-y0)*(h-B-T);
+ x.strokeStyle='#2a3846';x.fillStyle='#8b9bab';x.font='11px system-ui';x.textAlign='right';
+ for(let i=0;i<=4;i++){const v=y0+(y1-y0)*i/4;x.beginPath();x.moveTo(L,Y(v));x.lineTo(w-R,Y(v));x.stroke();x.fillText(v.toFixed(v<10?1:0),L-4,Y(v)+4)}
+ x.textAlign='center';for(let i=0;i<=4;i++){const v=x0+(x1-x0)*i/4;x.fillText(Math.round(v),X(v),h-8)}
+ for(const s of series){x.strokeStyle=s.color;x.fillStyle=s.color;x.lineWidth=s.w||2;x.setLineDash(s.dash||[]);x.beginPath();let st=false;
+  for(const p of s.pts){if(p[1]==null)continue;st?x.lineTo(X(p[0]),Y(p[1])):x.moveTo(X(p[0]),Y(p[1]));st=true}x.stroke();x.setLineDash([]);
+  if(s.dots)for(const p of s.pts)if(p[1]!=null){x.beginPath();x.arc(X(p[0]),Y(p[1]),3,0,7);x.fill()}}
+ x.textAlign='left';let lx=L+6;for(const s of series){x.fillStyle=s.color;x.fillRect(lx,T+2,10,3);x.fillStyle='#8b9bab';x.fillText(s.name,lx+14,T+8);lx+=x.measureText(s.name).width+34}}
+function sma(a,k){return a.map((_,i)=>{const s=a.slice(Math.max(0,i-k+1),i+1).filter(v=>v!=null);return s.length?s.reduce((p,c)=>p+c,0)/s.length:null})}
+async function poll(){try{const P=await (await fetch('/progress')).json(),m=P.meta;
+ $('run').textContent=m.run;$('ep').textContent=m.episode;$('target').textContent=m.target;$('scn').textContent=m.scenario+(m.label&&m.label!=='train'?' ['+m.label+']':'');$('prof').textContent=m.profile;
+ $('eps').textContent=m.epsilon;$('qs').textContent=m.q_states;$('emerg').innerHTML='emergency priority <b>'+(m.emergency?'ON':'OFF')+'</b>';
+ if(m.resumed_from){$('resumed').style.display='';$('resumed').innerHTML='resumed from episode <b>'+m.resumed_from+'</b>'}
+ $('stop').textContent=P.stopping?'Stopping after this episode...':'Save & stop';
+ const H=P.hist,E=P.evals,b=P.baseline;const ep=H.map(h=>h.episode);
+ const S1=[{name:'training episodes',color:'#3b5b7a',w:1,pts:H.map(h=>[h.episode,h.mean_wait])},{name:'training (smoothed)',color:'#4aa3ff',pts:ep.map((e,i)=>[e,sma(H.map(h=>h.mean_wait),10)[i]])},
+  {name:'agent on validation',color:'#3ddc84',dots:true,pts:E.map(e=>[e.episode,e.agent.mean_wait])}];
+ if(b&&b.mean_wait!=null&&E.length){S1.push({name:'fixed-time',color:'#ff8a5c',dash:[6,4],pts:[[Math.min(0,E[0].episode),b.mean_wait],[Math.max(1,E[E.length-1].episode,ep[ep.length-1]||1),b.mean_wait]]})}
+ line($('c1'),S1);
+ const S2=[{name:'agent (training)',color:'#ff5d9a',w:1,pts:H.map(h=>[h.episode,h.amb_wait])},{name:'agent (smoothed)',color:'#ff2d55',pts:ep.map((e,i)=>[e,sma(H.map(h=>h.amb_wait),10)[i]])}];
+ if(b&&b.amb_wait!=null&&ep.length)S2.push({name:'fixed-time (with priority)',color:'#ff8a5c',dash:[6,4],pts:[[1,b.amb_wait],[Math.max(2,ep[ep.length-1]),b.amb_wait]]});line($('c2'),S2);
+ line($('c3'),[{name:'epsilon x100',color:'#ffc24a',pts:H.map(h=>[h.episode,h.epsilon*100])},{name:'Q states / 100',color:'#2ec4b6',pts:H.map(h=>[h.episode,h.q_states/100])}]);
+ const le=E[E.length-1];if(le){$('k1').textContent=le.agent.mean_wait+' s';$('k2').textContent=le.fixed.mean_wait+' s';
+  const k3=$('k3');k3.textContent=(le.improvement_pct>0?'+':'')+le.improvement_pct+' %';k3.className=le.improvement_pct>=0?'good':'bad';
+  $('k4').textContent=(le.agent.amb_wait??'-')+' / '+(le.fixed.amb_wait??'-')+' s'}
+}catch(e){}setTimeout(poll,1500)}
+async function live(){try{const S=await (await fetch('/snapshot')).json();drawMap(S);
+ $('clock').textContent='sim time '+Math.round(S.t||0)+' s · '+(S.vehicles||[]).length+' vehicles · '+(S.halting||0)+' stopped';
+ $('sent').textContent=S.sent||0;$('lost').textContent=S.lost||0;
+ const ev=(S.events||[]).slice().reverse().map(e=>'<li>t='+Math.round(e.time)+' s &nbsp;'+(e.signal||'')+' &nbsp;<b>'+(e.event||'')+'</b></li>').join('');$('evt').innerHTML=ev||'<li style="color:#8b9bab">no ambulance near a signal yet</li>'}catch(e){}setTimeout(live,150)}
+poll();live();
+</script></body></html>

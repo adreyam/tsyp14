@@ -1,0 +1,41 @@
+
+=== T8: A traffic jam: 300 extra cars flood the city; the trained signals must cope and the city must get moving again.
+[T8 + 40.4s] Signals are in 'train' mode. Releasing 300 extra cars within 60 simulated seconds.
+   PASS  the Brain accepted the jam test
+   PASS  all 300 extra cars entered the city
+   PASS  a real jam formed (cars standing still rose from 66 to 86)
+[T8 + 47.1s] Waiting for the jam to dissolve (up to 15 real minutes)...
+[T8 + 59.2s] worst moment 109 standing, mean 68.8, worst mean wait 5.5 s, recovered after 217 s
+   PASS  the city got moving again (standing cars back to normal)
+   PASS  it recovered within 20 simulated minutes (217 s) [threshold chosen by the team, change in run.py]
+   PASS  the timeline recorded the start and the end of the jam
+   PASS  signal learning/policy kept running during the jam
+--- T8 PASS  log: logs/T8-20261106-150525.log
+
+RESULT: ALL PASSED
+
+=== T8: A traffic jam: 300 extra cars flood the city; the trained signals must cope and the city must get moving again.
+[T8 + 40.6s] Signals are in 'train' mode. Releasing 300 extra cars within 60 simulated seconds.
+   PASS  the Brain accepted the jam test
+   PASS  all 300 extra cars entered the city
+   PASS  a real jam formed (cars standing still rose from 45 to 92)
+[T8 + 47.8s] Waiting for the jam to dissolve (up to 15 real minutes)...
+[T8 + 93.0s] worst moment 159 standing, mean 101.9, worst mean wait 12.8 s, recovered after 850 s
+   PASS  the city got moving again (standing cars back to normal)
+   PASS  it recovered within 20 simulated minutes (850 s) [threshold chosen by the team, change in run.py]
+   PASS  the timeline recorded the start and the end of the jam
+   PASS  signal learning/policy kept running during the jam
+--- T8 PASS  log: logs/T8-20261106-191112.log
+
+RESULT: ALL PASSED
+
+=== T2: Emergency call from the Twin: the Brain dispatches a vehicle and the signals on its way give it priority.
+[T2 + 41.1s] The Twin raises an ambulance call.
+   PASS  the Brain accepted the call and dispatched a vehicle
+   PASS  the dispatch decision appears on the timeline
+   PASS  the Twin received the 'dispatch' actuator command
+   PASS  signals gave the vehicle priority and the Twin received 'priority_green' commands for it
+   PASS  the vehicle reached the scene
+--- T2 PASS  log: logs/T2-20261106-191354.log
+
+RESULT: ALL PASSED

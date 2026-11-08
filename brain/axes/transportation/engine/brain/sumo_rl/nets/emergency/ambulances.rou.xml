@@ -1,0 +1,10 @@
+<routes>
+    <!-- Emergency vehicles. vClass="emergency" is what makes the vehicle carry the on-board priority transmitter.
+         The bluelight device makes the other vehicles give way (SUMO >= 1.12). -->
+    <vType id="ambulance" vClass="emergency" guiShape="emergency" color="1,0,0" length="6.5" width="2.4"
+           accel="3.5" decel="5.0" maxSpeed="22" speedFactor="1.2" lcStrategic="1" lcSpeedGain="2">
+        <param key="has.bluelight.device" value="true"/>
+    </vType>
+    <flow id="amb_1" type="ambulance" from="-h11" to="-h13" begin="75" number="1" departSpeed="max" departLane="best"/>
+    <flow id="amb_2" type="ambulance" from="-v21" to="-v23" begin="190" number="1" departSpeed="max" departLane="best"/>
+</routes>

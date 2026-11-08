@@ -1,0 +1,24 @@
+# scenario T5 The Guardian quarantines the exit barrier of the lot where a car is parked: the Brain must not open it by itself.
+# started 2026-11-05T22:55:21.303Z
+2026-11-05T22:55:21.304Z [TEST    ] scenario_start: T5 The Guardian quarantines the exit barrier of the lot where a car is parked: the Brain must not open it by itself.  (ref T5)
+2026-11-05T22:55:26.765Z [ACTUATOR] command: open barrier:P02-ENT1 {'lot_id': 'P02'} - ticket / exit authorised
+2026-11-05T22:55:26.769Z [ACTUATOR] command_ack: barrier:P02-ENT1 open -> Twin: HTTP 202
+2026-11-05T22:55:27.725Z [TEST    ] check_pass: d2 is parked with an active session  (ref T5)
+2026-11-05T22:55:27.731Z [GUARDIAN] verdict: barrier:P02-EXIT1 -> QUARANTINED: exit barrier controller answers commands it did not receive (possible tampering)  (ref barrier:P02-EXIT1)
+2026-11-05T22:55:27.731Z [BRAIN   ] decision: barrier:P02-EXIT1 is quarantined: the Brain will not send it commands; the administrator can still override manually  (ref barrier:P02-EXIT1)
+2026-11-05T22:55:27.741Z [TEST    ] check_pass: the Brain received the verdict and isolated the barrier  (ref T5)
+2026-11-05T22:55:29.307Z [BRAIN   ] command_withheld: open on barrier:P02-EXIT1 NOT sent: device is quarantined (exit barrier controller answers commands it did not receive (possible tampering))
+2026-11-05T22:55:29.790Z [TEST    ] check_pass: the Brain WITHHELD the 'open barrier' command and said why  (ref T5)
+2026-11-05T22:55:29.800Z [TEST    ] check_pass: no 'open' command for that barrier reached the Twin  (ref T5)
+2026-11-05T22:55:29.808Z [TEST    ] check_pass: the administration got a notice (ACTUATOR_QUARANTINED)  (ref T5)
+2026-11-05T22:55:32.820Z [TEST    ] check_pass: the car is still waiting at the exit  (ref T5)
+2026-11-05T22:55:32.831Z [TEST    ] check_pass: manual override accepted  (ref T5)
+2026-11-05T22:55:32.842Z [BRAIN   ] manual_override: administrator overrides the quarantined state of barrier:P02-EXIT1: open
+2026-11-05T22:55:32.842Z [ACTUATOR] command: open barrier:P02-EXIT1 {'lot_id': 'P02'} - manual override by the administrator
+2026-11-05T22:55:32.846Z [ACTUATOR] command_ack: barrier:P02-EXIT1 open -> Twin: HTTP 202
+2026-11-05T22:55:33.344Z [TEST    ] check_pass: the override is logged and the Twin received the command  (ref T5)
+2026-11-05T22:55:33.355Z [TEST    ] check_pass: the car left the lot  (ref T5)
+2026-11-05T22:55:33.364Z [GUARDIAN] verdict: barrier:P02-EXIT1 -> RELEASED: barrier checked  (ref barrier:P02-EXIT1)
+2026-11-05T22:55:33.364Z [BRAIN   ] decision: barrier:P02-EXIT1 is trusted again: its readings and commands are accepted  (ref barrier:P02-EXIT1)
+2026-11-05T22:55:33.368Z [TEST    ] scenario_end: T5 PASS (9/9 checks)  (ref T5)
+# finished 2026-11-05T22:55:33.368Z  RESULT PASS

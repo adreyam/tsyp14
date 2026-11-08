@@ -1,0 +1,88 @@
+{
+  "id": "EM03",
+  "name": "Earthquake M6.5 under zone F",
+  "interaction": "Twin → Brain",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "An M6.5 earthquake shakes zone F (EARTHQUAKE trigger). Several seismic stations record strong shaking.",
+  "expected": {
+    "twin": "Seismic stations report strong shaking near zone F, less further away.",
+    "guardian": "Readings trusted.",
+    "brain": "Emergency: earthquake confirmed by two stations; the epicentre (zone F) is fixed once confirmed; cuts zone F's water and asks transportation (A2A) to stop the traffic in zone F only: every signal of zone F all red, back to its cycle when the shaking stops. Nothing outside zone F."
+  },
+  "how_to_verify": "Top bar: 'Earthquake, epicentre near zone F' critical; map arrows to SIGNALS and zone F; logs/EM03-*.jsonl.",
+  "duration_s": 60,
+  "speed": 3,
+  "live_duration_s": 120,
+  "steps": [
+    {
+      "at": 3,
+      "do": "twin_command",
+      "id": "EARTHQUAKE",
+      "command": "trigger",
+      "value": {
+        "zone": "F",
+        "magnitude": 6.5
+      }
+    },
+    {
+      "at": 55,
+      "do": "twin_command",
+      "id": "EARTHQUAKE",
+      "command": "clear",
+      "live_at": 110
+    }
+  ],
+  "checks": [
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "action_type": "stop_traffic"
+    },
+    {
+      "expect": "action",
+      "actuator": "ZONE-Zone_NorthCentral_2",
+      "command": "cut_water"
+    },
+    {
+      "expect": "action",
+      "actuator": "ZONE-Zone_NorthCentral_2",
+      "command": "restore_water",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "emergency → transportation: stop_traffic"
+    },
+    {
+      "expect": "no_action",
+      "actuator": "SIGNALS"
+    },
+    {
+      "expect": "max_actions",
+      "value": 40
+    },
+    {
+      "expect": "only_zone",
+      "zone": "F",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py EM03   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "emergency",
+  "focus": {
+    "zone": "F",
+    "follow": "units"
+  }
+}

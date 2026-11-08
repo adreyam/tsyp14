@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/WaterReservoirSite.tscn" id="1_site"]
+[ext_resource type="Script" path="res://scripts/water_reservoir_system.gd" id="2_system"]
+
+[node name="WaterReservoirs" type="Node3D"]
+script = ExtResource("2_system")
+
+[node name="NorthCentralReservoir" parent="." groups=["water_reservoir_sites"] instance=ExtResource("1_site")]
+position = Vector3(-47.5, 0, -237.5)
+metadata/site = "North-central distribution reservoir"
+metadata/park_block = "OuterBlock_r2c4"
+
+[node name="SouthCentralReservoir" parent="." groups=["water_reservoir_sites"] instance=ExtResource("1_site")]
+position = Vector3(47.5, 0, 237.5)
+metadata/site = "South-central distribution reservoir"
+metadata/park_block = "OuterBlock_r7c5"
+
+[node name="NorthWestReservoir" parent="." groups=["water_reservoir_sites"] instance=ExtResource("1_site")]
+position = Vector3(-332.5, 0, -332.5)
+metadata/site = "North-west distribution reservoir"
+metadata/park_block = "OuterBlock_r1c1"
+
+[node name="NorthEastReservoir" parent="." groups=["water_reservoir_sites"] instance=ExtResource("1_site")]
+position = Vector3(332.5, 0, -332.5)
+metadata/site = "North-east distribution reservoir"
+metadata/park_block = "OuterBlock_r1c8"
+
+[node name="SouthWestReservoir" parent="." groups=["water_reservoir_sites"] instance=ExtResource("1_site")]
+position = Vector3(-332.5, 0, 332.5)
+metadata/site = "South-west distribution reservoir"
+metadata/park_block = "OuterBlock_r8c1"
+
+[node name="SouthEastReservoir" parent="." groups=["water_reservoir_sites"] instance=ExtResource("1_site")]
+position = Vector3(332.5, 0, 332.5)
+metadata/site = "South-east distribution reservoir"
+metadata/park_block = "OuterBlock_r8c8"

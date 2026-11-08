@@ -1,0 +1,193 @@
+{
+  "id": "EM02",
+  "name": "Flash flood",
+  "interaction": "Twin → Brain",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "A storm (WEATHER storm) floods the low point of zone J: the water rises at FLOOD-02 on the street between junctions r6c4 and r6c5. The flood stays in zone J (the rest of the city only gets puddles).",
+  "expected": {
+    "twin": "Storm; flood sensors rise with the rain, FLOOD-02 fastest. Zone J is closed: its four entrances get barriers and police cars (a fire engine when one is free), the cars inside drive out (lights turn green for them) and no car enters until the zone reopens.",
+    "guardian": "Readings trusted (rain explains them).",
+    "brain": "Emergency: flood in zone J; asks transportation (A2A) to close zone J's car parks and to detour the traffic: transportation sends a police car to each end of the flooded street (r6c4 and r6c5) and holds those junctions north-south green so the traffic goes around the water; emergency sends an ambulance to stand by on the cross street; critical: energy cuts zone J's power. When the water goes down, the police cars and the ambulance are recalled, the junctions and car parks go back to normal, power is restored."
+  },
+  "how_to_verify": "Map: zone J highlighted, the camera follows the police cars and the ambulance from their stations to the flooded street; A2A panel: emergency → transportation detour_traffic; logs/EM02-*.jsonl. On the real Twin the surface water is one level for the whole city and stops at 42 mm, below the flood threshold (150 mm): the flood response (detour, ambulance, car parks, power) is checked on the mock; the live run checks the storm response, and closes zone J itself (ZONES lockdown at 40 s, reopen at 285 s): barriers and police cars on its four entrances, the cars inside leave, nobody enters.",
+  "duration_s": 150,
+  "speed": 5,
+  "live_duration_s": 300,
+  "steps": [
+    {
+      "at": 1,
+      "do": "twin_command",
+      "id": "WEATHER",
+      "command": "set",
+      "value": "storm"
+    },
+    {
+      "at": 30,
+      "do": "twin_command",
+      "id": "ZONES",
+      "command": "lockdown",
+      "value": {
+        "zone": "J",
+        "reason": "flood"
+      },
+      "live_at": 40,
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 95,
+      "do": "twin_command",
+      "id": "WEATHER",
+      "command": "set",
+      "value": "clear",
+      "live_at": 270
+    },
+    {
+      "at": 140,
+      "do": "twin_command",
+      "id": "ZONES",
+      "command": "reopen",
+      "value": {
+        "zone": "J",
+        "reason": "flood"
+      },
+      "live_at": 285,
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 100,
+      "do": "ramp",
+      "device": "FLOOD-02",
+      "metric": "surface_water_depth",
+      "to": 20,
+      "over": 20,
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "expect": "action",
+      "actuator": "LIGHTS",
+      "command": "on"
+    },
+    {
+      "expect": "situation",
+      "axis": "emergency",
+      "kind": "storm"
+    },
+    {
+      "expect": "action",
+      "actuator": "LOT-06",
+      "command": "closed",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "ZONE-Zone_SouthCentral_2",
+      "command": "cut_power",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "LOT-06",
+      "command": "auto",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "ZONE-Zone_SouthCentral_2",
+      "command": "restore_power",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "emergency → transportation: close_car_parks",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "emergency → energy: street_lights_on"
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "emergency → transportation: detour_traffic",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "action_type": "police_detour",
+      "command": "send_unit",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "actuator": "SIG-Junction_r6_c4",
+      "command": "ns_green",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "agent": "emergency",
+      "action_type": "standby_unit",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "command": "recall_unit",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "only_zone",
+      "zone": "J",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py EM02   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "emergency",
+  "focus": {
+    "zone": "J",
+    "devices": [
+      "FLOOD-02"
+    ],
+    "follow": "units"
+  }
+}

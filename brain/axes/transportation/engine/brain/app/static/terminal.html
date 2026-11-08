@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parking Terminal</title>
+<style>
+  :root { --bg:#0f1720; --panel:#17212d; --text:#eef3f8; --muted:#93a4b8; --accent:#2fb380; --warn:#e8a33a; --bad:#e5484d; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui, Segoe UI, Roboto, sans-serif;
+         min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px; }
+  .screen { width:100%; max-width:720px; background:var(--panel); border-radius:18px; padding:28px; }
+  header { display:flex; justify-content:space-between; color:var(--muted); font-size:15px; margin-bottom:24px; }
+  .message { font-size:clamp(22px, 4vw, 32px); line-height:1.35; min-height:90px; }
+  .state-BLOCKED .message, .state-MANUAL_VERIFICATION .message { color:var(--warn); }
+  .ticket { margin-top:24px; border:2px dashed var(--accent); border-radius:14px; padding:20px; }
+  .ticket h2 { margin:0 0 14px; font-size:16px; letter-spacing:.08em; color:var(--accent); }
+  .space { font-size:72px; font-weight:800; line-height:1; margin-bottom:16px; }
+  .row { display:flex; justify-content:space-between; padding:6px 0; border-top:1px solid #2a3746; font-size:16px; }
+  .row span:first-child { color:var(--muted); }
+  button { margin-top:28px; width:100%; padding:22px; font-size:24px; font-weight:700; border:0; border-radius:14px;
+           background:var(--accent); color:#04140d; cursor:pointer; }
+  button:active { transform:scale(.99); }
+  .hidden { display:none; }
+  .error { color:var(--bad); min-height:20px; margin-top:12px; }
+</style>
+</head>
+<body>
+<main class="screen" id="screen">
+  <header><span id="lane">Terminal</span><span id="clock"></span></header>
+  <section class="message" id="message">Connecting...</section>
+  <section class="ticket hidden" id="ticket">
+    <h2>DIGITAL PARKING TICKET</h2>
+    <div class="space" id="t-space"></div>
+    <div class="row"><span>Ticket ID</span><span id="t-id"></span></div>
+    <div class="row"><span>RFID identifier</span><span id="t-rfid"></span></div>
+    <div class="row"><span>Parking lot</span><span id="t-lot"></span></div>
+    <div class="row"><span>Entry time</span><span id="t-entry"></span></div>
+  </section>
+  <button id="request" class="hidden">Request a ticket</button>
+  <p class="error" id="error"></p>
+</main>
+<script>
+const laneId = decodeURIComponent(location.pathname.split("/").filter(Boolean).pop());
+const $ = (id) => document.getElementById(id);
+const IDLE = { ENTRANCE: "Welcome. Please drive up to the barrier.", EXIT: "Please drive up to the barrier to exit." };
+
+function render(s) {
+  $("screen").className = "screen state-" + s.state;
+  $("lane").textContent = (s.kind === "ENTRANCE" ? "Entrance " : "Exit ") + s.lane_id;
+  $("message").textContent = s.message || IDLE[s.kind] || "";
+  $("request").classList.toggle("hidden", !s.show_request_button);
+  const t = s.ticket;
+  $("ticket").classList.toggle("hidden", !t);
+  if (t) {
+    $("t-space").textContent = t.space;
+    $("t-id").textContent = t.ticket_id;
+    $("t-rfid").textContent = t.rfid;
+    $("t-lot").textContent = t.lot_id;
+    $("t-entry").textContent = new Date(t.entry_time).toLocaleString();
+  }
+}
+
+async function refresh() {
+  try {
+    const r = await fetch(`/api/terminal/${encodeURIComponent(laneId)}`);
+    if (!r.ok) throw new Error(r.status === 404 ? "Unknown lane " + laneId : "Server error");
+    render(await r.json());
+    $("error").textContent = "";
+  } catch (e) { $("error").textContent = e.message; }
+}
+
+$("request").addEventListener("click", async () => {
+  $("request").disabled = true;
+  try {
+    const r = await fetch(`/api/terminal/${encodeURIComponent(laneId)}/request-ticket`, { method: "POST" });
+    const body = await r.json();
+    if (!r.ok) throw new Error(body.detail || "Request failed");
+    render(body);
+  } catch (e) { $("error").textContent = e.message; }
+  finally { $("request").disabled = false; }
+});
+
+setInterval(() => { $("clock").textContent = new Date().toLocaleTimeString(); }, 1000);
+setInterval(refresh, 700);
+refresh();
+</script>
+</body>
+</html>

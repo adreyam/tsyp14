@@ -1,0 +1,61 @@
+# scenario T7 An emergency call, a lying sensor and a flooding device at the same moment, in the rush hour: the city must keep working.
+# started 2026-11-05T22:56:19.448Z
+2026-11-05T22:56:19.448Z [TEST    ] scenario_start: T7 An emergency call, a lying sensor and a flooding device at the same moment, in the rush hour: the city must keep working.  (ref T7)
+2026-11-05T22:56:21.479Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=False
+2026-11-05T22:56:21.586Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:56:21.617Z [BRAIN   ] reading_applied: space P01-A3 sensor vacant (was vacant); device sensor:P01:A3 currently unknown
+2026-11-05T22:56:21.666Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was vacant); device sensor:P01:A3 currently unknown
+2026-11-05T22:56:21.667Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently unknown
+2026-11-05T22:56:21.677Z [TWIN    ] reading: sensor:P01:A5: space P01-A5 occupied=False
+2026-11-05T22:56:21.681Z [TWIN    ] reading: sensor:city:emergency-calls: emergency call CALL-T7 (ambulance)  (ref CALL-T7)
+2026-11-05T22:56:21.689Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:56:21.692Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:56:21.692Z [BRAIN   ] decision: dispatch ambulance amb_CALLT7 to emergency call CALL-T7; signals on its route will give it priority  (ref CALL-T7)
+2026-11-05T22:56:21.692Z [ACTUATOR] command: dispatch dispatch:ambulance {'call_id': 'CALL-T7', 'vehicle_id': 'amb_CALLT7', 'lat': 36.80685932447, 'lon': 10.186728326947183} - emergency call CALL-T7  (ref CALL-T7)
+2026-11-05T22:56:21.696Z [ACTUATOR] command_ack: dispatch:ambulance dispatch -> Twin: HTTP 202  (ref CALL-T7)
+2026-11-05T22:56:21.697Z [TEST    ] check_pass: the emergency call was accepted and a vehicle dispatched in spite of the attack  (ref T7)
+2026-11-05T22:56:21.725Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:56:21.747Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:56:21.793Z [GUARDIAN] verdict: sensor:P01:A5 -> QUARANTINED: message flood: 30 readings/s  (ref sensor:P01:A5)
+2026-11-05T22:56:21.938Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently quarantined
+2026-11-05T22:56:21.940Z [BRAIN   ] decision: ISOLATED sensor:P01:A5 (quarantined); its state already matched the last trusted one, nothing to roll back  (ref sensor:P01:A5)
+2026-11-05T22:56:22.144Z [BRAIN   ] rate_limited: sensor:P01:A5 sends more than 30 readings/s: extra readings dropped
+2026-11-05T22:56:22.314Z [BRAIN   ] decision: priority: signal J1_6 turns green for amb_CALLT7  (ref CALL-T7)
+2026-11-05T22:56:22.314Z [ACTUATOR] command: priority_green signal:J1_6 {'vehicle_id': 'amb_CALLT7'} - emergency vehicle approaching  (ref CALL-T7)
+2026-11-05T22:56:22.318Z [ACTUATOR] command_ack: signal:J1_6 priority_green -> Twin: HTTP 202  (ref CALL-T7)
+2026-11-05T22:56:22.671Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True (+2 similar)
+2026-11-05T22:56:22.852Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently unknown
+2026-11-05T22:56:23.241Z [BRAIN   ] decision: priority: signal J2_6 turns green for amb_CALLT7  (ref CALL-T7)
+2026-11-05T22:56:23.241Z [ACTUATOR] command: priority_green signal:J2_6 {'vehicle_id': 'amb_CALLT7'} - emergency vehicle approaching  (ref CALL-T7)
+2026-11-05T22:56:23.247Z [ACTUATOR] command_ack: signal:J2_6 priority_green -> Twin: HTTP 202  (ref CALL-T7)
+2026-11-05T22:56:23.599Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0 (+2 similar)
+2026-11-05T22:56:23.856Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True
+2026-11-05T22:56:23.874Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently unknown
+2026-11-05T22:56:24.290Z [BRAIN   ] decision: priority: signal J3_6 turns green for amb_CALLT7  (ref CALL-T7)
+2026-11-05T22:56:24.290Z [ACTUATOR] command: priority_green signal:J3_6 {'vehicle_id': 'amb_CALLT7'} - emergency vehicle approaching  (ref CALL-T7)
+2026-11-05T22:56:24.295Z [ACTUATOR] command_ack: signal:J3_6 priority_green -> Twin: HTTP 202  (ref CALL-T7)
+2026-11-05T22:56:24.881Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True
+2026-11-05T22:56:24.947Z [GUARDIAN] verdict: sensor:P01:A3 -> UNTRUSTED: sensor says occupied but the gate counter of P01 says 0 occupied (sensors: 1)  (ref sensor:P01:A3)
+2026-11-05T22:56:25.005Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently untrusted
+2026-11-05T22:56:25.011Z [BRAIN   ] decision: ISOLATED sensor:P01:A3 (untrusted: sensor says occupied but the gate counter of P01 says 0 occupied (sensors: 1)); rolled space P01-A3 back to its last trusted state (vacant); the space stays assignable  (ref sensor:P01:A3)
+2026-11-05T22:56:25.241Z [TEST    ] check_pass: the fake sensor was isolated  (ref T7)
+2026-11-05T22:56:25.247Z [TEST    ] check_pass: the flooding device was quarantined  (ref T7)
+2026-11-05T22:56:25.254Z [TEST    ] check_pass: signals gave the ambulance priority (Twin received priority_green for it)  (ref T7)
+2026-11-05T22:56:25.457Z [BRAIN   ] decision: priority: signal J4_6 turns green for amb_CALLT7  (ref CALL-T7)
+2026-11-05T22:56:25.457Z [ACTUATOR] command: priority_green signal:J4_6 {'vehicle_id': 'amb_CALLT7'} - emergency vehicle approaching  (ref CALL-T7)
+2026-11-05T22:56:25.464Z [ACTUATOR] command_ack: signal:J4_6 priority_green -> Twin: HTTP 202  (ref CALL-T7)
+2026-11-05T22:56:25.605Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:56:26.014Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device untrusted]
+2026-11-05T22:56:27.019Z [GUARDIAN] verdict: sensor:P01:A3 -> QUARANTINED: disagrees with the independent gate counter of P01 for 5 s (1 occupied by sensors, 0 by counter)  (ref sensor:P01:A3)
+2026-11-05T22:56:27.020Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:56:27.158Z [BRAIN   ] decision: ISOLATED sensor:P01:A3 (quarantined); its state already matched the last trusted one, nothing to roll back  (ref sensor:P01:A3)
+2026-11-05T22:56:27.612Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:56:28.025Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:56:29.030Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:56:29.619Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:56:30.037Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:56:30.264Z [TEST    ] check_pass: the city kept running: simulation time advanced (135 s) and mean waiting time is 4.3 s (< 60 s)  (ref T7)
+2026-11-05T22:56:30.269Z [TEST    ] check_pass: signal learning is still on  (ref T7)
+2026-11-05T22:56:30.286Z [TEST    ] check_pass: the space P01-A3 is still assignable  (ref T7)
+2026-11-05T22:56:30.364Z [TEST    ] scenario_end: T7 PASS (7/7 checks)  (ref T7)
+# finished 2026-11-05T22:56:30.365Z  RESULT PASS

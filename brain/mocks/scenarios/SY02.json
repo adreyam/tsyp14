@@ -1,0 +1,134 @@
+{
+  "id": "SY02",
+  "name": "A partner sends malformed messages",
+  "interaction": "Twin → Brain (input validation)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "A badly configured partner pushes: a body that is not JSON, a reading without readings, a device id with spaces, an unknown field and a non-numeric value.",
+  "expected": {
+    "twin": "(partner) sends 5 bad messages.",
+    "guardian": "-",
+    "brain": "Refuses each with a readable reason (HTTP 400 on /v1/events), keeps running, takes no decision."
+  },
+  "how_to_verify": "Timeline: 5 'Malformed input refused' lines with the exact field; logs/SY02-*.jsonl.",
+  "duration_s": 15,
+  "speed": 2,
+  "live_duration_s": 15,
+  "steps": [
+    {
+      "at": 1,
+      "do": "push_raw",
+      "body": "{\"type\": \"reading\", oops"
+    },
+    {
+      "at": 2,
+      "do": "push_event",
+      "event": {
+        "type": "reading",
+        "origin": {
+          "layer": "twin",
+          "device_id": "FLOOD-01",
+          "family": "flood",
+          "kind": "sensor"
+        },
+        "readings": {}
+      }
+    },
+    {
+      "at": 3,
+      "do": "push_event",
+      "event": {
+        "type": "reading",
+        "origin": {
+          "layer": "twin",
+          "device_id": "flood sensor 2",
+          "family": "flood",
+          "kind": "sensor"
+        },
+        "location": {
+          "zone": "J",
+          "x": -24,
+          "z": 109
+        },
+        "readings": {
+          "surface_water_depth": {
+            "value": 50,
+            "unit": "mm"
+          }
+        }
+      }
+    },
+    {
+      "at": 4,
+      "do": "push_event",
+      "event": {
+        "type": "reading",
+        "origin": {
+          "layer": "twin",
+          "device_id": "FLOOD-01",
+          "family": "flood",
+          "kind": "sensor"
+        },
+        "location": {
+          "zone": "F",
+          "x": -119,
+          "z": -176
+        },
+        "readings": {
+          "surface_water_depth": {
+            "value": 5,
+            "unit": "mm"
+          }
+        },
+        "priority": "urgent"
+      }
+    },
+    {
+      "at": 5,
+      "do": "push_event",
+      "event": {
+        "type": "reading",
+        "origin": {
+          "layer": "twin",
+          "device_id": "FLOOD-01",
+          "family": "flood",
+          "kind": "sensor"
+        },
+        "location": {
+          "zone": "F",
+          "x": -119,
+          "z": -176
+        },
+        "readings": {
+          "surface_water_depth": {
+            "value": "deep",
+            "unit": "mm"
+          }
+        }
+      }
+    }
+  ],
+  "checks": [
+    {
+      "expect": "error"
+    },
+    {
+      "expect": "max_actions",
+      "value": 0
+    },
+    {
+      "expect": "record",
+      "kind": "error",
+      "contains": "device_id"
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py SY02   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "system",
+  "focus": {}
+}

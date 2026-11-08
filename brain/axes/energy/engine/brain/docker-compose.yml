@@ -1,0 +1,36 @@
+# Energy Brain standalone, with mocks (R1). In the triplet's root
+# docker-compose.yml, drop the two mocks and point TWIN_URL / GUARDIAN_URL
+# at the real Twin and Guardian services.
+services:
+  twin-mock:
+    build: .
+    command: python -m mocks.twin --host 0.0.0.0 --port 8101 --city mocks/cities/city_a.yaml
+    environment: [TWIN_API_KEY=dev-twin-key]
+    ports: ["8101:8101"]
+
+  twin-mcp-mock:            # same city exposed as MCP tools (http://localhost:8111/mcp)
+    build: .
+    command: python -m mocks.twin_mcp --host 0.0.0.0 --port 8111 --city mocks/cities/city_a.yaml
+    environment: [TWIN_API_KEY=dev-twin-key]
+    ports: ["8111:8111"]
+
+  guardian-mock:
+    build: .
+    command: python -m mocks.guardian --host 0.0.0.0 --port 8102
+    environment: [GUARDIAN_API_KEY=dev-guardian-key]
+    ports: ["8102:8102"]
+
+  energy-brain:                 # the agent: control loop + MCP endpoint for the orchestrator
+    build: .
+    command: python -m energy_brain.agent --config config/config.yaml --port 8300
+    depends_on: [twin-mock, guardian-mock]
+    environment:
+      - TWIN_URL=http://twin-mock:8101
+      - TWIN_API_KEY=dev-twin-key
+      - GUARDIAN_URL=http://guardian-mock:8102
+      - GUARDIAN_API_KEY=dev-guardian-key
+      - TIMELINE_URL=
+      - ORCHESTRATOR_API_KEY=dev-orchestrator-key
+      - ORCHESTRATOR_NOTIFY_URL=
+    ports: ["8300:8300"]    # MCP agent endpoint: http://localhost:8300/mcp
+    volumes: ["../logs:/logs"]

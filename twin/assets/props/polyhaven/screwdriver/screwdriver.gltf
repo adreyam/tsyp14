@@ -1,0 +1,159 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.1.20",
+    "version": "2.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "screwdriver"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "screwdriver",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Sphere.005",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "screwdriver_nor_gl",
+      "uri": "textures/screwdriver_nor_gl_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "screwdriver_diff",
+      "uri": "textures/screwdriver_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "screwdriver_metal-screwdriver_rough",
+      "uri": "textures/screwdriver_arm_1k.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 1878,
+      "max": [
+        0.013566119596362114,
+        0.13510257005691528,
+        0.01335463672876358
+      ],
+      "min": [
+        -0.013566119596362114,
+        -0.07394193857908249,
+        -0.013354635797441006
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 1878,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 1878,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 10236,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 22536,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 22536,
+      "byteOffset": 22536,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 15024,
+      "byteOffset": 45072,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 20472,
+      "byteOffset": 60096,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 80568,
+      "uri": "screwdriver.bin"
+    }
+  ]
+}

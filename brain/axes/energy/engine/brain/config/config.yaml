@@ -1,0 +1,87 @@
+# Energy Brain configuration. Partner addresses and secrets come from the
+# environment so the same build can be pointed at any Twin / Guardian.
+poll_interval_s: 1.0
+log_dir: ${BRAIN_LOG_DIR:-../logs}
+timeline_url: ${TIMELINE_URL:-}     # optional: every Brain event is POSTed here (R3 timeline)
+forecast_log_every: 5               # cycles between forecast events
+
+twin:
+  adapter: rest                     # rest | mcp
+  base_url: ${TWIN_URL:-http://127.0.0.1:8101}
+  api_key: ${TWIN_API_KEY:-dev-twin-key}
+  auth_header: X-API-Key
+  timeout_s: 3.0
+  signing_secret: ${TWIN_SIGNING_SECRET:-}      # set to sign commands and require signed answers (HMAC-SHA256)
+  # mcp_tools: {get_readings: read_power_meters}  # MCP only: their tool names
+  # field_map: {...}                              # reshape a foreign Twin's JSON, see adapters/mapping.py
+
+guardian:
+  adapter: rest
+  base_url: ${GUARDIAN_URL:-http://127.0.0.1:8102}
+  api_key: ${GUARDIAN_API_KEY:-dev-guardian-key}
+  auth_header: X-API-Key
+  timeout_s: 2.0
+  signing_secret: ${GUARDIAN_SIGNING_SECRET:-}
+
+inbound:                            # API for other Brain domains (priority hints), port 8103
+  api_key: ${INBOUND_API_KEY:-dev-inbound-key}
+  max_hint_ttl_s: 900               # a hint can pin a zone as priority for 15 min at most
+  rate_per_min: 30                  # per client
+
+trust:
+  verdict_ttl_s: 10                 # a verdict older than this counts as missing
+  degraded_min_consistent_samples: 3
+  flap_changes: 4                   # this many verdict changes...
+  flap_window_s: 20                 # ...within this window = flapping -> treated as untrusted
+
+ingest:
+  stale_s: 10                       # readings older than this are rejected
+  max_future_s: 5                   # readings stamped further in the future are rejected
+  max_step_frac: 0.2                # jump > 20% of capacity in one sample is suspect
+  suspect_confirm_samples: 5        # ...until it persists this long AND the Guardian trusts the sensor
+  plan_deviation_frac: 0.25         # report when a zone strays 25% from its J-1 plan...
+  plan_deviation_samples: 10        # ...for 10 samples
+
+forecast:
+  mode: predictive                  # 'reactive' = threshold-only baseline, for comparison runs
+  window_samples: 20                # rolling least-squares trend window
+  horizon_s: 45                     # how far ahead overload risk is evaluated
+  warmup_samples: 10                # below this a zone uses its current reading only
+  band_sigma: 2.0                   # prediction-interval width (in residual std)
+  risk_persistence: 3               # consecutive risky samples before acting
+  l0_alert_ratio: 1.3               # capacity-unknown zones: alert when forecast > 1.3 x J-1 plan (or own mean)
+  clear_ratio: 0.97                 # hysteresis: a risk clears only below 97% of capacity for 3 samples
+
+dayahead:
+  file: ${DAYAHEAD_FILE:-}          # J-1 load profile per zone (JSON, see dayahead.py)
+  offset_s: 0                       # time of day when the Brain starts
+
+action:
+  ack_timeout_s: 5                  # switch must reach the commanded state within this
+  verify_tolerance: 0.25            # allowed relative error between predicted and observed load shift
+  switch_cooldown_s: 60             # anti-flapping
+  switching_cost: 0.02              # an action must cut expected overload by at least this
+  priority_weight: 3.0              # overload in hospital / flood pump / signals zones counts 3x
+  priority_headroom: 0.85           # a priority zone only receives load if it stays below 85%
+  max_send_attempts: 2              # retries reuse the same command_id (no double execution)
+  shed_above: 1.10                  # last-resort shedding: zone MEASURED over capacity and expected peak >= 110%
+  shed_penalty: 0.05
+  restore_enabled: true             # put switches back when the forecast stays safe
+  restore_margin: 0.85              # ...every affected zone <= 85% of capacity
+  restore_persistence: 10           # ...for 10 consecutive samples
+  restore_min_shed_s: 90            # a shed zone stays dark >= 90 s, doubled after each failed retry
+
+learning:
+  enabled: true                     # learn unknown switch effects by watching operator switching
+  min_observations: 2
+  min_shift_frac: 0.05
+  fraction_tolerance: 0.08
+  confirm_s: 10                     # an observation counts only if its sensors stay trusted this long
+
+# Optional local knowledge about the city (fills gaps the Twin does not advertise).
+city_file: null
+
+orchestrator:                       # the City Brain orchestrator that supervises this agent (MCP)
+  api_key: ${ORCHESTRATOR_API_KEY:-dev-orchestrator-key}
+  start_mode: autonomous            # autonomous: the agent acts | advisory: it proposes, the orchestrator approves
+  notify_url: ${ORCHESTRATOR_NOTIFY_URL:-}   # optional webhook for important events

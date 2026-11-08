@@ -1,0 +1,52 @@
+{
+  "note": "The Test Book: three scenarios per axis, then the system checks. Only the scenarios listed here are loaded.",
+  "groups": [
+    {
+      "axis": "emergency",
+      "title": "Emergency",
+      "scenarios": [
+        "EM01",
+        "EM02",
+        "EM03"
+      ]
+    },
+    {
+      "axis": "transportation",
+      "title": "Transportation",
+      "scenarios": [
+        "TR01",
+        "TR02",
+        "TR03"
+      ]
+    },
+    {
+      "axis": "pollution",
+      "title": "Pollution",
+      "scenarios": [
+        "PO01",
+        "PO02",
+        "PO03"
+      ]
+    },
+    {
+      "axis": "energy",
+      "title": "Energy",
+      "scenarios": [
+        "EN01",
+        "EN02",
+        "EN03"
+      ]
+    },
+    {
+      "axis": "system",
+      "title": "System (partners and links)",
+      "scenarios": [
+        "SY01",
+        "SY02",
+        "SY03",
+        "SY04",
+        "SY05"
+      ]
+    }
+  ]
+}

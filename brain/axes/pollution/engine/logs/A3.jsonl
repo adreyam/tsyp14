@@ -1,0 +1,671 @@
+{"ts": "2026-11-02T06:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.9, "o3": 13.97, "no2": 10.14}
+{"ts": "2026-11-02T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.4, "o3": 12.97, "no2": 11.14}
+{"ts": "2026-11-02T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 12.1, "o3": 9.92, "no2": 16.42}
+{"ts": "2026-11-02T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 11.58, "o3": 9.93, "no2": 15.38}
+{"ts": "2026-11-02T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.87, "o3": 14.98, "no2": 9.1}
+{"ts": "2026-11-02T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.37, "o3": 14.98, "no2": 9.6}
+{"ts": "2026-11-02T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.93, "o3": 8.97, "no2": 14.17}
+{"ts": "2026-11-02T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 52.7, "level": "normal", "sensor_id": "AIR-01", "r_pm": 39.6, "r_ox": 48.7, "season": "cold", "reason": "AIR-01: risk 53 = max(R_pm 40, R_ox 49) + 0.10 x 40; Ox driven (Z_pm 9.9/25 ug/m3, Z_ox 12.7/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_level", "zone": "A", "level": "normal", "previous": null, "risk": 52.7, "reason": "AIR-01: risk 53 = max(R_pm 40, R_ox 49) + 0.10 x 40; Ox driven (Z_pm 9.9/25 ug/m3, Z_ox 12.7/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 53.1, "level": "normal", "sensor_id": "AIR-03", "r_pm": 48.4, "r_ox": 46.7, "season": "cold", "reason": "AIR-03: risk 53 = max(R_pm 48, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 12.1/25 ug/m3, Z_ox 12.1/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_level", "zone": "B", "level": "normal", "previous": null, "risk": 53.1, "reason": "AIR-03: risk 53 = max(R_pm 48, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 12.1/25 ug/m3, Z_ox 12.1/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 54.3, "level": "normal", "sensor_id": "AIR-06", "r_pm": 37.5, "r_ox": 50.6, "season": "cold", "reason": "AIR-06: risk 54 = max(R_pm 37, R_ox 51) + 0.10 x 37; Ox driven (Z_pm 9.4/25 ug/m3, Z_ox 13.1/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_level", "zone": "C", "level": "normal", "previous": null, "risk": 54.3, "reason": "AIR-06: risk 54 = max(R_pm 37, R_ox 51) + 0.10 x 37; Ox driven (Z_pm 9.4/25 ug/m3, Z_ox 13.1/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 63.9, "level": "normal", "sensor_id": "AIR-07", "r_pm": 59.7, "r_ox": 41.3, "season": "cold", "reason": "AIR-07: risk 64 = max(R_pm 60, R_ox 41) + 0.10 x 41; PM2.5 driven (Z_pm 14.9/25 ug/m3, Z_ox 10.7/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:10:00Z", "layer": "city_brain", "event": "air_level", "zone": "D", "level": "normal", "previous": null, "risk": 63.9, "reason": "AIR-07: risk 64 = max(R_pm 60, R_ox 41) + 0.10 x 41; PM2.5 driven (Z_pm 14.9/25 ug/m3, Z_ox 10.7/26 ppb, cold season, first reading, t-1 = t)"}
+{"ts": "2026-11-02T06:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.91, "o3": 13.95, "no2": 10.29}
+{"ts": "2026-11-02T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.41, "o3": 12.95, "no2": 11.29}
+{"ts": "2026-11-02T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.33, "o3": 9.84, "no2": 16.86}
+{"ts": "2026-11-02T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.78, "o3": 9.86, "no2": 15.78}
+{"ts": "2026-11-02T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.86, "o3": 14.96, "no2": 9.21}
+{"ts": "2026-11-02T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.36, "o3": 14.96, "no2": 9.71}
+{"ts": "2026-11-02T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.97, "o3": 8.94, "no2": 14.36}
+{"ts": "2026-11-02T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 52.4, "level": "normal", "sensor_id": "AIR-01", "r_pm": 36.0, "r_ox": 48.8, "season": "cold", "reason": "AIR-01: risk 52 = max(R_pm 36, R_ox 49) + 0.10 x 36; Ox driven (Z_pm 9.0/25 ug/m3, Z_ox 12.7/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 51.4, "level": "normal", "sensor_id": "AIR-03", "r_pm": 45.6, "r_ox": 46.8, "season": "cold", "reason": "AIR-03: risk 51 = max(R_pm 46, R_ox 47) + 0.10 x 46; Ox driven (Z_pm 11.4/25 ug/m3, Z_ox 12.2/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 54.0, "level": "normal", "sensor_id": "AIR-06", "r_pm": 33.8, "r_ox": 50.6, "season": "cold", "reason": "AIR-06: risk 54 = max(R_pm 34, R_ox 51) + 0.10 x 34; Ox driven (Z_pm 8.5/25 ug/m3, Z_ox 13.2/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 60.4, "level": "normal", "sensor_id": "AIR-07", "r_pm": 56.3, "r_ox": 41.4, "season": "cold", "reason": "AIR-07: risk 60 = max(R_pm 56, R_ox 41) + 0.10 x 41; PM2.5 driven (Z_pm 14.1/25 ug/m3, Z_ox 10.8/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.79, "o3": 13.9, "no2": 10.55}
+{"ts": "2026-11-02T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.29, "o3": 12.9, "no2": 11.55}
+{"ts": "2026-11-02T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.58, "o3": 9.7, "no2": 17.64}
+{"ts": "2026-11-02T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.98, "o3": 9.73, "no2": 16.5}
+{"ts": "2026-11-02T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.69, "o3": 14.93, "no2": 9.41}
+{"ts": "2026-11-02T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.19, "o3": 14.93, "no2": 9.91}
+{"ts": "2026-11-02T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.89, "o3": 8.88, "no2": 14.68}
+{"ts": "2026-11-02T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 52.5, "level": "normal", "sensor_id": "AIR-01", "r_pm": 35.6, "r_ox": 48.9, "season": "cold", "reason": "AIR-01: risk 52 = max(R_pm 36, R_ox 49) + 0.10 x 36; Ox driven (Z_pm 8.9/25 ug/m3, Z_ox 12.7/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 51.8, "level": "normal", "sensor_id": "AIR-03", "r_pm": 46.5, "r_ox": 47.2, "season": "cold", "reason": "AIR-03: risk 52 = max(R_pm 47, R_ox 47) + 0.10 x 47; Ox driven (Z_pm 11.6/25 ug/m3, Z_ox 12.3/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 54.0, "level": "normal", "sensor_id": "AIR-06", "r_pm": 33.2, "r_ox": 50.7, "season": "cold", "reason": "AIR-06: risk 54 = max(R_pm 33, R_ox 51) + 0.10 x 33; Ox driven (Z_pm 8.3/25 ug/m3, Z_ox 13.2/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 60.1, "level": "normal", "sensor_id": "AIR-07", "r_pm": 56.0, "r_ox": 41.5, "season": "cold", "reason": "AIR-07: risk 60 = max(R_pm 56, R_ox 42) + 0.10 x 42; PM2.5 driven (Z_pm 14.0/25 ug/m3, Z_ox 10.8/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 10.4, "o3": 13.82, "no2": 10.98}
+{"ts": "2026-11-02T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.9, "o3": 12.82, "no2": 11.98}
+{"ts": "2026-11-02T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 13.83, "o3": 9.47, "no2": 18.94}
+{"ts": "2026-11-02T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 13.15, "o3": 9.51, "no2": 17.7}
+{"ts": "2026-11-02T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 9.22, "o3": 14.87, "no2": 9.74}
+{"ts": "2026-11-02T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.72, "o3": 14.87, "no2": 10.24}
+{"ts": "2026-11-02T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 15.58, "o3": 8.78, "no2": 15.23}
+{"ts": "2026-11-02T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 53.2, "level": "normal", "sensor_id": "AIR-01", "r_pm": 41.4, "r_ox": 49.1, "season": "cold", "reason": "AIR-01: risk 53 = max(R_pm 41, R_ox 49) + 0.10 x 41; Ox driven (Z_pm 10.4/25 ug/m3, Z_ox 12.8/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 59.4, "level": "normal", "sensor_id": "AIR-03", "r_pm": 54.6, "r_ox": 47.7, "season": "cold", "reason": "AIR-03: risk 59 = max(R_pm 55, R_ox 48) + 0.10 x 48; PM2.5 driven (Z_pm 13.7/25 ug/m3, Z_ox 12.4/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 54.7, "level": "normal", "sensor_id": "AIR-06", "r_pm": 38.7, "r_ox": 50.9, "season": "cold", "reason": "AIR-06: risk 55 = max(R_pm 39, R_ox 51) + 0.10 x 39; Ox driven (Z_pm 9.7/25 ug/m3, Z_ox 13.2/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 66.2, "level": "normal", "sensor_id": "AIR-07", "r_pm": 62.1, "r_ox": 41.8, "season": "cold", "reason": "AIR-07: risk 66 = max(R_pm 62, R_ox 42) + 0.10 x 42; PM2.5 driven (Z_pm 15.5/25 ug/m3, Z_ox 10.9/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 10.36, "o3": 13.7, "no2": 11.64}
+{"ts": "2026-11-02T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.86, "o3": 12.7, "no2": 12.64}
+{"ts": "2026-11-02T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 14.74, "o3": 9.11, "no2": 20.92}
+{"ts": "2026-11-02T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 13.94, "o3": 9.18, "no2": 19.51}
+{"ts": "2026-11-02T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 9.06, "o3": 14.78, "no2": 10.23}
+{"ts": "2026-11-02T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.56, "o3": 14.78, "no2": 10.73}
+{"ts": "2026-11-02T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 15.66, "o3": 8.63, "no2": 16.05}
+{"ts": "2026-11-02T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T06:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 53.5, "level": "normal", "sensor_id": "AIR-01", "r_pm": 41.3, "r_ox": 49.4, "season": "cold", "reason": "AIR-01: risk 53 = max(R_pm 41, R_ox 49) + 0.10 x 41; Ox driven (Z_pm 10.3/25 ug/m3, Z_ox 12.8/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 62.8, "level": "normal", "sensor_id": "AIR-03", "r_pm": 57.9, "r_ox": 48.6, "season": "cold", "reason": "AIR-03: risk 63 = max(R_pm 58, R_ox 49) + 0.10 x 49; PM2.5 driven (Z_pm 14.5/25 ug/m3, Z_ox 12.6/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 54.9, "level": "normal", "sensor_id": "AIR-06", "r_pm": 38.2, "r_ox": 51.1, "season": "cold", "reason": "AIR-06: risk 55 = max(R_pm 38, R_ox 51) + 0.10 x 38; Ox driven (Z_pm 9.5/25 ug/m3, Z_ox 13.3/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T06:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 66.6, "level": "normal", "sensor_id": "AIR-07", "r_pm": 62.3, "r_ox": 42.1, "season": "cold", "reason": "AIR-07: risk 67 = max(R_pm 62, R_ox 42) + 0.10 x 42; PM2.5 driven (Z_pm 15.6/25 ug/m3, Z_ox 10.9/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T07:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 10.07, "o3": 13.53, "no2": 12.56}
+{"ts": "2026-11-02T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.57, "o3": 12.53, "no2": 13.56}
+{"ts": "2026-11-02T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 15.79, "o3": 8.6, "no2": 23.68}
+{"ts": "2026-11-02T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 14.83, "o3": 8.72, "no2": 22.04}
+{"ts": "2026-11-02T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.6, "o3": 14.65, "no2": 10.92}
+{"ts": "2026-11-02T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.1, "o3": 14.65, "no2": 11.42}
+{"ts": "2026-11-02T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 15.53, "o3": 8.42, "no2": 17.2}
+{"ts": "2026-11-02T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 53.8, "level": "normal", "sensor_id": "AIR-01", "r_pm": 40.2, "r_ox": 49.7, "season": "cold", "reason": "AIR-01: risk 54 = max(R_pm 40, R_ox 50) + 0.10 x 40; Ox driven (Z_pm 10.1/25 ug/m3, Z_ox 12.9/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T07:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 66.7, "level": "normal", "sensor_id": "AIR-03", "r_pm": 61.7, "r_ox": 49.7, "season": "cold", "reason": "AIR-03: risk 67 = max(R_pm 62, R_ox 50) + 0.10 x 50; PM2.5 driven (Z_pm 15.4/25 ug/m3, Z_ox 12.9/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T07:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 55.0, "level": "normal", "sensor_id": "AIR-06", "r_pm": 36.5, "r_ox": 51.3, "season": "cold", "reason": "AIR-06: risk 55 = max(R_pm 37, R_ox 51) + 0.10 x 37; Ox driven (Z_pm 9.1/25 ug/m3, Z_ox 13.4/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T07:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 66.1, "level": "normal", "sensor_id": "AIR-07", "r_pm": 61.9, "r_ox": 42.6, "season": "cold", "reason": "AIR-07: risk 66 = max(R_pm 62, R_ox 43) + 0.10 x 43; PM2.5 driven (Z_pm 15.5/25 ug/m3, Z_ox 11.1/26 ppb, cold season, t-1 not yet available, oldest reading used)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 12.06, "o3": 13.32, "no2": 13.73}
+{"ts": "2026-11-02T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 12.56, "o3": 12.32, "no2": 14.73}
+{"ts": "2026-11-02T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 19.49, "o3": 7.96, "no2": 27.2}
+{"ts": "2026-11-02T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 18.32, "o3": 8.13, "no2": 25.27}
+{"ts": "2026-11-02T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 10.38, "o3": 14.49, "no2": 11.8}
+{"ts": "2026-11-02T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 10.88, "o3": 14.49, "no2": 12.3}
+{"ts": "2026-11-02T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 17.74, "o3": 8.15, "no2": 18.67}
+{"ts": "2026-11-02T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 55.0, "level": "normal", "sensor_id": "AIR-01", "r_pm": 47.4, "r_ox": 50.2, "season": "cold", "reason": "AIR-01: risk 55 = max(R_pm 47, R_ox 50) + 0.10 x 47; Ox driven (Z_pm 11.8/25 ug/m3, Z_ox 13.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 80.1, "level": "warning", "sensor_id": "AIR-03", "r_pm": 75.0, "r_ox": 51.2, "season": "cold", "reason": "AIR-03: risk 80 = max(R_pm 75, R_ox 51) + 0.10 x 51; PM2.5 driven (Z_pm 18.8/25 ug/m3, Z_ox 13.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_level", "zone": "B", "level": "warning", "previous": "normal", "risk": 80.1, "reason": "AIR-03: risk 80 = max(R_pm 75, R_ox 51) + 0.10 x 51; PM2.5 driven (Z_pm 18.8/25 ug/m3, Z_ox 13.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_action", "zone": "B", "action": "sensitive_alert", "severity": "warning", "audience": "sensitive sites", "message": "Air quality warning in zone B: keep vulnerable people indoors", "reason": "AIR-03: risk 80 = max(R_pm 75, R_ox 51) + 0.10 x 51; PM2.5 driven (Z_pm 18.8/25 ug/m3, Z_ox 13.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 56.0, "level": "normal", "sensor_id": "AIR-06", "r_pm": 42.9, "r_ox": 51.7, "season": "cold", "reason": "AIR-06: risk 56 = max(R_pm 43, R_ox 52) + 0.10 x 43; Ox driven (Z_pm 10.7/25 ug/m3, Z_ox 13.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 74.2, "level": "warning", "sensor_id": "AIR-07", "r_pm": 69.8, "r_ox": 43.2, "season": "cold", "reason": "AIR-07: risk 74 = max(R_pm 70, R_ox 43) + 0.10 x 43; PM2.5 driven (Z_pm 17.5/25 ug/m3, Z_ox 11.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_level", "zone": "D", "level": "warning", "previous": "normal", "risk": 74.2, "reason": "AIR-07: risk 74 = max(R_pm 70, R_ox 43) + 0.10 x 43; PM2.5 driven (Z_pm 17.5/25 ug/m3, Z_ox 11.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:10:00Z", "layer": "city_brain", "event": "air_action", "zone": "D", "action": "sensitive_alert", "severity": "warning", "audience": "sensitive sites", "message": "Air quality warning in zone D: keep vulnerable people indoors", "reason": "AIR-07: risk 74 = max(R_pm 70, R_ox 43) + 0.10 x 43; PM2.5 driven (Z_pm 17.5/25 ug/m3, Z_ox 11.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 13.27, "o3": 13.08, "no2": 15.08}
+{"ts": "2026-11-02T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 13.77, "o3": 12.08, "no2": 16.08}
+{"ts": "2026-11-02T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 22.66, "o3": 7.23, "no2": 31.25}
+{"ts": "2026-11-02T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 21.24, "o3": 7.46, "no2": 28.98}
+{"ts": "2026-11-02T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 11.34, "o3": 14.31, "no2": 12.81}
+{"ts": "2026-11-02T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 11.84, "o3": 14.31, "no2": 13.31}
+{"ts": "2026-11-02T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 19.19, "o3": 7.84, "no2": 20.35}
+{"ts": "2026-11-02T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 58.3, "level": "normal", "sensor_id": "AIR-02", "r_pm": 53.3, "r_ox": 49.7, "season": "cold", "reason": "AIR-02: risk 58 = max(R_pm 53, R_ox 50) + 0.10 x 50; PM2.5 driven (Z_pm 13.3/25 ug/m3, Z_ox 12.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 91.4, "level": "warning", "sensor_id": "AIR-03", "r_pm": 86.1, "r_ox": 53.1, "season": "cold", "reason": "AIR-03: risk 91 = max(R_pm 86, R_ox 53) + 0.10 x 53; PM2.5 driven (Z_pm 21.5/25 ug/m3, Z_ox 13.8/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 56.8, "level": "normal", "sensor_id": "AIR-06", "r_pm": 46.0, "r_ox": 52.2, "season": "cold", "reason": "AIR-06: risk 57 = max(R_pm 46, R_ox 52) + 0.10 x 46; Ox driven (Z_pm 11.5/25 ug/m3, Z_ox 13.6/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 79.1, "level": "warning", "sensor_id": "AIR-07", "r_pm": 74.7, "r_ox": 44.0, "season": "cold", "reason": "AIR-07: risk 79 = max(R_pm 75, R_ox 44) + 0.10 x 44; PM2.5 driven (Z_pm 18.7/25 ug/m3, Z_ox 11.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 12.98, "o3": 12.82, "no2": 16.46}
+{"ts": "2026-11-02T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 13.48, "o3": 11.82, "no2": 17.46}
+{"ts": "2026-11-02T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 24.39, "o3": 6.47, "no2": 35.39}
+{"ts": "2026-11-02T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 22.71, "o3": 6.77, "no2": 32.77}
+{"ts": "2026-11-02T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 10.81, "o3": 14.12, "no2": 13.85}
+{"ts": "2026-11-02T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 11.31, "o3": 14.12, "no2": 14.35}
+{"ts": "2026-11-02T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 19.16, "o3": 7.53, "no2": 22.08}
+{"ts": "2026-11-02T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 57.3, "level": "normal", "sensor_id": "AIR-02", "r_pm": 52.2, "r_ox": 50.3, "season": "cold", "reason": "AIR-02: risk 57 = max(R_pm 52, R_ox 50) + 0.10 x 50; PM2.5 driven (Z_pm 13.1/25 ug/m3, Z_ox 13.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 98.0, "level": "warning", "sensor_id": "AIR-03", "r_pm": 92.4, "r_ox": 55.2, "season": "cold", "reason": "AIR-03: risk 98 = max(R_pm 92, R_ox 55) + 0.10 x 55; PM2.5 driven (Z_pm 23.1/25 ug/m3, Z_ox 14.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 57.1, "level": "normal", "sensor_id": "AIR-06", "r_pm": 44.0, "r_ox": 52.7, "season": "cold", "reason": "AIR-06: risk 57 = max(R_pm 44, R_ox 53) + 0.10 x 44; Ox driven (Z_pm 11.0/25 ug/m3, Z_ox 13.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 79.0, "level": "warning", "sensor_id": "AIR-07", "r_pm": 74.5, "r_ox": 44.9, "season": "cold", "reason": "AIR-07: risk 79 = max(R_pm 75, R_ox 45) + 0.10 x 45; PM2.5 driven (Z_pm 18.6/25 ug/m3, Z_ox 11.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 14.47, "o3": 12.61, "no2": 17.67}
+{"ts": "2026-11-02T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 14.97, "o3": 11.61, "no2": 18.67}
+{"ts": "2026-11-02T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 27.63, "o3": 5.82, "no2": 39.02}
+{"ts": "2026-11-02T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 25.74, "o3": 6.16, "no2": 36.1}
+{"ts": "2026-11-02T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 12.08, "o3": 13.95, "no2": 14.75}
+{"ts": "2026-11-02T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 12.58, "o3": 13.95, "no2": 15.25}
+{"ts": "2026-11-02T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 20.87, "o3": 7.26, "no2": 23.59}
+{"ts": "2026-11-02T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 63.4, "level": "normal", "sensor_id": "AIR-02", "r_pm": 58.3, "r_ox": 51.1, "season": "cold", "reason": "AIR-02: risk 63 = max(R_pm 58, R_ox 51) + 0.10 x 51; PM2.5 driven (Z_pm 14.6/25 ug/m3, Z_ox 13.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 110.7, "level": "high", "sensor_id": "AIR-03", "r_pm": 105.0, "r_ox": 57.3, "season": "cold", "reason": "AIR-03: risk 111 = max(R_pm 105, R_ox 57) + 0.10 x 57; PM2.5 driven (Z_pm 26.2/25 ug/m3, Z_ox 14.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:40:00Z", "layer": "city_brain", "event": "air_level", "zone": "B", "level": "high", "previous": "warning", "risk": 110.7, "reason": "AIR-03: risk 111 = max(R_pm 105, R_ox 57) + 0.10 x 57; PM2.5 driven (Z_pm 26.2/25 ug/m3, Z_ox 14.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:40:00Z", "layer": "city_brain", "event": "air_action", "zone": "B", "action": "close_parking", "target": "LOT-02", "severity": "high", "message": {"tool": "set_parking_barrier", "arguments": {"id": "LOT-02", "mode": "closed"}}, "reason": "AIR-03: risk 111 = max(R_pm 105, R_ox 57) + 0.10 x 57; PM2.5 driven (Z_pm 26.2/25 ug/m3, Z_ox 14.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:40:00Z", "layer": "city_brain", "event": "air_action", "zone": "B", "action": "public_alert", "severity": "high", "audience": "public", "message": "Air quality high in zone B: limit outdoor activity", "reason": "AIR-03: risk 111 = max(R_pm 105, R_ox 57) + 0.10 x 57; PM2.5 driven (Z_pm 26.2/25 ug/m3, Z_ox 14.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.2, "level": "normal", "sensor_id": "AIR-06", "r_pm": 49.2, "r_ox": 53.2, "season": "cold", "reason": "AIR-06: risk 58 = max(R_pm 49, R_ox 53) + 0.10 x 49; Ox driven (Z_pm 12.3/25 ug/m3, Z_ox 13.8/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 85.9, "level": "warning", "sensor_id": "AIR-07", "r_pm": 81.4, "r_ox": 45.8, "season": "cold", "reason": "AIR-07: risk 86 = max(R_pm 81, R_ox 46) + 0.10 x 46; PM2.5 driven (Z_pm 20.3/25 ug/m3, Z_ox 11.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 15.97, "o3": 12.45, "no2": 18.5}
+{"ts": "2026-11-02T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 16.47, "o3": 11.45, "no2": 19.5}
+{"ts": "2026-11-02T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 23.84, "o3": 6.99, "no2": 32.58}
+{"ts": "2026-11-02T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 22.34, "o3": 7.24, "no2": 30.2}
+{"ts": "2026-11-02T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 13.42, "o3": 13.84, "no2": 15.38}
+{"ts": "2026-11-02T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 13.92, "o3": 13.84, "no2": 15.88}
+{"ts": "2026-11-02T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 22.51, "o3": 7.07, "no2": 24.63}
+{"ts": "2026-11-02T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T07:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 68.8, "level": "normal", "sensor_id": "AIR-02", "r_pm": 63.6, "r_ox": 51.7, "season": "cold", "reason": "AIR-02: risk 69 = max(R_pm 64, R_ox 52) + 0.10 x 52; PM2.5 driven (Z_pm 15.9/25 ug/m3, Z_ox 13.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 97.3, "level": "high", "sensor_id": "AIR-03", "r_pm": 91.7, "r_ox": 55.4, "season": "cold", "reason": "AIR-03: risk 97 = max(R_pm 92, R_ox 55) + 0.10 x 55; PM2.5 driven (Z_pm 22.9/25 ug/m3, Z_ox 14.4/26 ppb, cold season); holding high until risk < 95"}
+{"ts": "2026-11-02T07:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 59.3, "level": "normal", "sensor_id": "AIR-06", "r_pm": 53.9, "r_ox": 53.7, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 54, R_ox 54) + 0.10 x 54; PM2.5 driven (Z_pm 13.5/25 ug/m3, Z_ox 14.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T07:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 92.0, "level": "warning", "sensor_id": "AIR-07", "r_pm": 87.3, "r_ox": 46.5, "season": "cold", "reason": "AIR-07: risk 92 = max(R_pm 87, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 21.8/25 ug/m3, Z_ox 12.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 15.0, "o3": 12.4, "no2": 18.8}
+{"ts": "2026-11-02T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 15.5, "o3": 11.4, "no2": 19.8}
+{"ts": "2026-11-02T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 23.08, "o3": 6.88, "no2": 33.16}
+{"ts": "2026-11-02T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 21.54, "o3": 7.14, "no2": 30.73}
+{"ts": "2026-11-02T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 12.4, "o3": 13.8, "no2": 15.6}
+{"ts": "2026-11-02T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 12.9, "o3": 13.8, "no2": 16.1}
+{"ts": "2026-11-02T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 21.6, "o3": 7.0, "no2": 25.0}
+{"ts": "2026-11-02T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 65.2, "level": "normal", "sensor_id": "AIR-02", "r_pm": 60.0, "r_ox": 52.2, "season": "cold", "reason": "AIR-02: risk 65 = max(R_pm 60, R_ox 52) + 0.10 x 52; PM2.5 driven (Z_pm 15.0/25 ug/m3, Z_ox 13.6/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 95.1, "level": "high", "sensor_id": "AIR-03", "r_pm": 89.4, "r_ox": 56.8, "season": "cold", "reason": "AIR-03: risk 95 = max(R_pm 89, R_ox 57) + 0.10 x 57; PM2.5 driven (Z_pm 22.4/25 ug/m3, Z_ox 14.8/26 ppb, cold season); holding high until risk < 95"}
+{"ts": "2026-11-02T08:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 59.1, "level": "normal", "sensor_id": "AIR-06", "r_pm": 50.1, "r_ox": 54.1, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 50, R_ox 54) + 0.10 x 50; Ox driven (Z_pm 12.5/25 ug/m3, Z_ox 14.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 88.7, "level": "warning", "sensor_id": "AIR-07", "r_pm": 84.0, "r_ox": 47.2, "season": "cold", "reason": "AIR-07: risk 89 = max(R_pm 84, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 21.0/25 ug/m3, Z_ox 12.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 14.66, "o3": 12.45, "no2": 18.5}
+{"ts": "2026-11-02T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 15.16, "o3": 11.45, "no2": 19.5}
+{"ts": "2026-11-02T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 22.53, "o3": 6.99, "no2": 32.58}
+{"ts": "2026-11-02T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 21.03, "o3": 7.24, "no2": 30.2}
+{"ts": "2026-11-02T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 12.11, "o3": 13.84, "no2": 15.38}
+{"ts": "2026-11-02T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 12.61, "o3": 13.84, "no2": 15.88}
+{"ts": "2026-11-02T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 21.21, "o3": 7.07, "no2": 24.63}
+{"ts": "2026-11-02T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 64.9, "level": "normal", "sensor_id": "AIR-02", "r_pm": 59.6, "r_ox": 52.6, "season": "cold", "reason": "AIR-02: risk 65 = max(R_pm 60, R_ox 53) + 0.10 x 53; PM2.5 driven (Z_pm 14.9/25 ug/m3, Z_ox 13.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 94.7, "level": "high", "sensor_id": "AIR-03", "r_pm": 88.9, "r_ox": 58.1, "season": "cold", "reason": "AIR-03: risk 95 = max(R_pm 89, R_ox 58) + 0.10 x 58; PM2.5 driven (Z_pm 22.2/25 ug/m3, Z_ox 15.1/26 ppb, cold season); holding high: below 95 1/2"}
+{"ts": "2026-11-02T08:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 59.4, "level": "normal", "sensor_id": "AIR-06", "r_pm": 49.7, "r_ox": 54.4, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 50, R_ox 54) + 0.10 x 50; Ox driven (Z_pm 12.4/25 ug/m3, Z_ox 14.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 88.2, "level": "warning", "sensor_id": "AIR-07", "r_pm": 83.5, "r_ox": 47.6, "season": "cold", "reason": "AIR-07: risk 88 = max(R_pm 83, R_ox 48) + 0.10 x 48; PM2.5 driven (Z_pm 20.9/25 ug/m3, Z_ox 12.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 15.32, "o3": 12.61, "no2": 17.67}
+{"ts": "2026-11-02T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 15.82, "o3": 11.61, "no2": 18.67}
+{"ts": "2026-11-02T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 22.62, "o3": 7.28, "no2": 30.96}
+{"ts": "2026-11-02T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 21.21, "o3": 7.51, "no2": 28.71}
+{"ts": "2026-11-02T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 12.93, "o3": 13.95, "no2": 14.75}
+{"ts": "2026-11-02T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 13.43, "o3": 13.95, "no2": 15.25}
+{"ts": "2026-11-02T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 21.72, "o3": 7.26, "no2": 23.59}
+{"ts": "2026-11-02T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 67.7, "level": "normal", "sensor_id": "AIR-02", "r_pm": 62.5, "r_ox": 52.8, "season": "cold", "reason": "AIR-02: risk 68 = max(R_pm 62, R_ox 53) + 0.10 x 53; PM2.5 driven (Z_pm 15.6/25 ug/m3, Z_ox 13.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 96.4, "level": "high", "sensor_id": "AIR-03", "r_pm": 90.5, "r_ox": 59.1, "season": "cold", "reason": "AIR-03: risk 96 = max(R_pm 90, R_ox 59) + 0.10 x 59; PM2.5 driven (Z_pm 22.6/25 ug/m3, Z_ox 15.4/26 ppb, cold season); holding high until risk < 95"}
+{"ts": "2026-11-02T08:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 59.9, "level": "normal", "sensor_id": "AIR-06", "r_pm": 53.1, "r_ox": 54.5, "season": "cold", "reason": "AIR-06: risk 60 = max(R_pm 53, R_ox 55) + 0.10 x 53; Ox driven (Z_pm 13.3/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 90.7, "level": "warning", "sensor_id": "AIR-07", "r_pm": 85.9, "r_ox": 47.9, "season": "cold", "reason": "AIR-07: risk 91 = max(R_pm 86, R_ox 48) + 0.10 x 48; PM2.5 driven (Z_pm 21.5/25 ug/m3, Z_ox 12.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 13.75, "o3": 12.82, "no2": 16.46}
+{"ts": "2026-11-02T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 14.25, "o3": 11.82, "no2": 17.46}
+{"ts": "2026-11-02T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 20.21, "o3": 7.71, "no2": 28.6}
+{"ts": "2026-11-02T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 18.95, "o3": 7.9, "no2": 26.55}
+{"ts": "2026-11-02T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 11.57, "o3": 14.12, "no2": 13.85}
+{"ts": "2026-11-02T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 12.07, "o3": 14.12, "no2": 14.35}
+{"ts": "2026-11-02T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 19.92, "o3": 7.53, "no2": 22.08}
+{"ts": "2026-11-02T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 62.0, "level": "normal", "sensor_id": "AIR-02", "r_pm": 56.7, "r_ox": 52.8, "season": "cold", "reason": "AIR-02: risk 62 = max(R_pm 57, R_ox 53) + 0.10 x 53; PM2.5 driven (Z_pm 14.2/25 ug/m3, Z_ox 13.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 88.5, "level": "high", "sensor_id": "AIR-03", "r_pm": 82.5, "r_ox": 59.9, "season": "cold", "reason": "AIR-03: risk 88 = max(R_pm 83, R_ox 60) + 0.10 x 60; PM2.5 driven (Z_pm 20.6/25 ug/m3, Z_ox 15.6/26 ppb, cold season); holding high: below 95 1/2"}
+{"ts": "2026-11-02T08:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 59.4, "level": "normal", "sensor_id": "AIR-06", "r_pm": 48.0, "r_ox": 54.6, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 48, R_ox 55) + 0.10 x 48; Ox driven (Z_pm 12.0/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 84.2, "level": "warning", "sensor_id": "AIR-07", "r_pm": 79.4, "r_ox": 48.0, "season": "cold", "reason": "AIR-07: risk 84 = max(R_pm 79, R_ox 48) + 0.10 x 48; PM2.5 driven (Z_pm 19.8/25 ug/m3, Z_ox 12.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 11.93, "o3": 13.08, "no2": 15.08}
+{"ts": "2026-11-02T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 12.43, "o3": 12.08, "no2": 16.08}
+{"ts": "2026-11-02T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 17.44, "o3": 8.2, "no2": 25.91}
+{"ts": "2026-11-02T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 16.34, "o3": 8.35, "no2": 24.09}
+{"ts": "2026-11-02T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 10.0, "o3": 14.31, "no2": 12.81}
+{"ts": "2026-11-02T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 10.5, "o3": 14.31, "no2": 13.31}
+{"ts": "2026-11-02T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 17.85, "o3": 7.84, "no2": 20.35}
+{"ts": "2026-11-02T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 58.9, "level": "normal", "sensor_id": "AIR-01", "r_pm": 48.7, "r_ox": 54.0, "season": "cold", "reason": "AIR-01: risk 59 = max(R_pm 49, R_ox 54) + 0.10 x 49; Ox driven (Z_pm 12.2/25 ug/m3, Z_ox 14.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 79.9, "level": "warning", "sensor_id": "AIR-03", "r_pm": 73.8, "r_ox": 60.3, "season": "cold", "reason": "AIR-03: risk 80 = max(R_pm 74, R_ox 60) + 0.10 x 60; PM2.5 driven (Z_pm 18.5/25 ug/m3, Z_ox 15.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:40:00Z", "layer": "city_brain", "event": "air_level", "zone": "B", "level": "warning", "previous": "high", "risk": 79.9, "reason": "AIR-03: risk 80 = max(R_pm 74, R_ox 60) + 0.10 x 60; PM2.5 driven (Z_pm 18.5/25 ug/m3, Z_ox 15.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:40:00Z", "layer": "city_brain", "event": "air_action", "zone": "B", "action": "reopen_parking", "target": "LOT-02", "severity": "warning", "message": {"tool": "set_parking_barrier", "arguments": {"id": "LOT-02", "mode": "auto"}}, "reason": "AIR-03: risk 80 = max(R_pm 74, R_ox 60) + 0.10 x 60; PM2.5 driven (Z_pm 18.5/25 ug/m3, Z_ox 15.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:40:00Z", "layer": "city_brain", "event": "air_action", "zone": "B", "action": "lift_public_alert", "severity": "warning", "reason": "AIR-03: risk 80 = max(R_pm 74, R_ox 60) + 0.10 x 60; PM2.5 driven (Z_pm 18.5/25 ug/m3, Z_ox 15.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.8, "level": "normal", "sensor_id": "AIR-06", "r_pm": 42.8, "r_ox": 54.5, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 43, R_ox 55) + 0.10 x 43; Ox driven (Z_pm 10.7/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 77.4, "level": "warning", "sensor_id": "AIR-07", "r_pm": 72.6, "r_ox": 47.9, "season": "cold", "reason": "AIR-07: risk 77 = max(R_pm 73, R_ox 48) + 0.10 x 48; PM2.5 driven (Z_pm 18.2/25 ug/m3, Z_ox 12.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 12.17, "o3": 13.32, "no2": 13.73}
+{"ts": "2026-11-02T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 12.67, "o3": 12.32, "no2": 14.73}
+{"ts": "2026-11-02T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 19.6, "o3": 7.96, "no2": 27.2}
+{"ts": "2026-11-02T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 18.42, "o3": 8.13, "no2": 25.27}
+{"ts": "2026-11-02T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 10.49, "o3": 14.49, "no2": 11.8}
+{"ts": "2026-11-02T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 10.99, "o3": 14.49, "no2": 12.3}
+{"ts": "2026-11-02T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 17.85, "o3": 8.15, "no2": 18.67}
+{"ts": "2026-11-02T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T08:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 58.8, "level": "normal", "sensor_id": "AIR-01", "r_pm": 50.2, "r_ox": 53.8, "season": "cold", "reason": "AIR-01: risk 59 = max(R_pm 50, R_ox 54) + 0.10 x 50; Ox driven (Z_pm 12.5/25 ug/m3, Z_ox 14.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 85.9, "level": "warning", "sensor_id": "AIR-03", "r_pm": 80.1, "r_ox": 58.1, "season": "cold", "reason": "AIR-03: risk 86 = max(R_pm 80, R_ox 58) + 0.10 x 58; PM2.5 driven (Z_pm 20.0/25 ug/m3, Z_ox 15.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.9, "level": "normal", "sensor_id": "AIR-06", "r_pm": 45.1, "r_ox": 54.4, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 45, R_ox 54) + 0.10 x 45; Ox driven (Z_pm 11.3/25 ug/m3, Z_ox 14.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T08:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 78.0, "level": "warning", "sensor_id": "AIR-07", "r_pm": 73.3, "r_ox": 47.6, "season": "cold", "reason": "AIR-07: risk 78 = max(R_pm 73, R_ox 48) + 0.10 x 48; PM2.5 driven (Z_pm 18.3/25 ug/m3, Z_ox 12.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 11.34, "o3": 13.53, "no2": 12.56}
+{"ts": "2026-11-02T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 11.84, "o3": 12.53, "no2": 13.56}
+{"ts": "2026-11-02T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 17.06, "o3": 8.6, "no2": 23.68}
+{"ts": "2026-11-02T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 16.1, "o3": 8.72, "no2": 22.04}
+{"ts": "2026-11-02T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 9.87, "o3": 14.65, "no2": 10.92}
+{"ts": "2026-11-02T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 10.37, "o3": 14.65, "no2": 11.42}
+{"ts": "2026-11-02T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 16.81, "o3": 8.42, "no2": 17.2}
+{"ts": "2026-11-02T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 58.1, "level": "normal", "sensor_id": "AIR-01", "r_pm": 46.8, "r_ox": 53.4, "season": "cold", "reason": "AIR-01: risk 58 = max(R_pm 47, R_ox 53) + 0.10 x 47; Ox driven (Z_pm 11.7/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 76.3, "level": "warning", "sensor_id": "AIR-03", "r_pm": 70.6, "r_ox": 56.8, "season": "cold", "reason": "AIR-03: risk 76 = max(R_pm 71, R_ox 57) + 0.10 x 57; PM2.5 driven (Z_pm 17.7/25 ug/m3, Z_ox 14.8/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.4, "level": "normal", "sensor_id": "AIR-06", "r_pm": 42.5, "r_ox": 54.1, "season": "cold", "reason": "AIR-06: risk 58 = max(R_pm 42, R_ox 54) + 0.10 x 42; Ox driven (Z_pm 10.6/25 ug/m3, Z_ox 14.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 73.9, "level": "warning", "sensor_id": "AIR-07", "r_pm": 69.2, "r_ox": 47.2, "season": "cold", "reason": "AIR-07: risk 74 = max(R_pm 69, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 17.3/25 ug/m3, Z_ox 12.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.43, "o3": 14.23, "no2": 11.64}
+{"ts": "2026-11-02T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.93, "o3": 13.23, "no2": 12.64}
+{"ts": "2026-11-02T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 13.82, "o3": 9.63, "no2": 20.92}
+{"ts": "2026-11-02T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 13.02, "o3": 9.7, "no2": 19.51}
+{"ts": "2026-11-02T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.13, "o3": 15.3, "no2": 10.23}
+{"ts": "2026-11-02T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.63, "o3": 15.3, "no2": 10.73}
+{"ts": "2026-11-02T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.73, "o3": 9.15, "no2": 16.05}
+{"ts": "2026-11-02T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 57.6, "level": "normal", "sensor_id": "AIR-01", "r_pm": 39.8, "r_ox": 53.6, "season": "cold", "reason": "AIR-01: risk 58 = max(R_pm 40, R_ox 54) + 0.10 x 40; Ox driven (Z_pm 10.0/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 64.4, "level": "warning", "sensor_id": "AIR-03", "r_pm": 58.8, "r_ox": 56.1, "season": "cold", "reason": "AIR-03: risk 64 = max(R_pm 59, R_ox 56) + 0.10 x 56; PM2.5 driven (Z_pm 14.7/25 ug/m3, Z_ox 14.6/26 ppb, cold season); holding warning: below 65 1/2"}
+{"ts": "2026-11-02T09:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.0, "level": "normal", "sensor_id": "AIR-06", "r_pm": 36.1, "r_ox": 54.4, "season": "cold", "reason": "AIR-06: risk 58 = max(R_pm 36, R_ox 54) + 0.10 x 36; Ox driven (Z_pm 9.0/25 ug/m3, Z_ox 14.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 66.2, "level": "warning", "sensor_id": "AIR-07", "r_pm": 61.5, "r_ox": 47.2, "season": "cold", "reason": "AIR-07: risk 66 = max(R_pm 62, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 15.4/25 ug/m3, Z_ox 12.3/26 ppb, cold season); holding warning until risk < 65"}
+{"ts": "2026-11-02T09:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.73, "o3": 14.87, "no2": 10.98}
+{"ts": "2026-11-02T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.23, "o3": 13.87, "no2": 11.98}
+{"ts": "2026-11-02T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 13.15, "o3": 10.51, "no2": 18.94}
+{"ts": "2026-11-02T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 12.47, "o3": 10.55, "no2": 17.7}
+{"ts": "2026-11-02T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.55, "o3": 15.91, "no2": 9.74}
+{"ts": "2026-11-02T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.05, "o3": 15.91, "no2": 10.24}
+{"ts": "2026-11-02T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.91, "o3": 9.82, "no2": 15.23}
+{"ts": "2026-11-02T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 57.7, "level": "normal", "sensor_id": "AIR-01", "r_pm": 41.2, "r_ox": 53.6, "season": "cold", "reason": "AIR-01: risk 58 = max(R_pm 41, R_ox 54) + 0.10 x 41; Ox driven (Z_pm 10.3/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 61.9, "level": "warning", "sensor_id": "AIR-03", "r_pm": 56.4, "r_ox": 55.2, "season": "cold", "reason": "AIR-03: risk 62 = max(R_pm 56, R_ox 55) + 0.10 x 55; PM2.5 driven (Z_pm 14.1/25 ug/m3, Z_ox 14.4/26 ppb, cold season); holding warning: in force for 40 min, minimum 60 min"}
+{"ts": "2026-11-02T09:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.4, "level": "normal", "sensor_id": "AIR-06", "r_pm": 38.0, "r_ox": 54.6, "season": "cold", "reason": "AIR-06: risk 58 = max(R_pm 38, R_ox 55) + 0.10 x 38; Ox driven (Z_pm 9.5/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 67.1, "level": "warning", "sensor_id": "AIR-07", "r_pm": 62.4, "r_ox": 47.1, "season": "cold", "reason": "AIR-07: risk 67 = max(R_pm 62, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 15.6/25 ug/m3, Z_ox 12.2/26 ppb, cold season); holding warning until risk < 65"}
+{"ts": "2026-11-02T09:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 10.15, "o3": 15.46, "no2": 10.55}
+{"ts": "2026-11-02T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.65, "o3": 14.46, "no2": 11.55}
+{"ts": "2026-11-02T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 12.95, "o3": 11.26, "no2": 17.64}
+{"ts": "2026-11-02T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 12.35, "o3": 11.29, "no2": 16.5}
+{"ts": "2026-11-02T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 9.05, "o3": 16.49, "no2": 9.41}
+{"ts": "2026-11-02T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.55, "o3": 16.49, "no2": 9.91}
+{"ts": "2026-11-02T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 15.25, "o3": 10.44, "no2": 14.68}
+{"ts": "2026-11-02T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 57.8, "level": "normal", "sensor_id": "AIR-01", "r_pm": 42.0, "r_ox": 53.6, "season": "cold", "reason": "AIR-01: risk 58 = max(R_pm 42, R_ox 54) + 0.10 x 42; Ox driven (Z_pm 10.5/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 60.1, "level": "warning", "sensor_id": "AIR-03", "r_pm": 54.7, "r_ox": 54.3, "season": "cold", "reason": "AIR-03: risk 60 = max(R_pm 55, R_ox 54) + 0.10 x 54; PM2.5 driven (Z_pm 13.7/25 ug/m3, Z_ox 14.1/26 ppb, cold season); holding warning: in force for 50 min, minimum 60 min"}
+{"ts": "2026-11-02T09:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.6, "level": "normal", "sensor_id": "AIR-06", "r_pm": 39.2, "r_ox": 54.7, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 39, R_ox 55) + 0.10 x 39; Ox driven (Z_pm 9.8/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 67.6, "level": "warning", "sensor_id": "AIR-07", "r_pm": 62.9, "r_ox": 46.9, "season": "cold", "reason": "AIR-07: risk 68 = max(R_pm 63, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 15.7/25 ug/m3, Z_ox 12.2/26 ppb, cold season); holding warning until risk < 65"}
+{"ts": "2026-11-02T09:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.71, "o3": 16.02, "no2": 10.29}
+{"ts": "2026-11-02T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.21, "o3": 15.02, "no2": 11.29}
+{"ts": "2026-11-02T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.12, "o3": 11.91, "no2": 16.86}
+{"ts": "2026-11-02T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.57, "o3": 11.93, "no2": 15.78}
+{"ts": "2026-11-02T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.65, "o3": 17.03, "no2": 9.21}
+{"ts": "2026-11-02T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.15, "o3": 17.03, "no2": 9.71}
+{"ts": "2026-11-02T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.76, "o3": 11.01, "no2": 14.36}
+{"ts": "2026-11-02T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 57.1, "level": "normal", "sensor_id": "AIR-01", "r_pm": 36.1, "r_ox": 53.5, "season": "cold", "reason": "AIR-01: risk 57 = max(R_pm 36, R_ox 54) + 0.10 x 36; Ox driven (Z_pm 9.0/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 58.2, "level": "normal", "sensor_id": "AIR-03", "r_pm": 47.0, "r_ox": 53.5, "season": "cold", "reason": "AIR-03: risk 58 = max(R_pm 47, R_ox 53) + 0.10 x 47; Ox driven (Z_pm 11.8/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:40:00Z", "layer": "city_brain", "event": "air_level", "zone": "B", "level": "normal", "previous": "warning", "risk": 58.2, "reason": "AIR-03: risk 58 = max(R_pm 47, R_ox 53) + 0.10 x 47; Ox driven (Z_pm 11.8/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:40:00Z", "layer": "city_brain", "event": "air_action", "zone": "B", "action": "lift_sensitive_alert", "severity": "normal", "reason": "AIR-03: risk 58 = max(R_pm 47, R_ox 53) + 0.10 x 47; Ox driven (Z_pm 11.8/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.2, "level": "normal", "sensor_id": "AIR-06", "r_pm": 33.5, "r_ox": 54.8, "season": "cold", "reason": "AIR-06: risk 58 = max(R_pm 34, R_ox 55) + 0.10 x 34; Ox driven (Z_pm 8.4/25 ug/m3, Z_ox 14.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 61.3, "level": "warning", "sensor_id": "AIR-07", "r_pm": 56.7, "r_ox": 46.6, "season": "cold", "reason": "AIR-07: risk 61 = max(R_pm 57, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 14.2/25 ug/m3, Z_ox 12.1/26 ppb, cold season); holding warning: below 65 1/2"}
+{"ts": "2026-11-02T09:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.67, "o3": 16.55, "no2": 10.14}
+{"ts": "2026-11-02T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.17, "o3": 15.55, "no2": 11.14}
+{"ts": "2026-11-02T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.87, "o3": 12.5, "no2": 16.42}
+{"ts": "2026-11-02T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.35, "o3": 12.5, "no2": 15.38}
+{"ts": "2026-11-02T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.65, "o3": 17.55, "no2": 9.1}
+{"ts": "2026-11-02T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.15, "o3": 17.55, "no2": 9.6}
+{"ts": "2026-11-02T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.7, "o3": 11.54, "no2": 14.17}
+{"ts": "2026-11-02T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T09:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 57.1, "level": "normal", "sensor_id": "AIR-01", "r_pm": 36.1, "r_ox": 53.5, "season": "cold", "reason": "AIR-01: risk 57 = max(R_pm 36, R_ox 54) + 0.10 x 36; Ox driven (Z_pm 9.0/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 59.2, "level": "normal", "sensor_id": "AIR-03", "r_pm": 47.0, "r_ox": 54.5, "season": "cold", "reason": "AIR-03: risk 59 = max(R_pm 47, R_ox 54) + 0.10 x 47; Ox driven (Z_pm 11.7/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 58.4, "level": "normal", "sensor_id": "AIR-06", "r_pm": 33.7, "r_ox": 55.0, "season": "cold", "reason": "AIR-06: risk 58 = max(R_pm 34, R_ox 55) + 0.10 x 34; Ox driven (Z_pm 8.4/25 ug/m3, Z_ox 14.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 61.1, "level": "normal", "sensor_id": "AIR-07", "r_pm": 56.5, "r_ox": 46.5, "season": "cold", "reason": "AIR-07: risk 61 = max(R_pm 56, R_ox 46) + 0.10 x 46; PM2.5 driven (Z_pm 14.1/25 ug/m3, Z_ox 12.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:50:00Z", "layer": "city_brain", "event": "air_level", "zone": "D", "level": "normal", "previous": "warning", "risk": 61.1, "reason": "AIR-07: risk 61 = max(R_pm 56, R_ox 46) + 0.10 x 46; PM2.5 driven (Z_pm 14.1/25 ug/m3, Z_ox 12.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T09:50:00Z", "layer": "city_brain", "event": "air_action", "zone": "D", "action": "lift_sensitive_alert", "severity": "normal", "reason": "AIR-07: risk 61 = max(R_pm 56, R_ox 46) + 0.10 x 46; PM2.5 driven (Z_pm 14.1/25 ug/m3, Z_ox 12.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.82, "o3": 17.05, "no2": 10.06}
+{"ts": "2026-11-02T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.32, "o3": 16.05, "no2": 11.06}
+{"ts": "2026-11-02T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.92, "o3": 13.03, "no2": 16.19}
+{"ts": "2026-11-02T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 11.4, "o3": 13.03, "no2": 15.17}
+{"ts": "2026-11-02T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.81, "o3": 18.05, "no2": 9.05}
+{"ts": "2026-11-02T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.31, "o3": 18.05, "no2": 9.55}
+{"ts": "2026-11-02T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.84, "o3": 12.05, "no2": 14.08}
+{"ts": "2026-11-02T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 57.6, "level": "normal", "sensor_id": "AIR-01", "r_pm": 39.9, "r_ox": 53.6, "season": "cold", "reason": "AIR-01: risk 58 = max(R_pm 40, R_ox 54) + 0.10 x 40; Ox driven (Z_pm 10.0/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 58.5, "level": "normal", "sensor_id": "AIR-03", "r_pm": 49.7, "r_ox": 53.5, "season": "cold", "reason": "AIR-03: risk 59 = max(R_pm 50, R_ox 54) + 0.10 x 50; Ox driven (Z_pm 12.4/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 59.0, "level": "normal", "sensor_id": "AIR-06", "r_pm": 37.7, "r_ox": 55.2, "season": "cold", "reason": "AIR-06: risk 59 = max(R_pm 38, R_ox 55) + 0.10 x 38; Ox driven (Z_pm 9.4/25 ug/m3, Z_ox 14.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 64.8, "level": "normal", "sensor_id": "AIR-07", "r_pm": 60.1, "r_ox": 46.4, "season": "cold", "reason": "AIR-07: risk 65 = max(R_pm 60, R_ox 46) + 0.10 x 46; PM2.5 driven (Z_pm 15.0/25 ug/m3, Z_ox 12.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.95, "o3": 17.53, "no2": 10.03}
+{"ts": "2026-11-02T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.45, "o3": 16.53, "no2": 11.03}
+{"ts": "2026-11-02T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.98, "o3": 13.52, "no2": 16.08}
+{"ts": "2026-11-02T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.48, "o3": 13.52, "no2": 15.07}
+{"ts": "2026-11-02T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 180.0, "o3": 18.53, "no2": 9.02}
+{"ts": "2026-11-02T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "not_trusted", "confidence": 0.1, "reason": "PM2.5 jumped from 9 to 180 ug/m3 in 10 min, AIR-06 next door unchanged"}
+{"ts": "2026-11-02T10:10:00Z", "layer": "city_brain", "event": "reading_blocked", "sensor_id": "AIR-05", "reason": "PM2.5 jumped from 9 to 180 ug/m3 in 10 min, AIR-06 next door unchanged", "axis": "air"}
+{"ts": "2026-11-02T10:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.44, "o3": 18.53, "no2": 9.52}
+{"ts": "2026-11-02T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.95, "o3": 12.53, "no2": 14.03}
+{"ts": "2026-11-02T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 58.1, "level": "normal", "sensor_id": "AIR-01", "r_pm": 36.0, "r_ox": 54.5, "season": "cold", "reason": "AIR-01: risk 58 = max(R_pm 36, R_ox 54) + 0.10 x 36; Ox driven (Z_pm 9.0/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 58.1, "level": "normal", "sensor_id": "AIR-03", "r_pm": 45.1, "r_ox": 53.6, "season": "cold", "reason": "AIR-03: risk 58 = max(R_pm 45, R_ox 54) + 0.10 x 45; Ox driven (Z_pm 11.3/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 59.6, "level": "normal", "sensor_id": "AIR-06", "r_pm": 33.8, "r_ox": 56.2, "season": "cold", "reason": "AIR-06: risk 60 = max(R_pm 34, R_ox 56) + 0.10 x 34; Ox driven (Z_pm 8.5/25 ug/m3, Z_ox 14.6/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 60.8, "level": "normal", "sensor_id": "AIR-07", "r_pm": 56.1, "r_ox": 47.2, "season": "cold", "reason": "AIR-07: risk 61 = max(R_pm 56, R_ox 47) + 0.10 x 47; PM2.5 driven (Z_pm 14.0/25 ug/m3, Z_ox 12.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.28, "o3": 18.0, "no2": 10.01}
+{"ts": "2026-11-02T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 8.78, "o3": 17.0, "no2": 11.01}
+{"ts": "2026-11-02T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.29, "o3": 13.99, "no2": 16.03}
+{"ts": "2026-11-02T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 9.79, "o3": 13.99, "no2": 15.03}
+{"ts": "2026-11-02T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 180.0, "o3": 19.0, "no2": 9.01}
+{"ts": "2026-11-02T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "not_trusted", "confidence": 0.1, "reason": "PM2.5 jumped from 9 to 180 ug/m3 in 10 min, AIR-06 next door unchanged"}
+{"ts": "2026-11-02T10:20:00Z", "layer": "city_brain", "event": "reading_blocked", "sensor_id": "AIR-05", "reason": "PM2.5 jumped from 9 to 180 ug/m3 in 10 min, AIR-06 next door unchanged", "axis": "air"}
+{"ts": "2026-11-02T10:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 7.78, "o3": 19.0, "no2": 9.51}
+{"ts": "2026-11-02T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.28, "o3": 13.0, "no2": 14.01}
+{"ts": "2026-11-02T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 58.8, "level": "normal", "sensor_id": "AIR-01", "r_pm": 33.7, "r_ox": 55.4, "season": "cold", "reason": "AIR-01: risk 59 = max(R_pm 34, R_ox 55) + 0.10 x 34; Ox driven (Z_pm 8.4/25 ug/m3, Z_ox 14.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 58.2, "level": "normal", "sensor_id": "AIR-03", "r_pm": 42.3, "r_ox": 54.0, "season": "cold", "reason": "AIR-03: risk 58 = max(R_pm 42, R_ox 54) + 0.10 x 42; Ox driven (Z_pm 10.6/25 ug/m3, Z_ox 14.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 60.4, "level": "normal", "sensor_id": "AIR-06", "r_pm": 31.6, "r_ox": 57.2, "season": "cold", "reason": "AIR-06: risk 60 = max(R_pm 32, R_ox 57) + 0.10 x 32; Ox driven (Z_pm 7.9/25 ug/m3, Z_ox 14.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 58.6, "level": "normal", "sensor_id": "AIR-07", "r_pm": 53.8, "r_ox": 48.1, "season": "cold", "reason": "AIR-07: risk 59 = max(R_pm 54, R_ox 48) + 0.10 x 48; PM2.5 driven (Z_pm 13.4/25 ug/m3, Z_ox 12.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.55, "o3": 18.44, "no2": 10.0}
+{"ts": "2026-11-02T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.05, "o3": 17.44, "no2": 11.0}
+{"ts": "2026-11-02T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.55, "o3": 14.44, "no2": 16.01}
+{"ts": "2026-11-02T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 11.05, "o3": 14.44, "no2": 15.01}
+{"ts": "2026-11-02T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 180.0, "o3": 19.44, "no2": 9.0}
+{"ts": "2026-11-02T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "not_trusted", "confidence": 0.1, "reason": "PM2.5 jumped from 9 to 180 ug/m3 in 10 min, AIR-06 next door unchanged"}
+{"ts": "2026-11-02T10:30:00Z", "layer": "city_brain", "event": "reading_blocked", "sensor_id": "AIR-05", "reason": "PM2.5 jumped from 9 to 180 ug/m3 in 10 min, AIR-06 next door unchanged", "axis": "air"}
+{"ts": "2026-11-02T10:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.05, "o3": 19.44, "no2": 9.5}
+{"ts": "2026-11-02T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.55, "o3": 13.44, "no2": 14.0}
+{"ts": "2026-11-02T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 60.3, "level": "normal", "sensor_id": "AIR-01", "r_pm": 38.4, "r_ox": 56.5, "season": "cold", "reason": "AIR-01: risk 60 = max(R_pm 38, R_ox 56) + 0.10 x 38; Ox driven (Z_pm 9.6/25 ug/m3, Z_ox 14.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 59.3, "level": "normal", "sensor_id": "AIR-03", "r_pm": 46.8, "r_ox": 54.6, "season": "cold", "reason": "AIR-03: risk 59 = max(R_pm 47, R_ox 55) + 0.10 x 47; Ox driven (Z_pm 11.7/25 ug/m3, Z_ox 14.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 61.9, "level": "normal", "sensor_id": "AIR-06", "r_pm": 36.4, "r_ox": 58.3, "season": "cold", "reason": "AIR-06: risk 62 = max(R_pm 36, R_ox 58) + 0.10 x 36; Ox driven (Z_pm 9.1/25 ug/m3, Z_ox 15.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 63.4, "level": "normal", "sensor_id": "AIR-07", "r_pm": 58.5, "r_ox": 49.1, "season": "cold", "reason": "AIR-07: risk 63 = max(R_pm 58, R_ox 49) + 0.10 x 49; PM2.5 driven (Z_pm 14.6/25 ug/m3, Z_ox 12.8/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.38, "o3": 18.87, "no2": 10.0}
+{"ts": "2026-11-02T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.88, "o3": 17.87, "no2": 11.0}
+{"ts": "2026-11-02T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.38, "o3": 14.87, "no2": 16.0}
+{"ts": "2026-11-02T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.88, "o3": 14.87, "no2": 15.0}
+{"ts": "2026-11-02T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.38, "o3": 19.87, "no2": 9.0}
+{"ts": "2026-11-02T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.88, "o3": 19.87, "no2": 9.5}
+{"ts": "2026-11-02T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.38, "o3": 13.87, "no2": 14.0}
+{"ts": "2026-11-02T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 61.3, "level": "normal", "sensor_id": "AIR-01", "r_pm": 37.3, "r_ox": 57.5, "season": "cold", "reason": "AIR-01: risk 61 = max(R_pm 37, R_ox 58) + 0.10 x 37; Ox driven (Z_pm 9.3/25 ug/m3, Z_ox 15.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 60.0, "level": "normal", "sensor_id": "AIR-03", "r_pm": 45.4, "r_ox": 55.5, "season": "cold", "reason": "AIR-03: risk 60 = max(R_pm 45, R_ox 55) + 0.10 x 45; Ox driven (Z_pm 11.4/25 ug/m3, Z_ox 14.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 62.9, "level": "normal", "sensor_id": "AIR-06", "r_pm": 35.2, "r_ox": 59.4, "season": "cold", "reason": "AIR-06: risk 63 = max(R_pm 35, R_ox 59) + 0.10 x 35; Ox driven (Z_pm 8.8/25 ug/m3, Z_ox 15.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 62.3, "level": "normal", "sensor_id": "AIR-07", "r_pm": 57.3, "r_ox": 50.1, "season": "cold", "reason": "AIR-07: risk 62 = max(R_pm 57, R_ox 50) + 0.10 x 50; PM2.5 driven (Z_pm 14.3/25 ug/m3, Z_ox 13.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.21, "o3": 19.27, "no2": 10.0}
+{"ts": "2026-11-02T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 8.71, "o3": 18.27, "no2": 11.0}
+{"ts": "2026-11-02T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.21, "o3": 15.27, "no2": 16.0}
+{"ts": "2026-11-02T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 9.71, "o3": 15.27, "no2": 15.0}
+{"ts": "2026-11-02T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.21, "o3": 20.27, "no2": 9.0}
+{"ts": "2026-11-02T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 7.71, "o3": 20.27, "no2": 9.5}
+{"ts": "2026-11-02T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.21, "o3": 14.27, "no2": 14.0}
+{"ts": "2026-11-02T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T10:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 61.9, "level": "normal", "sensor_id": "AIR-01", "r_pm": 33.0, "r_ox": 58.6, "season": "cold", "reason": "AIR-01: risk 62 = max(R_pm 33, R_ox 59) + 0.10 x 33; Ox driven (Z_pm 8.3/25 ug/m3, Z_ox 15.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 60.6, "level": "normal", "sensor_id": "AIR-03", "r_pm": 41.1, "r_ox": 56.4, "season": "cold", "reason": "AIR-03: risk 61 = max(R_pm 41, R_ox 56) + 0.10 x 41; Ox driven (Z_pm 10.3/25 ug/m3, Z_ox 14.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 63.6, "level": "normal", "sensor_id": "AIR-06", "r_pm": 31.0, "r_ox": 60.5, "season": "cold", "reason": "AIR-06: risk 64 = max(R_pm 31, R_ox 60) + 0.10 x 31; Ox driven (Z_pm 7.8/25 ug/m3, Z_ox 15.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T10:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 58.2, "level": "normal", "sensor_id": "AIR-07", "r_pm": 53.0, "r_ox": 51.2, "season": "cold", "reason": "AIR-07: risk 58 = max(R_pm 53, R_ox 51) + 0.10 x 51; PM2.5 driven (Z_pm 13.3/25 ug/m3, Z_ox 13.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.13, "o3": 19.66, "no2": 10.0}
+{"ts": "2026-11-02T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.63, "o3": 18.66, "no2": 11.0}
+{"ts": "2026-11-02T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.13, "o3": 15.66, "no2": 16.0}
+{"ts": "2026-11-02T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.63, "o3": 15.66, "no2": 15.0}
+{"ts": "2026-11-02T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.13, "o3": 20.66, "no2": 9.0}
+{"ts": "2026-11-02T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.63, "o3": 20.66, "no2": 9.5}
+{"ts": "2026-11-02T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.13, "o3": 14.66, "no2": 14.0}
+{"ts": "2026-11-02T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 63.4, "level": "normal", "sensor_id": "AIR-01", "r_pm": 36.8, "r_ox": 59.7, "season": "cold", "reason": "AIR-01: risk 63 = max(R_pm 37, R_ox 60) + 0.10 x 37; Ox driven (Z_pm 9.2/25 ug/m3, Z_ox 15.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 61.9, "level": "normal", "sensor_id": "AIR-03", "r_pm": 44.8, "r_ox": 57.5, "season": "cold", "reason": "AIR-03: risk 62 = max(R_pm 45, R_ox 57) + 0.10 x 45; Ox driven (Z_pm 11.2/25 ug/m3, Z_ox 14.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 65.1, "level": "normal", "sensor_id": "AIR-06", "r_pm": 34.8, "r_ox": 61.6, "season": "cold", "reason": "AIR-06: risk 65 = max(R_pm 35, R_ox 62) + 0.10 x 35; Ox driven (Z_pm 8.7/25 ug/m3, Z_ox 16.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 62.0, "level": "normal", "sensor_id": "AIR-07", "r_pm": 56.8, "r_ox": 52.3, "season": "cold", "reason": "AIR-07: risk 62 = max(R_pm 57, R_ox 52) + 0.10 x 52; PM2.5 driven (Z_pm 14.2/25 ug/m3, Z_ox 13.6/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.7, "o3": 20.01, "no2": 10.0}
+{"ts": "2026-11-02T11:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.2, "o3": 19.01, "no2": 11.0}
+{"ts": "2026-11-02T11:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.7, "o3": 16.01, "no2": 16.0}
+{"ts": "2026-11-02T11:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 11.2, "o3": 16.01, "no2": 15.0}
+{"ts": "2026-11-02T11:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.7, "o3": 21.01, "no2": 9.0}
+{"ts": "2026-11-02T11:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.2, "o3": 21.01, "no2": 9.5}
+{"ts": "2026-11-02T11:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:10:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.7, "o3": 15.01, "no2": 14.0}
+{"ts": "2026-11-02T11:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 64.6, "level": "normal", "sensor_id": "AIR-01", "r_pm": 38.5, "r_ox": 60.7, "season": "cold", "reason": "AIR-01: risk 65 = max(R_pm 38, R_ox 61) + 0.10 x 38; Ox driven (Z_pm 9.6/25 ug/m3, Z_ox 15.8/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 63.1, "level": "normal", "sensor_id": "AIR-03", "r_pm": 46.5, "r_ox": 58.5, "season": "cold", "reason": "AIR-03: risk 63 = max(R_pm 47, R_ox 58) + 0.10 x 47; Ox driven (Z_pm 11.6/25 ug/m3, Z_ox 15.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 66.3, "level": "normal", "sensor_id": "AIR-06", "r_pm": 36.5, "r_ox": 62.6, "season": "cold", "reason": "AIR-06: risk 66 = max(R_pm 36, R_ox 63) + 0.10 x 36; Ox driven (Z_pm 9.1/25 ug/m3, Z_ox 16.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:10:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 63.8, "level": "normal", "sensor_id": "AIR-07", "r_pm": 58.5, "r_ox": 53.3, "season": "cold", "reason": "AIR-07: risk 64 = max(R_pm 58, R_ox 53) + 0.10 x 53; PM2.5 driven (Z_pm 14.6/25 ug/m3, Z_ox 13.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.41, "o3": 20.35, "no2": 10.0}
+{"ts": "2026-11-02T11:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 8.91, "o3": 19.35, "no2": 11.0}
+{"ts": "2026-11-02T11:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.41, "o3": 16.35, "no2": 16.0}
+{"ts": "2026-11-02T11:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 9.91, "o3": 16.35, "no2": 15.0}
+{"ts": "2026-11-02T11:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.41, "o3": 21.35, "no2": 9.0}
+{"ts": "2026-11-02T11:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 7.91, "o3": 21.35, "no2": 9.5}
+{"ts": "2026-11-02T11:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:20:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.41, "o3": 15.35, "no2": 14.0}
+{"ts": "2026-11-02T11:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 65.1, "level": "normal", "sensor_id": "AIR-01", "r_pm": 33.6, "r_ox": 61.8, "season": "cold", "reason": "AIR-01: risk 65 = max(R_pm 34, R_ox 62) + 0.10 x 34; Ox driven (Z_pm 8.4/25 ug/m3, Z_ox 16.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 63.6, "level": "normal", "sensor_id": "AIR-03", "r_pm": 41.6, "r_ox": 59.5, "season": "cold", "reason": "AIR-03: risk 64 = max(R_pm 42, R_ox 59) + 0.10 x 42; Ox driven (Z_pm 10.4/25 ug/m3, Z_ox 15.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 66.8, "level": "normal", "sensor_id": "AIR-06", "r_pm": 31.6, "r_ox": 63.6, "season": "cold", "reason": "AIR-06: risk 67 = max(R_pm 32, R_ox 64) + 0.10 x 32; Ox driven (Z_pm 7.9/25 ug/m3, Z_ox 16.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:20:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 59.7, "level": "normal", "sensor_id": "AIR-07", "r_pm": 53.6, "r_ox": 54.3, "season": "cold", "reason": "AIR-07: risk 60 = max(R_pm 54, R_ox 54) + 0.10 x 54; Ox driven (Z_pm 13.4/25 ug/m3, Z_ox 14.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.68, "o3": 20.65, "no2": 10.0}
+{"ts": "2026-11-02T11:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.18, "o3": 19.65, "no2": 11.0}
+{"ts": "2026-11-02T11:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.68, "o3": 16.65, "no2": 16.0}
+{"ts": "2026-11-02T11:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.18, "o3": 16.65, "no2": 15.0}
+{"ts": "2026-11-02T11:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.68, "o3": 21.65, "no2": 9.0}
+{"ts": "2026-11-02T11:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.18, "o3": 21.65, "no2": 9.5}
+{"ts": "2026-11-02T11:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:30:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.68, "o3": 15.65, "no2": 14.0}
+{"ts": "2026-11-02T11:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 66.2, "level": "normal", "sensor_id": "AIR-01", "r_pm": 35.1, "r_ox": 62.7, "season": "cold", "reason": "AIR-01: risk 66 = max(R_pm 35, R_ox 63) + 0.10 x 35; Ox driven (Z_pm 8.8/25 ug/m3, Z_ox 16.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 64.7, "level": "normal", "sensor_id": "AIR-03", "r_pm": 43.1, "r_ox": 60.4, "season": "cold", "reason": "AIR-03: risk 65 = max(R_pm 43, R_ox 60) + 0.10 x 43; Ox driven (Z_pm 10.8/25 ug/m3, Z_ox 15.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 67.9, "level": "normal", "sensor_id": "AIR-06", "r_pm": 33.1, "r_ox": 64.6, "season": "cold", "reason": "AIR-06: risk 68 = max(R_pm 33, R_ox 65) + 0.10 x 33; Ox driven (Z_pm 8.3/25 ug/m3, Z_ox 16.8/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:30:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 60.7, "level": "normal", "sensor_id": "AIR-07", "r_pm": 55.1, "r_ox": 55.2, "season": "cold", "reason": "AIR-07: risk 61 = max(R_pm 55, R_ox 55) + 0.10 x 55; Ox driven (Z_pm 13.8/25 ug/m3, Z_ox 14.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 9.8, "o3": 20.93, "no2": 10.0}
+{"ts": "2026-11-02T11:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 10.3, "o3": 19.93, "no2": 11.0}
+{"ts": "2026-11-02T11:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 11.8, "o3": 16.93, "no2": 16.0}
+{"ts": "2026-11-02T11:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 11.3, "o3": 16.93, "no2": 15.0}
+{"ts": "2026-11-02T11:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 8.8, "o3": 21.93, "no2": 9.0}
+{"ts": "2026-11-02T11:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 9.3, "o3": 21.93, "no2": 9.5}
+{"ts": "2026-11-02T11:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:40:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 14.8, "o3": 15.93, "no2": 14.0}
+{"ts": "2026-11-02T11:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 67.5, "level": "normal", "sensor_id": "AIR-01", "r_pm": 39.0, "r_ox": 63.6, "season": "cold", "reason": "AIR-01: risk 67 = max(R_pm 39, R_ox 64) + 0.10 x 39; Ox driven (Z_pm 9.8/25 ug/m3, Z_ox 16.5/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 66.0, "level": "normal", "sensor_id": "AIR-03", "r_pm": 47.0, "r_ox": 61.3, "season": "cold", "reason": "AIR-03: risk 66 = max(R_pm 47, R_ox 61) + 0.10 x 47; Ox driven (Z_pm 11.8/25 ug/m3, Z_ox 15.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 69.2, "level": "normal", "sensor_id": "AIR-06", "r_pm": 37.0, "r_ox": 65.5, "season": "cold", "reason": "AIR-06: risk 69 = max(R_pm 37, R_ox 65) + 0.10 x 37; Ox driven (Z_pm 9.3/25 ug/m3, Z_ox 17.0/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:40:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 64.6, "level": "normal", "sensor_id": "AIR-07", "r_pm": 59.0, "r_ox": 56.1, "season": "cold", "reason": "AIR-07: risk 65 = max(R_pm 59, R_ox 56) + 0.10 x 56; PM2.5 driven (Z_pm 14.8/25 ug/m3, Z_ox 14.6/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.81, "o3": 21.17, "no2": 10.0}
+{"ts": "2026-11-02T11:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 9.31, "o3": 20.17, "no2": 11.0}
+{"ts": "2026-11-02T11:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.81, "o3": 17.17, "no2": 16.0}
+{"ts": "2026-11-02T11:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 10.31, "o3": 17.17, "no2": 15.0}
+{"ts": "2026-11-02T11:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.81, "o3": 22.17, "no2": 9.0}
+{"ts": "2026-11-02T11:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 8.31, "o3": 22.17, "no2": 9.5}
+{"ts": "2026-11-02T11:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:50:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.81, "o3": 16.17, "no2": 14.0}
+{"ts": "2026-11-02T11:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T11:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 67.9, "level": "normal", "sensor_id": "AIR-01", "r_pm": 35.0, "r_ox": 64.4, "season": "cold", "reason": "AIR-01: risk 68 = max(R_pm 35, R_ox 64) + 0.10 x 35; Ox driven (Z_pm 8.8/25 ug/m3, Z_ox 16.7/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 66.4, "level": "normal", "sensor_id": "AIR-03", "r_pm": 43.0, "r_ox": 62.1, "season": "cold", "reason": "AIR-03: risk 66 = max(R_pm 43, R_ox 62) + 0.10 x 43; Ox driven (Z_pm 10.8/25 ug/m3, Z_ox 16.1/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 69.6, "level": "normal", "sensor_id": "AIR-06", "r_pm": 33.0, "r_ox": 66.3, "season": "cold", "reason": "AIR-06: risk 70 = max(R_pm 33, R_ox 66) + 0.10 x 33; Ox driven (Z_pm 8.3/25 ug/m3, Z_ox 17.2/26 ppb, cold season)"}
+{"ts": "2026-11-02T11:50:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 62.4, "level": "normal", "sensor_id": "AIR-07", "r_pm": 55.0, "r_ox": 56.9, "season": "cold", "reason": "AIR-07: risk 62 = max(R_pm 55, R_ox 57) + 0.10 x 55; Ox driven (Z_pm 13.8/25 ug/m3, Z_ox 14.8/26 ppb, cold season)"}
+{"ts": "2026-11-02T12:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-01", "zone": "A", "pm25": 8.33, "o3": 21.39, "no2": 10.0}
+{"ts": "2026-11-02T12:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-01", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T12:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-02", "zone": "A", "pm25": 8.83, "o3": 20.39, "no2": 11.0}
+{"ts": "2026-11-02T12:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-02", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T12:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-03", "zone": "B", "pm25": 10.33, "o3": 17.39, "no2": 16.0}
+{"ts": "2026-11-02T12:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-03", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T12:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-04", "zone": "B", "pm25": 9.83, "o3": 17.39, "no2": 15.0}
+{"ts": "2026-11-02T12:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-04", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T12:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-05", "zone": "C", "pm25": 7.33, "o3": 22.39, "no2": 9.0}
+{"ts": "2026-11-02T12:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-05", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T12:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-06", "zone": "C", "pm25": 7.83, "o3": 22.39, "no2": 9.5}
+{"ts": "2026-11-02T12:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-06", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T12:00:00Z", "layer": "twin", "event": "air_reading", "sensor_id": "AIR-07", "zone": "D", "pm25": 13.33, "o3": 16.39, "no2": 14.0}
+{"ts": "2026-11-02T12:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "AIR-07", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-02T12:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "A", "risk": 68.5, "level": "normal", "sensor_id": "AIR-01", "r_pm": 33.6, "r_ox": 65.2, "season": "cold", "reason": "AIR-01: risk 69 = max(R_pm 34, R_ox 65) + 0.10 x 34; Ox driven (Z_pm 8.4/25 ug/m3, Z_ox 16.9/26 ppb, cold season)"}
+{"ts": "2026-11-02T12:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "B", "risk": 67.0, "level": "normal", "sensor_id": "AIR-03", "r_pm": 41.6, "r_ox": 62.9, "season": "cold", "reason": "AIR-03: risk 67 = max(R_pm 42, R_ox 63) + 0.10 x 42; Ox driven (Z_pm 10.4/25 ug/m3, Z_ox 16.3/26 ppb, cold season)"}
+{"ts": "2026-11-02T12:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "C", "risk": 70.2, "level": "warning", "sensor_id": "AIR-06", "r_pm": 31.6, "r_ox": 67.1, "season": "cold", "reason": "AIR-06: risk 70 = max(R_pm 32, R_ox 67) + 0.10 x 32; Ox driven (Z_pm 7.9/25 ug/m3, Z_ox 17.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T12:00:00Z", "layer": "city_brain", "event": "air_level", "zone": "C", "level": "warning", "previous": "normal", "risk": 70.2, "reason": "AIR-06: risk 70 = max(R_pm 32, R_ox 67) + 0.10 x 32; Ox driven (Z_pm 7.9/25 ug/m3, Z_ox 17.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T12:00:00Z", "layer": "city_brain", "event": "air_action", "zone": "C", "action": "sensitive_alert", "severity": "warning", "audience": "sensitive sites", "message": "Air quality warning in zone C: keep vulnerable people indoors", "reason": "AIR-06: risk 70 = max(R_pm 32, R_ox 67) + 0.10 x 32; Ox driven (Z_pm 7.9/25 ug/m3, Z_ox 17.4/26 ppb, cold season)"}
+{"ts": "2026-11-02T12:00:00Z", "layer": "city_brain", "event": "air_zone_risk", "zone": "D", "risk": 63.1, "level": "normal", "sensor_id": "AIR-07", "r_pm": 53.6, "r_ox": 57.7, "season": "cold", "reason": "AIR-07: risk 63 = max(R_pm 54, R_ox 58) + 0.10 x 54; Ox driven (Z_pm 13.4/25 ug/m3, Z_ox 15.0/26 ppb, cold season)"}

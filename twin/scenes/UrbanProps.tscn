@@ -1,0 +1,904 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Bicycle.glb" id="1_bicycle"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Dumpster.glb" id="2_dumpster"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Planter & Bushes.glb" id="3_planter"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Trash Can.glb" id="4_trash"]
+
+[node name="UrbanProps" type="Node3D"]
+
+[node name="UrbanProp_001" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-366.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 198, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r1_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_002" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-298.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 288, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r1_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_003" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-271.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 265, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r1_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_004" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-203.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 355, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r1_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_005" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-176.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 332, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r1_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_006" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-108.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 62, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r1_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_007" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-81.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 39, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r1_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_008" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-13.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 129, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r1_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_009" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(13.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 106, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r1_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_010" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(81.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 196, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r1_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_011" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(108.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 173, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r1_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_012" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(176.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 263, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r1_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_013" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(203.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 240, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r1_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_014" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(271.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 330, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r1_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_015" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(298.5, 0.15, -362.5)
+rotation_degrees = Vector3(0, 307, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r1_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_016" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(366.5, 0.15, -302.5)
+rotation_degrees = Vector3(0, 37, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r1_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_017" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-366.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 239, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r2_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_018" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-298.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 329, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r2_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_019" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-271.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 306, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r2_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_020" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-203.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 36, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r2_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_021" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-176.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 13, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r2_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_022" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-108.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 103, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r2_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_023" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-81.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 80, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r2_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_024" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-13.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 170, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r2_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_025" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(13.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 147, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r2_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_026" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(81.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 237, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r2_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_027" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(108.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 214, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r2_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_028" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(176.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 304, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r2_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_029" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(203.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 281, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r2_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_030" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(271.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 11, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r2_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_031" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(298.5, 0.15, -267.5)
+rotation_degrees = Vector3(0, 348, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r2_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_032" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(366.5, 0.15, -207.5)
+rotation_degrees = Vector3(0, 78, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r2_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_033" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-366.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 280, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r3_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_034" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-298.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 10, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r3_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_035" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-271.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 347, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r3_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_036" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-203.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 77, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r3_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_037" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-176.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 54, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r3_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_038" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-108.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 144, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r3_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_039" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-81.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 121, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r3_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_040" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-13.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 211, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r3_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_041" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(13.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 188, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r3_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_042" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(81.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 278, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r3_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_043" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(108.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 255, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r3_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_044" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(176.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 345, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r3_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_045" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(203.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 322, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r3_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_046" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(271.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 52, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r3_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_047" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(298.5, 0.15, -172.5)
+rotation_degrees = Vector3(0, 29, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r3_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_048" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(366.5, 0.15, -112.5)
+rotation_degrees = Vector3(0, 119, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r3_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_049" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-366.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 321, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r4_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_050" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-298.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 51, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r4_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_051" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-271.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 28, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r4_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_052" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-203.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 118, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r4_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_053" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-176.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 95, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r4_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_054" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-108.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 185, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r4_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_055" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-81.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 162, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r4_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_056" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-13.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 252, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r4_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_057" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(13.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 229, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r4_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_058" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(81.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 319, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r4_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_059" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(108.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 296, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r4_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_060" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(176.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 26, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r4_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_061" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(203.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 3, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r4_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_062" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(271.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 93, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r4_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_063" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(298.5, 0.15, -77.5)
+rotation_degrees = Vector3(0, 70, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r4_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_064" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(366.5, 0.15, -17.5)
+rotation_degrees = Vector3(0, 160, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r4_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_065" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-366.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 2, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r5_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_066" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-298.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 92, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r5_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_067" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-271.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 69, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r5_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_068" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-203.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 159, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r5_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_069" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-176.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 136, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r5_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_070" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-108.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 226, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r5_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_071" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-81.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 203, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r5_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_072" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-13.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 293, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r5_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_073" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(13.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 270, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r5_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_074" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(81.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r5_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_075" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(108.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 337, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r5_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_076" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(176.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 67, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r5_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_077" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(203.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 44, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r5_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_078" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(271.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 134, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r5_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_079" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(298.5, 0.15, 17.5)
+rotation_degrees = Vector3(0, 111, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r5_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_080" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(366.5, 0.15, 77.5)
+rotation_degrees = Vector3(0, 201, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r5_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_081" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-366.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 43, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r6_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_082" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-298.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 133, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r6_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_083" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-271.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 110, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r6_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_084" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-203.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 200, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r6_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_085" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-176.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 177, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r6_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_086" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-108.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 267, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r6_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_087" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-81.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 244, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r6_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_088" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-13.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 334, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r6_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_089" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(13.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 311, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r6_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_090" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(81.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 41, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r6_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_091" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(108.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 18, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r6_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_092" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(176.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 108, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r6_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_093" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(203.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 85, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r6_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_094" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(271.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 175, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r6_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_095" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(298.5, 0.15, 112.5)
+rotation_degrees = Vector3(0, 152, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r6_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_096" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(366.5, 0.15, 172.5)
+rotation_degrees = Vector3(0, 242, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r6_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_097" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-366.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 84, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r7_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_098" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-298.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 174, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r7_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_099" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-271.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 151, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r7_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_100" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-203.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 241, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r7_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_101" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-176.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 218, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r7_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_102" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-108.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 308, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r7_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_103" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-81.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 285, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r7_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_104" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-13.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 15, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r7_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_105" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(13.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 352, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r7_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_106" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(81.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 82, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r7_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_107" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(108.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 59, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r7_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_108" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(176.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 149, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r7_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_109" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(203.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 126, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r7_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_110" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(271.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 216, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r7_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_111" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(298.5, 0.15, 207.5)
+rotation_degrees = Vector3(0, 193, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r7_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_112" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(366.5, 0.15, 267.5)
+rotation_degrees = Vector3(0, 283, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r7_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_113" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-366.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 125, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r8_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_114" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-298.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 215, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r8_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_115" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(-271.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 192, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r8_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_116" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-203.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 282, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r8_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_117" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(-176.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 259, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r8_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_118" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-108.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 349, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r8_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_119" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(-81.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 326, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r8_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_120" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(-13.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 56, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r8_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_121" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(13.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 33, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r8_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_122" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(81.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 123, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r8_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_123" parent="." groups=["urban_props"] instance=ExtResource("4_trash")]
+position = Vector3(108.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 100, 0)
+scale = Vector3(0.28, 0.28, 0.28)
+metadata/district = "District_r8_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_124" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(176.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 190, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r8_c6"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_125" parent="." groups=["urban_props"] instance=ExtResource("1_bicycle")]
+position = Vector3(203.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 167, 0)
+scale = Vector3(0.5, 0.5, 0.5)
+metadata/district = "District_r8_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_126" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(271.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 257, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r8_c7"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_127" parent="." groups=["urban_props"] instance=ExtResource("2_dumpster")]
+position = Vector3(298.5, 0.15, 302.5)
+rotation_degrees = Vector3(0, 234, 0)
+scale = Vector3(0.75, 0.75, 0.75)
+metadata/district = "District_r8_c8"
+metadata/model_family = "external_poly_pizza"
+
+[node name="UrbanProp_128" parent="." groups=["urban_props"] instance=ExtResource("3_planter")]
+position = Vector3(366.5, 0.15, 362.5)
+rotation_degrees = Vector3(0, 324, 0)
+scale = Vector3(1, 1, 1)
+metadata/district = "District_r8_c8"
+metadata/model_family = "external_poly_pizza"

@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Material_cabinet"]
+albedo_color = Color(0.055, 0.31, 0.47, 1)
+metallic = 0.28
+roughness = 0.34
+
+[sub_resource type="StandardMaterial3D" id="Material_trim"]
+albedo_color = Color(0.38, 0.48, 0.53, 1)
+metallic = 0.72
+roughness = 0.24
+
+[sub_resource type="StandardMaterial3D" id="Material_face"]
+albedo_color = Color(0.86, 0.94, 0.96, 1)
+roughness = 0.22
+
+[sub_resource type="StandardMaterial3D" id="Material_water"]
+albedo_color = Color(0.02, 0.58, 0.83, 1)
+metallic = 0.18
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="Material_valve"]
+albedo_color = Color(0.83, 0.17, 0.09, 1)
+metallic = 0.35
+roughness = 0.31
+
+[sub_resource type="BoxMesh" id="Mesh_base"]
+material = SubResource("Material_trim")
+size = Vector3(0.92, 0.12, 0.58)
+
+[sub_resource type="BoxMesh" id="Mesh_cabinet"]
+material = SubResource("Material_cabinet")
+size = Vector3(0.78, 0.72, 0.46)
+
+[sub_resource type="CylinderMesh" id="Mesh_gauge_outer"]
+material = SubResource("Material_trim")
+top_radius = 0.175
+bottom_radius = 0.175
+height = 0.07
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="Mesh_gauge_face"]
+material = SubResource("Material_face")
+top_radius = 0.135
+bottom_radius = 0.135
+height = 0.076
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="Mesh_pipe"]
+material = SubResource("Material_water")
+top_radius = 0.065
+bottom_radius = 0.065
+height = 1.56
+radial_segments = 16
+
+[sub_resource type="BoxMesh" id="Mesh_valve_bar"]
+material = SubResource("Material_valve")
+size = Vector3(0.30, 0.045, 0.045)
+
+[node name="WaterMeterWorkProp" type="Node3D"]
+
+[node name="Base" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.06, 0)
+mesh = SubResource("Mesh_base")
+
+[node name="Cabinet" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.48, 0)
+mesh = SubResource("Mesh_cabinet")
+
+[node name="GaugeOuter" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.59, 0.29)
+rotation_degrees = Vector3(90, 0, 0)
+mesh = SubResource("Mesh_gauge_outer")
+
+[node name="GaugeFace" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.59, 0.297)
+rotation_degrees = Vector3(90, 0, 0)
+mesh = SubResource("Mesh_gauge_face")
+
+[node name="WaterPipe" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.32, 0)
+rotation_degrees = Vector3(0, 0, 90)
+mesh = SubResource("Mesh_pipe")
+
+[node name="ValveHorizontal" type="MeshInstance3D" parent="."]
+position = Vector3(0.26, 0.69, 0.29)
+mesh = SubResource("Mesh_valve_bar")

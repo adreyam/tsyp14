@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duplicate entry demo - Smart Parking</title>
+<style>
+  :root { --bg:#f4f6f9; --panel:#fff; --ink:#1c2733; --mute:#66758a; --line:#d9e0e8; --accent:#1f6feb; --ok:#2da44e; --warn:#d29922; --bad:#d1242f;
+          --asphalt:#59626b; --lot:#6b747d; --grass:#cfe3c6; --road:#3f464d; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#10161d; --panel:#18212b; --ink:#e6edf3; --mute:#8b9aab; --line:#2b3745; --accent:#58a6ff; --grass:#1d2b20; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, Segoe UI, sans-serif; }
+  header { padding:10px 16px; display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; border-bottom:1px solid var(--line); background:var(--panel); }
+  header h1 { font-size:16px; margin:0 8px 0 0; }
+  select, input, button { font:inherit; color:inherit; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:5px 9px; }
+  button { cursor:pointer; } button.primary { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+  button.danger { background:var(--bad); color:#fff; border-color:var(--bad); } button:disabled { opacity:.4; cursor:not-allowed; }
+  main { padding:12px; display:grid; gap:12px; grid-template-columns:minmax(0,1.7fr) minmax(320px,1fr); }
+  @media (max-width:1000px) { main { grid-template-columns:1fr; } }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px; }
+  .card h2 { font-size:12px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.05em; color:var(--mute); }
+  svg { width:100%; height:auto; display:block; border-radius:8px; background:var(--grass); }
+  .say { border-left:4px solid var(--accent); padding:6px 10px; background:var(--bg); border-radius:0 8px 8px 0; min-height:70px; }
+  .say.alert { border-color:var(--bad); } .say.ok { border-color:var(--ok); } .say b.t { display:block; margin-bottom:2px; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:6px 0; }
+  .screen { font:12px ui-monospace, Consolas, monospace; background:#0b1d2e; color:#9fe3a5; border-radius:6px; padding:8px; min-height:64px; border:2px solid #1c3b57; }
+  .screen.BLOCKED { background:#3a0d12; color:#ffb3b8; border-color:var(--bad); animation:flash 1s infinite; }
+  @keyframes flash { 50% { border-color:#fff; } }
+  .alert-item { border:1px solid var(--bad); border-radius:8px; padding:6px 8px; margin:6px 0; font-size:12px; }
+  .alert-item.WARNING { border-color:var(--warn); } .alert-item b { color:var(--bad); }
+  .mute { color:var(--mute); } .tag { font-size:11px; padding:1px 7px; border-radius:99px; background:var(--line); }
+  .log { font:11.5px/1.45 ui-monospace, Consolas, monospace; background:var(--bg); border-radius:6px; padding:8px; max-height:260px; overflow:auto; white-space:pre-wrap; word-break:break-word; }
+  .log div.lot { color:var(--warn); } .log div.err { color:var(--bad); } .log div.ok { color:var(--ok); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .adm button { display:none; } .adm.A button.A, .adm.B button.B, .adm.C button.C { display:inline-block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🚧 Duplicate entry: a tag that is already parked elsewhere</h1>
+  <label>What really happened <select id="scenario">
+    <option value="A">A · cloned tag: a second car carries the same tag</option>
+    <option value="B">B · same car, left P02 without being scanned out</option>
+    <option value="C">C · cloned tag, the administrator approves a visitor RFID card</option></select></label>
+  <button class="primary" id="btnPlay">▶ Play the whole scenario</button>
+  <button id="btnS1">1 · Car parks in P02</button>
+  <button id="btnS2">2 · Same tag arrives at P01</button>
+  <button id="btnReset">Reset demo</button>
+</header>
+<main>
+  <section>
+    <div class="card"><h2>Live view</h2>
+      <svg id="scene" viewBox="0 0 1130 430"></svg>
+      <div class="mute" style="margin-top:6px">Spaces: green free · amber reserved · red occupied. Everything the cars do is sent to the real lot backend as gateway events; the barriers open only when the backend commands it.</div>
+    </div>
+    <div class="card" style="margin-top:12px"><h2>What is happening</h2><div class="say" id="say"><b class="t">Ready</b>Press “Play the whole scenario”, or run the steps one by one.</div></div>
+    <div class="card" style="margin-top:12px"><h2>Event log (car/gateway ↔ lot system)</h2><div class="log" id="log"></div></div>
+  </section>
+  <section>
+    <div class="card"><h2>Entrance screens</h2>
+      <div class="two"><div><b>P01 entrance</b><div class="screen" id="scrP01">…</div></div><div><b>P02 entrance</b><div class="screen" id="scrP02">…</div></div></div>
+    </div>
+    <div class="card" style="margin-top:12px"><h2>Parking sessions (admin view)</h2><div id="sessions" class="mute">none</div></div>
+    <div class="card" style="margin-top:12px"><h2>Administrator alerts</h2><div id="alerts" class="mute">none</div></div>
+    <div class="card adm A" id="adm" style="margin-top:12px"><h2>Administrator actions</h2>
+      <div class="row">
+        <button class="A" id="aBlock">Block tag RFID_123 (vehicle inactive)</button>
+        <button class="A" id="aRetryB">The second car tries P01 again</button>
+        <button class="A" id="aExitA">Car A leaves P02 normally</button>
+        <button class="B" id="bManual">Manual exit of the P02 session</button>
+        <button class="B" id="bRetry">The car tries P01 again</button>
+        <button class="C" id="cApprove">Approve a visitor RFID card for the waiting car</button>
+        <button class="C" id="cLeave">The visitor car leaves P01 (returns the card)</button>
+      </div>
+      <div class="mute">Open <a href="/admin" target="_blank">/admin</a> in another tab for the full administrator dashboard.</div>
+      <details><summary class="mute">Demo keys</summary><div class="row"><label>device <input id="deviceKey" value="dev-device-key"></label><label>admin <input id="adminKey" value="dev-admin-key"></label></div></details>
+    </div>
+  </section>
+</main>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+const ROAD_Y = 385, TAG = "RFID_123";
+const LOTS = {
+  P02: { id:"P02", ox:20,  name:"Station Parking P02",  codes:["A1","A2","A3"], gw:"GW-P02", ent:"P02-ENT1", exit:"P02-EXIT1" },
+  P01: { id:"P01", ox:590, name:"Downtown Parking P01", codes:["E1","E2","E3"], gw:"GW-P01", ent:"P01-ENT1", exit:"P01-EXIT1" },
+};
+for (const L of Object.values(LOTS)) { L.gateIn = L.ox + 90; L.gateOut = L.ox + 430; L.cx = (i) => L.ox + 105 + 140 * i; }
+const D = { trip:0, busy:false, carA:null, carB:null, spaceA:null, ticketA:null, barrier:{}, barrierSeen:{}, ov:{}, term:{}, alertSeen:new Set() };
+
+/* ---------------------------------------------------------------- scene (SVG) */
+function lotSvg(L) {
+  let s = `<g>
+    <rect x="${L.ox}" y="20" width="500" height="320" rx="14" fill="var(--lot)" stroke="#fff" stroke-width="3"/>
+    <text x="${L.ox + 250}" y="45" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">${L.name}</text>
+    <rect x="${L.ox + 20}" y="215" width="460" height="70" fill="#4d555d" rx="6"/>
+    <text x="${L.ox + 250}" y="262" text-anchor="middle" fill="#8e99a4" font-size="11">aisle →</text>`;
+  L.codes.forEach((c, i) => {
+    const x = L.ox + 50 + 140 * i;
+    s += `<rect id="sp-${L.id}-${c}" x="${x}" y="60" width="110" height="130" rx="4" fill="#2da44e" fill-opacity=".38" stroke="#fff" stroke-width="2" stroke-dasharray="7 5"/>
+          <text x="${x + 55}" y="82" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">${c}</text>`;
+  });
+  // entrance (IN) and exit (OUT) gates, kiosks, barriers
+  s += `<rect x="${L.gateIn - 25}" y="338" width="50" height="6" fill="#222"/><text x="${L.gateIn}" y="326" text-anchor="middle" fill="#9fe3a5" font-size="12" font-weight="700">IN</text>
+        <rect id="kiosk-${L.id}" x="${L.gateIn + 34}" y="310" width="22" height="28" rx="4" fill="#0b1d2e" stroke="#9fe3a5" stroke-width="2"/>
+        <text x="${L.gateIn + 45}" y="328" text-anchor="middle" font-size="12" fill="#fff">📟</text>
+        <rect x="${L.gateOut - 25}" y="338" width="50" height="6" fill="#222"/><text x="${L.gateOut}" y="326" text-anchor="middle" fill="#ffb3b8" font-size="12" font-weight="700">OUT</text>
+        <g id="bar-${L.ent}" class="barrier" style="transform:translate(${L.gateIn - 25}px,341px);transform-origin:0 0"><circle r="5" fill="#222"/><rect id="arm-${L.ent}" x="0" y="-3" width="50" height="6" fill="#e5a50a" style="transform-origin:0 0;transition:transform .5s"/></g>
+        <g id="bar-${L.exit}" class="barrier" style="transform:translate(${L.gateOut - 25}px,341px);transform-origin:0 0"><circle r="5" fill="#222"/><rect id="arm-${L.exit}" x="0" y="-3" width="50" height="6" fill="#e5a50a" style="transform-origin:0 0;transition:transform .5s"/></g></g>`;
+  return s;
+}
+function buildScene() {
+  let s = `<rect x="0" y="350" width="1130" height="80" fill="var(--road)"/>
+           <line x1="0" y1="385" x2="1130" y2="385" stroke="#e6d36a" stroke-width="3" stroke-dasharray="26 18"/>
+           <text x="560" y="425" text-anchor="middle" fill="#aeb7c0" font-size="11">public road</text>`;
+  s += lotSvg(LOTS.P02) + lotSvg(LOTS.P01);
+  s += `<g id="cars"></g><g id="bubbles"></g>`;
+  $("scene").innerHTML = s;
+}
+const COLORS = { A:"#1f6feb", B:"#d1242f", C:"#e8890c" }, DARKS = { A:"#164fb0", B:"#9a1a22", C:"#a85f05" };
+function makeCar(key, plate) {
+  const c = COLORS[key], dark = DARKS[key];
+  const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  g.innerHTML = `<g class="rot">
+      <rect x="-19" y="-20" width="6" height="14" rx="2" fill="#111"/><rect x="13" y="-20" width="6" height="14" rx="2" fill="#111"/>
+      <rect x="-19" y="9" width="6" height="14" rx="2" fill="#111"/><rect x="13" y="9" width="6" height="14" rx="2" fill="#111"/>
+      <rect x="-15" y="-30" width="30" height="60" rx="10" fill="${c}" stroke="#0d1117" stroke-width="1.5"/>
+      <rect x="-11" y="-19" width="22" height="11" rx="3" fill="#cfe8ff"/><rect x="-11" y="12" width="22" height="8" rx="3" fill="#cfe8ff"/>
+      <rect x="-11" y="-6" width="22" height="16" rx="3" fill="${dark}"/>
+      <circle cx="-9" cy="-29" r="3" fill="#ffe9a3"/><circle cx="9" cy="-29" r="3" fill="#ffe9a3"/>
+      <circle cx="-9" cy="29" r="2.5" fill="#ff6b6b"/><circle cx="9" cy="29" r="2.5" fill="#ff6b6b"/></g>
+    <g class="lbl"><rect x="-46" y="-58" width="92" height="22" rx="5" fill="#0d1117" fill-opacity=".85"/>
+      <text x="0" y="-50" text-anchor="middle" font-size="9.5" fill="#fff">${esc(plate)}</text>
+      <text x="0" y="-40" text-anchor="middle" font-size="9.5" fill="#9fe3a5">tag ${TAG}</text></g>`;
+  $("cars").appendChild(g);
+  const car = { key, g, rot:g.querySelector(".rot"), tagText:g.querySelectorAll(".lbl text")[1], x:-80, y:ROAD_Y, a:90, target:90 };
+  placeCar(car, -80, ROAD_Y, 90);
+  return car;
+}
+function placeCar(car, x, y, a) {
+  car.x = x; car.y = y; car.a = a; car.target = a;
+  car.g.setAttribute("transform", `translate(${x} ${y})`); car.rot.setAttribute("transform", `rotate(${a})`);
+}
+const norm = (d) => ((d + 540) % 360) - 180;
+/* drive through points; the car faces its direction of travel (or backwards when reversing) */
+function moveCar(car, pts, { speed = 190, reverse = false } = {}) {
+  const myTrip = D.trip;
+  return new Promise(async (resolve, reject) => {
+    for (const [tx, ty] of pts) {
+      const dx = tx - car.x, dy = ty - car.y, dist = Math.hypot(dx, dy);
+      if (dist < 1) continue;
+      car.target = (Math.atan2(dx, -dy) * 180) / Math.PI + (reverse ? 180 : 0);
+      const t0 = performance.now(), x0 = car.x, y0 = car.y, dur = (dist / speed) * 1000;
+      await new Promise((done) => (function step(now) {
+        if (myTrip !== D.trip) return done();
+        const f = Math.min(1, (now - t0) / dur);
+        car.x = x0 + dx * f; car.y = y0 + dy * f;
+        car.a += norm(car.target - car.a) * 0.18;
+        car.g.setAttribute("transform", `translate(${car.x} ${car.y})`); car.rot.setAttribute("transform", `rotate(${car.a})`);
+        f < 1 ? requestAnimationFrame(step) : done();
+      })(t0));
+      if (myTrip !== D.trip) return reject(new Error("cancelled"));
+    }
+    resolve();
+  });
+}
+function bubble(car, text, color = "#d1242f") {
+  const b = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  b.innerHTML = `<rect x="${car.x - 70}" y="${car.y - 110}" width="140" height="34" rx="8" fill="${color}"/><text x="${car.x}" y="${car.y - 90}" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">${esc(text)}</text>`;
+  $("bubbles").appendChild(b); return b;
+}
+function setBarrier(lane, open) {
+  const arm = document.getElementById("arm-" + lane);
+  if (arm) arm.style.transform = open ? "rotate(-88deg)" : "rotate(0deg)";
+}
+
+/* ---------------------------------------------------------------- narration + log */
+function say(title, text, kind = "") { $("say").className = "say " + kind; $("say").innerHTML = `<b class="t">${esc(title)}</b>${text}`; }
+function log(cls, text) { const d = document.createElement("div"); d.className = cls; d.textContent = new Date().toLocaleTimeString() + "  " + text; $("log").appendChild(d); $("log").scrollTop = $("log").scrollHeight; }
+
+/* ---------------------------------------------------------------- backend access */
+async function api(method, path, body, opt = {}) {
+  const h = { "Content-Type":"application/json" };
+  if (opt.admin) h["X-Admin-Key"] = $("adminKey").value;
+  if (opt.device) h["X-Device-Key"] = $("deviceKey").value;
+  const r = await fetch(path, { method, headers:h, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(`${r.status} ${typeof j.detail === "string" ? j.detail : JSON.stringify(j.detail)}`);
+  return j;
+}
+async function ev(L, type, body) {
+  const fields = Object.entries(body).map(([k, v]) => `${k}=${v}`).join(" ");
+  log("lot", `${L.id} gateway → ${type} ${fields}`);
+  const j = await api("POST", `/api/gateways/${L.gw}/events`, { type, ...body }, { device:true });
+  log("lot", `        lot system replies: ${j.lane_state ? "lane " + j.lane_state : "space " + j.space_status}`);
+  refresh(); return j;
+}
+async function pollCommands() {
+  for (const L of Object.values(LOTS)) {
+    try {
+      const { commands } = await api("GET", `/api/gateways/${L.gw}/commands`, null, { device:true });
+      for (const c of commands) if (c.type === "DISPENSE_CARD") { D.dispense = true; log("ok", `lot system → dispenser ${c.lane_id}: DISPENSE_CARD`); }
+      else if (c.type === "OPEN_BARRIER") {
+        log("ok", `lot system → barrier ${c.lane_id}: OPEN`);
+        D.barrierSeen[c.lane_id] = true; setBarrier(c.lane_id, true); setTimeout(() => setBarrier(c.lane_id, false), 3200);
+      }
+    } catch {}
+  }
+}
+async function waitBarrier(lane) {
+  for (let i = 0; i < 40; i++) { if (D.barrierSeen[lane]) { D.barrierSeen[lane] = false; return true; } await sleep(250); }
+  log("err", `barrier ${lane} never opened`); return false;
+}
+async function refresh() {
+  for (const L of Object.values(LOTS)) {
+    try {
+      const o = await api("GET", `/api/admin/overview?lot_id=${L.id}`, null, { admin:true }); D.ov[L.id] = o;
+      for (const sp of o.spaces) {
+        const el = document.getElementById(`sp-${L.id}-${sp.code}`); if (!el) continue;
+        const col = { AVAILABLE:"#2da44e", RESERVED:"#d29922", OCCUPIED:"#d1242f", RELEASING:"#8250df", OUT_OF_SERVICE:"#6e7781" }[sp.status] || "#2da44e";
+        el.setAttribute("fill", col); el.setAttribute("fill-opacity", sp.status === "AVAILABLE" ? ".38" : ".62");
+      }
+      const lane = o.lanes.find((l) => l.kind === "ENTRANCE");
+      D.term[L.id] = lane;
+      const scr = $("scr" + L.id); scr.className = "screen " + lane.state;
+      scr.textContent = `[${lane.state}]\n${lane.message || "—"}`;
+      document.getElementById("kiosk-" + L.id)?.setAttribute("stroke", lane.state === "BLOCKED" ? "#ff4d5a" : "#9fe3a5");
+    } catch {}
+  }
+  const act = Object.values(D.ov).flatMap((o) => o.sessions.map((s) => ({ ...s })));
+  $("sessions").innerHTML = act.length ? act.map((s) => `<div><b>${esc(s.lot_id)}</b> · ${esc(s.vehicle_id)} · ticket ${esc(s.ticket_id)} · <span class="tag">${esc(s.status)}</span> · space ${esc(s.space)}</div>`).join("")
+    : "no active session";
+  try {
+    const alerts = await api("GET", "/api/admin/alerts", null, { admin:true });
+    $("alerts").innerHTML = alerts.length ? alerts.map((a) => `<div class="alert-item ${a.severity}"><b>${esc(a.severity)}</b> ${esc(a.type)} · lot ${esc(a.lot_id ?? "-")}<br>${esc(a.message)}
+        <div><button data-resolve="${a.id}">Acknowledge</button></div></div>`).join("") : "none";
+    $("alerts").querySelectorAll("[data-resolve]").forEach((b) => b.onclick = async () => {
+      await api("POST", `/api/admin/alerts/${b.dataset.resolve}/resolve`, { note:"Investigated by the administrator" }, { admin:true }); log("ok", "alert acknowledged"); refresh(); });
+    for (const a of alerts) if (a.type === "DUPLICATE_ENTRY" && !D.alertSeen.has(a.id)) { D.alertSeen.add(a.id); log("err", `ALERT sent to the administrator: ${a.type} (${a.severity})`); }
+  } catch {}
+}
+
+/* ---------------------------------------------------------------- the car approaches a gate */
+const gateStop = (L) => [L.gateIn, 366];
+async function enterAfterTicket(L, car, view) {
+    const space = view.ticket.space;
+    say(`${L.id} lets the car in`, `Ticket <b>${esc(view.ticket.ticket_id)}</b>, space <b>${esc(space)}</b>. The barrier opens.`, "ok");
+    await waitBarrier(L.ent); await sleep(300);
+    await moveCar(car, [[L.gateIn, 340], [L.gateIn, 250]]);
+    await ev(L, "LANE_VEHICLE_CLEARED", { lane_id:L.ent });
+    const i = L.codes.indexOf(space), cx = L.cx(i);
+    await moveCar(car, [[cx, 250], [cx, 125]], { speed:150 });
+    await sleep(600);
+    await ev(L, "SPACE_OCCUPANCY", { space_code:space, occupied:true, magnitude:1900 });
+    await sleep(500);
+    await ev(L, "SPACE_RFID_READ", { space_code:space, uid:car.tag });
+    car.lot = L.id; car.parkedIn = L.id; car.space = space; car.ticket = view.ticket.ticket_id;
+    return { admitted:true, space, ticket:view.ticket.ticket_id };
+}
+async function attemptEntry(L, car, { waitAtGate = false } = {}) {
+  car.g.style.display = "";
+  say(`Car ${car.key} approaches ${L.id}`, `It drives onto the entrance detection loop of <b>${L.name}</b>.`);
+  if (car.x > L.gateIn - 5 || car.y < ROAD_Y - 5) placeCar(car, -80, ROAD_Y, 90);
+  await moveCar(car, [[L.gateIn, ROAD_Y], gateStop(L)]);
+  await ev(L, "LANE_VEHICLE_DETECTED", { lane_id:L.ent });
+  await sleep(600);
+  say(`${L.id} reads the tag`, `The reader at the gate reads <b>${TAG}</b> and the backend looks up the vehicle and <b>any active session in ANY lot</b>.`);
+  const res = await ev(L, "LANE_RFID_READ", { lane_id:L.ent, uid:car.tag });
+  const view = await api("GET", `/api/terminal/${L.ent}`);
+  if (res.lane_state === "TICKET_SHOWN") return enterAfterTicket(L, car, view);
+  // refused
+  const bub = bubble(car, waitAtGate ? "REFUSED - WAITING" : "ENTRY REFUSED");
+  say(`${L.id} REFUSES the car`, `${esc(view.message)}<br><br>The barrier stays <b>closed</b>, the screen shows the refusal and a <b>CRITICAL alert</b> is raised for the administrator. The other session is not touched.`, "alert");
+  if (waitAtGate) { D.waitBubble = bub; D.waiting = { L, car }; return { admitted:false, waiting:true, message:view.message }; }
+  await sleep(3200);
+  bub.remove();
+  await ev(L, "LANE_VEHICLE_CLEARED", { lane_id:L.ent });
+  await moveCar(car, [[L.gateIn, ROAD_Y]], { reverse:true, speed:120 });
+  await moveCar(car, [[1230, ROAD_Y]], { speed:220 });
+  return { admitted:false, message:view.message };
+}
+
+/* A car that is currently parked must stay in its space. If the demo needs "another attempt" with the same
+   tag, a NEW car (orange) arrives instead of teleporting the parked one away. */
+function carForAttempt(base, key, plate) {
+  if (base && base.parkedIn) {
+    const extra = makeCar("C", "44 TU 5555"); extra.tag = TAG; placeCar(extra, -80, ROAD_Y, 90); D.extra = extra;
+    say("Another car with the same tag", `The earlier car (${esc(base.key)}) is <b>parked in ${esc(base.parkedIn)}</b> and stays there. A new car (orange) now arrives with the same tag.`);
+    return extra;
+  }
+  if (!base) base = makeCar(key, plate);
+  base.tag = TAG; placeCar(base, -80, ROAD_Y, 90); return base;
+}
+async function leaveLot(L, car, { scan }) {
+  car.parkedIn = null;
+  await ev(L, "SPACE_OCCUPANCY", { space_code:car.space, occupied:false });
+  await sleep(700);
+  const i = L.codes.indexOf(car.space), cx = L.cx(i);
+  await moveCar(car, [[cx, 250], [L.gateOut, 250], [L.gateOut, 330]], { speed:150 });
+  if (scan) {
+    await ev(L, "LANE_VEHICLE_DETECTED", { lane_id:L.exit }); await sleep(600);
+    const r = await ev(L, "LANE_RFID_READ", { lane_id:L.exit, uid:car.tag });
+    if (r.lane_state === "AWAITING_CARD_RETURN") {
+      say("Exit: the visitor returns the card", "The exit reader read the <b>visitor card</b>; the driver inserts it into the card-return unit, which confirms it before the session is closed.");
+      await sleep(1200);
+      const rr = await ev(L, "CARD_RETURNED", { lane_id:L.exit, uid:car.tag });
+      if (rr.lane_state === "EXIT_AUTHORIZED") { await waitBarrier(L.exit); await sleep(300); }
+    } else if (r.lane_state === "EXIT_AUTHORIZED") { await waitBarrier(L.exit); await sleep(300); }
+    await moveCar(car, [[L.gateOut, 360], [L.gateOut, ROAD_Y]]);
+    await ev(L, "LANE_VEHICLE_CLEARED", { lane_id:L.exit });
+  }
+}
+
+/* ---------------------------------------------------------------- the scenario steps */
+function guard(fn) { return async () => {
+  if (D.busy) return; D.busy = true; setButtons();
+  try { await fn(); } catch (e) { if (e.message !== "cancelled") { log("err", e.message); say("Error", esc(e.message), "alert"); } } finally { D.busy = false; setButtons(); } }; }
+function setButtons() { for (const id of ["btnS1","btnS2","btnPlay","aBlock","aRetryB","aExitA","bManual","bRetry","cApprove","cLeave","scenario"]) $(id).disabled = D.busy; }
+const sc = () => $("scenario").value;
+
+async function step1() {
+  if (!D.carA) D.carA = makeCar("A", "123 TU 4567");
+  say("Step 1 · a registered car parks in P02", "Car A (blue) is a registered vehicle with tag RFID_123. It enters Station Parking P02 and parks normally.");
+  D.carA.tag = TAG; const r = await attemptEntry(LOTS.P02, D.carA);
+  if (r.admitted) { D.spaceA = r.space; D.ticketA = r.ticket; say("Car A is parked in P02", `Session <b>${esc(r.ticket)}</b> is <b>PARKED</b> in space ${esc(r.space)} (magnetic sensor + local RFID agree). Now the same tag will show up at P01.`, "ok"); }
+}
+async function step2() {
+  if (!D.ticketA) { say("Run step 1 first", "Car A must be parked in P02 before its tag can appear at P01.", "alert"); return; }
+  let car;
+  if (sc() === "A" || sc() === "C") {
+    if (!D.carB) D.carB = makeCar("B", "99 TU 7777");
+    D.carB.tag = TAG; car = D.carB; placeCar(car, -80, ROAD_Y, 90);
+    say("Step 2 · a second car with the same tag", "Car B (red, a different plate) carries a <b>copy of tag RFID_123</b>. Car A is still parked in P02. Car B drives to the gate of P01.");
+  } else {
+    car = D.carA;
+    say("Step 2 · the car left P02 without being scanned out", "The exit reader of P02 is out of order: the guard lifts the barrier by hand (a logged administrator action). The system never sees car A leave, so its P02 session stays open.");
+    await leaveLot(LOTS.P02, car, { scan:false });                       // drives to the exit gate, nothing is scanned
+    await api("POST", `/api/admin/lanes/${LOTS.P02.exit}/open-barrier`, { note:"exit reader out of order, barrier lifted by hand" }, { admin:true });
+    log("ok", "administrator action logged: barrier P02-EXIT1 lifted by hand");
+    await waitBarrier(LOTS.P02.exit); await sleep(300);
+    await moveCar(car, [[LOTS.P02.gateOut, 360], [LOTS.P02.gateOut, ROAD_Y]]);
+    await moveCar(car, [[LOTS.P01.gateIn - 90, ROAD_Y]]);
+  }
+  await attemptEntry(LOTS.P01, car, { waitAtGate: sc() === "C" });
+  if (sc() === "C") say("What the system did", "P01 refused car B (the tag has an active session in P02), raised a CRITICAL alert and <b>did not offer a visitor card</b>. The driver waits at the gate. Only the administrator can approve a visitor card: use the button on the right (or “Allow visitor RFID card” on the alert in /admin).", "alert");
+  else if (sc() === "A") say("What the system did", "P01 refused car B: the tag already has an <b>active session in lot P02</b>. Car A's session was left untouched, and the administrator got a CRITICAL alert. Use the administrator actions on the right to decide what to do.", "alert");
+  else say("What the system did", "P01 refused the car: its tag still has an <b>active session in P02</b>. The administrator can check P02 (space vacated, no exit recorded) and close that session by hand, then the car can try again.", "alert");
+}
+async function aBlock() {
+  await api("POST", "/api/admin/vehicles", { id:"V001", rfid:TAG, plate:"123 TU 4567", owner:"Registered owner 1", active:false }, { admin:true });
+  log("ok", "administrator: vehicle V001 set inactive (tag blocked for new entries)");
+  say("Tag blocked", "The administrator set vehicle V001 to inactive. New entries with this tag are refused, but the car that is legitimately parked in P02 can still leave.", "ok"); refresh();
+}
+async function aRetryB() {
+  if (!D.ticketA && !D.carB) { say("Run steps 1 and 2 first", "A second car must have been refused before it can try again.", "alert"); return; }
+  const car = carForAttempt(D.carB, "B", "99 TU 7777"); if (!D.carB) D.carB = car;
+  const r = await attemptEntry(LOTS.P01, car);
+  if (r.admitted) say("P01 lets this car in", `The original car is no longer parked anywhere, so nothing prevents this tag from entering: ticket <b>${esc(r.ticket)}</b>, space ${esc(r.space)}. Press the button again: a new car with the same tag is refused, because this tag is now parked in P01.`, "ok");
+  else say("Still refused", `P01: “${esc(r.message)}”`, "alert"); }
+async function aExitA() {
+  say("Car A leaves P02 the normal way", "It drives to the exit, the reader reads its tag, the session is closed and the barrier opens.");
+  await leaveLot(LOTS.P02, D.carA, { scan:true });
+  await moveCar(D.carA, [[1230, ROAD_Y]], { speed:220 }); D.ticketA = null;
+  say("P02 session closed", "Car A left normally (this works even though the tag was blocked for new entries).", "ok"); refresh();
+}
+async function bManual() {
+  if (!D.ticketA) return;
+  await api("POST", "/api/admin/manual-exit", { ticket_id:D.ticketA, lane_id:LOTS.P02.exit, manual_vehicle_check_confirmed:true, note:"checked: car left, exit reader out of order" }, { admin:true });
+  await api("POST", `/api/admin/lanes/${LOTS.P02.exit}/reset`, null, { admin:true });
+  await pollCommands();
+  log("ok", "administrator: manual exit of the P02 session after a physical check");
+  say("Administrator closes the P02 session", "After checking that the car really is gone, the administrator closes ticket <b>" + esc(D.ticketA) + "</b> by hand. The duplicate-entry alert is resolved automatically with the session.", "ok"); D.ticketA = null; refresh();
+}
+async function bRetry() {
+  const car = carForAttempt(D.carA, "A", "123 TU 4567");
+  const r = await attemptEntry(LOTS.P01, car);
+  if (r.admitted) say("P01 accepts the car", `With no other active session, P01 issues ticket <b>${esc(r.ticket)}</b>, space ${esc(r.space)}.`, "ok");
+}
+async function cApprove() {
+  if (!D.waiting) { say("Nobody is waiting", "Run step 2 first: a refused car must be waiting at the P01 gate.", "alert"); return; }
+  const { L, car } = D.waiting;
+  await api("POST", `/api/admin/lanes/${L.ent}/allow-visitor-card`, { note:"checked with the driver: second car, no copy of the tag should exist" }, { admin:true });
+  log("ok", "administrator: visitor RFID card approved for the car waiting at P01");
+  D.waitBubble?.remove(); D.waiting = null;
+  say("Administrator approves a visitor RFID card", "The P01 entrance screen now offers “Request a ticket”. The approval is written on the alert, and it works only for the car waiting at this gate right now.", "ok");
+  refresh(); await sleep(1500);
+  const b2 = bubble(car, "Driver presses “Request a ticket”", "#1f6feb");
+  D.dispense = false;
+  await api("POST", `/api/terminal/${L.ent}/request-ticket`);
+  for (let i = 0; i < 20 && !D.dispense; i++) { await pollCommands(); await sleep(150); }
+  await sleep(900); b2.remove();
+  const card = (D.ov[L.id]?.cards || []).find((c) => c.status === "AVAILABLE");
+  if (!card) throw new Error("no visitor card available");
+  const b3 = bubble(car, "Takes card " + card.uid, "#d29922");
+  say("The dispenser issues a temporary RFID card", `The driver takes visitor card <b>${esc(card.uid)}</b> and presents it to the reader. From now on the car is identified by this card, not by the registered tag.`);
+  await sleep(1600); b3.remove();
+  car.tag = card.uid; if (car.tagText) { car.tagText.textContent = "visitor card " + card.uid.replace("RFID_", ""); car.tagText.setAttribute("fill", "#f2b84b"); }
+  const res = await ev(L, "LANE_RFID_READ", { lane_id:L.ent, uid:card.uid });
+  const view = await api("GET", `/api/terminal/${L.ent}`);
+  if (res.lane_state !== "TICKET_SHOWN") throw new Error("visitor card not accepted: " + view.message);
+  const r = await enterAfterTicket(L, car, view);
+  say("The visitor car is parked in P01", `Visitor session <b>${esc(r.ticket)}</b> is <b>PARKED</b> in ${esc(r.space)}. Car A's registered session in P02 was never touched, and the duplicate alert stays open with the approval recorded.`, "ok");
+}
+async function cLeave() {
+  const car = D.carB;
+  if (!car || !car.space || car.lot !== "P01") { say("Run the visitor entry first", "Approve the visitor card and let the car park in P01.", "alert"); return; }
+  say("The visitor car leaves P01", "It drives to the exit; the reader reads the visitor card.");
+  await leaveLot(LOTS.P01, car, { scan:true });
+  await moveCar(car, [[1230, ROAD_Y]], { speed:220 }); car.lot = null;
+  say("Visitor session closed", "The card was returned and the P01 session is closed. Car A is still legitimately parked in P02.", "ok"); refresh();
+}
+async function playAll() {
+  await resetDemo(true);
+  await step1(); await sleep(1200);
+  await step2(); await sleep(2500);
+  if (sc() === "A") { await aBlock(); await sleep(2000); await aRetryB(); await sleep(1500); await aExitA(); }
+  else if (sc() === "C") { await sleep(2500); await cApprove(); await sleep(2000); await cLeave(); }
+  else { await bManual(); await sleep(1800); await bRetry(); }
+  say("Scenario complete", sc() === "A" ? "Duplicate refused, alert raised, tag blocked, legitimate car left normally."
+      : sc() === "C" ? "Duplicate refused, alert raised, administrator approved a visitor RFID card, the car parked and left with it; the original session stayed untouched."
+      : "Duplicate refused, alert raised, stale session closed by the administrator, car admitted at P01.", "ok");
+}
+async function resetDemo(quiet) {
+  D.trip++; await sleep(60);
+  try { await api("POST", "/api/admin/reset-demo", null, { admin:true }); } catch (e) { log("err", "reset failed: " + e.message); }
+  $("cars").innerHTML = ""; $("bubbles").innerHTML = ""; D.carA = D.carB = D.extra = null; D.ticketA = D.spaceA = null; D.waiting = null; D.dispense = false; D.barrierSeen = {}; D.alertSeen = new Set();
+  for (const L of Object.values(LOTS)) { setBarrier(L.ent, false); setBarrier(L.exit, false); }
+  await pollCommands(); D.barrierSeen = {};
+  if (!quiet) { say("Ready", "Press “Play the whole scenario”, or run the steps one by one."); $("log").innerHTML = ""; }
+  refresh();
+}
+
+$("btnS1").onclick = guard(step1); $("btnS2").onclick = guard(step2); $("btnPlay").onclick = guard(playAll);
+$("btnReset").onclick = async () => { await resetDemo(false); D.busy = false; setButtons(); };
+$("aBlock").onclick = guard(aBlock); $("aRetryB").onclick = guard(aRetryB); $("aExitA").onclick = guard(aExitA);
+$("cApprove").onclick = guard(cApprove); $("cLeave").onclick = guard(cLeave);
+$("bManual").onclick = guard(bManual); $("bRetry").onclick = guard(bRetry);
+$("scenario").onchange = () => { $("adm").className = "card adm " + sc(); };
+buildScene(); $("adm").className = "card adm A";
+pollCommands().then(() => { D.barrierSeen = {}; }); setInterval(pollCommands, 350); setInterval(refresh, 900); refresh();
+window.__D = D;
+</script>
+</body>
+</html>

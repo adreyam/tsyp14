@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>City Brain - Transportation</title>
+<style>
+:root{
+  --bg:#0d1117;--panel:#151b23;--panel2:#1b232d;--line:#2a3441;--text:#e6edf3;--mute:#8b98a8;
+  --ok:#3fb950;--warn:#d29922;--bad:#f85149;--acc:#58a6ff;--pur:#bc8cff;--pink:#f778ba;
+  --road:#3a4452;--roadb:#4b5667;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:13px/1.4 system-ui,Segoe UI,Roboto,sans-serif}
+button{font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}
+button:hover{border-color:var(--acc)}
+button.primary{background:#1f6feb;border-color:#1f6feb}
+button.good{background:#238636;border-color:#238636}
+button.danger{background:#b62324;border-color:#b62324}
+button.warn{background:#9e6a03;border-color:#9e6a03}
+button:disabled{opacity:.4;cursor:not-allowed}
+input,select{font:inherit;color:var(--text);background:#0d1117;border:1px solid var(--line);border-radius:6px;padding:4px 6px}
+input[type=range]{padding:0}
+h3{margin:12px 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 470px;grid-template-rows:46px minmax(0,1fr);height:100%}
+header{grid-column:1/3;display:flex;align-items:center;gap:14px;padding:0 12px;background:var(--panel);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap}
+header b{font-size:15px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--mute)}
+.chip b{color:var(--text);font-size:12px}
+.speed button.on{background:#1f6feb;border-color:#1f6feb}
+#mapwrap{position:relative;min-width:0;min-height:0}
+#map{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;background:#0b0f14}
+#map.drag{cursor:grabbing}
+#legend{position:absolute;left:10px;bottom:10px;background:#0d1117cc;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:11px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px 12px;max-width:70%}
+#legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+#tip{position:absolute;pointer-events:none;background:#0d1117ee;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:12px;display:none;max-width:260px}
+#ticker{position:absolute;right:10px;bottom:10px;width:300px;pointer-events:none;max-height:35%;overflow:hidden;font-size:11.5px;color:var(--mute);background:#0d1117bb;border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+#ticker div{padding:1px 0;border-bottom:1px solid #ffffff10}
+#ticker div:last-child{border:0}
+#mapbtns{position:absolute;left:10px;top:10px;display:flex;gap:6px}
+aside{background:var(--panel);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;border:0;border-radius:0;background:transparent;padding:10px 4px;color:var(--mute);border-bottom:2px solid transparent}
+.tabs button.on{color:var(--text);border-bottom-color:var(--acc)}
+.tabs .badge{background:var(--bad);color:#fff;border-radius:9px;padding:0 6px;font-size:11px;margin-left:4px}
+.pane{display:none;overflow:auto;padding:10px 12px 40px;min-height:0;flex:1}
+.pane.on{display:block}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px 10px;margin:8px 0}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.row.sp{justify-content:space-between}
+.mute{color:var(--mute)}
+.tag{display:inline-block;border-radius:5px;padding:1px 7px;font-size:11px;border:1px solid var(--line)}
+.tag.ok{color:var(--ok);border-color:#3fb95066}.tag.bad{color:var(--bad);border-color:#f8514966}.tag.warn{color:var(--warn);border-color:#d2992266}.tag.acc{color:var(--acc);border-color:#58a6ff66}
+.drivers{display:flex;flex-wrap:wrap;gap:5px}
+.drivers button{padding:3px 8px;font-size:12px;position:relative}
+.drivers button.sel{outline:2px solid var(--acc)}
+.drivers button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:#555}
+.offer{border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0;background:#10161d}
+.offer.best{border-color:var(--ok)}
+.bar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:#0d1117;margin:6px 0 3px}
+.bar i{display:block;height:100%}
+.crit{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:11px;color:var(--mute)}
+.crit span i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}
+.ticket{border:2px dashed var(--ok);border-radius:10px;padding:10px 12px;background:#0f1d14;margin:8px 0}
+.ticket .big{font-size:30px;font-weight:700;color:var(--ok);letter-spacing:.05em}
+.screen{background:#04070b;border:2px solid #2d3b4d;border-radius:10px;padding:8px 10px;margin:6px 0;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;color:#9ee6a8;min-height:40px}
+.msg{border-left:3px solid var(--warn);background:#2a2110;padding:6px 8px;border-radius:0 6px 6px 0;margin:6px 0}
+.msg.REPARK{border-color:var(--bad);background:#2d1416}
+.msg.done{opacity:.5}
+.log{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--mute);max-height:130px;overflow:auto}
+.spgrid{display:flex;flex-wrap:wrap;gap:3px}
+.sp1{width:34px;height:26px;border-radius:4px;font-size:10px;display:flex;align-items:center;justify-content:center;color:#000;font-weight:600;position:relative}
+.sp1.AVAILABLE{background:#2ea043}.sp1.RESERVED{background:#d29922}.sp1.OCCUPIED{background:#f85149}.sp1.RELEASING{background:#bc8cff}.sp1.OUT_OF_SERVICE{background:#6e7681}
+.sp1.bad{outline:2px solid #fff}
+table{border-collapse:collapse;width:100%;font-size:12px}
+td,th{padding:3px 5px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:500}
+.lotlist button{display:block;width:100%;text-align:left;margin:4px 0}
+.lotlist button.sel{border-color:var(--acc)}
+canvas.chart{width:100%;height:120px;display:block;background:#10161d;border:1px solid var(--line);border-radius:8px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px}
+.kv div:nth-child(odd){color:var(--mute)}
+label.sl{display:block;margin:8px 0 2px;color:var(--mute)}
+label.sl b{color:var(--text)}
+.tl{font-size:12px}
+.tl .e{display:grid;grid-template-columns:78px 78px 1fr;gap:6px;padding:3px 0;border-bottom:1px solid #ffffff10;align-items:start}
+.tl .t{color:var(--mute);font-family:ui-monospace,Consolas,monospace;font-size:11px}
+.lay{display:inline-block;border-radius:5px;padding:0 6px;font-size:10.5px;font-weight:700;text-transform:uppercase;text-align:center}
+.lay.twin{background:#1f4e8c}.lay.guardian{background:#7a4a00;color:#ffd58a}.lay.brain{background:#1c5b2e;color:#9ef0b0}.lay.actuator{background:#5b2d78;color:#e3c3ff}.lay.test{background:#333;color:#ccc}
+.tl .k{color:var(--mute);font-size:10.5px}
+.tl .e.bad .x{color:#ff8b85}.tl .e.good .x{color:#8be9a0}
+.scen{display:flex;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid var(--line)}
+.scen .n{flex:1}
+@media (max-width:1000px){.app{grid-template-columns:1fr;grid-template-rows:46px 55vh auto}aside{border-left:0;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <b>City Brain &middot; Transportation</b>
+  <span class="chip"><b id="hClock">--</b></span>
+  <span class="chip">cars <b id="hBg">0</b></span>
+  <span class="chip">stopped <b id="hStop">0</b></span>
+  <span class="chip">mean wait <b id="hWait">0</b> s</span>
+  <span class="chip">emergency <b id="hEm">0</b></span>
+  <span class="chip" id="hLearn">learning</span>
+  <span style="flex:1"></span>
+  <span class="speed" id="speedBtns"></span>
+  <button id="btnPause">Pause</button>
+</header>
+
+<div id="mapwrap">
+  <canvas id="map"></canvas>
+  <div id="mapbtns"><button id="btnFit">Fit</button><button id="btnZin">+</button><button id="btnZout">&minus;</button><button id="btnFollow">Follow car</button></div>
+  <div id="ticker"></div>
+  <div id="legend">
+    <span><i style="background:#9aa4b2"></i>car</span><span><i style="background:#c9a66b"></i>truck</span>
+    <span><i style="background:#fff;box-shadow:0 0 0 2px #f85149"></i>ambulance</span><span><i style="background:#58a6ff"></i>police</span><span><i style="background:#ff7b32"></i>fire truck</span>
+    <span><i style="background:#d2a8ff"></i>driver car (click)</span>
+    <span><i style="background:#58a6ff;border-radius:2px"></i>work</span><span><i style="background:#e3a008;border-radius:2px"></i>cafe</span><span><i style="background:#3fb950;border-radius:2px"></i>school</span><span><i style="background:#f778ba;border-radius:2px"></i>spouse work</span>
+    <span><i style="background:#2ea043;border-radius:2px"></i>free space</span><span><i style="background:#d29922;border-radius:2px"></i>reserved</span><span><i style="background:#f85149;border-radius:2px"></i>occupied</span>
+  </div>
+  <div id="tip"></div>
+</div>
+
+<aside>
+  <div class="tabs">
+    <button data-tab="car" class="on">Car dash</button>
+    <button data-tab="admin">Admin<span class="badge" id="admBadge" style="display:none">0</span></button>
+    <button data-tab="train">Training</button>
+    <button data-tab="tl">Timeline</button>
+    <button data-tab="sim">Simulation</button>
+  </div>
+
+  <!-- ===================== CAR DASH ===================== -->
+  <div class="pane on" id="pane-car">
+    <div class="drivers" id="driverChips"></div>
+    <div id="carBody"><p class="mute">Click a purple driver car on the map, or choose a driver above.</p></div>
+  </div>
+
+  <!-- ===================== ADMIN ===================== -->
+  <div class="pane" id="pane-admin">
+    <div class="row sp"><h3 style="margin:0">Parking administration</h3><span class="mute">key <input id="admKey" value="dev-admin-key" size="14"></span></div>
+    <div class="lotlist" id="lotList"></div>
+    <div id="admBody"></div>
+    <h3>Notices from the cars</h3>
+    <div id="admNotices"></div>
+  </div>
+
+  <!-- ===================== TRAINING ===================== -->
+  <div class="pane" id="pane-train">
+    <div id="trainHead"></div>
+    <div class="row" style="margin:8px 0">
+      <button id="btnMode">Mode</button>
+      <button id="btnSave">Save now</button>
+      <button id="btnBench">Run benchmark</button> <button id="btnBenchJam">Benchmark with a traffic jam</button>
+    </div>
+    <div id="trainCharts"></div>
+    <h3>Benchmarks (fixed-time vs learned, same traffic)</h3>
+    <div id="benchBox" class="mute">No benchmark yet.</div>
+  </div>
+
+  <!-- ===================== TIMELINE (three layers) ===================== -->
+  <div class="pane" id="pane-tl">
+    <div class="row sp"><h3 style="margin:0">What happens across the three layers</h3>
+      <select id="tlFilter"><option value="">all layers</option><option value="twin">Twin</option><option value="guardian">Guardian</option><option value="brain">Brain</option><option value="actuator">Actuators</option><option value="test">Test</option></select></div>
+    <div class="mute" style="margin:4px 0">Twin reading &rarr; Guardian verdict &rarr; Brain decision &rarr; actuator action, with timestamps. The same lines are written to <code>logs/</code>.</div>
+    <div id="tlTrust"></div>
+    <h3>Test Book scenarios (one button each)</h3>
+    <div id="tlScen"></div>
+    <h3>Timeline</h3>
+    <div id="tlList" class="tl"></div>
+  </div>
+
+  <!-- ===================== SIMULATION ===================== -->
+  <div class="pane" id="pane-sim">
+    <h3>Traffic</h3>
+    <label class="sl">Traffic level <b id="vTraffic"></b></label>
+    <input type="range" id="sTraffic" min="0" max="2" step="0.1" style="width:100%">
+    <label class="sl">Virtual clock speed (sim seconds &rarr; clock seconds) <b id="vTs"></b></label>
+    <input type="range" id="sTs" min="1" max="300" step="1" style="width:100%">
+    <div class="row" style="margin-top:8px">
+      <select id="selDay"><option value="0">Mon</option><option value="1">Tue</option><option value="2">Wed</option><option value="3">Thu</option><option value="4">Fri</option><option value="5">Sat</option><option value="6">Sun</option></select>
+      <input type="time" id="inTime" value="08:00"><button id="btnSetClock">Set clock</button>
+    </div>
+    <h3>Emergency vehicles on the map</h3>
+    <div class="row">
+      <label>ambulances <input id="nAmb" type="number" min="0" max="10" style="width:52px"></label>
+      <label>police <input id="nPol" type="number" min="0" max="10" style="width:52px"></label>
+      <label>fire trucks <input id="nFire" type="number" min="0" max="10" style="width:52px"></label>
+      <button id="btnEm">Apply</button>
+    </div>
+    <h3>Traffic jam test</h3>
+    <div class="row">
+      <label>extra cars <input id="jamSize" type="number" min="50" max="1500" value="300" style="width:62px"></label>
+      <button id="btnJam">Create a traffic jam</button>
+    </div>
+    <div id="jamBox" class="mute">Floods the city with extra cars within 60 s, then measures the worst moment and the recovery time. Switch the signals to "policy" (trained) or "train" and compare.</div>
+    <h3>Drivers</h3>
+    <label><input type="checkbox" id="chAuto"> drivers start trips automatically (otherwise you drive them)</label>
+    <label class="sl">Probability that a driver parks in the wrong space <b id="vMis"></b></label>
+    <input type="range" id="sMis" min="0" max="1" step="0.05" style="width:100%">
+    <h3>Scenarios</h3>
+    <div class="row">
+      <button id="scDup" class="warn">Duplicate RFID (d6 / d13)</button>
+      <button id="scWrong" class="warn">Wrong-space parking</button>
+    </div>
+    <p class="mute">Duplicate RFID: d6 parks first, then d13 (same tag) arrives and is blocked at the gate. Open the Admin tab and press <i>Allow visitor card</i>, then request the ticket from d13's dash.</p>
+    <h3>Event log</h3>
+    <div class="log" id="evLog" style="max-height:260px"></div>
+  </div>
+</aside>
+</div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const el = (t, a = {}, h = "") => { const e = document.createElement(t); Object.assign(e, a); if (h) e.innerHTML = h; return e; };
+const API = "/api";
+async function api(path, method = "GET", body, admin = false) {
+  const h = {"content-type": "application/json"};
+  if (admin) h["X-Admin-Key"] = $("#admKey").value;
+  const r = await fetch(API + path, {method, headers: h, body: body === undefined ? undefined : JSON.stringify(body)});
+  let j = null; try { j = await r.json(); } catch (e) {}
+  if (!r.ok) throw new Error((j && (j.detail && (typeof j.detail === "string" ? j.detail : JSON.stringify(j.detail)))) || r.statusText);
+  return j;
+}
+function toast(msg, bad) {
+  const t = el("div", {textContent: msg});
+  Object.assign(t.style, {position: "fixed", left: "50%", top: "56px", transform: "translateX(-50%)", background: bad ? "#b62324" : "#1f6feb", color: "#fff", padding: "7px 14px", borderRadius: "8px", zIndex: 99, maxWidth: "70vw"});
+  document.body.appendChild(t); setTimeout(() => t.remove(), 3500);
+}
+async function act(fn) { try { await fn(); } catch (e) { toast(e.message, true); } }
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+
+// ---------------------------------------------------------------- state
+let W = null, S = null, sel = null, carFull = null, followCar = false;
+const PHASE_COL = {IDLE: "#555", DRIVING: "#58a6ff", TO_LOT: "#58a6ff", AT_GATE: "#d29922", IN_LOT_IN: "#3fb950", CHOOSE_SPACE: "#d29922", TO_SPACE: "#3fb950", PARKED: "#8b98a8", REPARKING: "#f85149", TO_EXIT: "#bc8cff", AT_EXIT: "#bc8cff", LEAVING: "#58a6ff"};
+const KIND_COL = {work: "#58a6ff", cafe: "#e3a008", school: "#3fb950", spouse: "#f778ba"};
+const KIND_TXT = {work: "work", cafe: "cafe", school: "school", spouse: "spouse's work"};
+const CRIT_COL = {drive_min: "#58a6ff", walk_m: "#3fb950", free_now: "#d29922", free_30: "#e3a008", pressure: "#f85149", reputation: "#bc8cff", routine_m: "#f778ba"};
+const CRIT_TXT = {drive_min: "drive time", walk_m: "walk to destination", free_now: "free now", free_30: "free in 30 min", pressure: "pressure", reputation: "reputation", routine_m: "daily routine"};
+
+// ---------------------------------------------------------------- map
+const cv = $("#map"), cx = cv.getContext("2d");
+let view = {s: 0.6, ox: 0, oy: 0}, dpr = 1, dragging = null, hover = null;
+function resize() { dpr = window.devicePixelRatio || 1; const r = cv.getBoundingClientRect(); cv.width = r.width * dpr; cv.height = r.height * dpr; if (!view.fitted && W) fit(); }
+window.addEventListener("resize", resize);
+function fit() {
+  const r = cv.getBoundingClientRect(), b = W.bbox, pad = 30;
+  const s = Math.min((r.width - 2 * pad) / (b[2] - b[0]), (r.height - 2 * pad) / (b[3] - b[1]));
+  view = {s, ox: (r.width - s * (b[2] - b[0])) / 2 - s * b[0], oy: (r.height + s * (b[3] - b[1])) / 2 + s * b[1], fitted: true};
+}
+const sx = x => x * view.s + view.ox, sy = y => view.oy - y * view.s;
+const wx = px => (px - view.ox) / view.s, wy = py => (view.oy - py) / view.s;
+function zoomAt(px, py, f) {
+  const x = wx(px), y = wy(py); view.s = Math.max(0.25, Math.min(8, view.s * f)); view.ox = px - x * view.s; view.oy = py + y * view.s;
+}
+cv.addEventListener("wheel", e => { e.preventDefault(); const r = cv.getBoundingClientRect(); zoomAt(e.clientX - r.left, e.clientY - r.top, e.deltaY < 0 ? 1.15 : 1 / 1.15); followCar = false; }, {passive: false});
+cv.addEventListener("mousedown", e => { dragging = {x: e.clientX, y: e.clientY, ox: view.ox, oy: view.oy, moved: false}; cv.classList.add("drag"); });
+window.addEventListener("mouseup", e => {
+  cv.classList.remove("drag");
+  if (dragging && !dragging.moved) { const r = cv.getBoundingClientRect(); onClick(e.clientX - r.left, e.clientY - r.top); }
+  dragging = null;
+});
+window.addEventListener("mousemove", e => {
+  const r = cv.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
+  if (dragging) {
+    const dx = e.clientX - dragging.x, dy = e.clientY - dragging.y;
+    if (Math.abs(dx) + Math.abs(dy) > 4) { dragging.moved = true; followCar = false; }
+    if (dragging.moved) { view.ox = dragging.ox + dx; view.oy = dragging.oy + dy; }
+  } else if (e.target === cv) { onHover(px, py, e.clientX - r.left + 14, e.clientY - r.top + 14); }
+});
+$("#btnFit").onclick = () => { fit(); followCar = false; };
+$("#btnZin").onclick = () => { const r = cv.getBoundingClientRect(); zoomAt(r.width / 2, r.height / 2, 1.3); };
+$("#btnZout").onclick = () => { const r = cv.getBoundingClientRect(); zoomAt(r.width / 2, r.height / 2, 1 / 1.3); };
+$("#btnFollow").onclick = () => { followCar = !followCar; $("#btnFollow").classList.toggle("primary", followCar); if (followCar && sel) view.s = Math.max(view.s, 2.2); };
+
+function hitTest(px, py) {
+  if (!S || !W) return null;
+  let best = null, bd = 16;
+  for (const c of S.cars) {
+    if (c.x == null) continue;
+    const d = Math.hypot(sx(c.x) - px, sy(c.y) - py);
+    if (d < bd) { bd = d; best = {type: "car", id: c.id, c}; }
+  }
+  if (best) return best;
+  for (const p of W.places) { const d = Math.hypot(sx(p.x) - px, sy(p.y) - py); if (d < 11) return {type: "place", p}; }
+  for (const l of W.lots) {
+    const x0 = Math.min(...l.corners.map(c => c[0])), x1 = Math.max(...l.corners.map(c => c[0])), y0 = Math.min(...l.corners.map(c => c[1])), y1 = Math.max(...l.corners.map(c => c[1]));
+    const X = wx(px), Y = wy(py);
+    if (X >= x0 && X <= x1 && Y >= y0 && Y <= y1) return {type: "lot", l};
+  }
+  for (const v of S.vehicles) {
+    if (!v[5]) continue;
+    if (Math.hypot(sx(v[0]) - px, sy(v[1]) - py) < 10) return {type: "em", v};
+  }
+  return null;
+}
+function onClick(px, py) {
+  const h = hitTest(px, py);
+  if (!h) return;
+  if (h.type === "car") selectCar(h.id, true);
+  else if (h.type === "lot") { admLot = h.l.id; setTab("admin"); }
+  else if (h.type === "place") { selectCar(h.p.driver, true); }
+}
+function onHover(px, py, tx, ty) {
+  const h = hitTest(px, py), tip = $("#tip");
+  if (!h) { tip.style.display = "none"; cv.style.cursor = "grab"; return; }
+  cv.style.cursor = "pointer";
+  let t = "";
+  if (h.type === "car") t = `<b>${h.id}</b> ${esc(h.c.name)}<br>${esc(h.c.phase)} &middot; ${esc(h.c.sub || "")}`;
+  else if (h.type === "place") t = `<b>${esc(h.p.label)}</b><br>${KIND_TXT[h.p.kind]} of ${h.p.driver} &middot; weight ${h.p.weight}`;
+  else if (h.type === "lot") { const st = S.lots[h.l.id]; t = `<b>${h.l.id} ${esc(h.l.name)}</b><br>${st ? st.free : "?"}/${h.l.capacity} free &middot; click for administration`; }
+  else t = `<b>${esc(h.v[5])}</b> emergency vehicle`;
+  tip.innerHTML = t; tip.style.display = "block"; tip.style.left = tx + "px"; tip.style.top = ty + "px";
+}
+
+function rect(x, y, w, h, c) { cx.fillStyle = c; cx.fillRect(x, y, w, h); }
+function draw() {
+  requestAnimationFrame(draw);
+  if (!W) return;
+  const r = cv.getBoundingClientRect();
+  if (followCar && sel && S) { const c = S.cars.find(c => c.id === sel); if (c && c.x != null) { view.ox += (r.width / 2 - sx(c.x)) * .15; view.oy += (r.height / 2 - sy(c.y)) * .15; } }
+  cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  cx.clearRect(0, 0, r.width, r.height);
+  const s = view.s;
+  // roads
+  cx.lineCap = "round";
+  cx.strokeStyle = "#2c3541"; cx.lineWidth = Math.max(3, 15 * s);
+  cx.beginPath(); for (const e of W.edges) { cx.moveTo(sx(e.shape[0][0]), sy(e.shape[0][1])); cx.lineTo(sx(e.shape[1][0]), sy(e.shape[1][1])); } cx.stroke();
+  cx.strokeStyle = "#3a4555"; cx.lineWidth = Math.max(1, 1.2 * s);
+  cx.setLineDash([6 * s, 8 * s]);
+  cx.beginPath(); for (const e of W.edges) { cx.moveTo(sx(e.shape[0][0]), sy(e.shape[0][1])); cx.lineTo(sx(e.shape[1][0]), sy(e.shape[1][1])); } cx.stroke();
+  cx.setLineDash([]);
+  if (!S) return;
+  // lots
+  for (const l of W.lots) {
+    const xs = l.corners.map(c => c[0]), ys = l.corners.map(c => c[1]);
+    const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+    const st = S.lots[l.id];
+    cx.fillStyle = "#101820"; cx.strokeStyle = "#58a6ff"; cx.lineWidth = 1.5;
+    cx.fillRect(sx(x0), sy(y1), (x1 - x0) * s, (y1 - y0) * s); cx.strokeRect(sx(x0), sy(y1), (x1 - x0) * s, (y1 - y0) * s);
+    const sz = Math.max(2.5, 4 * s);
+    for (const sp of l.spaces) {
+      const q = st && st.spaces[sp.code]; const stt = q ? q.st : "AVAILABLE";
+      cx.fillStyle = {AVAILABLE: "#2ea043", RESERVED: "#d29922", OCCUPIED: "#f85149", RELEASING: "#bc8cff", OUT_OF_SERVICE: "#6e7681"}[stt] || "#2ea043";
+      cx.fillRect(sx(sp.x) - sz / 2, sy(sp.y) - sz / 2, sz, sz);
+      if (st && st.led && st.led[sp.code] === "WRONG") { cx.strokeStyle = "#fff"; cx.lineWidth = 1.5; cx.strokeRect(sx(sp.x) - sz, sy(sp.y) - sz, sz * 2, sz * 2); }
+    }
+    // barriers
+    for (const [g, open] of [[l.gate_in, st && st.bin], [l.gate_out, st && st.bout]]) {
+      cx.strokeStyle = open ? "#3fb950" : "#f85149"; cx.lineWidth = Math.max(2, 3 * s);
+      cx.beginPath(); cx.moveTo(sx(g[0]), sy(g[1]) - 7 * s); cx.lineTo(sx(g[0]), sy(g[1]) + 7 * s); cx.stroke();
+    }
+    cx.fillStyle = "#cfe3ff"; cx.font = `600 ${Math.max(10, 11 * Math.min(1.4, s + .3))}px system-ui`; cx.textAlign = "center";
+    cx.fillText(`${l.id} ${l.name}`, sx((x0 + x1) / 2), sy(y1) - 5);
+    cx.fillStyle = "#8b98a8"; cx.font = `${Math.max(9, 10 * Math.min(1.3, s + .3))}px system-ui`;
+    if (st) cx.fillText(`${st.free}/${l.capacity} free`, sx((x0 + x1) / 2), sy(y0) + 12);
+  }
+  // places
+  const selPlaces = new Set(); if (carFull && carFull.id === sel) carFull.places.forEach(p => selPlaces.add(p.id));
+  cx.textAlign = "left";
+  for (const p of W.places) {
+    const hi = selPlaces.has(p.id), px = sx(p.x), py = sy(p.y), a = sel ? (hi ? 1 : .35) : .9;
+    cx.globalAlpha = a; cx.fillStyle = KIND_COL[p.kind];
+    const z = hi ? 7 : 5;
+    cx.save(); cx.translate(px, py); cx.rotate(Math.PI / 4); cx.fillRect(-z / 2, -z / 2, z, z); cx.restore();
+    if (hi || s > 0.9) { cx.fillStyle = "#e6edf3"; cx.font = "10px system-ui"; cx.fillText(p.id, px + 7, py + 3); }
+    if (hi) { cx.strokeStyle = KIND_COL[p.kind]; cx.lineWidth = 1.5; cx.beginPath(); cx.arc(px, py, 11, 0, 7); cx.stroke(); }
+    cx.globalAlpha = 1;
+  }
+  // traffic signals
+  const now = performance.now();
+  for (const t of W.signals) {
+    const g = S.signals[t.id]; if (!g) continue;
+    const st = g[0], pre = g[1];
+    let col = "#f85149";
+    if (/G/.test(st)) col = "#3fb950"; else if (/[Gg]/.test(st) || /y/i.test(st)) col = "#d29922";
+    cx.fillStyle = col; cx.beginPath(); cx.arc(sx(t.x), sy(t.y), Math.max(3, 4.2 * s), 0, 7); cx.fill();
+    if (pre) { cx.strokeStyle = (now / 250 | 0) % 2 ? "#ffb000" : "#ffffff"; cx.lineWidth = 2; cx.beginPath(); cx.arc(sx(t.x), sy(t.y), Math.max(6, 9 * s), 0, 7); cx.stroke(); }
+  }
+  // vehicles
+  const flash = (now / 200 | 0) % 2;
+  for (const v of S.vehicles) {
+    const k = v[3]; if (k === "D") continue;
+    const px = sx(v[0]), py = sy(v[1]);
+    if (px < -20 || py < -20 || px > r.width + 20 || py > r.height + 20) continue;
+    let col = "#9aa4b2", len = 5, wd = 2.6;
+    if (k === "T") { col = "#c9a66b"; len = 8; wd = 3.2; }
+    else if (k === "A") { col = "#ffffff"; len = 7; wd = 3.4; }
+    else if (k === "P") { col = "#58a6ff"; len = 6; wd = 3; }
+    else if (k === "F") { col = "#ff7b32"; len = 9; wd = 3.6; }
+    const L = Math.max(3, len * s * 1.1), Wd = Math.max(2, wd * s * 1.1);
+    cx.save(); cx.translate(px, py); cx.rotate((v[2] - 90) * Math.PI / 180);
+    cx.fillStyle = col; cx.fillRect(-L / 2, -Wd / 2, L, Wd);
+    if (k === "A" || k === "P" || k === "F") { cx.fillStyle = flash ? "#ff2d2d" : "#2d6bff"; cx.fillRect(-L / 6, -Wd / 2 - 1, L / 3, Wd + 2); }
+    cx.restore();
+    if (k === "A" || k === "P" || k === "F") {
+      cx.strokeStyle = flash ? "#ff2d2d88" : "#2d6bff88"; cx.lineWidth = 1.5; cx.beginPath(); cx.arc(px, py, Math.max(6, 8 * s), 0, 7); cx.stroke();
+      if (s > 1.1) { cx.fillStyle = "#e6edf3"; cx.font = "9px system-ui"; cx.fillText(v[5], px + 8, py - 6); }
+    }
+  }
+  // driver cars
+  for (const c of S.cars) {
+    if (c.x == null) continue;
+    const px = sx(c.x), py = sy(c.y), isSel = c.id === sel;
+    const col = PHASE_COL[c.phase] || "#bc8cff";
+    cx.save(); cx.translate(px, py); cx.rotate((c.angle - 90) * Math.PI / 180);
+    const L = Math.max(7, 6.5 * s * 1.3), Wd = Math.max(4, 3.4 * s * 1.3);
+    cx.fillStyle = "#d2a8ff"; cx.fillRect(-L / 2, -Wd / 2, L, Wd);
+    cx.restore();
+    cx.strokeStyle = col; cx.lineWidth = isSel ? 3 : 1.6; cx.beginPath(); cx.arc(px, py, isSel ? 13 : 9, 0, 7); cx.stroke();
+    if (isSel) { cx.strokeStyle = "#fff"; cx.lineWidth = 1; cx.beginPath(); cx.arc(px, py, 17, 0, 7); cx.stroke(); }
+    cx.fillStyle = "#fff"; cx.font = "600 11px system-ui"; cx.textAlign = "left"; cx.fillText(c.id, px + 11, py - 8);
+    if (c.status === "MISPLACED") { cx.fillStyle = "#f85149"; cx.fillText("!", px + 11, py + 5); }
+  }
+  // destination of selected car
+  if (carFull && carFull.id === sel && carFull.dest) {
+    const p = W.places.find(p => p.id === carFull.dest.id);
+    if (p) { cx.strokeStyle = "#fff"; cx.setLineDash([4, 4]); cx.lineWidth = 1.5; cx.beginPath(); cx.arc(sx(p.x), sy(p.y), 15, 0, 7); cx.stroke(); cx.setLineDash([]); }
+  }
+}
+
+// ---------------------------------------------------------------- tabs
+let tab = "car";
+function setTab(t) {
+  tab = t;
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === t));
+  document.querySelectorAll(".pane").forEach(p => p.classList.toggle("on", p.id === "pane-" + t));
+  if (t === "train") refreshTraining(); if (t === "admin") refreshAdmin(); if (t === "tl") { tlLast = 0; $("#tlList").innerHTML = ""; refreshTimeline(); }
+}
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => setTab(b.dataset.tab));
+
+// ---------------------------------------------------------------- header + simulation controls
+const SPEEDS = [[1, "1x"], [3, "3x"], [10, "10x"], [30, "30x"], [100, "100x"], [200, "max"]];
+for (const [v, t] of SPEEDS) { const b = el("button", {textContent: t}); b.dataset.v = v; b.onclick = () => act(() => api("/sim/controls", "POST", {speed: v})); $("#speedBtns").appendChild(b); }
+$("#btnPause").onclick = () => act(() => api("/sim/controls", "POST", {paused: !S.paused}));
+$("#sTraffic").oninput = e => { $("#vTraffic").textContent = e.target.value; };
+$("#sTraffic").onchange = e => act(() => api("/sim/controls", "POST", {traffic_level: +e.target.value}));
+$("#sTs").oninput = e => { $("#vTs").textContent = e.target.value + "x"; };
+$("#sTs").onchange = e => act(() => api("/sim/controls", "POST", {time_scale: +e.target.value}));
+$("#sMis").oninput = e => { $("#vMis").textContent = Math.round(e.target.value * 100) + "%"; };
+$("#sMis").onchange = e => act(() => api("/sim/controls", "POST", {misspark_prob: +e.target.value}));
+$("#chAuto").onchange = e => act(() => api("/sim/controls", "POST", {auto_trips: e.target.checked}));
+$("#btnSetClock").onclick = () => act(() => api("/sim/controls", "POST", {day: +$("#selDay").value, time: $("#inTime").value}));
+$("#btnJam").onclick = () => act(async () => { await api("/sim/jam", "POST", {size: +$("#jamSize").value, seconds: 60}); toast("Traffic jam started"); });
+function showJam(j) {
+  if (!j) return;
+  const lab = {loading: "cars are entering", clearing: "jam is dissolving", done: "finished"}[j.state] || j.state;
+  $("#jamBox").innerHTML = `<b>${lab}</b> (signals: ${esc(j.mode || "?")}) &middot; cars released ${j.released}/${j.size}<br>standing still now: baseline ${j.baseline_stopped}, worst ${j.peak_stopped} (at +${j.peak_at}s), average ${j.mean_stopped}<br>worst mean waiting time ${j.peak_wait} s &middot; ` +
+    (j.recovered_after != null ? `city moving again after <b>${j.recovered_after} s</b>` : `elapsed ${j.elapsed} s`);
+}
+$("#btnEm").onclick = () => act(() => api("/sim/controls", "POST", {ambulance: +$("#nAmb").value, police: +$("#nPol").value, fire: +$("#nFire").value}));
+$("#scDup").onclick = () => act(async () => { await api("/sim/scenario/duplicate", "POST"); toast("Scenario started: watch d6 and d13"); selectCar("d13", false); });
+$("#scWrong").onclick = () => act(async () => { await api("/sim/scenario/wrongspace", "POST"); toast("Scenario started: a driver will park in the wrong space"); });
+
+let ctlInit = false;
+function applyState() {
+  const c = S.counts, ct = S.controls;
+  $("#hClock").textContent = S.clock;
+  showJam(S.jam);
+  $("#hBg").textContent = c.background + c.driver_cars;
+  $("#hStop").textContent = c.stopped;
+  $("#hWait").textContent = c.mean_wait;
+  $("#hEm").textContent = `${c.ambulance}A ${c.police}P ${c.fire}F`;
+  const L = S.learning || {};
+  $("#hLearn").innerHTML = `signals: <b>${L.mode === "train" ? "learning" : "policy only"}</b> &middot; ep <b>${L.episode ?? "-"}</b> &middot; &epsilon; <b>${L.epsilon ?? "-"}</b>`;
+  $("#btnPause").textContent = S.paused ? "Resume" : "Pause";
+  document.querySelectorAll("#speedBtns button").forEach(b => b.classList.toggle("on", +b.dataset.v === +S.speed));
+  if (!ctlInit) {
+    ctlInit = true;
+    $("#sTraffic").value = ct.traffic_level; $("#vTraffic").textContent = ct.traffic_level;
+    $("#sTs").value = ct.time_scale; $("#vTs").textContent = ct.time_scale + "x";
+    $("#sMis").value = ct.misspark_prob; $("#vMis").textContent = Math.round(ct.misspark_prob * 100) + "%";
+    $("#chAuto").checked = ct.auto_trips;
+    $("#nAmb").value = ct.emergency_target.ambulance; $("#nPol").value = ct.emergency_target.police; $("#nFire").value = ct.emergency_target.fire;
+  }
+  $("#ticker").innerHTML = S.events.slice(0, 5).map(e => `<div><span style="color:#58a6ff">${esc(e.clock)}</span> ${esc(e.text)}</div>`).join("");
+  $("#evLog").innerHTML = S.events.map(e => `<div>${esc(e.clock)} &middot; ${esc(e.text)}</div>`).join("");
+  // driver chips
+  const box = $("#driverChips");
+  if (box.children.length !== S.cars.length) {
+    box.innerHTML = "";
+    for (const c of S.cars) { const b = el("button", {}, `<span class="dot"></span>${c.id}`); b.dataset.id = c.id; b.onclick = () => selectCar(c.id, true); box.appendChild(b); }
+  }
+  for (const b of box.children) {
+    const c = S.cars.find(c => c.id === b.dataset.id);
+    b.firstChild.style.background = PHASE_COL[c.phase] || "#555"; b.classList.toggle("sel", c.id === sel);
+    b.title = `${c.name}: ${c.phase} ${c.sub || ""}`;
+  }
+}
+async function pollState() {
+  try { const s = await api("/state"); if (s.ready !== false) { S = s; applyState(); } } catch (e) {}
+  setTimeout(pollState, 220);
+}
+
+// ---------------------------------------------------------------- car dash
+async function selectCar(id, openTab) {
+  sel = id; carFull = null; if (openTab) setTab("car");
+  await refreshCar();
+}
+async function refreshCar() {
+  if (!sel) return;
+  try { const c = await api("/cars/" + sel); if (c.id === sel) { carFull = c; renderCar(); } } catch (e) {}
+}
+setInterval(() => { if (tab === "car" && sel) refreshCar(); }, 700);
+
+let carRenderKey = "";
+function renderCar() {
+  const c = carFull, a = c.actions || [], body = $("#carBody");
+  // avoid re-rendering the form controls while the user is using them
+  const key = JSON.stringify([c.id, c.phase, c.sub, c.dest, c.ticket, c.offers && c.offers.destination, c.lane_state, c.lane_message, c.messages, c.status, c.space, c.assigned, c.park_choice, c.autopilot, c.log.length, c.ticket_requested, c.held_card, a]);
+  if (key === carRenderKey) return; carRenderKey = key;
+  const prevOffers = document.getElementById("offersBox");
+  const lot = c.lot && S.lots[c.lot];
+  let h = "";
+  h += `<div class="card"><div class="row sp"><div><b style="font-size:15px">${c.id} &middot; ${esc(c.name)}</b><div class="mute">${esc(c.plate)} &middot; ${c.married ? "married" : "single"}${c.kids ? ", kids" : ""}</div></div>
+    <span class="tag acc">${esc(c.phase)}</span></div>
+    <div class="kv" style="margin-top:6px"><div>RFID</div><div>${esc(c.rfid)}${c.shares_tag_with ? ` <span class="tag bad">same tag as ${esc(c.shares_tag_with)}</span>` : ""}${c.no_tag ? ' <span class="tag warn">no tag</span>' : ""}</div>
+    <div>Status</div><div>${esc(c.sub || "")}</div>
+    ${c.lot ? `<div>Lot</div><div>${esc(c.lot)}${c.space ? " &middot; in space <b>" + esc(c.space) + "</b>" : ""}</div>` : ""}</div>
+    <label style="display:block;margin-top:6px"><input type="checkbox" id="cAuto" ${c.autopilot ? "checked" : ""}> autopilot (the car decides alone)</label></div>`;
+
+  // messages from administration
+  const pend = (c.messages || []).filter(m => !m.acknowledged);
+  for (const m of pend) h += `<div class="msg ${m.kind}"><b>${m.kind === "REPARK" ? "Administration asks you to re-park" : "Message"}</b><br>${esc(m.text)}<div class="row" style="margin-top:6px">${m.kind === "REPARK" && a.includes("repark") ? `<button class="good" data-act="repark" data-mid="${m.id}">Move to the assigned space</button>` : ""}<button data-act="ack" data-mid="${m.id}">Dismiss</button></div></div>`;
+
+  // destination + trip
+  h += `<h3>Trip</h3><div class="card">`;
+  h += `<div class="row"><select id="cDest" style="flex:1">${c.places.map(p => `<option value="${p.id}" ${c.dest && c.dest.id === p.id ? "selected" : ""}>${esc(p.label)} (${KIND_TXT[p.kind]}${p.active ? ", open now" : ", closed now"})</option>`).join("")}</select></div>`;
+  h += `<div class="row" style="margin-top:6px">`;
+  if (a.includes("start_trip")) h += `<button class="primary" data-act="start">Start trip</button><label><input type="checkbox" id="cNoTag"> no RFID tag</label>`;
+  else if (["DRIVING", "TO_LOT", "AT_GATE"].includes(c.phase)) h += `<button data-act="setdest">Set destination</button>`;
+  h += `</div></div>`;
+
+  // parking request
+  if (a.includes("request_parking")) {
+    h += `<button class="primary" style="width:100%" data-act="offers">Request parking &mdash; suggest the best 3 lots</button>`;
+  }
+  if (c.offers && c.offers.ranking && c.offers.ranking.length && ["DRIVING", "TO_LOT", "AT_GATE"].includes(c.phase)) {
+    const o = c.offers, names = Object.keys(o.weights);
+    h += `<div id="offersBox"><h3>Best options for ${esc(o.destination.label)} <span class="mute" style="text-transform:none">(${esc(o.clock)})</span></h3>`;
+    h += `<div class="crit" style="margin-bottom:4px">${names.map(k => `<span><i style="background:${CRIT_COL[k]}"></i>${CRIT_TXT[k]} ${Math.round(o.weights[k] * 100)}%</span>`).join("")}</div>`;
+    if (o.routine && o.routine.used) h += `<div class="mute">Routine used: ${o.routine.active.map(esc).join(", ") || "-"}</div>`;
+    for (const r of o.ranking) {
+      const tot = Object.values(r.contributions).reduce((x, y) => x + y, 0) || 1;
+      h += `<div class="offer ${r.rank === 1 ? "best" : ""}"><div class="row sp"><b>#${r.rank} ${esc(r.lot_id)} &middot; ${esc(r.name)}</b><span class="tag ${r.rank === 1 ? "ok" : "acc"}">score ${Math.round(r.score * 100)}</span></div>
+        <div class="mute">${r.drive_min} min drive &middot; ${Math.round(r.walk_m)} m walk &middot; ${r.free_now} free${r.routine_m != null ? " &middot; routine " + Math.round(r.routine_m) + " m" : ""}</div>
+        <div class="bar">${Object.entries(r.contributions).map(([k, v]) => `<i title="${CRIT_TXT[k]}" style="width:${v / tot * 100}%;background:${CRIT_COL[k]}"></i>`).join("")}</div>
+        <div class="row"><button class="good" data-act="choose" data-lot="${r.lot_id}">Go to ${esc(r.lot_id)}</button></div></div>`;
+    }
+    if (o.excluded && o.excluded.length) h += `<div class="mute">Excluded: ${o.excluded.map(x => esc(x.lot_id || x) + (x.reason ? " (" + esc(x.reason) + ")" : "")).join(", ")}</div>`;
+    h += `</div>`;
+  }
+
+  // gate screen
+  if (["AT_GATE", "TO_LOT", "IN_LOT_IN", "CHOOSE_SPACE", "TO_SPACE", "AT_EXIT", "TO_EXIT"].includes(c.phase) || c.lane_message) {
+    h += `<h3>Gate screen</h3><div class="screen">${esc(c.lane_message || c.sub || "")}${c.lane_state ? `<div style="color:#58a6ff;margin-top:4px">lane: ${esc(c.lane_state)}</div>` : ""}</div>`;
+    if (c.held_card) h += `<div class="card">Visitor card in hand: <b>${esc(c.held_card)}</b></div>`;
+  }
+  if (a.includes("request_ticket")) h += `<button class="good" style="width:100%" data-act="ticket">Request a ticket</button>`;
+  if (a.includes("redirect")) h += `<div class="card"><div class="mute">The gate refused this car. You can ask the administration for a visitor card, or choose another lot.</div><button class="warn" data-act="redirect" style="margin-top:6px">Go to another lot</button></div>`;
+
+  // ticket
+  if (c.ticket) {
+    h += `<div class="ticket"><div class="mute">TICKET ${esc(c.ticket.ticket_id)} &middot; lot ${esc(c.ticket.lot_id)}</div>
+      <div>Your space</div><div class="big">${esc(c.ticket.space)}</div>
+      <div class="mute">RFID ${esc(c.ticket.rfid)} &middot; entered ${esc(c.ticket.entry_time || "")}</div></div>`;
+  }
+  if (a.includes("park_assigned")) {
+    const spaces = lot ? Object.entries(lot.spaces).filter(([k, v]) => v.st === "AVAILABLE" && !v.fault).map(([k]) => k) : [];
+    h += `<div class="card"><b>Parking</b><div class="row" style="margin-top:6px"><button class="good" data-act="park_assigned">Park in my space ${esc(c.assigned || "")}</button></div>
+      <div class="row" style="margin-top:6px"><select id="cOther">${spaces.map(s => `<option>${s}</option>`).join("")}</select><button class="warn" data-act="park_other">Park here instead</button></div>
+      <div class="mute" style="margin-top:4px">Parking elsewhere sends a notification to the administration.</div></div>`;
+  }
+  if (c.phase === "PARKED") {
+    h += `<div class="card"><div class="row"><b>Parked</b> ${c.space ? "in " + esc(c.space) : ""}${c.assigned && c.space && c.space !== c.assigned ? ` <span class="tag bad">assigned ${esc(c.assigned)}</span>` : ""}
+      ${c.status ? `<span class="tag ${c.status === "MISPLACED" ? "bad" : "ok"}">${esc(c.status)}</span>` : ""}</div>
+      <div class="row" style="margin-top:6px">${a.includes("repark") ? `<button class="warn" data-act="repark">Move to my assigned space</button>` : ""}
+      <button class="primary" data-act="leave">Leave the lot</button>
+      <button data-act="hold">${a.includes("unhold") ? "Release hold" : "Stay parked (hold)"}</button></div></div>`;
+  }
+  if (a.includes("give_up")) h += `<button style="margin-top:8px" data-act="giveup">Give up parking</button>`;
+
+  h += `<h3>Car log</h3><div class="log">${c.log.slice(-14).reverse().map(l => `<div>${esc(typeof l === "string" ? l : JSON.stringify(l))}</div>`).join("")}</div>`;
+  body.innerHTML = h;
+
+  const on = (sel, fn) => body.querySelectorAll(sel).forEach(b => b.onclick = () => act(async () => { await fn(b); carRenderKey = ""; await refreshCar(); }));
+  const cid = c.id;
+  const auto = $("#cAuto"); if (auto) auto.onchange = () => act(async () => { await api(`/cars/${cid}/autopilot?on=${auto.checked}`, "POST"); carRenderKey = ""; refreshCar(); });
+  on('[data-act="start"]', () => api(`/cars/${cid}/start-trip`, "POST", {place_id: $("#cDest").value, autopilot: false, no_tag: !!($("#cNoTag") && $("#cNoTag").checked)}));
+  on('[data-act="setdest"]', () => api(`/cars/${cid}/destination`, "POST", {place_id: $("#cDest").value}));
+  on('[data-act="offers"]', async () => { await api(`/cars/${cid}/destination`, "POST", {place_id: $("#cDest").value}); await api(`/cars/${cid}/offers`, "POST"); });
+  on('[data-act="choose"]', b => api(`/cars/${cid}/choose`, "POST", {lot_id: b.dataset.lot}));
+  on('[data-act="ticket"]', () => api(`/cars/${cid}/request-ticket`, "POST"));
+  on('[data-act="redirect"]', () => api(`/cars/${cid}/redirect`, "POST"));
+  on('[data-act="park_assigned"]', () => api(`/cars/${cid}/park`, "POST", {space: "assigned"}));
+  on('[data-act="park_other"]', () => api(`/cars/${cid}/park`, "POST", {space: $("#cOther").value}));
+  on('[data-act="repark"]', async b => { await api(`/cars/${cid}/repark`, "POST"); if (b.dataset.mid) await api(`/cars/${cid}/messages/${b.dataset.mid}/ack`, "POST"); });
+  on('[data-act="leave"]', () => api(`/cars/${cid}/leave`, "POST"));
+  on('[data-act="hold"]', () => api(`/cars/${cid}/hold?on=${!a.includes("unhold")}`, "POST"));
+  on('[data-act="giveup"]', () => api(`/cars/${cid}/give-up`, "POST"));
+  on('[data-act="ack"]', b => api(`/cars/${cid}/messages/${b.dataset.mid}/ack`, "POST"));
+}
+
+// ---------------------------------------------------------------- admin
+let admLot = null, admData = null, admNotices = [], admAlertsAll = [];
+function lotTag(l) { return l.open_alerts ? `<span class="tag bad">${l.open_alerts} alert${l.open_alerts > 1 ? "s" : ""}</span>` : `<span class="tag ok">ok</span>`; }
+async function refreshAdmin() {
+  if (!W) return;
+  try {
+    const lots = (await api("/admin/lots", "GET", undefined, true)).lots;
+    if (!admLot) admLot = lots[0].lot_id;
+    const nsum = lots.reduce((a, l) => a + (l.open_alerts || 0), 0);
+    const bad = $("#admBadge"); bad.style.display = nsum ? "" : "none"; bad.textContent = nsum;
+    if (tab === "admin") {
+      $("#lotList").innerHTML = "";
+      for (const l of lots) {
+        const b = el("button", {className: l.lot_id === admLot ? "sel" : ""}, `<div class="row sp"><b>${l.lot_id} &middot; ${esc(l.name)}</b>${lotTag(l)}</div><div class="mute">${l.available}/${l.total} free &middot; ${l.occupied} occupied &middot; ${l.reserved} reserved</div>`);
+        b.onclick = () => { admLot = l.lot_id; refreshAdmin(); };
+        $("#lotList").appendChild(b);
+      }
+      admData = await api("/admin/overview?lot_id=" + admLot, "GET", undefined, true);
+      admNotices = await api("/admin/notices?limit=12", "GET", undefined, true);
+      renderAdmin();
+    }
+  } catch (e) { if (tab === "admin") $("#admBody").innerHTML = `<p class="tag bad">${esc(e.message)}</p>`; }
+}
+setInterval(() => { if (W) refreshAdmin(); }, 1500);
+
+function renderAdmin() {
+  const d = admData; if (!d) return;
+  let h = `<h3>${d.lot_id} &middot; lanes</h3>`;
+  for (const l of d.lanes) {
+    const dup = d.alerts.find(a => a.type === "DUPLICATE_ENTRY" && a.lane_id === l.id);
+    h += `<div class="card"><div class="row sp"><b>${l.id}</b><span class="tag ${l.state === "BLOCKED" ? "bad" : l.state === "IDLE" ? "" : "acc"}">${l.state}</span></div>
+      <div class="screen" style="min-height:22px">${esc(l.message || "-")}</div>
+      <div class="row">${l.vehicle_present ? '<span class="tag warn">vehicle present</span>' : ""}
+      ${l.kind === "ENTRANCE" && l.state === "BLOCKED" && dup ? `<button class="good" data-lane="${l.id}" data-a="visitor">Allow visitor card</button>` : ""}
+      <button data-lane="${l.id}" data-a="barrier">Open barrier</button></div></div>`;
+  }
+  h += `<h3>Alerts</h3>`;
+  if (!d.alerts.length) h += `<div class="mute">No open alerts.</div>`;
+  for (const a of d.alerts) {
+    const s = d.sessions.find(s => s.id === a.session_id);
+    h += `<div class="card"><div class="row sp"><b>${esc(a.type)}</b><span class="tag ${a.severity === "CRITICAL" ? "bad" : "warn"}">${esc(a.severity)}</span></div><div class="mute">${esc(a.message)}</div>
+      <div class="row" style="margin-top:6px">
+      ${a.type === "DUPLICATE_ENTRY" && a.lane_id ? `<button class="good" data-lane="${a.lane_id}" data-a="visitor">Allow visitor card</button>` : ""}
+      ${s && s.status === "MISPLACED" ? `<button class="warn" data-sid="${s.id}" data-a="notify">Send re-park notification</button><button data-sid="${s.id}" data-sp="${esc(spaceOfCar(s))}" data-a="reassign">Let it keep its space</button>` : ""}
+      <button data-aid="${a.id}" data-a="resolve">Resolve</button></div></div>`;
+  }
+  h += `<h3>Active sessions</h3><table><tr><th>ticket</th><th>vehicle</th><th>space</th><th>status</th><th></th></tr>`;
+  for (const s of d.sessions) {
+    h += `<tr><td>${esc((s.ticket_id || "").split("-").pop())}</td><td>${esc(s.vehicle_id)}<div class="mute">${esc(s.rfid)}</div></td><td>${esc(s.space || "-")}</td>
+      <td><span class="tag ${s.status === "MISPLACED" ? "bad" : s.status === "PARKED" ? "ok" : "acc"}">${esc(s.status)}</span></td>
+      <td>${s.status === "MISPLACED" ? `<button data-sid="${s.id}" data-a="notify">Notify</button>` : ""}<button data-tk="${esc(s.ticket_id)}" data-a="mexit">Manual exit</button></td></tr>`;
+  }
+  h += `</table>`;
+  h += `<h3>Spaces</h3><div class="spgrid">${d.spaces.map(s => `<div class="sp1 ${s.status}" title="${esc(s.code)} ${s.status}${s.occupant_ticket ? " occupant " + s.occupant_ticket : ""}">${esc(s.code)}</div>`).join("")}</div>`;
+  h += `<h3>Visitor cards</h3><div class="mute">${d.cards.map(c => `${esc(c.uid.split("_").slice(-1)[0])}:${c.status === "AVAILABLE" ? "free" : c.status.toLowerCase()}`).join(" &middot; ")}</div>`;
+  h += `<h3>Message a car</h3><div class="row"><select id="mDrv">${(W.drivers || []).map(x => `<option>${x.id}</option>`).join("")}</select><input id="mTxt" placeholder="message" style="flex:1"><button data-a="msg">Send</button></div>`;
+  $("#admBody").innerHTML = h;
+  $("#admNotices").innerHTML = admNotices.length ? admNotices.map(n => `<div class="card ${n.seen ? "" : ""}" style="${n.seen ? "opacity:.55" : ""}"><div class="row sp"><b>${esc(n.kind)} &middot; ${esc(n.driver_id)} @ ${esc(n.lot_id)}</b><span class="mute">${esc(n.at.slice(11, 19))}</span></div><div>${esc(n.text)}</div>${n.seen ? "" : `<button data-nid="${n.id}" data-a="seen" style="margin-top:4px">Mark seen</button>`}</div>`).join("") : '<div class="mute">None.</div>';
+
+  document.querySelectorAll("#pane-admin [data-a]").forEach(b => b.onclick = () => act(async () => {
+    const a = b.dataset.a;
+    if (a === "visitor") { const note = prompt("Reason for issuing a visitor card (the driver has the same RFID as a parked car):", "Verified identity, second car of the same owner"); if (!note) return; await api(`/admin/lanes/${b.dataset.lane}/allow-visitor-card`, "POST", {note}, true); toast("Visitor card approved: the driver can now request a ticket"); }
+    else if (a === "barrier") { const note = prompt("Reason for opening the barrier:"); if (!note) return; await api(`/admin/lanes/${b.dataset.lane}/open-barrier`, "POST", {note}, true); }
+    else if (a === "notify") { await api(`/admin/sessions/${b.dataset.sid}/notify-repark`, "POST", {note: ""}, true); toast("Notification sent to the car's dash screen"); }
+    else if (a === "reassign") { await api(`/admin/sessions/${b.dataset.sid}/reassign`, "POST", {space_code: b.dataset.sp, note: "accepted by the administrator"}, true); toast("Space reassigned"); }
+    else if (a === "resolve") { await api(`/admin/alerts/${b.dataset.aid}/resolve`, "POST", {note: "Resolved from the dashboard"}, true); }
+    else if (a === "seen") { await api(`/admin/notices/${b.dataset.nid}/seen`, "POST", undefined, true); }
+    else if (a === "mexit") { const note = prompt("Reason for the manual exit (lost card / unreadable tag):"); if (!note) return; if (!confirm("Confirm that you checked the vehicle manually?")) return; await api(`/admin/manual-exit`, "POST", {ticket_id: b.dataset.tk, lane_id: d.lanes.find(l => l.kind === "EXIT").id, manual_vehicle_check_confirmed: true, card_status: "NOT_APPLICABLE", note}, true); toast("Exit authorised"); }
+    else if (a === "msg") { await api(`/admin/cars/${$("#mDrv").value}/message`, "POST", {note: $("#mTxt").value}, true); $("#mTxt").value = ""; toast("Message sent"); }
+    refreshAdmin();
+  }));
+}
+function spaceOfCar(s) {
+  // the space the car is physically in = the space whose occupant ticket is this session's
+  const sp = admData.spaces.find(x => x.occupant_ticket === s.ticket_id);
+  return sp ? sp.code : (s.space || "");
+}
+
+// ---------------------------------------------------------------- training
+const CH = [
+  {k: "mean_wait", t: "Mean waiting time of vehicles (s) - lower is better", c: "#f85149"},
+  {k: "mean_stopped", t: "Stopped vehicles (average)", c: "#d29922"},
+  {k: "mean_speed", t: "Mean speed (m/s) - higher is better", c: "#3fb950"},
+  {k: "emerg_wait", t: "Emergency vehicles: waiting time at signals (s)", c: "#ff7b32"},
+  {k: "reward", t: "Reward per window (higher is better)", c: "#58a6ff"},
+  {k: "epsilon", t: "Exploration rate (epsilon)", c: "#bc8cff"},
+  {k: "q_states", t: "Situations known to the Q-table", c: "#f778ba"},
+];
+function chart(canvas, data, key, col) {
+  const r = canvas.getBoundingClientRect(); canvas.width = r.width * dpr; canvas.height = r.height * dpr;
+  const g = canvas.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const pts = data.map((d, i) => [d.episode ?? i, d[key]]).filter(p => p[1] != null && isFinite(p[1]) && Math.abs(p[1]) < 1e6);
+  g.clearRect(0, 0, r.width, r.height);
+  if (pts.length < 2) { g.fillStyle = "#8b98a8"; g.font = "12px system-ui"; g.fillText("collecting data... (one point per 600 simulated seconds)", 12, 22); return; }
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  let y0 = Math.min(...ys), y1 = Math.max(...ys); if (y0 === y1) { y0 -= 1; y1 += 1; }
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), L = 40, B = 16, T = 8, R = 8;
+  const X = x => L + (x - x0) / (x1 - x0 || 1) * (r.width - L - R), Y = y => T + (1 - (y - y0) / (y1 - y0)) * (r.height - T - B);
+  g.strokeStyle = "#2a3441"; g.fillStyle = "#8b98a8"; g.font = "10px system-ui"; g.lineWidth = 1;
+  for (let i = 0; i <= 3; i++) { const v = y0 + (y1 - y0) * i / 3, yy = Y(v); g.beginPath(); g.moveTo(L, yy); g.lineTo(r.width - R, yy); g.stroke(); g.fillText(Math.abs(v) >= 100 ? v.toFixed(0) : v.toFixed(2), 2, yy + 3); }
+  g.fillText("episode " + x0, L, r.height - 3); g.textAlign = "right"; g.fillText("episode " + x1, r.width - R, r.height - 3); g.textAlign = "left";
+  g.strokeStyle = col; g.lineWidth = 2; g.beginPath(); pts.forEach((p, i) => i ? g.lineTo(X(p[0]), Y(p[1])) : g.moveTo(X(p[0]), Y(p[1]))); g.stroke();
+  if (pts.length > 6) { // moving average
+    g.strokeStyle = "#ffffffaa"; g.lineWidth = 1.2; g.beginPath();
+    pts.forEach((p, i) => { const w = pts.slice(Math.max(0, i - 4), i + 1), m = w.reduce((a, q) => a + q[1], 0) / w.length; i ? g.lineTo(X(p[0]), Y(m)) : g.moveTo(X(p[0]), Y(m)); }); g.stroke();
+  }
+}
+let trainData = null;
+async function refreshTraining() {
+  try { trainData = await api("/training"); } catch (e) { return; }
+  const T = trainData, h = T.history || [];
+  const last = h[h.length - 1] || {};
+  const first = h.slice(0, 3), recent = h.slice(-3);
+  const avg = (a, k) => { const v = a.map(x => x[k]).filter(x => x != null && Math.abs(x) < 1e6); return v.length ? v.reduce((p, q) => p + q, 0) / v.length : null; };
+  $("#trainHead").innerHTML = `<div class="card">
+    <div class="row sp"><b>Online learning in the running city</b><span class="tag ${T.mode === "train" ? "ok" : "warn"}">${T.mode === "train" ? "training" : "policy only"}</span></div>
+    <div class="mute" style="margin:4px 0">${esc((T.started_from && T.started_from.note) || "")}${T.started_from ? ` (saved result: ${T.started_from.improvement_pct}% less waiting than fixed-time lights)` : ""}</div>
+    <div class="kv"><div>Episode</div><div><b>${T.episode}</b> (this session started at ${T.session_start_episode}) &middot; window ${Math.round(T.window_progress * 100)}% of ${T.window_s} s</div>
+    <div>Exploration</div><div>&epsilon; = ${T.epsilon}</div>
+    <div>Q-table</div><div>${T.q_states} situations known</div>
+    <div>Signal priority</div><div>${T.preemptions} preemptions &middot; ${T.emergency_served} emergency vehicles served &middot; avg wait ${T.emergency_wait_avg ?? "-"} s</div>
+    <div>Last saved</div><div>${T.last_saved_at ? new Date(T.last_saved_at * 1000).toLocaleTimeString() : "-"}</div>
+    ${avg(first, "mean_wait") != null && avg(recent, "mean_wait") != null ? `<div>Trend</div><div>mean wait ${avg(first, "mean_wait").toFixed(1)} s &rarr; ${avg(recent, "mean_wait").toFixed(1)} s (first vs last 3 windows)</div>` : ""}</div></div>`;
+  $("#btnMode").textContent = T.mode === "train" ? "Switch to policy only" : "Switch to training";
+  $("#btnBench").disabled = T.benchmark_running; $("#btnBench").textContent = T.benchmark_running ? "Benchmark running..." : "Run benchmark"; $("#btnBenchJam").disabled = T.benchmark_running;
+  const box = $("#trainCharts");
+  if (!box.children.length) CH.forEach(c => { box.appendChild(el("h3", {textContent: c.t})); const cvs = el("canvas", {className: "chart"}); cvs.dataset.k = c.k; cvs.dataset.c = c.c; box.appendChild(cvs); });
+  box.querySelectorAll("canvas").forEach(cvs => chart(cvs, h, cvs.dataset.k, cvs.dataset.c));
+  const b = T.benchmarks || [];
+  $("#benchBox").innerHTML = b.length ? b.slice().reverse().map(x => `<div class="card"><div class="row sp"><b>episode ${x.episode ?? "?"}${x.jam ? " &middot; with a " + x.jam + "-car traffic jam" : ""}</b><span class="mute">${esc(x.when || "")}</span></div>
+     <table><tr><th></th><th>fixed-time</th><th>learned</th><th>change</th></tr>
+     ${["mean_wait", "mean_stopped", "peak_stopped", "mean_speed", "trip_time", "emerg_wait"].filter(k => x.fixed && x.fixed[k] != null).map(k => { const f = x.fixed[k], l = x.learned[k], pct = f ? ((l - f) / Math.abs(f) * 100) : 0; return `<tr><td>${k}</td><td>${(+f).toFixed(1)}</td><td>${(+l).toFixed(1)}</td><td>${pct > 0 ? "+" : ""}${pct.toFixed(0)}%</td></tr>`; }).join("")}</table></div>`).join("") : "No benchmark yet. It runs in a separate process, on the same traffic for both controllers, and does not disturb the live city.";
+}
+setInterval(() => { if (tab === "train") refreshTraining(); }, 4000);
+$("#btnMode").onclick = () => act(async () => { await api("/training/mode", "POST", {mode: trainData && trainData.mode === "train" ? "policy" : "train"}); refreshTraining(); });
+$("#btnSave").onclick = () => act(async () => { const r = await api("/training/save", "POST"); toast("Saved at episode " + r.episode); refreshTraining(); });
+$("#btnBenchJam").onclick = () => act(async () => { await api("/training/benchmark?jam=300&scenarios=2&seconds=1200", "POST"); toast("Jam benchmark started (takes a few minutes)"); refreshTraining(); });
+$("#btnBench").onclick = () => act(async () => { await api("/training/benchmark", "POST"); toast("Benchmark started"); refreshTraining(); });
+
+// ---------------------------------------------------------------- timeline of the three layers
+let tlLast = 0;
+async function refreshTimeline() {
+  try {
+    const layer = $("#tlFilter").value;
+    const r = await api(`/v1/timeline?after=${tlLast}&limit=300${layer ? "&layer=" + layer : ""}`);
+    const box = $("#tlList");
+    for (const e of r.items) {
+      const bad = /FAIL|withheld|untrusted|UNTRUSTED|QUARANTINED|ISOLATED|rate_limited|failed|alert/.test(e.kind + e.text) , good = /check_pass|PASS|released|RELEASED|trusted again/.test(e.kind + e.text);
+      const row = el("div", {className: "e" + (bad ? " bad" : good ? " good" : "")}, `<div class="t">${esc(e.ts.slice(11, 23))}</div><div><span class="lay ${e.layer}">${e.layer}</span></div><div class="x"><span class="k">${esc(e.kind)}</span> ${esc(e.text)}</div>`);
+      box.prepend(row);
+    }
+    while (box.children.length > 400) box.lastChild.remove();
+    tlLast = r.last_id;
+    const st = await api("/v1/state");
+    $("#tlTrust").innerHTML = `<div class="card"><div class="row sp"><b>Guardian verdicts in force</b><span class="mute">twin ${st.twin.enabled ? "linked" : "off"} &middot; guardian ${st.guardian.enabled ? "linked" : "off"} &middot; sent ${st.outbound.sent}, failed ${st.outbound.failed}</span></div>` +
+      (st.trust.length ? st.trust.map(t => `<div><span class="tag ${t.verdict === "quarantined" ? "bad" : "warn"}">${esc(t.verdict)}</span> ${esc(t.device_id)} <span class="mute">${esc(t.reason)} (${t.age_s}s)</span></div>`).join("") : '<span class="mute">All devices trusted.</span>') + `</div>`;
+    const sc = await api("/v1/scenarios");
+    $("#tlScen").innerHTML = sc.scenarios.map(x => `<div class="scen"><span class="tag">${x.id}</span><span class="n">${esc(x.name)}<div class="mute">${x.layers.join(" + ")}${x.last ? ` &middot; last run: <b style="color:${x.last.pass ? "#3fb950" : "#f85149"}">${x.last.pass ? "PASS" : "FAIL"}</b> (${esc(x.last.log)})` : ""}</div></span><button data-sc="${x.id}" ${sc.running ? "disabled" : ""}>${sc.running === x.id ? "running..." : "Run"}</button></div>`).join("");
+    document.querySelectorAll("#tlScen [data-sc]").forEach(b => b.onclick = () => act(async () => { await api(`/v1/scenarios/${b.dataset.sc}/run`, "POST", undefined, true); toast("Scenario " + b.dataset.sc + " started: watch the timeline"); }));
+  } catch (e) {}
+}
+$("#tlFilter").onchange = () => { tlLast = 0; $("#tlList").innerHTML = ""; refreshTimeline(); };
+setInterval(() => { if (tab === "tl") refreshTimeline(); }, 1000);
+
+// ---------------------------------------------------------------- start
+(async function init() {
+  for (;;) { try { W = await api("/world"); break; } catch (e) { await new Promise(r => setTimeout(r, 1000)); } }
+  resize(); fit(); draw(); pollState(); refreshAdmin();
+})();
+</script>
+</body>
+</html>

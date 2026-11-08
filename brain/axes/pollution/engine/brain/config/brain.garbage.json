@@ -1,0 +1,53 @@
+{
+  "_comment": "City Brain, garbage-bin axis only, with the mock Twin and mock Guardian over HTTP. Every garbage setting is written out with its default value. Tokens: environment variables BRAIN_TOKEN and TWIN_TOKEN (16 characters or more).",
+
+  "listen":   { "host": "127.0.0.1", "port": 8100 },
+
+  "twin": {
+    "transport": "http",
+    "url": "http://127.0.0.1:8200",
+    "dispatch_path": "/v1/dispatch",
+    "map_path": "/v1/map",
+    "timeout_s": 2.0
+  },
+  "guardian": {
+    "url": "http://127.0.0.1:8300",
+    "verdict_path": "/v1/trust-verdict",
+    "timeout_s": 2.0,
+    "retry_after_s": 5.0
+  },
+  "auth": { "brain_token_env": "BRAIN_TOKEN", "twin_token_env": "TWIN_TOKEN" },
+  "map":  { "source": "twin" },
+
+  "city": {
+    "_comment_decision": "trucks = plan routes and send dispatch_truck; crew = the Twin empties a bin on request (City Ground Zero)",
+    "decision": "trucks",
+
+    "_comment_colours": "red >= red_pct; green < green_pct; orange = will reach red_pct before the next pass; yellow otherwise",
+    "red_pct": 90,
+    "green_pct": 10,
+    "pass_interval_minutes": { "crowded": 240, "open": 480 },
+    "fallback_pass_interval_minutes": 240,
+    "emptied_drop_pct": 30,
+    "history_size": 6,
+
+    "_comment_readings": "the Twin sends every bin every reading_interval_s; silent for silence_factor x that = suspect",
+    "reading_interval_s": 300,
+    "silence_factor": 3,
+
+    "_comment_trucks": "depot = a node of the map; only the first of horizon_stops planned stops is sent",
+    "depot_node": "r0c0",
+    "truck_capacity_kg": 200,
+    "horizon_stops": 3,
+
+    "_comment_crew": "crew mode only",
+    "crew_max_orders_per_cycle": 3,
+    "crew_reorder_after_s": 600
+  },
+
+  "air": { "enabled": false },
+
+  "cycle_s": 1.0,
+  "clock": "twin",
+  "log_path": "../../logs/GARBAGE-LIVE.jsonl"
+}

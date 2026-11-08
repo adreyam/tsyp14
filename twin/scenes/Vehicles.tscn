@@ -1,0 +1,227 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Car.glb" id="1_car"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Police Car.glb" id="2_police"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/SUV.glb" id="3_suv"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Sports Car.glb" id="4_sports"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_pack/Car-unqqkULtRU.glb" id="5_compact"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_pack/Nissan GTR.glb" id="6_gtr"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_pack/Convertible.glb" id="7_convertible"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Bus.glb" id="8_bus"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Van.glb" id="9_van"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Pickup Truck.glb" id="10_pickup"]
+[ext_resource type="PackedScene" path="res://assets/kenney/car_kit/ambulance.glb" id="11_ambulance"]
+
+[node name="Vehicles" type="Node3D"]
+
+[node name="Vehicle_001" parent="." groups=["vehicles"] instance=ExtResource("4_sports")]
+position = Vector3(-120, 0.15, -185.8)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(3.1, 3.1, 3.1)
+metadata/vehicle_index = 1
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_002" parent="." groups=["vehicles"] instance=ExtResource("7_convertible")]
+position = Vector3(110, 0.15, -194.2)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(1.16, 1.16, 1.16)
+metadata/vehicle_index = 2
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_003" parent="." groups=["vehicles"] instance=ExtResource("10_pickup")]
+position = Vector3(-145, 2.55, -99.2)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(2.4, 2.4, 2.4)
+metadata/vehicle_index = 3
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_004" parent="." groups=["vehicles"] instance=ExtResource("4_sports")]
+position = Vector3(-45, 0.15, -90.8)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(3.1, 3.1, 3.1)
+metadata/vehicle_index = 4
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_005" parent="." groups=["vehicles"] instance=ExtResource("7_convertible")]
+position = Vector3(55, 0.15, -99.2)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(1.16, 1.16, 1.16)
+metadata/vehicle_index = 5
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_006" parent="." groups=["vehicles"] instance=ExtResource("10_pickup")]
+position = Vector3(-145, 2.55, 4.2)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(2.4, 2.4, 2.4)
+metadata/vehicle_index = 6
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_007" parent="." groups=["vehicles"] instance=ExtResource("3_suv")]
+position = Vector3(-45, 0.15, -4.2)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(2.9, 2.9, 2.9)
+metadata/vehicle_index = 7
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_008" parent="." groups=["vehicles"] instance=ExtResource("7_convertible")]
+position = Vector3(55, 0.15, 4.2)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(1.16, 1.16, 1.16)
+metadata/vehicle_index = 8
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_009" parent="." groups=["vehicles"] instance=ExtResource("10_pickup")]
+position = Vector3(-145, 2.55, 90.8)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(2.4, 2.4, 2.4)
+metadata/vehicle_index = 9
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_010" parent="." groups=["vehicles"] instance=ExtResource("3_suv")]
+position = Vector3(-45, 0.15, 99.2)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(2.9, 2.9, 2.9)
+metadata/vehicle_index = 10
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_011" parent="." groups=["vehicles"] instance=ExtResource("6_gtr")]
+position = Vector3(55, 1.75, 90.8)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(1.9, 1.9, 1.9)
+metadata/vehicle_index = 11
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_012" parent="." groups=["vehicles"] instance=ExtResource("10_pickup")]
+position = Vector3(-120, 2.55, 194.2)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(2.4, 2.4, 2.4)
+metadata/vehicle_index = 12
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_013" parent="." groups=["vehicles"] instance=ExtResource("3_suv")]
+position = Vector3(110, 0.15, 185.8)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(2.9, 2.9, 2.9)
+metadata/vehicle_index = 13
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_014" parent="." groups=["vehicles"] instance=ExtResource("6_gtr")]
+position = Vector3(-185.8, 1.75, -115)
+rotation_degrees = Vector3(0, 0, 0)
+scale = Vector3(1.9, 1.9, 1.9)
+metadata/vehicle_index = 14
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_015" parent="." groups=["vehicles"] instance=ExtResource("9_van")]
+position = Vector3(-194.2, 0.15, 115)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.15, 0.15, 0.15)
+metadata/vehicle_index = 15
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_016" parent="." groups=["vehicles"] instance=ExtResource("3_suv")]
+position = Vector3(-99.2, 0.15, -140)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(2.9, 2.9, 2.9)
+metadata/vehicle_index = 16
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_017" parent="." groups=["vehicles"] instance=ExtResource("6_gtr")]
+position = Vector3(-90.8, 1.75, -40)
+rotation_degrees = Vector3(0, 0, 0)
+scale = Vector3(1.9, 1.9, 1.9)
+metadata/vehicle_index = 17
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_018" parent="." groups=["vehicles", "ambulance_vehicles", "emergency_vehicles"] instance=ExtResource("11_ambulance")]
+position = Vector3(-99.2, 0.15, 60)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.15, 0.15, 0.15)
+metadata/vehicle_index = 18
+metadata/state = "moving"
+metadata/model_family = "external_kenney_ambulance"
+metadata/vehicle_service = "emergency_medical_response"
+metadata/future_interaction = "paramedic_dispatch_and_patient_transfer"
+
+[node name="Vehicle_019" parent="." groups=["vehicles", "police_vehicles", "emergency_vehicles"] instance=ExtResource("2_police")]
+position = Vector3(4.2, 0.15, -140)
+rotation_degrees = Vector3(0, 0, 0)
+scale = Vector3(3.3, 3.3, 3.3)
+metadata/vehicle_index = 19
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_020" parent="." groups=["vehicles"] instance=ExtResource("6_gtr")]
+position = Vector3(-4.2, 1.75, -40)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(1.9, 1.9, 1.9)
+metadata/vehicle_index = 20
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_021" parent="." groups=["vehicles"] instance=ExtResource("9_van")]
+position = Vector3(4.2, 0.15, 60)
+rotation_degrees = Vector3(0, 0, 0)
+scale = Vector3(0.15, 0.15, 0.15)
+metadata/vehicle_index = 21
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_022" parent="." groups=["vehicles", "police_vehicles", "emergency_vehicles"] instance=ExtResource("2_police")]
+position = Vector3(90.8, 0.15, -140)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(3.3, 3.3, 3.3)
+metadata/vehicle_index = 22
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_023" parent="." groups=["vehicles"] instance=ExtResource("5_compact")]
+position = Vector3(99.2, 0.15, -40)
+rotation_degrees = Vector3(0, 0, 0)
+scale = Vector3(3.64, 3.64, 3.64)
+metadata/vehicle_index = 23
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_024" parent="." groups=["vehicles", "ambulance_vehicles", "emergency_vehicles"] instance=ExtResource("11_ambulance")]
+position = Vector3(90.8, 0.15, 60)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.15, 0.15, 0.15)
+metadata/vehicle_index = 24
+metadata/state = "moving"
+metadata/model_family = "external_kenney_ambulance"
+metadata/vehicle_service = "emergency_medical_response"
+metadata/future_interaction = "paramedic_dispatch_and_patient_transfer"
+
+[node name="Vehicle_025" parent="." groups=["vehicles", "police_vehicles", "emergency_vehicles"] instance=ExtResource("2_police")]
+position = Vector3(194.2, 0.15, -115)
+rotation_degrees = Vector3(0, 0, 0)
+scale = Vector3(3.3, 3.3, 3.3)
+metadata/vehicle_index = 25
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"
+
+[node name="Vehicle_026" parent="." groups=["vehicles"] instance=ExtResource("5_compact")]
+position = Vector3(185.8, 0.15, 115)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(3.64, 3.64, 3.64)
+metadata/vehicle_index = 26
+metadata/state = "moving"
+metadata/model_family = "external_poly_pizza"

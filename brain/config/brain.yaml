@@ -1,0 +1,95 @@
+# City Brain configuration. Every partner address and every policy is here: the code has none.
+# Switch the data source by changing one word below and restarting the Brain (no code change).
+
+source: mock            # live = the Godot Twin (twin/run_control_room.sh) | mock = brain/mocks stand-ins
+
+brain:
+  host: 127.0.0.1
+  port: 8500
+  token_env: BRAIN_TOKEN            # partners pushing events and the control center use this Bearer token
+  token_default: tsyp14-brain-dev-token   # used only when the variable is not set (local demo)
+  max_body_bytes: 262144
+
+twin:
+  host: 127.0.0.1                   # the Twin device API listens on 127.0.0.1 only (same machine)
+  port: auto                        # auto = $CITY_SIM_API_PORT, else the file the Twin writes, else 8820
+  port_file: /tmp/city_ground_zero_api_port
+  default_port: 8820
+  timeout_s: 3.0
+  poll_s: 1.0                       # read_all every second (the Twin samples at 100 ms)
+  incidents_poll_s: 2.0
+  heartbeat_s: 15.0                 # a device that does not change is still re-sent this often
+  families:                         # Twin families the Brain ingests (lights, cameras, citizens are skipped)
+    [traffic, air, noise, weather, flood, utility, power_meter, water_meter, waste,
+     signal, water_valve, power_switch, reservoir, grid, service_zone, seismic, parking]
+  deadband:                         # a reading is re-sent when it moves at least this much
+    default: 0.5
+    shaking_intensity: 0.2
+    surface_water_depth: 2.0
+    fill_level: 2.0
+
+guardian:
+  mode: mock                        # mock = brain/mocks guardian stand-in | http = a real Guardian | off = no Guardian
+  url: http://127.0.0.1:8300
+  verdict_path: /v1/trust-verdict
+  token_env: GUARDIAN_TOKEN
+  timeout_s: 1.5
+  on_missing: degraded              # degraded = act only with reversible actions | ignore = drop the data | trust
+
+fallback:
+  auto_switch_to_mock: false        # true = if the live Twin stays unreachable, the Brain switches itself to mock
+  after_s: 20
+
+policy:
+  cooldown_s: 20                    # the same command on the same actuator is not repeated within this time
+  resource_lock_s: 45               # a resource claimed by a higher-priority axis stays locked this long
+  axis_priority: [emergency, energy, pollution, transportation]   # first wins a conflict
+  protected_zones: [F, K]           # zones with hospitals: never load-shed (edit to match the Twin city)
+
+agents:
+  emergency:
+    seismic_mmi_alert: 5.0
+    seismic_mmi_critical: 6.5
+    seismic_confirm_sensors: 2      # two stations must agree (as PLUM) before an earthquake alert
+    seismic_window_s: 6
+    seismic_settle_s: 1.5           # after confirmation, the epicentre follows the strongest station this long, then is fixed
+    flood_depth_alert_mm: 150
+    flood_depth_critical_mm: 300
+    flood_rise_rate_mm_min: 5
+    wind_alert_mps: 15
+    rain_alert_mm_h: 10
+  transportation:
+    jam_occupancy_pct: 70
+    jam_speed_kmh: 12
+    jam_samples: 3
+    clear_samples: 3
+    green_wave_ahead_m: 250         # junctions up to this far ahead of a responding unit turn green for it
+    green_wave_release_m: 12        # ... and go back to their cycle once the unit is this far past them
+    green_wave_max_hold_s: 45       # never hold one junction longer (cross traffic), whatever happens
+    green_wave_kinds: [fire, ambulance, police]   # units that get a green wave (the emergency agent asks for them)
+  pollution:
+    limits: {pm2_5: 15, pm10: 45, nitrogen_dioxide: 25}   # WHO 2021 24 h guideline values, ug/m3
+    level_watch: 70
+    level_alert: 100
+    level_critical: 130
+    persist_samples: 3
+    bin_full_pct: 90
+    round_pct: 75                   # this many bins above round_pct -> order a garbage-truck round
+    round_min_bins: 3
+    round_cooldown_s: 300
+    noise_watch_dba: 75
+  energy:
+    grid_alert_pct: 25
+    grid_shed_pct: 15
+    grid_restore_pct: 35
+    voltage_low_v: 205
+    dim_level: 0.6                  # street lights output when the reserve is low
+    dim_level_low: 0.35             # after a vetoed load shed: dim further rather than cut another zone
+
+logs:
+  dir: ../../logs                   # relative to this file (brain/config/): the triplet root logs/
+  keep_in_memory: 4000
+
+scenario:
+  twin_camera: true       # while a Test Book scenario runs: its zones tinted in the Twin (ZONES show) and the Twin's
+                          # camera following its moving unit (CAMERA follow) or framing its device (FOCUS device)

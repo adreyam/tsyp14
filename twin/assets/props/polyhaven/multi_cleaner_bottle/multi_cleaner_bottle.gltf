@@ -1,0 +1,237 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v3.3.32",
+    "version": "2.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "blend_export",
+      "nodes": [
+        0,
+        1
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "multi_cleaner_bottle"
+    },
+    {
+      "mesh": 1,
+      "name": "multi_cleaner_bottle_sticker"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "multi_cleaner_bottle",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0,
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cylinder.005",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "Cylinder.006",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "multi_cleaner_bottle_nor_gl",
+      "uri": "textures/multi_cleaner_bottle_nor_gl_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "multi_cleaner_bottle_diff",
+      "uri": "textures/multi_cleaner_bottle_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "multi_cleaner_bottle_rough",
+      "uri": "textures/multi_cleaner_bottle_arm_1k.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 3209,
+      "max": [
+        0.04423614218831062,
+        0.22856293618679047,
+        0.04423609375953674
+      ],
+      "min": [
+        -0.04423604533076286,
+        -3.4790587077893065e-11,
+        -0.04423609375953674
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 3209,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 3209,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 16236,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 794,
+      "max": [
+        0.037626270204782486,
+        0.1631469428539276,
+        0.04488615319132805
+      ],
+      "min": [
+        -0.04166184365749359,
+        0.014014344662427902,
+        -0.044865332543849945
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 794,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 794,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5123,
+      "count": 4140,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 38508,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 38508,
+      "byteOffset": 38508,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 25672,
+      "byteOffset": 77016,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 32472,
+      "byteOffset": 102688,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 9528,
+      "byteOffset": 135160,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 9528,
+      "byteOffset": 144688,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 6352,
+      "byteOffset": 154216,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 8280,
+      "byteOffset": 160568,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 168848,
+      "uri": "multi_cleaner_bottle.bin"
+    }
+  ]
+}

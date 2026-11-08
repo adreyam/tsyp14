@@ -1,0 +1,703 @@
+SCENARIO SY05 · Industrial fire with a toxic smoke plume (all axes)
+Result: STOPPED   Source: live   Duration: 110 s   Stopped at 109.6 s
+
+What it tests: At the evening rush a fire breaks out in an industrial building in zone G (INCIDENTS trigger
+  building_fire). Its smoke plume makes zone G's air critical and drifts downwind into the hospital district
+  (zone F). Every axis has to act on the same event, through the A2A requests between them.
+
+WHAT HAPPENED (time from the start of the run)
+
++   5 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 8 km/h (limit 12) for 3 readings
+                           in a row
+                   +   5 s  command: signal r6c4 north-south green -> done
+
++   5 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 3 readings
+                           in a row
+                   +   5 s  command: signal r3c6 east-west green -> done
+
++   6 s  BRAIN          Unrouted
+                   +   6 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-NorthCentral)
+
++   6 s  BRAIN          Unrouted
+                   +   6 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-SouthCentral)
+
++   6 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 96 % (limit 70) and speed 4 km/h (limit 12) for 4 readings in
+                           a row
+
++   6 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 4 readings
+                           in a row
+
++   6 s  BRAIN          Unrouted
+                   +   6 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-NorthWest)
+
++   6 s  BRAIN          Unrouted
+                   +   6 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-SouthEast)
+
++   6 s  EMERGENCY      Building fire in zone G
+                         why: Twin incident INC-0003 (building_fire, phase responding) in zone G; units
+                           already sent: fire, police, ambulance
+                   +   6 s  asks: emergency → energy: isolate_feeder (incident INC-0003, zone G) because
+                     building fire INC-0003 in zone G: the firefighters need the building de-energised
+                   +   6 s  command: INCIDENTS dispatch {"id": "INC-0003", "kind": "fire"} -> done
+                   +   6 s  command: INCIDENTS dispatch {"id": "INC-0003", "kind": "ambulance"} -> done
+                   +   6 s  command: INCIDENTS dispatch {"id": "INC-0003", "kind": "police"} -> done
+                   +   6 s  command: zone G power cut power -> done
+                   +   7 s  answer: energy → emergency: isolate_feeder completed: Twin applied zone G power
+                     cut power: power cut for Zone_NorthCentral_3
+
++   7 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 90 % (limit 70) and speed 10 km/h (limit 12) for 5 readings
+                           in a row
+
++   7 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 5 readings
+                           in a row
+
++   7 s  EMERGENCY      Requests between axes: emergency → transportation
+                   +   7 s  asks: emergency → transportation: green_wave (unit POL-3, incident INC-0003, kind
+                     police) because POL-3 (police) is on its way to INC-0003 (building fire): it needs green
+                     along its route
+                   +   7 s  asks: emergency → transportation: green_wave (unit POL-4, incident INC-0003, kind
+                     police) because POL-4 (police) is on its way to INC-0003 (building fire): it needs green
+                     along its route
+                   +   7 s  asks: emergency → transportation: green_wave (unit AMB-1, incident INC-0003, kind
+                     ambulance) because AMB-1 (ambulance) is on its way to INC-0003 (building fire): it needs
+                     green along its route
+                   +   7 s  asks: emergency → transportation: green_wave (unit AMB-3, incident INC-0003, kind
+                     ambulance) because AMB-3 (ambulance) is on its way to INC-0003 (building fire): it needs
+                     green along its route
+                   +   7 s  asks: emergency → transportation: green_wave (unit FIRE-1, incident INC-0003, kind
+                     fire) because FIRE-1 (fire) is on its way to INC-0003 (building fire): it needs green
+                     along its route
+                   +  11 s  answer: transportation → emergency: green_wave completed: AMB-1 arrived
+                     (on_scene); 1 junction(s) turned green on its way
+                   +  14 s  answer: transportation → emergency: green_wave completed: FIRE-1 arrived
+                     (on_scene); 1 junction(s) turned green on its way
+                   +  15 s  answer: transportation → emergency: green_wave completed: POL-3 arrived
+                     (on_scene); 4 junction(s) turned green on its way
+                   +  16 s  answer: transportation → emergency: green_wave completed: AMB-3 arrived
+                     (on_scene); 2 junction(s) turned green on its way
+                   +  20 s  answer: transportation → emergency: green_wave completed: POL-4 arrived
+                     (on_scene); 2 junction(s) turned green on its way
+
++   8 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 97 % (limit 70) and speed 4 km/h (limit 12) for 6 readings in
+                           a row
+
++   8 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 6 readings
+                           in a row
+
++   8 s  BRAIN          Unrouted
+                   +   8 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-NorthEast)
+
++   8 s  BRAIN          Unrouted
+                   +   8 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-SouthWest)
+
++   8 s  TRANSPORTATION Green wave for POL-3 to INC-0003
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x -2, z -154, heading
+                           north, en_route
+                   +   8 s  command: signal r3c5 north-south green -> done
+                   +   9 s  command: signal r5c5 east-west green -> done
+
++   9 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 7 readings
+                           in a row
+
++   9 s  TRANSPORTATION Green wave for POL-3 to INC-0003
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x -66, z -188, heading
+                           west, en_route
+                   +   9 s  command: signal r3c4 east-west green -> done
+                   +   9 s  command: signal r3c5 back to normal cycle -> done
+                   +  10 s  command: signal r5c5 back to normal cycle -> done
+
++  10 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 71 % (limit 70) and speed 9 km/h (limit 12) for 3 readings in
+                           a row
+                   +  10 s  command: signal r4c5 east-west green -> done
+
++  11 s  TRANSPORTATION Green wave for POL-3 to INC-0003
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x -93, z -122, heading
+                           south, en_route
+                   +  11 s  command: signal r4c4 north-south green -> done
+                   +  11 s  command: signal r3c4 back to normal cycle -> done
+
++  12 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 8 readings
+                           in a row
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-02)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-03)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-04)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-05)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-06)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-07)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-08)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-09)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-10)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-11)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-12)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-13)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-14)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-15)
+
++  12 s  BRAIN          Unrouted
+                   +  12 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-16)
+
++  12 s  TRANSPORTATION Green wave for POL-3 to INC-0003
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x -93, z -26, heading
+                           south, en_route
+                   +  12 s  command: signal r4c4 back to normal cycle -> done
+
++  13 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 3 readings
+                           in a row
+
++  13 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 9 readings
+                           in a row
+
++  13 s  TRANSPORTATION Green wave for POL-3 to INC-0003
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x -19, z -2, heading east,
+                           en_route
+                   +  13 s  command: signal r5c5 east-west green -> done
+                   +  13 s  command: signal r5c4 east-west green -> done
+                   +  13 s  command: signal r4c5 back to normal cycle -> done
+
++  14 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 95 % (limit 70) and speed 8 km/h (limit 12) for 4 readings in
+                           a row
+
++  14 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 10 readings
+                           in a row
+
++  14 s  TRANSPORTATION Green wave for POL-3 to INC-0003
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x 31, z -2, heading east,
+                           en_route
+                   +  14 s  command: signal r5c5 back to normal cycle -> done
+                   +  14 s  command: signal r5c4 back to normal cycle -> done
+
++  15 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 5 readings
+                           in a row
+
++  15 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 11 readings
+                           in a row
+
++  15 s  EMERGENCY      Building fire in zone G
+                         why: Twin incident INC-0003 (building_fire, phase working) in zone G; units already
+                           sent: fire, police, ambulance, ambulance, police
+
++  15 s  TRANSPORTATION Green wave for POL-3 to INC-0003
+                         why: POL-3 arrived (on_scene); 4 junction(s) given green -> situation closed
+                   +  15 s  command: signal r3c5 north-south green -> done
+
++  16 s  POLLUTION      Air quality in zone G
+                         why: AIR-08: risk score 117 driven by pm2_5 17.5 µg/m³ (guideline 15 µg/m³; levels
+                           70/100/130); held for 3 readings
+                   +  16 s  asks: pollution → transportation: close_car_parks (zone G) because air risk 117 in
+                     zone G: fewer cars should drive in
+                   +  16 s  command: LOT-04 closed -> done
+                   +  16 s  answer: transportation → pollution: close_car_parks completed: Twin applied LOT-04
+                     closed: LOT-04 barrier set to closed
+
++  16 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 12 readings
+                           in a row
+
++  16 s  TRANSPORTATION Green wave for POL-4 to INC-0003
+                         why: emergency asked (A2A) for POL-4 (POL-4 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x -82, z -188, heading
+                           west, en_route
+                   +  16 s  command: signal r3c4 east-west green -> done
+                   +  16 s  command: signal r3c5 back to normal cycle -> done
+
++  17 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 13 readings
+                           in a row
+
++  17 s  TRANSPORTATION Green wave for POL-4 to INC-0003
+                         why: emergency asked (A2A) for POL-4 (POL-4 (police) is on its way to INC-0003
+                           (building fire): it needs green along its route); now at x -93, z -67, heading
+                           south, en_route
+                   +  17 s  command: signal r3c4 back to normal cycle -> done
+
++  18 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 14 readings
+                           in a row
+
++  18 s  EMERGENCY      Requests between axes: emergency → transportation
+                   +  18 s  asks: emergency → transportation: green_wave (unit AID-FIRE-2, incident INC-0003,
+                     kind fire) because AID-FIRE-2 (fire) is on its way to INC-0003 (building fire): it needs
+                     green along its route
+                   +  26 s  answer: transportation → emergency: green_wave completed: AID-FIRE-2 arrived
+                     (on_scene); 5 junction(s) turned green on its way
+
++  19 s  POLLUTION      Air quality in zone G
+                         why: AIR-08: risk score 141 driven by pm2_5 21.1 µg/m³ (guideline 15 µg/m³; levels
+                           70/100/130); held for 3 readings
+
++  19 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 12 km/h (limit 12) for 3 readings
+                           in a row
+
++  19 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 8 km/h (limit 12) for 15 readings
+                           in a row
+
++  19 s  TRANSPORTATION Green wave for AID-FIRE-2 to INC-0003
+                         why: emergency asked (A2A) for AID-FIRE-2 (AID-FIRE-2 (fire) is on its way to
+                           INC-0003 (building fire): it needs green along its route); now at x 274, z 2,
+                           heading west, en_route
+                   +  19 s  asks: emergency → transportation: green_wave (unit AID-FIRE-3, incident INC-0003,
+                     kind fire) because AID-FIRE-3 (fire) is on its way to INC-0003 (building fire): it needs
+                     green along its route
+                   +  19 s  command: signal r5c7 east-west green -> done
+                   +  19 s  command: signal r5c6 east-west green -> done
+                   +  24 s  answer: transportation → emergency: green_wave completed: AID-FIRE-3 arrived
+                     (on_scene); 3 junction(s) turned green on its way
+
++  20 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 71 % (limit 70) and speed 10 km/h (limit 12) for 3 readings
+                           in a row
+                   +  20 s  not sent: [transportation] signal_phase on signal r4c4 not sent: same command sent
+                     9 s ago (cooldown 20 s)
+
++  20 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 4 readings
+                           in a row
+
++  20 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 16 readings
+                           in a row
+
++  20 s  TRANSPORTATION Green wave for POL-4 to INC-0003
+                         why: POL-4 arrived (on_scene); 2 junction(s) given green -> situation closed
+                   +  20 s  command: signal r4c7 east-west green -> done
+                   +  20 s  command: signal r4c6 east-west green -> done
+                   +  20 s  command: signal r5c7 back to normal cycle -> done
+
++  21 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 96 % (limit 70) and speed 0 km/h (limit 12) for 3 readings in
+                           a row
+                   +  21 s  command: signal r5c5 north-south green -> done
+
++  21 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 90 % (limit 70) and speed 9 km/h (limit 12) for 5 readings in
+                           a row
+
++  21 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 8 km/h (limit 12) for 17 readings
+                           in a row
+
++  21 s  BRAIN          Unrouted
+                   +  21 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-01)
+
++  21 s  TRANSPORTATION Green wave for AID-FIRE-2 to INC-0003
+                         why: emergency asked (A2A) for AID-FIRE-2 (AID-FIRE-2 (fire) is on its way to
+                           INC-0003 (building fire): it needs green along its route); now at x 93, z -69,
+                           heading north, en_route
+                   +  21 s  command: signal r5c6 back to normal cycle -> done
+                   +  21 s  command: signal r4c7 back to normal cycle -> done
+                   +  21 s  command: signal r4c6 back to normal cycle -> done
+
++  21 s  TRANSPORTATION Green wave for AID-FIRE-2 to INC-0003
+                         why: emergency asked (A2A) for AID-FIRE-2 (AID-FIRE-2 (fire) is on its way to
+                           INC-0003 (building fire): it needs green along its route); now at x 93, z -69,
+                           heading north, en_route
+                   +  21 s  command: signal r4c6 north-south green -> done
+
++  22 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 86 % (limit 70) and speed 6 km/h (limit 12) for 4 readings in
+                           a row
+
++  22 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 9 km/h (limit 12) for 18 readings
+                           in a row
+
++  22 s  TRANSPORTATION Green wave for AID-FIRE-2 to INC-0003
+                         why: emergency asked (A2A) for AID-FIRE-2 (AID-FIRE-2 (fire) is on its way to
+                           INC-0003 (building fire): it needs green along its route); now at x 35, z -93,
+                           heading west, en_route
+                   +  22 s  command: signal r4c5 east-west green -> done
+                   +  22 s  command: signal r4c6 back to normal cycle -> done
+
++  23 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 93 % (limit 70) and speed 8 km/h (limit 12) for 5 readings in
+                           a row
+
++  23 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 19 readings
+                           in a row
+
++  23 s  TRANSPORTATION Green wave for AID-FIRE-2 to INC-0003
+                         why: emergency asked (A2A) for AID-FIRE-2 (AID-FIRE-2 (fire) is on its way to
+                           INC-0003 (building fire): it needs green along its route); now at x 2, z -60,
+                           heading south, en_route
+                   +  23 s  command: signal r4c5 back to normal cycle -> done
+
++  24 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 93 % (limit 70) and speed 0 km/h (limit 12) for 6 readings in
+                           a row
+
++  24 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 20 readings
+                           in a row
+
++  24 s  TRANSPORTATION Green wave for AID-FIRE-3 to INC-0003
+                         why: AID-FIRE-3 arrived (on_scene); 3 junction(s) given green
+                   +  24 s  command: signal r5c5 back to normal cycle -> done
+
++  24 s  TRANSPORTATION Green wave for AID-FIRE-2 to INC-0003
+                         why: emergency asked (A2A) for AID-FIRE-2 (AID-FIRE-2 (fire) is on its way to
+                           INC-0003 (building fire): it needs green along its route); now at x 2, z -23,
+                           heading south, en_route
+                   +  24 s  command: signal r5c5 north-south green -> done
+
++  26 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 7 readings
+                           in a row
+
++  26 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 88 % (limit 70) and speed 10 km/h (limit 12) for 3 readings
+                           in a row
+
++  26 s  TRANSPORTATION Green wave for AID-FIRE-2 to INC-0003
+                         why: AID-FIRE-2 arrived (on_scene); 5 junction(s) given green
+                   +  26 s  command: signal r5c5 back to normal cycle -> done
+
++  27 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 8 readings
+                           in a row
+
++  27 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 4 readings
+                           in a row
+
++  27 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 21 readings
+                           in a row
+
++  27 s  EMERGENCY      Building fire in zone G
+                         why: the Twin reports INC-0003 resolved -> situation closed
+                   +  27 s  asks: emergency → energy: restore_feeder (incident INC-0003) because fire INC-0003
+                     is out: the building can be re-energised
+                   +  27 s  command: zone G power restore power -> done
+                   +  27 s  answer: energy → emergency: restore_feeder completed: Twin applied zone G power
+                     restore power: power restored for Zone_NorthCentral_3
+
++  28 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 9 readings
+                           in a row
+
++  28 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 5 readings
+                           in a row
+
++  28 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 22 readings
+                           in a row
+
++  29 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 93 % (limit 70) and speed 2 km/h (limit 12) for 6 readings in
+                           a row
+
++  29 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 73 % (limit 70) and speed 3 km/h (limit 12) for 3 readings in
+                           a row
+                   +  29 s  not sent: [transportation] signal_phase on signal r4c5 not sent: same command sent
+                     7 s ago (cooldown 20 s)
+
++  29 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 23 readings
+                           in a row
+
++  30 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 95 % (limit 70) and speed 8 km/h (limit 12) for 7 readings in
+                           a row
+
++  30 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 24 readings
+                           in a row
+
++  31 s  POLLUTION      Air quality in zone F
+                         why: AIR-02: risk score 104 driven by pm2_5 15.6 µg/m³ (guideline 15 µg/m³; levels
+                           70/100/130); held for 3 readings
+
++  31 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 25 readings
+                           in a row
+
++  32 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 26 readings
+                           in a row
+
++  33 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 88 % (limit 70) and speed 7 km/h (limit 12) for 4 readings in
+                           a row
+
++  33 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 27 readings
+                           in a row
+
++  34 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 3 readings
+                           in a row
+
++  34 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 28 readings
+                           in a row
+
++  35 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 29 readings
+                           in a row
+
++  36 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 30 readings
+                           in a row
+
++  37 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 31 readings
+                           in a row
+
++  38 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 95 % (limit 70) and speed 5 km/h (limit 12) for 3 readings in
+                           a row
+
++  38 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 32 readings
+                           in a row
+
++  39 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 90 % (limit 70) and speed 6 km/h (limit 12) for 4 readings in
+                           a row
+
++  39 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 33 readings
+                           in a row
+
++  40 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 5 readings
+                           in a row
+
++  40 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 34 readings
+                           in a row
+
++  41 s  POLLUTION      Air quality in zone F
+                         why: AIR-02: risk score 133 driven by pm2_5 20.0 µg/m³ (guideline 15 µg/m³; levels
+                           70/100/130); held for 3 readings
+
++  41 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 6 readings
+                           in a row
+
++  41 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 35 readings
+                           in a row
+
++  42 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 91 % (limit 70) and speed 9 km/h (limit 12) for 7 readings in
+                           a row
+
++  42 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 9 km/h (limit 12) for 36 readings
+                           in a row
+
++  43 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 8 readings
+                           in a row
+
++  43 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 37 readings
+                           in a row
+
++  44 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 8 km/h (limit 12) for 9 readings
+                           in a row
+
++  44 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 38 readings
+                           in a row
+
++  46 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 95 % (limit 70) and speed 5 km/h (limit 12) for 10 readings
+                           in a row
+
++  46 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 84 % (limit 70) and speed 8 km/h (limit 12) for 3 readings in
+                           a row
+                   +  46 s  command: signal r4c5 east-west green -> done
+
++  47 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 39 readings
+                           in a row
+
++  53 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 11 readings
+                           in a row
+
++  53 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 40 readings
+                           in a row
+
++  59 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 12 readings
+                           in a row
+
++  59 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 41 readings
+                           in a row
+
++  65 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 8 km/h (limit 12) for 13 readings
+                           in a row
+
++  65 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 96 % (limit 70) and speed 4 km/h (limit 12) for 4 readings in
+                           a row
+
++  65 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 42 readings
+                           in a row
+
++  71 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 14 readings
+                           in a row
+
++  71 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 97 % (limit 70) and speed 1 km/h (limit 12) for 5 readings in
+                           a row
+
++  71 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 43 readings
+                           in a row
+
++  71 s  TRANSPORTATION Traffic jam at TRAF-10, zone H
+                         why: TRAF-10: occupancy 85 % (limit 70) and speed 6 km/h (limit 12) for 3 readings in
+                           a row
+                   +  71 s  command: signal r4c7 east-west green -> done
+
++  78 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 97 % (limit 70) and speed 5 km/h (limit 12) for 6 readings in
+                           a row
+
++  78 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 44 readings
+                           in a row
+
++  85 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 11 km/h (limit 12) for 15 readings
+                           in a row
+
++  85 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 96 % (limit 70) and speed 8 km/h (limit 12) for 7 readings in
+                           a row
+
++  85 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 8 km/h (limit 12) for 45 readings
+                           in a row
+
++  90 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 8 readings
+                           in a row
+
++  90 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 46 readings
+                           in a row
+
++  90 s  TRANSPORTATION Traffic jam at TRAF-10, zone H
+                         why: TRAF-10: traffic flowing again (12 km/h, 57 %) for 3 readings
+                   +  90 s  command: signal r4c7 back to normal cycle -> done
+
++  98 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 9 readings
+                           in a row
+
++  98 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 47 readings
+                           in a row
+
++ 104 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 96 % (limit 70) and speed 3 km/h (limit 12) for 10 readings
+                           in a row
+
++ 104 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 9 km/h (limit 12) for 48 readings
+                           in a row
+
++ 110 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 3 readings
+                           in a row
+
++ 110 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 49 readings
+                           in a row
+
++ 113 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 97 % (limit 70) and speed 3 km/h (limit 12) for 4 readings in
+                           a row
+
++ 113 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 90 % (limit 70) and speed 2 km/h (limit 12) for 12 readings
+                           in a row
+
++ 113 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 50 readings
+                           in a row
+
++ 113 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 91 % (limit 70) and speed 10 km/h (limit 12) for 5 readings
+                           in a row
+
++ 113 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 51 readings
+                           in a row
+
+BY AXIS
+  brain            0 decision(s),   0 command(s), 22 refused / not sent
+  emergency        8 decision(s),   5 command(s),  0 refused / not sent
+  energy          16 decision(s),   0 command(s),  0 refused / not sent
+  pollution       10 decision(s),   1 command(s),  0 refused / not sent
+  transportation 146 decision(s),  39 command(s),  2 refused / not sent
+
+Full record (every reading, verdict and answer, one JSON per line): SY05-20261108-203302.jsonl

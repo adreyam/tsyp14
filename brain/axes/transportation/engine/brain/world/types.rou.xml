@@ -1,0 +1,15 @@
+<routes>
+    <vTypeDistribution id="mix">
+        <vType id="car" probability="0.9" vClass="passenger" length="4.5" accel="2.6" decel="4.5" maxSpeed="13.9" sigma="0.5"/>
+        <vType id="truck" probability="0.1" vClass="truck" length="9.0" accel="1.3" decel="3.5" maxSpeed="11" sigma="0.5"/>
+    </vTypeDistribution>
+    <vType id="ambulance" vClass="emergency" guiShape="emergency" color="1,0,0" length="6.5" width="2.4"
+           accel="3.5" decel="5.0" maxSpeed="22" speedFactor="1.2" lcStrategic="1" lcSpeedGain="2">
+        <param key="has.bluelight.device" value="true"/>
+    </vType>
+    <vType id="dcar" vClass="passenger" color="0,200,255" length="4.6" width="1.9" guiShape="passenger" accel="2.8" decel="4.5" maxSpeed="13.9"/>
+    <vType id="police" vClass="emergency" guiShape="police" color="30,80,255" length="5.0" width="2.0" accel="4.0" decel="6.0" maxSpeed="22" speedFactor="1.25">
+        <param key="has.bluelight.device" value="true"/></vType>
+    <vType id="fire" vClass="emergency" guiShape="firebrigade" color="255,90,0" length="9.0" width="2.5" accel="3.0" decel="5.0" maxSpeed="20" speedFactor="1.15">
+        <param key="has.bluelight.device" value="true"/></vType>
+</routes>

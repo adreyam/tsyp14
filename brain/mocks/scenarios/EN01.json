@@ -1,0 +1,116 @@
+{
+ "id": "EN01",
+ "name": "Protect the hospital",
+ "interaction": "Twin → Brain (energy)",
+ "layers": [
+  "Twin",
+  "City Brain"
+ ],
+ "description": "From the energy Brain's E4. The grid reserve falls (UTILITY set_reserve 22 %, then 12 %) while the hospital zones are the city's largest loads (zone F the largest, zone K next). Load must be shed, but never where the hospitals are.",
+ "expected": {
+  "twin": "GRID-01 reserve 22 %, then 12 %; recharged at the end.",
+  "guardian": "Trusted.",
+  "brain": "22 %: dims every street light. 12 %: sheds the largest zone that may be cut, skipping zones F and K (hospitals) even though they draw the most; the decision says why. Recharged: restores the zone and the street lights."
+ },
+ "how_to_verify": "Top bar energy 'Grid reserve low'; City map: the shed zone goes dark, F and K stay lit; the action reads 'skipped F protected (hospital), K protected (hospital)'; logs/EN01-*.jsonl. On the live Twin the zone loads are the city's own: the hospital zones are skipped whenever they are the largest.",
+ "duration_s": 75,
+ "speed": 3,
+ "live_duration_s": 130,
+ "steps": [
+  {
+   "at": 1,
+   "do": "state",
+   "device": "ZONE-Zone_NorthCentral_2",
+   "key": "_load",
+   "value": 2.6,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 1,
+   "do": "state",
+   "device": "ZONE-Zone_SouthCentral_3",
+   "key": "_load",
+   "value": 2.3,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 2,
+   "do": "twin_command",
+   "id": "UTILITY",
+   "command": "set_reserve",
+   "value": 22,
+   "live_at": 5
+  },
+  {
+   "at": 15,
+   "do": "twin_command",
+   "id": "UTILITY",
+   "command": "set_reserve",
+   "value": 12,
+   "live_at": 40
+  },
+  {
+   "at": 55,
+   "do": "twin_command",
+   "id": "UTILITY",
+   "command": "recharge_all",
+   "live_at": 100
+  }
+ ],
+ "checks": [
+  {
+   "expect": "action",
+   "actuator": "LIGHTS",
+   "command": "dim"
+  },
+  {
+   "expect": "action",
+   "action_type": "load_shed"
+  },
+  {
+   "expect": "no_action",
+   "actuator": "ZONE-Zone_NorthCentral_2",
+   "command": "cut_power"
+  },
+  {
+   "expect": "no_action",
+   "actuator": "ZONE-Zone_SouthCentral_3",
+   "command": "cut_power"
+  },
+  {
+   "expect": "record",
+   "kind": "action",
+   "contains": "protected (hospital)",
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "expect": "action",
+   "agent": "energy",
+   "command": "restore_power"
+  },
+  {
+   "expect": "action",
+   "actuator": "LIGHTS",
+   "command": "auto"
+  }
+ ],
+ "modes": [
+  "mock",
+  "live"
+ ],
+ "trigger": "python scenarios/run.py EN01   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+ "axis": "energy",
+ "focus": {
+  "zone": "F",
+  "devices": [
+   "GRID-01",
+   "ZONE-Zone_NorthCentral_2"
+  ]
+ }
+}

@@ -1,0 +1,312 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Female_Adult_01/Export/Female_Adult_01.fbx" id="1_female_adult"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Business_Female_01/Export/Business_Female_01.fbx" id="2_business_f"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Medical_Female_01/Export/Medical_Female_01.fbx" id="3_medical_f"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Construction_Male_01/Export/Construction_Male_01.fbx" id="4_construction_m1"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Delivery_Male_01/Export/Delivery_Male_01.fbx" id="5_delivery"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Male_Adult_01/Export/Male_Adult_01.fbx" id="6_male_adult"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Gardener_Male_01/Export/Gardener_Male_01.fbx" id="7_gardener"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Business_Male_01/Export/Business_Male_01.fbx" id="8_business_m1"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Chef_Female_01/Export/Chef_Female_01.fbx" id="9_chef"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Female_Adult_05/Export/Female_Adult_05.fbx" id="10_female_adult_alt"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Construction_Male_02/Export/Construction_Male_02.fbx" id="11_construction_m2"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Male_Adult_05/Export/Male_Adult_05.fbx" id="12_male_adult_alt"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Medical_Male_01/Export/Medical_Male_01.fbx" id="13_medical_m"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Construction_Female_01/Export/Construction_Female_01.fbx" id="14_construction_f"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Business_Female_02/Export/Business_Female_02.fbx" id="15_business_f2"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Construction_Male_03/Export/Construction_Male_03.fbx" id="16_construction_m3"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Business_Male_02/Export/Business_Male_02.fbx" id="17_business_m2"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Construction_Male_04/Export/Construction_Male_04.fbx" id="18_construction_m4"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Business_Male_03/Export/Business_Male_03.fbx" id="19_business_m3"]
+[ext_resource type="PackedScene" path="res://assets/rocketbox/Medical_Female_02/Export/Medical_Female_02.fbx" id="20_medical_f2"]
+
+[node name="Pedestrians" type="Node3D"]
+
+[node name="Pedestrian_001" parent="." groups=["pedestrians"] instance=ExtResource("1_female_adult")]
+position = Vector3(-150.5, 0.16, -178)
+rotation_degrees = Vector3(0, 182, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 1
+metadata/block = "Block_r1c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_002" parent="." groups=["pedestrians"] instance=ExtResource("2_business_f")]
+position = Vector3(-107, 0.16, -150.5)
+rotation_degrees = Vector3(0, -102, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 2
+metadata/block = "Block_r1c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_003" parent="." groups=["pedestrians"] instance=ExtResource("3_medical_f")]
+position = Vector3(-71.5, 0.16, -178)
+rotation_degrees = Vector3(0, 185, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 3
+metadata/block = "Block_r1c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_004" parent="." groups=["pedestrians"] instance=ExtResource("4_construction_m1")]
+position = Vector3(-12, 0.16, -140.5)
+rotation_degrees = Vector3(0, -99, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 4
+metadata/block = "Block_r1c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_005" parent="." groups=["pedestrians"] instance=ExtResource("5_delivery")]
+position = Vector3(31.5, 0.16, -178)
+rotation_degrees = Vector3(0, 188, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 5
+metadata/block = "Block_r1c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_006" parent="." groups=["pedestrians"] instance=ExtResource("6_male_adult")]
+position = Vector3(83, 0.16, -130.5)
+rotation_degrees = Vector3(0, -96, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 6
+metadata/block = "Block_r1c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_007" parent="." groups=["pedestrians"] instance=ExtResource("7_gardener")]
+position = Vector3(134.5, 0.16, -178)
+rotation_degrees = Vector3(0, 191, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 7
+metadata/block = "Block_r1c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_008" parent="." groups=["pedestrians"] instance=ExtResource("8_business_m1")]
+position = Vector3(178, 0.16, -160.5)
+rotation_degrees = Vector3(0, -93, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 8
+metadata/block = "Block_r1c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_009" parent="." groups=["pedestrians"] instance=ExtResource("9_chef")]
+position = Vector3(-166.5, 0.16, -83)
+rotation_degrees = Vector3(0, 194, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 9
+metadata/block = "Block_r2c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_010" parent="." groups=["pedestrians"] instance=ExtResource("10_female_adult_alt")]
+position = Vector3(-107, 0.16, -45.5)
+rotation_degrees = Vector3(0, -90, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 10
+metadata/block = "Block_r2c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_011" parent="." groups=["pedestrians"] instance=ExtResource("11_construction_m2")]
+position = Vector3(-63.5, 0.16, -83)
+rotation_degrees = Vector3(0, 166, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 11
+metadata/block = "Block_r2c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_012" parent="." groups=["pedestrians"] instance=ExtResource("5_delivery")]
+position = Vector3(-12, 0.16, -65.5)
+rotation_degrees = Vector3(0, -87, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 12
+metadata/block = "Block_r2c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_013" parent="." groups=["pedestrians"] instance=ExtResource("12_male_adult_alt")]
+position = Vector3(39.5, 0.16, -83)
+rotation_degrees = Vector3(0, 169, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 13
+metadata/block = "Block_r2c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_014" parent="." groups=["pedestrians"] instance=ExtResource("20_medical_f2")]
+position = Vector3(83, 0.16, -45.5)
+rotation_degrees = Vector3(0, -84, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 14
+metadata/block = "Block_r2c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_015" parent="." groups=["pedestrians"] instance=ExtResource("9_chef")]
+position = Vector3(118.5, 0.16, -83)
+rotation_degrees = Vector3(0, 172, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 15
+metadata/block = "Block_r2c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_016" parent="." groups=["pedestrians"] instance=ExtResource("14_construction_f")]
+position = Vector3(178, 0.16, -65.5)
+rotation_degrees = Vector3(0, -81, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 16
+metadata/block = "Block_r2c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_017" parent="." groups=["pedestrians"] instance=ExtResource("15_business_f2")]
+position = Vector3(-158.5, 0.16, 12)
+rotation_degrees = Vector3(0, 175, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 17
+metadata/block = "Block_r3c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_018" parent="." groups=["pedestrians"] instance=ExtResource("7_gardener")]
+position = Vector3(-107, 0.16, 59.5)
+rotation_degrees = Vector3(0, -78, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 18
+metadata/block = "Block_r3c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_019" parent="." groups=["pedestrians"] instance=ExtResource("5_delivery")]
+position = Vector3(-55.5, 0.16, 12)
+rotation_degrees = Vector3(0, 178, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 19
+metadata/block = "Block_r3c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_020" parent="." groups=["pedestrians"] instance=ExtResource("16_construction_m3")]
+position = Vector3(-12, 0.16, 49.5)
+rotation_degrees = Vector3(0, -75, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 20
+metadata/block = "Block_r3c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_021" parent="." groups=["pedestrians"] instance=ExtResource("17_business_m2")]
+position = Vector3(23.5, 0.16, 12)
+rotation_degrees = Vector3(0, 181, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 21
+metadata/block = "Block_r3c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_022" parent="." groups=["pedestrians"] instance=ExtResource("14_construction_f")]
+position = Vector3(83, 0.16, 39.5)
+rotation_degrees = Vector3(0, -103, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 22
+metadata/block = "Block_r3c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_023" parent="." groups=["pedestrians"] instance=ExtResource("18_construction_m4")]
+position = Vector3(126.5, 0.16, 12)
+rotation_degrees = Vector3(0, 184, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 23
+metadata/block = "Block_r3c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_024" parent="." groups=["pedestrians"] instance=ExtResource("5_delivery")]
+position = Vector3(178, 0.16, 29.5)
+rotation_degrees = Vector3(0, -100, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 24
+metadata/block = "Block_r3c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_025" parent="." groups=["pedestrians"] instance=ExtResource("18_construction_m4")]
+position = Vector3(-150.5, 0.16, 107)
+rotation_degrees = Vector3(0, 187, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 25
+metadata/block = "Block_r4c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_026" parent="." groups=["pedestrians"] instance=ExtResource("9_chef")]
+position = Vector3(-107, 0.16, 124.5)
+rotation_degrees = Vector3(0, -97, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 26
+metadata/block = "Block_r4c1"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_027" parent="." groups=["pedestrians"] instance=ExtResource("4_construction_m1")]
+position = Vector3(-71.5, 0.16, 107)
+rotation_degrees = Vector3(0, 190, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 27
+metadata/block = "Block_r4c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_028" parent="." groups=["pedestrians"] instance=ExtResource("5_delivery")]
+position = Vector3(-12, 0.16, 124.5)
+rotation_degrees = Vector3(0, -94, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 28
+metadata/block = "Block_r4c2"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_029" parent="." groups=["pedestrians"] instance=ExtResource("11_construction_m2")]
+position = Vector3(31.5, 0.16, 107)
+rotation_degrees = Vector3(0, 193, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 29
+metadata/block = "Block_r4c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_030" parent="." groups=["pedestrians"] instance=ExtResource("11_construction_m2")]
+position = Vector3(83, 0.16, 124.5)
+rotation_degrees = Vector3(0, -91, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 30
+metadata/block = "Block_r4c3"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_031" parent="." groups=["pedestrians"] instance=ExtResource("19_business_m3")]
+position = Vector3(134.5, 0.16, 107)
+rotation_degrees = Vector3(0, 165, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 31
+metadata/block = "Block_r4c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"
+
+[node name="Pedestrian_032" parent="." groups=["pedestrians"] instance=ExtResource("7_gardener")]
+position = Vector3(178, 0.16, 124.5)
+rotation_degrees = Vector3(0, -88, 0)
+scale = Vector3(1, 1, 1)
+metadata/pedestrian_index = 32
+metadata/block = "Block_r4c4"
+metadata/state = "walking"
+metadata/model_family = "rocketbox_realistic"

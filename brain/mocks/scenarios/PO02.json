@@ -1,0 +1,116 @@
+{
+  "id": "PO02",
+  "name": "A bin overflows",
+  "interaction": "Twin → Brain (waste)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "One bin (WGT-T003) fills past 90 % in zone C; the other bins are fine, so no truck round is needed, just that bin.",
+  "expected": {
+    "twin": "The bin's weight rises; once emptied it returns to the liner residue.",
+    "guardian": "Bin readings trusted.",
+    "brain": "Pollution: one bin above 90 %: send a crew to empty it (WGT-T003 empty); no garbage-truck round for a single bin."
+  },
+  "how_to_verify": "Map: the bin's zone highlighted, the Twin frames WGT-T003 while it fills; the empty command in the timeline; logs/PO02-*.jsonl. On the live Twin the scenario fills WGT-T003 itself (WGT-T003 fill 62 → 96 %, device API) and the Brain empties it once it passes 90 %.",
+  "duration_s": 40,
+  "speed": 2,
+  "live_duration_s": 90,
+  "steps": [
+    {
+      "at": 2,
+      "do": "ramp",
+      "device": "WGT-T003",
+      "metric": "fill_level",
+      "to": 96,
+      "over": 6,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 2,
+      "do": "twin_command",
+      "id": "WGT-T003",
+      "command": "fill",
+      "value": 62,
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 4,
+      "do": "twin_command",
+      "id": "WGT-T003",
+      "command": "fill",
+      "value": 76,
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 6,
+      "do": "twin_command",
+      "id": "WGT-T003",
+      "command": "fill",
+      "value": 88,
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 8,
+      "do": "twin_command",
+      "id": "WGT-T003",
+      "command": "fill",
+      "value": 96,
+      "modes": [
+        "live"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "expect": "action",
+      "actuator": "WGT-T003",
+      "command": "empty",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "no_action",
+      "action_type": "garbage_round",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "only_zone",
+      "zone": "G",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "WGT-T003",
+      "command": "empty",
+      "modes": [
+        "live"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py PO02   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "pollution",
+  "focus": {
+    "zone": "G",
+    "devices": [
+      "WGT-T003"
+    ]
+  }
+}

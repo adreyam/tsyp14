@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>City Ground Zero: system design</title>
+<style>
+@page { size: A4; margin: 14mm 15mm 13mm 15mm; }
+* { box-sizing: border-box; }
+body { font-family: "Helvetica Neue", Arial, "Liberation Sans", sans-serif; font-size: 9pt; line-height: 1.32; color: #1b2430; margin: 0; }
+h1 { font-size: 20pt; margin: 0 0 1mm; color: #0f2a4a; letter-spacing: -0.3px; }
+.sub { color: #5b6b7d; font-size: 10pt; margin-bottom: 4mm; }
+h2 { font-size: 12.2pt; color: #0f2a4a; margin: 4.2mm 0 1.4mm; padding-bottom: 0.8mm; border-bottom: 1.2px solid #c9d6e6; }
+h2, h3 { break-after: avoid; page-break-after: avoid; }
+svg, .note { break-inside: avoid; } tr { break-inside: avoid; }
+h3 { font-size: 9.8pt; margin: 2.4mm 0 0.6mm; color: #1f4f8a; }
+p { margin: 0 0 1.8mm; }
+ul { margin: 0 0 1.8mm 4.2mm; padding: 0; }
+li { margin-bottom: 0.7mm; }
+table { border-collapse: collapse; width: 100%; margin: 1.5mm 0 2.4mm; font-size: 8.6pt; }
+th, td { border: 1px solid #d3dce8; padding: 1.1mm 1.8mm; text-align: left; vertical-align: top; }
+th { background: #eaf1fa; color: #0f2a4a; }
+.cols { display: flex; gap: 5mm; }
+.cols > div { flex: 1; }
+.note { background: #f3f7fc; border-left: 3px solid #1f4f8a; padding: 1.4mm 2.6mm; margin: 1.6mm 0 2.2mm; }
+.kpi { display: flex; gap: 2.5mm; margin: 1mm 0 3mm; }
+.kpi div { flex: 1; background: #0f2a4a; color: #fff; border-radius: 2mm; padding: 2mm 2.4mm; text-align: center; }
+.kpi b { display: block; font-size: 14pt; }
+.kpi span { font-size: 7.6pt; opacity: .85; }
+svg text { font-family: "Helvetica Neue", Arial, sans-serif; }
+.break { page-break-before: always; }
+</style></head>
+<body>
+<h1>City Ground Zero</h1>
+<div class="sub">System design: how the city works, why it is built this way, and how its parts coordinate</div>
+<div class="kpi">
+ <div><b>4</b><span>cooperating programs</span></div>
+ <div><b>5</b><span>local message channels</span></div>
+ <div><b>15 Hz</b><span>traffic state stream</span></div>
+ <div><b>1</b><span>owner for every fact</span></div>
+ <div><b>566</b><span>sensors and actuators</span></div>
+</div>
+
+<h2>1. What the system is, and the principles behind it</h2>
+<p>City Ground Zero is a live smart-city simulator: a 3D city with traffic, emergency services, utilities and a society of citizens, instrumented with sensors and actuators that an operator, or any external program, can watch and control. It is not a single simulation but a <b>federation of specialised simulators and services</b> that share one world. Five design principles explain almost every choice in the system:</p>
+<ul>
+<li><b>Use the right engine for each job.</b> Road traffic is hard to get right (car following, lane changes, signals, right of way), so it is delegated to SUMO, a validated traffic simulator. The game engine (Godot) draws the world and hosts everything that is spatial or visual. Neither tries to do the other’s work.</li>
+<li><b>One owner per fact.</b> Every piece of state (a car’s position, a citizen’s wage, a reservoir’s level) has exactly one authoritative owner. Other parts hold read-only views or ask the owner to change it. This removes contradictions such as a car drawn where the simulator says it is not.</li>
+<li><b>Presentation never creates truth.</b> What you see (a 3D person at a bench) is a rendering of a record that exists in the simulation layer, never the other way round. A citizen does not get a job because a model happens to stand next to a prop.</li>
+<li><b>Loose coupling through small messages.</b> Parts run as separate programs and talk through compact local messages. Any part can be restarted, tested or replaced alone.</li>
+<li><b>Determinism and observability.</b> The population, agendas and work orders are reproducible and every decision carries a stated reason, so behaviour can be explained, replayed and tested.</li>
+</ul>
+
+<h2>2. The city plan and zones</h2>
+<p>The city is an <b>8 × 8 grid of districts</b> (64 blocks) with 81 junctions and 144 road links, 49 of them signal-controlled. Blocks are zoned as <b>downtown</b> (skyscrapers, hotels, commerce), <b>residential</b> (apartments and houses), <b>commercial and industrial</b> (workplaces and shops), <b>parks</b> (six, with irrigation) and <b>public services</b> (seven hospitals, police, emergency stations, six reservoir compounds and two renewable energy hubs). 224 buildings, kerb-aligned street furniture and a ring of overhead power lines complete the plan. The zoning is not decoration: it sets each block’s water and power demand, where citizens live and work, and where traffic and incidents concentrate.</p>
+
+<h2>3. Components and how they are joined</h2>
+<svg viewBox="0 0 780 300" width="100%" role="img" aria-label="Components and message channels">
+ <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#44546a"/></marker></defs>
+ <rect x="3" y="3" width="774" height="294" rx="8" fill="#f7fafd" stroke="#c9d6e6"/>
+ <rect x="16" y="26" width="196" height="140" rx="7" fill="#fff" stroke="#1f4f8a" stroke-width="1.6"/>
+ <text x="114" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2a4a">Traffic bridge (Python)</text>
+ <rect x="28" y="56" width="172" height="40" rx="5" fill="#eaf1fa" stroke="#8fb0d8"/><text x="114" y="73" text-anchor="middle" font-size="10" fill="#223">SUMO traffic engine</text><text x="114" y="87" text-anchor="middle" font-size="9" fill="#556">vehicles, signals, routes</text>
+ <rect x="28" y="104" width="172" height="52" rx="5" fill="#eaf1fa" stroke="#8fb0d8"/><text x="114" y="121" text-anchor="middle" font-size="10" fill="#223">Incident engine</text><text x="114" y="135" text-anchor="middle" font-size="9" fill="#556">crashes, fires, emergency fleet,</text><text x="114" y="147" text-anchor="middle" font-size="9" fill="#556">lane closures, police control</text>
+ <rect x="16" y="196" width="196" height="84" rx="7" fill="#fff" stroke="#1f4f8a" stroke-width="1.6"/>
+ <text x="114" y="218" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2a4a">Citizen planner (Python)</text>
+ <text x="114" y="236" text-anchor="middle" font-size="10" fill="#334">optional advice on routines</text><text x="114" y="250" text-anchor="middle" font-size="10" fill="#334">budget-limited, no authority</text>
+ <rect x="296" y="14" width="296" height="272" rx="9" fill="#eaf1fa" stroke="#0f2a4a" stroke-width="2"/>
+ <text x="444" y="36" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2a4a">Godot city application (one process)</text>
+ <rect x="308" y="48" width="132" height="44" rx="5" fill="#fff" stroke="#8fb0d8"/><text x="374" y="66" text-anchor="middle" font-size="10" fill="#223">City life / world</text><text x="374" y="80" text-anchor="middle" font-size="9" fill="#556">applies traffic state, signals</text>
+ <rect x="448" y="48" width="132" height="44" rx="5" fill="#fff" stroke="#8fb0d8"/><text x="514" y="66" text-anchor="middle" font-size="10" fill="#223">Incident presenters</text><text x="514" y="80" text-anchor="middle" font-size="9" fill="#556">wrecks, crews, fire, replay</text>
+ <rect x="308" y="100" width="132" height="44" rx="5" fill="#fff" stroke="#8fb0d8"/><text x="374" y="118" text-anchor="middle" font-size="10" fill="#223">Society kernel</text><text x="374" y="132" text-anchor="middle" font-size="9" fill="#556">citizens, jobs, work orders</text>
+ <rect x="448" y="100" width="132" height="44" rx="5" fill="#fff" stroke="#8fb0d8"/><text x="514" y="118" text-anchor="middle" font-size="10" fill="#223">Citizen embodiment</text><text x="514" y="132" text-anchor="middle" font-size="9" fill="#556">32 visible bodies, routes</text>
+ <rect x="308" y="152" width="132" height="44" rx="5" fill="#fff" stroke="#8fb0d8"/><text x="374" y="170" text-anchor="middle" font-size="10" fill="#223">Environment</text><text x="374" y="184" text-anchor="middle" font-size="9" fill="#556">clock, weather, lighting, speed</text>
+ <rect x="448" y="152" width="132" height="44" rx="5" fill="#fff" stroke="#8fb0d8"/><text x="514" y="170" text-anchor="middle" font-size="10" fill="#223">Utilities and grid</text><text x="514" y="184" text-anchor="middle" font-size="9" fill="#556">power, water, outages</text>
+ <rect x="308" y="204" width="272" height="30" rx="5" fill="#fff" stroke="#8fb0d8"/><text x="444" y="222" text-anchor="middle" font-size="10" fill="#223">Device registry: 566 sensors and actuators, one interface</text>
+ <rect x="308" y="244" width="272" height="30" rx="5" fill="#0f2a4a"/><text x="444" y="263" text-anchor="middle" font-size="10" fill="#fff">Control room: operator window, 6 tabs</text>
+ <rect x="650" y="40" width="116" height="62" rx="7" fill="#fff" stroke="#1f4f8a" stroke-width="1.6"/>
+ <text x="708" y="62" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2a4a">MCP server</text><text x="708" y="78" text-anchor="middle" font-size="9" fill="#334">tools for sensors</text><text x="708" y="90" text-anchor="middle" font-size="9" fill="#334">and actuators</text>
+ <rect x="650" y="160" width="116" height="62" rx="7" fill="#fff" stroke="#1f4f8a" stroke-width="1.6"/>
+ <text x="708" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2a4a">MCP clients</text><text x="708" y="198" text-anchor="middle" font-size="9" fill="#334">terminal, AI assistants,</text><text x="708" y="210" text-anchor="middle" font-size="9" fill="#334">other programs</text>
+ <line x1="212" y1="62" x2="294" y2="62" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/>
+ <text x="253" y="54" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1f4f8a">① state, UDP</text>
+ <line x1="294" y1="108" x2="214" y2="108" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/>
+ <text x="253" y="124" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1f4f8a">② commands, UDP</text>
+ <line x1="294" y1="226" x2="214" y2="226" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/><line x1="214" y1="246" x2="294" y2="246" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/>
+ <text x="253" y="218" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1f4f8a">③ request / answer</text>
+ <line x1="594" y1="70" x2="648" y2="70" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/><line x1="648" y1="90" x2="596" y2="90" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/>
+ <text x="621" y="62" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1f4f8a">④ TCP</text>
+ <line x1="708" y1="102" x2="708" y2="158" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/><line x1="722" y1="158" x2="722" y2="104" stroke="#44546a" stroke-width="1.7" marker-end="url(#a)"/>
+ <text x="744" y="134" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1f4f8a">⑤ stdio</text>
+</svg>
+<p>The four programs are started together by one launcher and talk only through the five channels in the figure; inside Godot the systems are separate nodes that exchange data through Godot’s own signals, scene groups and shared object metadata.</p>
+
+<h2 class="break">4. Movement of data between the parts</h2>
+<table>
+<tr><th style="width:3%">#</th><th style="width:19%">Channel</th><th style="width:18%">Transport</th><th style="width:60%">What moves, how often, and why this technique</th></tr>
+<tr><td>①</td><td>Traffic state: bridge → city</td><td>UDP, JSON, one packet per tick (about 15 per second, roughly 40 kB)</td><td>Every vehicle (position, heading, speed, size, class, stop reason), every signal head, incident and emergency-unit state, and an operator echo (paused, speed, weather). UDP because only the <i>latest</i> state matters: a lost packet is replaced 66 ms later, and there is no queue to back up. Godot decodes the packet on a worker thread and applies only the newest one, so a slow frame never builds a backlog.</td></tr>
+<tr><td>②</td><td>Commands: city → bridge</td><td>UDP, small JSON on a control port</td><td>Pause, resume, speed 1–8, weather and its traffic factor, signal phases, and incident requests. Operator commands are idempotent. Incident commands carry a request id; the bridge applies each once and keeps echoing an acknowledgement, while the sender resends every half second until it sees it. This gives <i>reliable delivery on top of cheap UDP</i>.</td></tr>
+<tr><td>③</td><td>Citizen planner</td><td>Local HTTP request/answer</td><td>A compact summary of a citizen goes out, an advisory suggestion (constrained intent or destination) comes back. It is budget-limited, falls back to a local rule if unavailable, and has no authority: the society kernel decides, so the world never depends on an external service being up.</td></tr>
+<tr><td>④</td><td>Device interface</td><td>TCP, one JSON object per line</td><td>Request/answer calls from the MCP server: list devices, read, command. Requests are handled on the main game loop, so a reading is a consistent snapshot of one frame and a command takes effect before the next one.</td></tr>
+<tr><td>⑤</td><td>MCP</td><td>Standard input/output, JSON-RPC 2.0</td><td>The industry-standard way for assistants and programs to call tools. Long-running reads send progress notifications and can be cancelled, so a live stream is an ordinary function call.</td></tr>
+</table>
+<div class="note"><b>Direction of flow.</b> Traffic truth flows <i>out of</i> SUMO into Godot continuously; intent flows <i>back</i> only as small commands. Everything else (citizens, utilities, devices) lives inside Godot and moves by direct reads of the owner’s state, which is faster and simpler than messaging within one process.</div>
+
+<h2>5. Time and synchronisation</h2>
+<p>A simulation made of several engines needs one notion of “now”. In City Ground Zero <b>SUMO is the master clock for the physical world</b>. Each wall-clock tick the bridge runs as many SUMO steps as the chosen speed demands (1–8×), executing <i>every</i> step of traffic and incident logic, and publishes only the last, so accelerated runs are never less correct, just coalesced for display. Godot follows: if SUMO cannot deliver the requested speed, the engine’s own time scale is eased down to the rate actually delivered, so people, crews, timers and the clock never run ahead of the traffic. Pausing is a command to the bridge, and the pause state is echoed back so every other part freezes together.</p>
+<p>On top of physical time sits the <b>city clock</b>: a day/night cycle whose pace the operator can set (from real time up to a day in minutes). The environment system owns it and drives lighting and weather; the society kernel advances its own “society minute” from the same clock, and when an operator jumps to a new time of day the change is pushed into the society so agendas, shifts and lighting stay consistent. This separation (physical time for movement, city time for lives) lets the operator fast-forward a day without breaking traffic.</p>
+
+<h2>6. Who owns what</h2>
+<table>
+<tr><th style="width:36%">Fact</th><th style="width:22%">Owner</th><th>Everyone else</th></tr>
+<tr><td>Position, speed, route of every road vehicle; signal phases; lane closures</td><td>SUMO (via the bridge)</td><td>Godot renders exactly what is published; vehicle sizes in SUMO equal the 3D models, so a visible contact is a simulated contact</td></tr>
+<tr><td>Incident choreography, emergency fleet lifecycle, junction police control</td><td>Incident engine (inside the bridge)</td><td>Presenters turn the published state into wrecks, crews, fire and replay</td></tr>
+<tr><td>Identity, money, jobs, households, agendas, work orders, trips</td><td>Society kernel</td><td>The embodiment layer shows a body for a citizen and reports completed work; the control room reads</td></tr>
+<tr><td>Clock, weather, light level</td><td>Environment system</td><td>Sensors, traffic factor, lights and the society read it</td></tr>
+<tr><td>Power and water stock, demand, outages</td><td>Utility system</td><td>Meters, lights, HUD and sensors are views of it</td></tr>
+</table>
+
+<h2>7. Traffic and incidents: how an emergency changes the road</h2>
+<p><b>Traffic.</b> About 200 vehicles circulate as a closed fleet: they enter at the perimeter and are rerouted legally forever, there is no teleporting and no invisible traffic that rendered cars could queue behind. About 68 of them are drawn in detail at a time. Vehicle classes (car, taxi, bus, police, ambulance, fire, tow, utility) are typed in the packet so each is drawn with the right body. Weather feeds back into behaviour: rain and storm lower a speed factor that SUMO applies to every driver.</p>
+<p><b>Why the incident engine lives next to SUMO.</b> An incident must <i>physically</i> change traffic, and only the traffic engine can do that. The engine therefore runs inside the bridge with direct access to SUMO: it choreographs a crash (approach, impact, slide, rest pose), closes lanes, grants controlled overtaking to queued cars, puts nearby junctions under a two-phase police program, reroutes traffic, and drives the emergency fleet. Godot then <i>presents</i> what it is told. There are eleven incident types: rear-end, red-light T-bone, unsafe overtake, secondary collision, breakdown, vehicle fire, lost load, building fire, water-main break, signal failure and garbage collection.</p>
+<p><b>Emergency lifecycle.</b> Each unit is always in exactly one state: stationed in its depot bay, dispatched, responding (lights on, permitted to take priority), on scene, then returning. Units are keyed by a stable unit id rather than by their SUMO vehicle, so they can pull out of a bay, drive on the real road network and park again without appearing or vanishing. On scene, presenter crews secure the area, treat people or fight the fire, and tow trucks clear wrecks only after the scene is secured. A recorder captures the published states so an incident can be replayed in a separate render layer that never touches live objects.</p>
+
+<h2>8. The society: separating life from appearance</h2>
+<p>The society kernel simulates <b>200 citizens in 80 households</b>, employed by 13 institutions, joined by a graph of about 440 relationships, all created deterministically so a run can be reproduced. Only 32 of them have a 3D body at any moment, but all of them live: their money, fatigue, jobs and agendas change whether or not they are on screen. The separation between the kernel (truth) and the embodiment layer (a body that carries out the truth) is the most important structural decision on the people side.</p>
+<ul>
+<li><b>Daily rhythm.</b> Each citizen has an agenda built from age and employment: sleep, household tasks, commute, work or school, meals, errands and leisure, return home. The activity at any moment is derived from the simulation clock, with the reason recorded. At day close wages and expenses are applied and agendas roll forward.</li>
+<li><b>Work orders.</b> Registered places in the world (a meter cabinet, hydrant, bin, planter) become institutional assets with a condition and a capacity. When an asset needs service the institution opens an order; a compatible, employed, free citizen is assigned with an exclusive reservation of the place. The body walks there over a collision-checked sidewalk graph, performs the work, and reports back; only then does the kernel close the order, change the asset’s condition and the institution’s budget, pay the citizen and choose the next assignment.</li>
+<li><b>Needs and social life.</b> Thirst, hunger, energy and boredom rise over time and send people to fountains, vending machines, benches or the coffee cart between jobs; afterwards litter goes into the nearest bin that has room. People who meet may stop and talk, and a completed social event strengthens the relationship edge between them.</li>
+<li><b>Trips and traffic feedback.</b> Every movement is a trip record (origin, destination, progress, status). Once a second the kernel stores a snapshot of the live traffic context, labelled clearly as live or as a local fallback, so citizens’ explanations can refer to real conditions without pretending to map one person to one SUMO car.</li>
+<li><b>Advice without authority.</b> The optional language-model planner can suggest, but cannot move bodies, change employment or complete an order.</li>
+</ul>
+
+<h2>9. Utilities: demand, supply and outages</h2>
+<p>The utility system models a <b>42,000 kWh power reserve</b> and <b>six reservoirs</b>. For each of the 64 blocks it computes demand from the actual building mix (a hospital, hotel or skyscraper consumes far more than a house), assigns the block to its nearest reservoir, and groups blocks into <b>service zones</b> that share meters and can be switched as a unit. Stocks fall with simulated time at the rate of demand, and a bookkeeping pass about five times a second updates meters, outages and the city HUD. Outages come from two sources: automatic load-shedding when supply is short, and operator cuts of a zone’s power or water. Their effects propagate through ordinary data rather than special cases: a cut zone’s meters read zero and report “supply offline”, its blocks are flagged and highlighted, and lights and sensors that depend on it change on the next sample. The power network is a graph of sources, feeders and three switch cabinets; opening a switch re-evaluates which consumers are still powered.</p>
+
+<h2 class="break">10. Sensors, actuators and the command path</h2>
+<p>All 566 devices are registered in one place and read from the live scene on demand: a traffic radar counts the simulated vehicles near it, an air monitor reflects exhaust and rain, a weight sensor on a bin reads what citizens actually threw in. The control room’s Sensors tab and every external client therefore see the same numbers. <b>Commands follow the same path as the operator’s buttons</b>, which is why an external command and a click are indistinguishable: a request is validated against the device’s allowed commands, then routed to the owner of that fact.</p>
+<table>
+<tr><th style="width:26%">Actuator</th><th style="width:30%">Routed to</th><th>Effect</th></tr>
+<tr><td>Traffic signals (phase)</td><td>Bridge over channel ② → SUMO</td><td>All controllers take the phase together; junctions under incident police control keep their safe program</td></tr>
+<tr><td>Power switch</td><td>Power grid graph</td><td>Feeder isolated; downstream consumers re-evaluated and shown unpowered</td></tr>
+<tr><td>Service zone cut / restore</td><td>Utility system</td><td>Zone’s power or water supply changes; meters, HUD and outage highlights follow</td></tr>
+<tr><td>Street light on / off / auto / dim</td><td>Environment lighting pass</td><td>Light output follows the override instead of the day/night curve</td></tr>
+<tr><td>Weather, clock, speed, pause</td><td>Environment system and bridge</td><td>Lighting, sensor values and traffic behaviour change; the clock and society are re-aligned</td></tr>
+<tr><td>Water and irrigation valves, bin emptying</td><td>Device state / waste system</td><td>State and indicators change; an emptied bin reads empty at once</td></tr>
+</table>
+<p>Each command answers with the readings before and after, so a caller can verify the effect without a second call.</p>
+
+<h2>11. Control room and terminal</h2>
+<p>The <b>control room</b> is a single window containing the live 3D viewport and six tabs: Control (time, weather, speed, camera, signals), Incidents, Assets (highlight any class of object in the city), Utilities, Society and Sensors. It is a <i>view and a remote control</i>: it reads public state from the owners and issues the same commands any other client could, which keeps it from becoming a second source of truth. The <b>MCP terminal</b> that opens beside it is deliberately just another client of the same interface, with no special access.</p>
+
+<h2>12. A scenario end to end</h2>
+<p>The table follows one scenario, a <i>rear-end crash during a storm at night</i>, to show how data moves and which part reacts.</p>
+<table>
+<tr><th style="width:4%">#</th><th style="width:30%">Step</th><th>What happens</th></tr>
+<tr><td>1</td><td>Operator sets night and storm</td><td>Environment updates the clock and weather, lights and sensors change; a weather command goes to the bridge, which lowers every driver’s speed factor; the society is re-aligned to the new time.</td></tr>
+<tr><td>2</td><td>Incident requested</td><td>A tagged command reaches the incident engine over channel ②, is acknowledged, and is retried until acknowledged.</td></tr>
+<tr><td>3</td><td>Crash choreographed in SUMO</td><td>Two vehicles are brought through approach, impact and rest pose; the lane is closed, queued cars are allowed to pass, the nearest junction goes under police control.</td></tr>
+<tr><td>4</td><td>State published (channel ①)</td><td>The next packets carry the wrecks, the closure and the dispatched units; Godot draws the scene and sirens begin.</td></tr>
+<tr><td>5</td><td>Sensors react</td><td>The nearby traffic radar reports occupancy rising and speed falling; air monitors register stopped traffic; the Sensors tab updates on the next sample.</td></tr>
+<tr><td>6</td><td>Response</td><td>Units leave their depots in response mode, secure the scene; crews treat; the tow truck clears the wreck; units return and the closure is lifted.</td></tr>
+<tr><td>7</td><td>Remote operator</td><td>An external client streams the radar, reads the summary of air quality, opens a power switch and watches the affected zone’s meters before and after, all through the same interface.</td></tr>
+</table>
+
+<h2>13. Technology choices</h2>
+<table>
+<tr><th style="width:24%">Layer</th><th>Choice and reason</th></tr>
+<tr><td>World, rendering, city systems</td><td><b>Godot 4</b>: free, scriptable and fast to iterate; one process hosts world, control room and device interface so internal data moves by direct reads.</td></tr>
+<tr><td>Traffic</td><td><b>Eclipse SUMO</b> with TraCI: validated car following, lane changing, signals and routing, controllable step by step.</td></tr>
+<tr><td>Engines and services</td><td><b>Python</b>: the traffic bridge, incident engine, citizen planner and MCP server; quick to write and close to SUMO’s tooling.</td></tr>
+<tr><td>Messaging</td><td>Local <b>UDP</b> for streams and commands (latest state wins), <b>TCP</b> and <b>HTTP</b> for request/answer, <b>JSON</b> everywhere for readability; <b>JSON-RPC over stdio</b> for MCP.</td></tr>
+<tr><td>Assets</td><td>Poly Pizza, Poly Haven, Kenney and Quaternius models (CC0 / CC-BY) and Microsoft Rocketbox avatars (MIT), all self-contained in the project.</td></tr>
+</table>
+</body></html>

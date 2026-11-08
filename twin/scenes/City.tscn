@@ -1,0 +1,210 @@
+[gd_scene load_steps=29 format=3]
+
+[ext_resource type="Script" path="res://scripts/static_mesh_batcher.gd" id="90_batcher"]
+[ext_resource type="PackedScene" path="res://scenes/Roads.tscn" id="1_roads"]
+[ext_resource type="PackedScene" path="res://scenes/Buildings.tscn" id="2_buildings"]
+[ext_resource type="PackedScene" path="res://scenes/Vehicles.tscn" id="3_vehicles"]
+[ext_resource type="PackedScene" path="res://scenes/Pedestrians.tscn" id="4_pedestrians"]
+[ext_resource type="PackedScene" path="res://scenes/Actuators.tscn" id="5_actuators"]
+[ext_resource type="Script" path="res://scripts/free_look_camera.gd" id="6_camera"]
+[ext_resource type="PackedScene" path="res://scenes/CityBackdrop.tscn" id="7_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/Sensors.tscn" id="8_sensors"]
+[ext_resource type="PackedScene" path="res://scenes/UrbanProps.tscn" id="9_props"]
+[ext_resource type="Script" path="res://scripts/city_life_controller.gd" id="10_life"]
+[ext_resource type="Script" path="res://scripts/npc_ai_controller.gd" id="11_npc_ai"]
+[ext_resource type="Script" path="res://scripts/traffic_camera_system.gd" id="13_traffic_cameras"]
+[ext_resource type="PackedScene" path="res://scenes/WaterReservoirs.tscn" id="14_reservoirs"]
+[ext_resource type="PackedScene" path="res://scenes/PowerGrid.tscn" id="15_power_grid"]
+[ext_resource type="PackedScene" path="res://scenes/UtilityResourceSystem.tscn" id="16_utility_resources"]
+[ext_resource type="Script" path="res://scripts/smart_city_asset_system.gd" id="17_smart_assets"]
+[ext_resource type="Script" path="res://scripts/incidents/incident_manager.gd" id="18_incidents"]
+[ext_resource type="Script" path="res://scripts/environment_system.gd" id="19_environment"]
+[ext_resource type="Script" path="res://scripts/bin_weight_system.gd" id="20_bin_weights"]
+[ext_resource type="Script" path="res://scripts/zone_overlay.gd" id="21_zone_overlay"]
+[ext_resource type="Script" path="res://scripts/earthquake_system.gd" id="22_earthquakes"]
+[ext_resource type="Script" path="res://scripts/parking/parking_lot_presenter.gd" id="23_parking"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_city"]
+rayleigh_coefficient = 2.3
+rayleigh_color = Color(0.42, 0.64, 1, 1)
+mie_coefficient = 0.008
+mie_eccentricity = 0.72
+sun_disk_scale = 2.2
+ground_color = Color(0.18, 0.19, 0.2, 1)
+
+[sub_resource type="Sky" id="Sky_city"]
+sky_material = SubResource("PhysicalSkyMaterial_city")
+process_mode = 2
+radiance_size = 3
+
+[sub_resource type="Environment" id="Environment_city"]
+background_mode = 2
+sky = SubResource("Sky_city")
+background_energy_multiplier = 0.86
+ambient_light_source = 3
+ambient_light_color = Color(0.72, 0.79, 0.9, 1)
+ambient_light_energy = 0.52
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.94
+adjustment_enabled = true
+adjustment_brightness = 0.98
+adjustment_contrast = 1.08
+adjustment_saturation = 0.97
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.4
+fog_enabled = true
+fog_light_color = Color(0.64, 0.70, 0.77, 1)
+fog_light_energy = 0.36
+fog_density = 0.00065
+fog_aerial_perspective = 0.45
+fog_sun_scatter = 0.12
+ssil_enabled = true
+ssil_radius = 7.0
+ssil_intensity = 0.65
+ssil_sharpness = 0.94
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.52
+glow_strength = 0.82
+glow_bloom = 0.06
+glow_hdr_threshold = 1.15
+
+[sub_resource type="StandardMaterial3D" id="GroundMaterial"]
+albedo_color = Color(0.19, 0.27, 0.19, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="GroundMesh"]
+material = SubResource("GroundMaterial")
+size = Vector3(1100, 0.5, 1100)
+
+[node name="City" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_city")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-36, -42, 0)
+light_color = Color(1, 0.82, 0.67, 1)
+light_energy = 1.28
+light_angular_distance = 0.42
+shadow_enabled = true
+shadow_opacity = 0.72
+shadow_blur = 1.35
+shadow_bias = 0.035
+shadow_normal_bias = 0.9
+directional_shadow_max_distance = 320.0
+directional_shadow_blend_splits = true
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.25
+directional_shadow_split_3 = 0.55
+
+[node name="SkyFill" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, 132, 0)
+light_color = Color(0.58, 0.72, 1, 1)
+light_energy = 0.16
+shadow_enabled = false
+
+[node name="EstablishingCamera" type="Camera3D" parent="."]
+position = Vector3(365, 195, 415)
+rotation_degrees = Vector3(-17.8, 41.3, 0)
+current = true
+fov = 48.0
+far = 1600.0
+script = ExtResource("6_camera")
+
+[node name="CityGround" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.25, 0)
+mesh = SubResource("GroundMesh")
+
+[node name="Roads" parent="." instance=ExtResource("1_roads")]
+
+[node name="Buildings" parent="." instance=ExtResource("2_buildings")]
+
+[node name="Vehicles" parent="." instance=ExtResource("3_vehicles")]
+
+[node name="Pedestrians" parent="." instance=ExtResource("4_pedestrians")]
+
+[node name="Actuators" parent="." instance=ExtResource("5_actuators")]
+
+[node name="CityBackdrop" parent="." instance=ExtResource("7_backdrop")]
+
+[node name="Sensors" parent="." instance=ExtResource("8_sensors")]
+
+[node name="UrbanProps" parent="." instance=ExtResource("9_props")]
+
+[node name="WaterReservoirs" parent="." instance=ExtResource("14_reservoirs")]
+
+[node name="PowerGrid" parent="." instance=ExtResource("15_power_grid")]
+
+[node name="UtilityResources" parent="." instance=ExtResource("16_utility_resources")]
+
+[node name="SmartCityAssets" type="Node3D" parent="."]
+script = ExtResource("17_smart_assets")
+
+[node name="EnvironmentSystem" type="Node" parent="."]
+script = ExtResource("19_environment")
+
+[node name="BinWeights" type="Node" parent="."]
+script = ExtResource("20_bin_weights")
+
+[node name="ZoneOverlay" type="Node3D" parent="."]
+script = ExtResource("21_zone_overlay")
+
+[node name="Earthquakes" type="Node" parent="."]
+script = ExtResource("22_earthquakes")
+
+[node name="ParkingLots" type="Node3D" parent="."]
+script = ExtResource("23_parking")
+
+[node name="CityLife" type="Node" parent="."]
+script = ExtResource("10_life")
+
+[node name="NpcAi" type="Node" parent="."]
+script = ExtResource("11_npc_ai")
+
+[node name="Incidents" type="Node3D" parent="."]
+script = ExtResource("18_incidents")
+
+[node name="TrafficCameraSystem" type="Node3D" parent="."]
+script = ExtResource("13_traffic_cameras")
+
+[node name="CameraControls" type="CanvasLayer" parent="."]
+
+[node name="Help" type="Label" parent="CameraControls"]
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 980.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.96, 0.98, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.03, 0.04, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "LIVE CITY + SUMO TRAFFIC  •  PERSISTENT 200-CITIZEN SOCIETY  •  PBR + ACES + TAA
+Click: Frame  |  Drag: Pan  |  RMB drag: Orbit  |  Wheel: Zoom to cursor  |  Alt+RMB: Free Look  |  V: First-Person  |  Esc: Release  |  WASD/Arrows + Q/E: Move  |  MMB: Orbit (Shift pan, Ctrl dolly)  |  F/H/R: Views"
+
+[node name="SelectionStatus" type="Label" parent="CameraControls"]
+offset_left = 18.0
+offset_top = 76.0
+offset_right = 1050.0
+offset_bottom = 106.0
+theme_override_colors/font_color = Color(0.72, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.03, 0.04, 0.95)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 16
+text = "SELECT: click a model to frame it  •  drag: pan  •  RMB: orbit  •  wheel: zoom to cursor  •  V: first-person  •  Esc: release"
+
+[node name="SumoStatus" type="Label" parent="CameraControls"]
+offset_left = 18.0
+offset_top = 106.0
+offset_right = 760.0
+offset_bottom = 136.0
+theme_override_colors/font_color = Color(0.55, 1, 0.66, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.03, 0.04, 0.95)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 16
+text = "SUMO STARTING  •  local traffic fallback active"
+
+[node name="StaticMeshBatcher" type="Node" parent="."]
+script = ExtResource("90_batcher")

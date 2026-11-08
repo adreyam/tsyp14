@@ -1,0 +1,43 @@
+{
+  "id": "SY03",
+  "name": "The link to the Twin drops and comes back",
+  "interaction": "Twin → Brain (partner failure)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "The Brain's connection to the Twin is cut for 15 s (fault injected on the Brain's side of the link), then restored.",
+  "expected": {
+    "twin": "Keeps running; unreachable for the Brain for 15 s.",
+    "guardian": "-",
+    "brain": "Reports 'Twin unreachable' at once (status, timeline, red badge), keeps its state, resumes when the link is back. With fallback.auto_switch_to_mock it would switch to mock."
+  },
+  "how_to_verify": "Dashboard badge turns red then green; timeline system lines; logs/SY03-*.jsonl. Also try it for real: close the Godot window and reopen it.",
+  "duration_s": 40,
+  "speed": 2,
+  "live_duration_s": 40,
+  "steps": [
+    {
+      "at": 4,
+      "do": "cut_link",
+      "seconds": 15
+    }
+  ],
+  "checks": [
+    {
+      "expect": "system",
+      "contains": "unreachable"
+    },
+    {
+      "expect": "system",
+      "contains": "connected"
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py SY03   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "system",
+  "focus": {}
+}

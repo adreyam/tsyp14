@@ -1,0 +1,41 @@
+{
+ "id": "T6",
+ "started": "2026-11-05T22:55:37.532Z",
+ "finished": "2026-11-05T22:56:09.322Z",
+ "pass": true,
+ "checks": [
+  {
+   "text": "the gate refused d13 (lane BLOCKED)",
+   "ok": true
+  },
+  {
+   "text": "the alert DUPLICATE_ENTRY is on the timeline",
+   "ok": true
+  },
+  {
+   "text": "the Brain reported the security event to the Guardian",
+   "ok": true
+  },
+  {
+   "text": "the entrance barrier did NOT open for the duplicate (no 'open' command sent to the Twin while the lane is blocked)",
+   "ok": true
+  },
+  {
+   "text": "the administrator allowed a visitor card",
+   "ok": true
+  },
+  {
+   "text": "d13 received a ticket with a temporary card (not the registered tag)",
+   "ok": true
+  },
+  {
+   "text": "d13 parked",
+   "ok": true
+  },
+  {
+   "text": "d13 left with the card returned (session closed)",
+   "ok": true
+  }
+ ],
+ "log": "T6-20261105-235537.log"
+}

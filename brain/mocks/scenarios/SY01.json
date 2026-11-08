@@ -1,0 +1,45 @@
+{
+  "id": "SY01",
+  "name": "Calm day: the Brain must not overreact",
+  "interaction": "Twin → Brain",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "A normal weekday morning: traffic, air, noise, water, power and seismic readings all vary with their usual noise. Nothing is wrong.",
+  "expected": {
+    "twin": "Streams normal readings for every device.",
+    "guardian": "Every reading trusted.",
+    "brain": "Reads everything, opens no alert, sends no emergency, traffic, energy or car-park command (routine bin service is allowed)."
+  },
+  "how_to_verify": "Timeline: readings and no decision; logs/SY01-*.jsonl ends with PASS.",
+  "duration_s": 120,
+  "speed": 4,
+  "live_duration_s": 120,
+  "steps": [],
+  "checks": [
+    {
+      "expect": "no_action",
+      "agent": "emergency"
+    },
+    {
+      "expect": "no_action",
+      "agent": "transportation"
+    },
+    {
+      "expect": "no_action",
+      "agent": "energy"
+    },
+    {
+      "expect": "no_action",
+      "actuator_prefix": "LOT-"
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py SY01   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "system",
+  "focus": {}
+}

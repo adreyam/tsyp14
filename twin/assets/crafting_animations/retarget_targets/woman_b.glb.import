@@ -1,0 +1,68 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://djwd1x74o2xqp"
+path="res://.godot/imported/woman_b.glb-ed2375d072e265cfb9e06ba1bc280e7d.scn"
+
+[deps]
+
+source_file="res://assets/crafting_animations/retarget_targets/woman_b.glb"
+dest_files=["res://.godot/imported/woman_b.glb-ed2375d072e265cfb9e06ba1bc280e7d.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"nodes": {
+"PATH:RootNode/CharacterArmature/Skeleton3D": {
+"retarget/bone_map": Resource("res://assets/crafting_animations/poly_pizza_humanoid_bone_map.tres"),
+"retarget/bone_renamer/rename_bones": true,
+"retarget/bone_renamer/unique_node/make_unique": true,
+"retarget/bone_renamer/unique_node/skeleton_name": "GeneralSkeleton",
+"retarget/remove_tracks/except_bone_transform": false,
+"retarget/remove_tracks/unimportant_positions": true,
+"retarget/remove_tracks/unmapped_bones": 1,
+"retarget/rest_fixer/apply_node_transforms": true,
+"retarget/rest_fixer/fix_silhouette/base_height_adjustment": 0.0,
+"retarget/rest_fixer/fix_silhouette/enable": true,
+"retarget/rest_fixer/fix_silhouette/filter": Array[StringName]([]),
+"retarget/rest_fixer/fix_silhouette/threshold": 15.0,
+"retarget/rest_fixer/keep_global_rest_on_leftovers": true,
+"retarget/rest_fixer/normalize_position_tracks": true,
+"retarget/rest_fixer/original_skeleton_name": "OriginalSkeleton",
+"retarget/rest_fixer/reset_all_bone_poses_after_import": true,
+"retarget/rest_fixer/retarget_method": 1,
+"retarget/rest_fixer/use_global_pose": true
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1
+gltf/texture_map_mode=1

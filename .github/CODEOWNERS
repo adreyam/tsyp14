@@ -1,0 +1,27 @@
+# Each team commits only inside its own folder (Phase 1 specification, repository structure).
+# Replace each handle with the team's real GitHub accounts (users or @org/team), then turn on
+# "Require review from Code Owners" in Settings > Branches so the rule is enforced.
+
+# Twin team
+/twin/                            @twin-team
+
+# City Brain team (and its four axes)
+/brain/                           @brain-team
+/brain/axes/emergency/            @brain-team @emergency-axis
+/brain/axes/transportation/       @brain-team @transportation-axis
+/brain/axes/pollution/            @brain-team @pollution-axis
+/brain/axes/energy/               @brain-team @energy-axis
+
+# Guardian team
+/guardian/                        @guardian-team
+
+# Shared by the triplet
+/README.md                        @twin-team @brain-team @guardian-team
+/INTEGRATION.md                   @twin-team @brain-team @guardian-team
+/TESTBOOK.md                      @twin-team @brain-team @guardian-team
+/docker-compose.yml               @twin-team @brain-team @guardian-team
+/start_city.sh                    @twin-team @brain-team @guardian-team
+/scenarios/                       @twin-team @brain-team @guardian-team
+/logs/                            @twin-team @brain-team @guardian-team
+/docs/                            @twin-team @brain-team @guardian-team
+/.github/                         @twin-team @brain-team @guardian-team

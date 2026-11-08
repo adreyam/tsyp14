@@ -1,0 +1,12 @@
+{
+  "_comment": "Example for a joint run on a local router: replace the addresses with your partners' machines. Listen on 0.0.0.0 so the Twin can reach this laptop.",
+  "listen":   { "host": "0.0.0.0", "port": 8100 },
+  "twin":     { "url": "http://192.168.1.20:8200" },
+  "guardian": { "url": "http://192.168.1.30:8300" },
+  "auth":     { "brain_token_env": "BRAIN_TOKEN", "twin_token_env": "TWIN_TOKEN" },
+  "map":      { "source": "twin" },
+  "city":     { "depot_node": "TO_AGREE", "truck_capacity_kg": 2000, "horizon_stops": 3, "reading_interval_s": 300 },
+  "cycle_s":  1.0,
+  "clock":    "twin",
+  "log_path": "../../logs/JOINT-RUN.jsonl"
+}

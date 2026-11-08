@@ -1,0 +1,479 @@
+SCENARIO EN01 · Protect the hospital
+Result: STOPPED   Source: live   Duration: 69 s   Stopped at 68.8 s
+
+What it tests: From the energy Brain's E4. The grid reserve falls (UTILITY set_reserve 22 %, then 12 %) while
+  the hospital zones are the city's largest loads (zone F the largest, zone K next). Load must be shed, but
+  never where the hospitals are.
+
+Undone on the Twin after the stop: UTILITY recharge_all, UTILITY auto_recharge_on
+
+WHAT HAPPENED (time from the start of the run)
+
++   1 s  POLLUTION      Air quality in zone F
+                         why: AIR-01: risk score 141 driven by pm2_5 21.1 µg/m³ (guideline 15 µg/m³; levels
+                           70/100/130); held for 3 readings
+
++   1 s  POLLUTION      Air quality in zone G
+                         why: AIR-08: risk score 340 driven by pm2_5 51.0 µg/m³ (guideline 15 µg/m³; levels
+                           70/100/130); held for 3 readings
+                   +   1 s  asks: pollution → transportation: close_car_parks (zone G) because air risk 340 in
+                     zone G: fewer cars should drive in
+                   +   1 s  command: LOT-04 closed -> done
+                   +   1 s  answer: transportation → pollution: close_car_parks completed: Twin applied LOT-04
+                     closed: LOT-04 barrier set to closed
+
++   2 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 3 readings
+                           in a row
+                   +   2 s  command: signal r6c4 north-south green -> done
+
++   3 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 4 readings
+                           in a row
+
++   5 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 5 readings
+                           in a row
+
++   5 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 3 readings
+                           in a row
+                   +   5 s  command: signal r3c6 east-west green -> done
+
++   6 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 4 readings
+                           in a row
+
++   6 s  ENERGY         Ignored GRID-01 (untrusted)
+                   +   6 s  not sent: Ignored GRID-01 (untrusted): energy_level jumped 94.8 -> 22 in 2.6 s,
+                     faster than the physics allows. No decision is taken on this data.
+
++   7 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 5 readings
+                           in a row
+
++   7 s  ENERGY         Grid reserve low
+                         why: GRID-01 reserve 22 % (alert 25 %, shed 15 %), demand 900 kW
+                   +   7 s  command: LIGHTS dim 0.6 -> done
+
++   7 s  BRAIN          Unrouted
+                   +   7 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-NorthCentral)
+
++   7 s  BRAIN          Unrouted
+                   +   7 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-SouthCentral)
+
++   8 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 86 % (limit 70) and speed 10 km/h (limit 12) for 3 readings
+                           in a row
+                   +   8 s  command: signal r4c5 east-west green -> done
+
++   9 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 86 % (limit 70) and speed 7 km/h (limit 12) for 4 readings in
+                           a row
+
++   9 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 6 readings
+                           in a row
+
++  15 s  TRANSPORTATION Traffic jam at TRAF-04, zone K
+                         why: TRAF-04: occupancy 88 % (limit 70) and speed 1 km/h (limit 12) for 3 readings in
+                           a row
+                   +  15 s  command: signal r6c6 north-south green -> done
+
++  16 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 92 % (limit 70) and speed 7 km/h (limit 12) for 5 readings in
+                           a row
+
++  16 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 7 readings
+                           in a row
+
++  16 s  BRAIN          Unrouted
+                   +  16 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-NorthWest)
+
++  16 s  BRAIN          Unrouted
+                   +  16 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-SouthEast)
+
++  22 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 6 readings
+                           in a row
+
++  22 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 8 readings
+                           in a row
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-02)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-03)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-04)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-05)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-06)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-07)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-08)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-09)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-10)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-11)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-12)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-13)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-14)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-15)
+
++  22 s  BRAIN          Unrouted
+                   +  22 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-16)
+
++  28 s  POLLUTION      Air quality in zone F
+                         why: AIR-02: risk score 123 driven by pm2_5 18.5 µg/m³ (guideline 15 µg/m³; levels
+                           70/100/130); held for 3 readings
+
++  28 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 7 readings
+                           in a row
+
++  28 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 9 readings
+                           in a row
+
++  28 s  BRAIN          Unrouted
+                   +  28 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-NorthEast)
+
++  31 s  TRANSPORTATION Traffic jam at TRAF-04, zone K
+                         why: TRAF-04: traffic flowing again (24 km/h, 65 %) for 3 readings
+                   +  31 s  command: signal r6c6 back to normal cycle -> done
+
++  31 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 8 readings
+                           in a row
+
++  31 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 10 readings
+                           in a row
+
++  31 s  BRAIN          Unrouted
+                   +  31 s  not sent: Unrouted: no agent handles family 'water_meter' (WTR-01)
+
++  31 s  BRAIN          Unrouted
+                   +  31 s  not sent: Unrouted: no agent handles family 'reservoir' (RSV-SouthWest)
+
++  31 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 3 readings
+                           in a row
+                   +  31 s  command: signal r4c4 north-south green -> done
+
++  31 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 9 readings
+                           in a row
+
++  31 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 3 readings
+                           in a row
+
++  32 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 4 readings
+                           in a row
+
++  32 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 10 readings
+                           in a row
+
++  32 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 4 readings
+                           in a row
+
++  32 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 11 readings
+                           in a row
+
++  33 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 5 readings
+                           in a row
+
++  33 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 11 readings
+                           in a row
+
++  34 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 6 readings
+                           in a row
+
++  34 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 82 % (limit 70) and speed 7 km/h (limit 12) for 3 readings in
+                           a row
+                   +  34 s  command: signal r5c5 north-south green -> done
+
++  34 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 12 readings
+                           in a row
+
++  35 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 13 readings
+                           in a row
+
++  35 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 12 readings
+                           in a row
+
++  36 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 7 readings
+                           in a row
+
++  37 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 8 readings
+                           in a row
+
++  37 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 14 readings
+                           in a row
+
++  37 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 13 readings
+                           in a row
+
++  38 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 9 readings
+                           in a row
+
++  38 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 15 readings
+                           in a row
+
++  38 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 5 readings
+                           in a row
+
++  39 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 91 % (limit 70) and speed 1 km/h (limit 12) for 6 readings in
+                           a row
+
++  39 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 16 readings
+                           in a row
+
++  39 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 6 readings
+                           in a row
+
++  40 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 17 readings
+                           in a row
+
++  40 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 7 readings
+                           in a row
+
++  41 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 88 % (limit 70) and speed 4 km/h (limit 12) for 7 readings in
+                           a row
+
++  41 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 18 readings
+                           in a row
+
++  41 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 8 readings
+                           in a row
+
++  41 s  ENERGY         Grid reserve low
+                         why: GRID-01 reserve 12 % (alert 25 %, shed 15 %), demand 900 kW
+                   +  41 s  command: zone J power cut power -> done
+
++  42 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 10 readings
+                           in a row
+
++  42 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 88 % (limit 70) and speed 5 km/h (limit 12) for 8 readings in
+                           a row
+
++  42 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 19 readings
+                           in a row
+
++  42 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 9 readings
+                           in a row
+
++  46 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 11 readings
+                           in a row
+
++  46 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: occupancy 91 % (limit 70) and speed 1 km/h (limit 12) for 9 readings in
+                           a row
+
++  46 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 20 readings
+                           in a row
+
++  46 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 10 readings
+                           in a row
+
++  47 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 12 readings
+                           in a row
+
++  47 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 10 km/h (limit 12) for 21 readings
+                           in a row
+
++  47 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 11 readings
+                           in a row
+
++  47 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 9 km/h (limit 12) for 14 readings
+                           in a row
+
++  48 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 22 readings
+                           in a row
+
++  48 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 15 readings
+                           in a row
+
++  49 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 23 readings
+                           in a row
+
++  49 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 16 readings
+                           in a row
+
++  49 s  TRANSPORTATION Traffic jam at TRAF-03, zone K
+                         why: TRAF-03: traffic flowing again (8 km/h, 61 %) for 3 readings
+                   +  49 s  command: signal r5c5 back to normal cycle -> done
+
++  50 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 24 readings
+                           in a row
+
++  50 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 17 readings
+                           in a row
+
++  51 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 25 readings
+                           in a row
+
++  51 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 18 readings
+                           in a row
+
++  51 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 4 readings
+                           in a row
+
++  51 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 12 km/h (limit 12) for 26 readings
+                           in a row
+
++  51 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 90 % (limit 70) and speed 5 km/h (limit 12) for 3 readings in
+                           a row
+
++  51 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 19 readings
+                           in a row
+
++  53 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 27 readings
+                           in a row
+
++  53 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 90 % (limit 70) and speed 12 km/h (limit 12) for 4 readings
+                           in a row
+
++  53 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 20 readings
+                           in a row
+
++  53 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 28 readings
+                           in a row
+
++  53 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 21 readings
+                           in a row
+
++  55 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 29 readings
+                           in a row
+
++  55 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 22 readings
+                           in a row
+
++  55 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 30 readings
+                           in a row
+
++  64 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: traffic flowing again (12 km/h, 55 %) for 3 readings
+                   +  64 s  command: signal r4c5 back to normal cycle -> done
+
++  68 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 23 readings
+                           in a row
+
++  68 s  TRANSPORTATION Traffic jam at TRAF-02, zone F
+                         why: TRAF-02: traffic flowing again (9 km/h, 57 %) for 3 readings
+                   +  68 s  command: signal r4c4 back to normal cycle -> done
+
++  68 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 3 readings
+                           in a row
+
++  68 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 7 km/h (limit 12) for 24 readings
+                           in a row
+
++  70 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 4 readings
+                           in a row
+
++  70 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 25 readings
+                           in a row
+
++  71 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 5 readings
+                           in a row
+
++  71 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 11 km/h (limit 12) for 26 readings
+                           in a row
+
+BY AXIS
+  brain            0 decision(s),   0 command(s), 22 refused / not sent
+  energy          10 decision(s),   2 command(s),  1 refused / not sent
+  pollution        9 decision(s),   1 command(s),  0 refused / not sent
+  transportation  98 decision(s),  10 command(s),  0 refused / not sent
+
+Full record (every reading, verdict and answer, one JSON per line): EN01-20261108-203501.jsonl

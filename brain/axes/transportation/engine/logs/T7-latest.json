@@ -1,0 +1,37 @@
+{
+ "id": "T7",
+ "started": "2026-11-05T22:56:19.448Z",
+ "finished": "2026-11-05T22:56:30.365Z",
+ "pass": true,
+ "checks": [
+  {
+   "text": "the emergency call was accepted and a vehicle dispatched in spite of the attack",
+   "ok": true
+  },
+  {
+   "text": "the fake sensor was isolated",
+   "ok": true
+  },
+  {
+   "text": "the flooding device was quarantined",
+   "ok": true
+  },
+  {
+   "text": "signals gave the ambulance priority (Twin received priority_green for it)",
+   "ok": true
+  },
+  {
+   "text": "the city kept running: simulation time advanced (135 s) and mean waiting time is 4.3 s (< 60 s)",
+   "ok": true
+  },
+  {
+   "text": "signal learning is still on",
+   "ok": true
+  },
+  {
+   "text": "the space P01-A3 is still assignable",
+   "ok": true
+  }
+ ],
+ "log": "T7-20261105-235619.log"
+}

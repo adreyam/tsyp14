@@ -1,0 +1,37 @@
+{
+ "id": "T8",
+ "started": "2026-11-06T18:11:12.966Z",
+ "finished": "2026-11-06T18:12:05.486Z",
+ "pass": true,
+ "checks": [
+  {
+   "text": "the Brain accepted the jam test",
+   "ok": true
+  },
+  {
+   "text": "all 300 extra cars entered the city",
+   "ok": true
+  },
+  {
+   "text": "a real jam formed (cars standing still rose from 45 to 92)",
+   "ok": true
+  },
+  {
+   "text": "the city got moving again (standing cars back to normal)",
+   "ok": true
+  },
+  {
+   "text": "it recovered within 20 simulated minutes (850 s) [threshold chosen by the team, change in run.py]",
+   "ok": true
+  },
+  {
+   "text": "the timeline recorded the start and the end of the jam",
+   "ok": true
+  },
+  {
+   "text": "signal learning/policy kept running during the jam",
+   "ok": true
+  }
+ ],
+ "log": "T8-20261106-191112.log"
+}

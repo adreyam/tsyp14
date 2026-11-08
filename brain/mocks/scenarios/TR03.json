@@ -1,0 +1,60 @@
+{
+  "id": "TR03",
+  "name": "Signal failure at a junction",
+  "interaction": "Twin → Brain (transportation)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "A junction's signal controller fails in zone K (INCIDENTS trigger signal_failure at Junction_r6_c6); the Twin sends a police car to direct the traffic.",
+  "expected": {
+    "twin": "The signal goes dark; a police car drives there from its patrol or the police HQ.",
+    "guardian": "Incident trusted.",
+    "brain": "Transportation: restarts the junction's normal cycle (reset_cycle); green wave for the police car on its way."
+  },
+  "how_to_verify": "Map: the junction's zone highlighted, the camera follows the police car; the junction's reset_cycle in the timeline; logs/TR03-*.jsonl.",
+  "duration_s": 60,
+  "speed": 4,
+  "live_duration_s": 200,
+  "steps": [
+    {
+      "at": 2,
+      "do": "twin_command",
+      "id": "INCIDENTS",
+      "command": "trigger",
+      "value": {
+        "kind": "signal_failure",
+        "junction": "Junction_r6_c6"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "expect": "situation",
+      "axis": "transportation",
+      "kind": "road_incident"
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "command": "reset_cycle"
+    },
+    {
+      "expect": "only_zone",
+      "zone": "K",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py TR03   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "transportation",
+  "focus": {
+    "zone": "K",
+    "follow": "units"
+  }
+}

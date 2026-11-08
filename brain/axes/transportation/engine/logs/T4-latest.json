@@ -1,0 +1,33 @@
+{
+ "id": "T4",
+ "started": "2026-11-05T22:55:13.296Z",
+ "finished": "2026-11-05T22:55:21.193Z",
+ "pass": true,
+ "checks": [
+  {
+   "text": "the Brain stayed responsive during the flood (worst answer 7 ms)",
+   "ok": true
+  },
+  {
+   "text": "the Brain rate-limited the device and said so on the timeline",
+   "ok": true
+  },
+  {
+   "text": "the Guardian quarantined the device",
+   "ok": true
+  },
+  {
+   "text": "the Brain stopped using the device (decision on the timeline)",
+   "ok": true
+  },
+  {
+   "text": "the simulated city kept running (simulation time advanced)",
+   "ok": true
+  },
+  {
+   "text": "a new reading from the quarantined device is refused with a clear message",
+   "ok": true
+  }
+ ],
+ "log": "T4-20261105-235513.log"
+}

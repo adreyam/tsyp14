@@ -1,0 +1,38 @@
+# City Brain configuration. NOTHING about partners is hard-coded: change the addresses here
+# (or override them with the environment variables written in the comments, which is what docker-compose does).
+brain:
+  port: 8000                       # BRAIN_PORT
+  logs_dir: ../logs                # BRAIN_LOGS_DIR  (one log file per scenario run is written here)
+  scenarios_dir: ../scenarios      # BRAIN_SCENARIOS_DIR  (scenario scripts, see TESTBOOK.md)
+
+twin:                              # the Twin layer: sensors in, actuators out
+  enabled: true                    # BRAIN_TWIN_ENABLED=0 -> the Brain runs alone on its internal simulation, no commands are sent
+  url: http://127.0.0.1:9001       # BRAIN_TWIN_URL   base URL where the Brain POSTs actuator commands
+  command_path: /api/actuators/{actuator_id}/commands
+  timeout_s: 2.0
+
+guardian:                          # the Guardian layer: trust verdicts in, decisions out
+  enabled: true                    # BRAIN_GUARDIAN_ENABLED=0
+  url: http://127.0.0.1:9002       # BRAIN_GUARDIAN_URL  base URL where the Brain POSTs its decisions / reports
+  decision_path: /api/decisions
+  report_path: /api/reports
+  timeout_s: 2.0
+
+auth:                              # shared secrets, sent in the header  X-API-Key
+  inbound:                         # what the Brain REQUIRES from its partners
+    twin_key: twin-dev-key         # BRAIN_TWIN_KEY
+    guardian_key: guardian-dev-key # BRAIN_GUARDIAN_KEY
+  outbound:                        # what the Brain SENDS to its partners
+    twin_key: brain-to-twin-dev-key         # BRAIN_TO_TWIN_KEY
+    guardian_key: brain-to-guardian-dev-key # BRAIN_TO_GUARDIAN_KEY
+
+trust:
+  unknown_device_policy: trust     # trust | reject : what to do with a device the Guardian has never rated
+  verdict_ttl_s: 900               # a verdict older than this is forgotten (the device is rated again by the Guardian)
+  rollback_on_untrusted: true      # restore the last trusted state when a device becomes untrusted
+
+limits:
+  max_readings_per_s_per_device: 30   # above this the Brain drops readings and tells the Guardian (flood protection)
+  max_batch: 200
+  max_body_bytes: 200000
+  queue_size: 500                     # outbound queue; oldest messages are dropped when a partner is slow

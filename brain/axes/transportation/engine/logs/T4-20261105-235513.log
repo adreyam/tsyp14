@@ -1,0 +1,25 @@
+# scenario T4 A compromised device floods the network: the Brain protects itself, the Guardian quarantines it, the city keeps running.
+# started 2026-11-05T22:55:13.296Z
+2026-11-05T22:55:13.297Z [TEST    ] scenario_start: T4 A compromised device floods the network: the Brain protects itself, the Guardian quarantines it, the city keeps running.  (ref T4)
+2026-11-05T22:55:13.325Z [TWIN    ] reading: sensor:P01:A5: space P01-A5 occupied=False
+2026-11-05T22:55:13.328Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.339Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.366Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.522Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.545Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.559Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.581Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.595Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently unknown
+2026-11-05T22:55:13.631Z [GUARDIAN] verdict: sensor:P01:A5 -> QUARANTINED: message flood: 30 readings/s  (ref sensor:P01:A5)
+2026-11-05T22:55:13.763Z [BRAIN   ] reading_applied: space P01-A5 sensor vacant (was vacant); device sensor:P01:A5 currently quarantined
+2026-11-05T22:55:13.764Z [BRAIN   ] decision: ISOLATED sensor:P01:A5 (quarantined); its state already matched the last trusted one, nothing to roll back  (ref sensor:P01:A5)
+2026-11-05T22:55:13.970Z [BRAIN   ] rate_limited: sensor:P01:A5 sends more than 30 readings/s: extra readings dropped
+2026-11-05T22:55:18.153Z [TEST    ] check_pass: the Brain stayed responsive during the flood (worst answer 7 ms)  (ref T4)
+2026-11-05T22:55:18.161Z [TEST    ] check_pass: the Brain rate-limited the device and said so on the timeline  (ref T4)
+2026-11-05T22:55:18.168Z [TEST    ] check_pass: the Guardian quarantined the device  (ref T4)
+2026-11-05T22:55:18.175Z [TEST    ] check_pass: the Brain stopped using the device (decision on the timeline)  (ref T4)
+2026-11-05T22:55:21.185Z [TEST    ] check_pass: the simulated city kept running (simulation time advanced)  (ref T4)
+2026-11-05T22:55:21.188Z [TWIN    ] reading: sensor:P01:A5: space P01-A5 occupied=True (+29 similar) [device quarantined]
+2026-11-05T22:55:21.190Z [TEST    ] check_pass: a new reading from the quarantined device is refused with a clear message  (ref T4)
+2026-11-05T22:55:21.193Z [TEST    ] scenario_end: T4 PASS (6/6 checks)  (ref T4)
+# finished 2026-11-05T22:55:21.193Z  RESULT PASS

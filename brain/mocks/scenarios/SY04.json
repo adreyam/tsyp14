@@ -1,0 +1,55 @@
+{
+  "id": "SY04",
+  "name": "An actuator channel fails",
+  "interaction": "Brain → Twin (actuator failure)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "The Brain's actuator channel stops delivering commands (fault injected on the Brain side); a traffic signal fails (INCIDENTS trigger signal_failure) and the Brain tries to restart it.",
+  "expected": {
+    "twin": "A signal failure; it does not receive the restart.",
+    "guardian": "-",
+    "brain": "Sends the command, logs the failure on the same trace, does not hammer it (retries only after the cooldown)."
+  },
+  "how_to_verify": "Timeline: action then 'Twin refused ... fault injected'; logs/SY04-*.jsonl.",
+  "duration_s": 40,
+  "speed": 4,
+  "live_duration_s": 60,
+  "steps": [
+    {
+      "at": 0,
+      "do": "actuator_fault",
+      "value": true
+    },
+    {
+      "at": 2,
+      "do": "twin_command",
+      "id": "INCIDENTS",
+      "command": "trigger",
+      "value": {
+        "kind": "signal_failure",
+        "junction": "Junction_r6_c6"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "expect": "feedback_refused"
+    },
+    {
+      "expect": "action",
+      "agent": "transportation"
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py SY04   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "system",
+  "focus": {
+    "zone": "K",
+    "follow": "units"
+  }
+}

@@ -1,0 +1,4 @@
+# City Brain core (brain/src/citybrain): already used elsewhere in this project, nothing new.
+pydantic>=2.0
+pyyaml
+pytest

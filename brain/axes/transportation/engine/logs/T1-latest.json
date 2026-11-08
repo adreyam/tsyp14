@@ -1,0 +1,29 @@
+{
+ "id": "T1",
+ "started": "2026-11-05T22:54:25.805Z",
+ "finished": "2026-11-05T22:54:36.931Z",
+ "pass": true,
+ "checks": [
+  {
+   "text": "every reading was accepted by the Brain (HTTP 200)",
+   "ok": true
+  },
+  {
+   "text": "Brain state matches the Twin: A2 and B1 occupied, A1 free again",
+   "ok": true
+  },
+  {
+   "text": "the Guardian sent NO verdict (nothing suspicious)",
+   "ok": true
+  },
+  {
+   "text": "the Brain did not overreact: no command withheld, no sensor isolated, no alert",
+   "ok": true
+  },
+  {
+   "text": "Brain reports 0 untrusted devices",
+   "ok": true
+  }
+ ],
+ "log": "T1-20261105-235425.log"
+}

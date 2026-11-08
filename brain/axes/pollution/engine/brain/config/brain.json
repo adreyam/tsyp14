@@ -1,0 +1,12 @@
+{
+  "_comment": "City Brain settings. Change partner addresses here, never in the code. Tokens are read from the environment variables named in auth.",
+  "listen":   { "host": "127.0.0.1", "port": 8100 },
+  "twin":     { "url": "http://127.0.0.1:8200", "dispatch_path": "/v1/dispatch", "map_path": "/v1/map", "timeout_s": 2.0 },
+  "guardian": { "url": "http://127.0.0.1:8300", "verdict_path": "/v1/trust-verdict", "timeout_s": 2.0, "retry_after_s": 5.0 },
+  "auth":     { "brain_token_env": "BRAIN_TOKEN", "twin_token_env": "TWIN_TOKEN" },
+  "map":      { "source": "twin" },
+  "city":     { "depot_node": "r0c0", "truck_capacity_kg": 200, "horizon_stops": 3, "reading_interval_s": 300 },
+  "cycle_s":  1.0,
+  "clock":    "twin",
+  "log_path": "../../logs/LIVE.jsonl"
+}

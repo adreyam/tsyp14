@@ -1,0 +1,82 @@
+{
+  "id": "TR02",
+  "name": "Crash at a junction",
+  "interaction": "Twin → Brain (emergency asks transportation, A2A)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "Two cars collide in a junction (INCIDENTS trigger red_light_tbone at x -95, z 100): police, ambulance and tow truck come from their stations.",
+  "expected": {
+    "twin": "The crash blocks the junction; police, ambulance and tow truck drive from their stations along the roads; the Twin resolves it once the scene is cleared.",
+    "guardian": "Incident trusted.",
+    "brain": "Emergency: an extra ambulance and police car; asks transportation for a green wave for each unit on its way. Transportation: green ahead of every responder; once the first responder is on scene, the junction is held all red to protect the scene; back to its cycle when the crash is cleared. The ambulance gets a second green wave to hospital with the patient."
+  },
+  "how_to_verify": "Map: zone J highlighted, the camera follows the first responder from its station to the crash; green rings ahead of it, then the junction all red; logs/TR02-*.jsonl.",
+  "duration_s": 170,
+  "speed": 4,
+  "live_duration_s": 300,
+  "steps": [
+    {
+      "at": 2,
+      "do": "twin_command",
+      "id": "INCIDENTS",
+      "command": "trigger",
+      "value": {
+        "kind": "red_light_tbone",
+        "junction": "Junction_r6_c4"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "expect": "situation",
+      "axis": "transportation",
+      "kind": "road_incident"
+    },
+    {
+      "expect": "record",
+      "kind": "a2a",
+      "contains": "emergency → transportation: green_wave"
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "action_type": "green_wave"
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "command": "all_red",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "agent": "transportation",
+      "command": "reset_cycle",
+      "action_type": "signal_phase",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "only_zone",
+      "zone": "J",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py TR02   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "transportation",
+  "focus": {
+    "zone": "J",
+    "follow": "units"
+  }
+}

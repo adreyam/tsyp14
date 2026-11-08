@@ -1,0 +1,2168 @@
+[
+    {
+        "timestamp": "2026-11-06T14:56:55.706935+00:00",
+        "event": "show_zones",
+        "status": "success",
+        "duration_ms": 305.47,
+        "arguments": {
+            "zones": []
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "show_zones",
+            "timestamp": "2026-11-06T14:56:55.706Z",
+            "applied": "zones  shown",
+            "id": "ZONES",
+            "shown_zones": []
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-06T14:57:38.838775+00:00",
+        "event": "set_all_street_lights",
+        "status": "success",
+        "duration_ms": 887.86,
+        "arguments": {
+            "mode": "on"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "set_all_street_lights",
+            "timestamp": "2026-11-06T14:57:38.838Z",
+            "applied": "256 street lights -> on",
+            "id": "LIGHTS",
+            "lights": 256
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-06T14:58:21.437343+00:00",
+        "event": "set_all_street_lights",
+        "status": "success",
+        "duration_ms": 31.44,
+        "arguments": {
+            "mode": "off"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "set_all_street_lights",
+            "timestamp": "2026-11-06T14:58:21.437Z",
+            "applied": "256 street lights -> off",
+            "id": "LIGHTS",
+            "lights": 256
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-06T14:58:47.204346+00:00",
+        "event": "read_vehicle",
+        "status": "error",
+        "duration_ms": 2.96,
+        "arguments": {
+            "id": "WGT-T001"
+        },
+        "data": {
+            "content": [
+                {
+                    "type": "text",
+                    "text": "{\n  \"source\": \"city_ground_zero\",\n  \"tool\": \"read_vehicle\",\n  \"timestamp\": \"2026-11-06T14:58:47.204Z\",\n  \"error\": {\n    \"code\": \"unknown_vehicle\",\n    \"message\": \"no vehicle 'WGT-T001' is on the road right now (use list_vehicles)\"\n  }\n}"
+                }
+            ],
+            "structuredContent": {
+                "source": "city_ground_zero",
+                "tool": "read_vehicle",
+                "timestamp": "2026-11-06T14:58:47.204Z",
+                "error": {
+                    "code": "unknown_vehicle",
+                    "message": "no vehicle 'WGT-T001' is on the road right now (use list_vehicles)"
+                }
+            },
+            "isError": true
+        },
+        "error": "unknown_vehicle: no vehicle 'WGT-T001' is on the road right now (use list_vehicles)"
+    },
+    {
+        "timestamp": "2026-11-06T15:05:01.249861+00:00",
+        "event": "follow",
+        "status": "success",
+        "duration_ms": 23.23,
+        "arguments": {
+            "target": "Pedestrian_030"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "follow",
+            "timestamp": "2026-11-06T15:05:01.249Z",
+            "applied": "follow Pedestrian_030",
+            "id": "CAMERA",
+            "ui": {
+                "camera_status": "Following Pedestrian_030",
+                "city_camera_active": true,
+                "focus_view": false,
+                "highlight": "",
+                "highlight_kinds": [
+                    "water_network",
+                    "power_network",
+                    "traffic_detectors",
+                    "air_quality",
+                    "noise",
+                    "weather",
+                    "flood",
+                    "utility_telemetry",
+                    "traffic_cameras",
+                    "traffic_signals",
+                    "water_valves",
+                    "power_switches",
+                    "street_lights",
+                    "irrigation",
+                    "power_meters",
+                    "water_meters",
+                    "hospitals",
+                    "police_stations",
+                    "police_vehicles",
+                    "ambulances",
+                    "smoky_vehicles",
+                    "emergency_stations",
+                    "fire_engines",
+                    "tow_trucks",
+                    "utility_vans",
+                    "seismic_sensors",
+                    "parking_lots",
+                    "bin_weights",
+                    "garbage_bins",
+                    "refuse_trucks"
+                ],
+                "replay": {
+                    "camera_mode": "orbit",
+                    "duration": 0.0,
+                    "paused": false,
+                    "playing": false,
+                    "speed": 0.5,
+                    "time": 0.0
+                }
+            }
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:20:55.991642+00:00",
+        "event": "set_parking_barrier",
+        "status": "success",
+        "duration_ms": 47.01,
+        "arguments": {
+            "id": "LOT-01",
+            "mode": "auto"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "set_parking_barrier",
+            "timestamp": "2026-11-07T00:20:55.991Z",
+            "after": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 9.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 10.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 83.3
+                }
+            },
+            "applied": "LOT-01 barrier set to auto",
+            "before": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 9.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 10.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 83.3
+                }
+            },
+            "id": "LOT-01"
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:21:21.441894+00:00",
+        "event": "set_parking_barrier",
+        "status": "success",
+        "duration_ms": 73.96,
+        "arguments": {
+            "id": "LOT-01",
+            "mode": "auto"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "set_parking_barrier",
+            "timestamp": "2026-11-07T00:21:21.441Z",
+            "after": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 11.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 11.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 91.7
+                }
+            },
+            "applied": "LOT-01 barrier set to auto",
+            "before": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 11.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 11.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 91.7
+                }
+            },
+            "id": "LOT-01"
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:21:56.670260+00:00",
+        "event": "set_parking_barrier",
+        "status": "success",
+        "duration_ms": 36.07,
+        "arguments": {
+            "id": "LOT-01",
+            "mode": "auto"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "set_parking_barrier",
+            "timestamp": "2026-11-07T00:21:56.670Z",
+            "after": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 1.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 100.0
+                }
+            },
+            "applied": "LOT-01 barrier set to auto",
+            "before": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 1.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 0.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 100.0
+                }
+            },
+            "id": "LOT-01"
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:22:52.985836+00:00",
+        "event": "set_parking_barrier",
+        "status": "success",
+        "duration_ms": 33.63,
+        "arguments": {
+            "id": "LOT-01",
+            "mode": "auto"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "set_parking_barrier",
+            "timestamp": "2026-11-07T00:22:52.985Z",
+            "after": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 3.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 1.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 11.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 91.7
+                }
+            },
+            "applied": "LOT-01 barrier set to auto",
+            "before": {
+                "capacity": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "denied_entries": {
+                    "unit": "cars",
+                    "value": 3.0
+                },
+                "entered": {
+                    "unit": "cars",
+                    "value": 12.0
+                },
+                "left": {
+                    "unit": "cars",
+                    "value": 1.0
+                },
+                "occupancy": {
+                    "unit": "cars",
+                    "value": 11.0
+                },
+                "occupancy_percent": {
+                    "unit": "%",
+                    "value": 91.7
+                }
+            },
+            "id": "LOT-01"
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:24:26.382157+00:00",
+        "event": "resolve_all_incidents",
+        "status": "success",
+        "duration_ms": 17.19,
+        "arguments": {},
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "resolve_all_incidents",
+            "timestamp": "2026-11-07T00:24:26.381Z",
+            "applied": "resolve all incidents requested",
+            "id": "INCIDENTS"
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:36:13.939772+00:00",
+        "event": "focus_device",
+        "status": "error",
+        "duration_ms": 18.63,
+        "arguments": {
+            "id": "car_077"
+        },
+        "data": {
+            "content": [
+                {
+                    "type": "text",
+                    "text": "{\n  \"source\": \"city_ground_zero\",\n  \"tool\": \"focus_device\",\n  \"timestamp\": \"2026-11-07T00:36:13.939Z\",\n  \"error\": {\n    \"code\": \"unknown_device\",\n    \"message\": \"no device with id 'car_077'\"\n  }\n}"
+                }
+            ],
+            "structuredContent": {
+                "source": "city_ground_zero",
+                "tool": "focus_device",
+                "timestamp": "2026-11-07T00:36:13.939Z",
+                "error": {
+                    "code": "unknown_device",
+                    "message": "no device with id 'car_077'"
+                }
+            },
+            "isError": true
+        },
+        "error": "unknown_device: no device with id 'car_077'"
+    },
+    {
+        "timestamp": "2026-11-07T00:36:39.181865+00:00",
+        "event": "focus_device",
+        "status": "error",
+        "duration_ms": 13.57,
+        "arguments": {
+            "id": "PooledVehicle_car_077"
+        },
+        "data": {
+            "content": [
+                {
+                    "type": "text",
+                    "text": "{\n  \"source\": \"city_ground_zero\",\n  \"tool\": \"focus_device\",\n  \"timestamp\": \"2026-11-07T00:36:39.181Z\",\n  \"error\": {\n    \"code\": \"unknown_device\",\n    \"message\": \"no device with id 'PooledVehicle_car_077'\"\n  }\n}"
+                }
+            ],
+            "structuredContent": {
+                "source": "city_ground_zero",
+                "tool": "focus_device",
+                "timestamp": "2026-11-07T00:36:39.181Z",
+                "error": {
+                    "code": "unknown_device",
+                    "message": "no device with id 'PooledVehicle_car_077'"
+                }
+            },
+            "isError": true
+        },
+        "error": "unknown_device: no device with id 'PooledVehicle_car_077'"
+    },
+    {
+        "timestamp": "2026-11-07T00:37:31.366751+00:00",
+        "event": "focus_device",
+        "status": "error",
+        "duration_ms": 12.31,
+        "arguments": {
+            "id": "PooledVehicle_car_077"
+        },
+        "data": {
+            "content": [
+                {
+                    "type": "text",
+                    "text": "{\n  \"source\": \"city_ground_zero\",\n  \"tool\": \"focus_device\",\n  \"timestamp\": \"2026-11-07T00:37:31.366Z\",\n  \"error\": {\n    \"code\": \"unknown_device\",\n    \"message\": \"no device with id 'PooledVehicle_car_077'\"\n  }\n}"
+                }
+            ],
+            "structuredContent": {
+                "source": "city_ground_zero",
+                "tool": "focus_device",
+                "timestamp": "2026-11-07T00:37:31.366Z",
+                "error": {
+                    "code": "unknown_device",
+                    "message": "no device with id 'PooledVehicle_car_077'"
+                }
+            },
+            "isError": true
+        },
+        "error": "unknown_device: no device with id 'PooledVehicle_car_077'"
+    },
+    {
+        "timestamp": "2026-11-07T00:37:45.345480+00:00",
+        "event": "focus_device",
+        "status": "error",
+        "duration_ms": 24.68,
+        "arguments": {
+            "id": "Vehicle_021"
+        },
+        "data": {
+            "content": [
+                {
+                    "type": "text",
+                    "text": "{\n  \"source\": \"city_ground_zero\",\n  \"tool\": \"focus_device\",\n  \"timestamp\": \"2026-11-07T00:37:45.345Z\",\n  \"error\": {\n    \"code\": \"unknown_device\",\n    \"message\": \"no device with id 'Vehicle_021'\"\n  }\n}"
+                }
+            ],
+            "structuredContent": {
+                "source": "city_ground_zero",
+                "tool": "focus_device",
+                "timestamp": "2026-11-07T00:37:45.345Z",
+                "error": {
+                    "code": "unknown_device",
+                    "message": "no device with id 'Vehicle_021'"
+                }
+            },
+            "isError": true
+        },
+        "error": "unknown_device: no device with id 'Vehicle_021'"
+    },
+    {
+        "timestamp": "2026-11-07T00:38:20.733787+00:00",
+        "event": "follow",
+        "status": "success",
+        "duration_ms": 32.93,
+        "arguments": {
+            "target": "Vehicle_021"
+        },
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "follow",
+            "timestamp": "2026-11-07T00:38:20.733Z",
+            "applied": "follow Vehicle_021",
+            "id": "CAMERA",
+            "ui": {
+                "camera_status": "Following Vehicle_021",
+                "city_camera_active": true,
+                "focus_view": false,
+                "highlight": "",
+                "highlight_kinds": [
+                    "water_network",
+                    "power_network",
+                    "traffic_detectors",
+                    "air_quality",
+                    "noise",
+                    "weather",
+                    "flood",
+                    "utility_telemetry",
+                    "traffic_cameras",
+                    "traffic_signals",
+                    "water_valves",
+                    "power_switches",
+                    "street_lights",
+                    "irrigation",
+                    "power_meters",
+                    "water_meters",
+                    "hospitals",
+                    "police_stations",
+                    "police_vehicles",
+                    "ambulances",
+                    "smoky_vehicles",
+                    "emergency_stations",
+                    "fire_engines",
+                    "tow_trucks",
+                    "utility_vans",
+                    "seismic_sensors",
+                    "parking_lots",
+                    "bin_weights",
+                    "garbage_bins",
+                    "refuse_trucks"
+                ],
+                "replay": {
+                    "camera_mode": "orbit",
+                    "duration": 0.0,
+                    "paused": false,
+                    "playing": false,
+                    "speed": 0.5,
+                    "time": 0.0
+                }
+            }
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:38:38.255793+00:00",
+        "event": "list_actuators",
+        "status": "success",
+        "duration_ms": 76.75,
+        "arguments": {},
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "list_actuators",
+            "timestamp": "2026-11-07T00:38:38.255Z",
+            "total": 341,
+            "offset": 0,
+            "count": 50,
+            "devices": [
+                {
+                    "commands": [
+                        "open",
+                        "close"
+                    ],
+                    "family": "irrigation",
+                    "id": "IRR-01",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -154.0,
+                        "y": 0.17,
+                        "z": 119.0
+                    },
+                    "metrics": [
+                        "valve_open",
+                        "irrigation_flow"
+                    ],
+                    "name": "IrrigationValve_01",
+                    "position": [
+                        -154.0,
+                        0.17,
+                        119.0
+                    ],
+                    "type": "Irrigation valve",
+                    "zone": "J"
+                },
+                {
+                    "commands": [
+                        "open",
+                        "close"
+                    ],
+                    "family": "irrigation",
+                    "id": "IRR-02",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -65.0,
+                        "y": 0.17,
+                        "z": 20.0
+                    },
+                    "metrics": [
+                        "valve_open",
+                        "irrigation_flow"
+                    ],
+                    "name": "IrrigationValve_02",
+                    "position": [
+                        -65.0,
+                        0.17,
+                        20.0
+                    ],
+                    "type": "Irrigation valve",
+                    "zone": "J"
+                },
+                {
+                    "commands": [
+                        "open",
+                        "close"
+                    ],
+                    "family": "irrigation",
+                    "id": "IRR-03",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 34.0,
+                        "y": 0.17,
+                        "z": -166.0
+                    },
+                    "metrics": [
+                        "valve_open",
+                        "irrigation_flow"
+                    ],
+                    "name": "IrrigationValve_03",
+                    "position": [
+                        34.0,
+                        0.17,
+                        -166.0
+                    ],
+                    "type": "Irrigation valve",
+                    "zone": "G"
+                },
+                {
+                    "commands": [
+                        "open",
+                        "close"
+                    ],
+                    "family": "irrigation",
+                    "id": "IRR-04",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 125.0,
+                        "y": 0.17,
+                        "z": 24.0
+                    },
+                    "metrics": [
+                        "valve_open",
+                        "irrigation_flow"
+                    ],
+                    "name": "IrrigationValve_04",
+                    "position": [
+                        125.0,
+                        0.17,
+                        24.0
+                    ],
+                    "type": "Irrigation valve",
+                    "zone": "K"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-001",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -332.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_01",
+                    "position": [
+                        -332.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-002",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -297.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_02",
+                    "position": [
+                        -297.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-003",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -332.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_03",
+                    "position": [
+                        -332.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-004",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -367.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_04",
+                    "position": [
+                        -367.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-005",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -237.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_05",
+                    "position": [
+                        -237.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-006",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -202.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_06",
+                    "position": [
+                        -202.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-007",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -237.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_07",
+                    "position": [
+                        -237.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-008",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -272.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_08",
+                    "position": [
+                        -272.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-009",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -142.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_09",
+                    "position": [
+                        -142.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-010",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -107.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_10",
+                    "position": [
+                        -107.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-011",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -142.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_11",
+                    "position": [
+                        -142.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-012",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -177.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_12",
+                    "position": [
+                        -177.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-013",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -47.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_13",
+                    "position": [
+                        -47.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-014",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -12.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_14",
+                    "position": [
+                        -12.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-015",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -47.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_15",
+                    "position": [
+                        -47.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-016",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -82.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_16",
+                    "position": [
+                        -82.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-017",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 47.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_17",
+                    "position": [
+                        47.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-018",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 82.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_18",
+                    "position": [
+                        82.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-019",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 47.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_19",
+                    "position": [
+                        47.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-020",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 12.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_20",
+                    "position": [
+                        12.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-021",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 142.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_21",
+                    "position": [
+                        142.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-022",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 177.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_22",
+                    "position": [
+                        177.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-023",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 142.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_23",
+                    "position": [
+                        142.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-024",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 107.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_24",
+                    "position": [
+                        107.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "C"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-025",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 237.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_25",
+                    "position": [
+                        237.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-026",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 272.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_26",
+                    "position": [
+                        272.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-027",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 237.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_27",
+                    "position": [
+                        237.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-028",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 202.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_28",
+                    "position": [
+                        202.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-029",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 332.5,
+                        "y": 0.17,
+                        "z": -367.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_29",
+                    "position": [
+                        332.5,
+                        0.17,
+                        -367.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-030",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 367.7,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_30",
+                    "position": [
+                        367.7,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-031",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 332.5,
+                        "y": 0.17,
+                        "z": -297.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_31",
+                    "position": [
+                        332.5,
+                        0.17,
+                        -297.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-032",
+                    "kind": "actuator",
+                    "location": {
+                        "x": 297.3,
+                        "y": 0.17,
+                        "z": -332.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_32",
+                    "position": [
+                        297.3,
+                        0.17,
+                        -332.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "D"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-033",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -332.5,
+                        "y": 0.17,
+                        "z": -272.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_33",
+                    "position": [
+                        -332.5,
+                        0.17,
+                        -272.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-034",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -297.3,
+                        "y": 0.17,
+                        "z": -237.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_34",
+                    "position": [
+                        -297.3,
+                        0.17,
+                        -237.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-035",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -332.5,
+                        "y": 0.17,
+                        "z": -202.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_35",
+                    "position": [
+                        -332.5,
+                        0.17,
+                        -202.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-036",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -367.7,
+                        "y": 0.17,
+                        "z": -237.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_36",
+                    "position": [
+                        -367.7,
+                        0.17,
+                        -237.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-037",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -237.5,
+                        "y": 0.17,
+                        "z": -272.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_37",
+                    "position": [
+                        -237.5,
+                        0.17,
+                        -272.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-038",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -202.3,
+                        "y": 0.17,
+                        "z": -237.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_38",
+                    "position": [
+                        -202.3,
+                        0.17,
+                        -237.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-039",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -237.5,
+                        "y": 0.17,
+                        "z": -202.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_39",
+                    "position": [
+                        -237.5,
+                        0.17,
+                        -202.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-040",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -272.7,
+                        "y": 0.17,
+                        "z": -237.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_40",
+                    "position": [
+                        -272.7,
+                        0.17,
+                        -237.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "A"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-041",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -142.5,
+                        "y": 0.17,
+                        "z": -272.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_41",
+                    "position": [
+                        -142.5,
+                        0.17,
+                        -272.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-042",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -107.3,
+                        "y": 0.17,
+                        "z": -237.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_42",
+                    "position": [
+                        -107.3,
+                        0.17,
+                        -237.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-043",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -142.5,
+                        "y": 0.17,
+                        "z": -202.3
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_43",
+                    "position": [
+                        -142.5,
+                        0.17,
+                        -202.3
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-044",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -177.7,
+                        "y": 0.17,
+                        "z": -237.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_44",
+                    "position": [
+                        -177.7,
+                        0.17,
+                        -237.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-045",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -47.5,
+                        "y": 0.17,
+                        "z": -272.7
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_45",
+                    "position": [
+                        -47.5,
+                        0.17,
+                        -272.7
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                },
+                {
+                    "commands": [
+                        "on",
+                        "off",
+                        "auto",
+                        "dim"
+                    ],
+                    "family": "lighting",
+                    "id": "LGT-046",
+                    "kind": "actuator",
+                    "location": {
+                        "x": -12.3,
+                        "y": 0.17,
+                        "z": -237.5
+                    },
+                    "metrics": [
+                        "light_level"
+                    ],
+                    "name": "SmartStreetLight_46",
+                    "position": [
+                        -12.3,
+                        0.17,
+                        -237.5
+                    ],
+                    "type": "Smart street light",
+                    "zone": "B"
+                }
+            ],
+            "global_controls": {
+                "CAMERA": {
+                    "follow": "value: person or car (random one), or a citizen/vehicle id",
+                    "view": "value: CAM-01..CAM-16, overview, street, reset or city"
+                },
+                "CLOCK": {
+                    "pause": "pause SUMO and the city",
+                    "resume": "resume SUMO and the city",
+                    "set_rate": "value: clock seconds per simulated second",
+                    "set_speed": "value: simulation speed 1-8",
+                    "set_time": "value: minute of day 0-1439 or 'HH:MM'"
+                },
+                "EARTHQUAKE": {
+                    "clear": "remove every earthquake and restore every collapsed building",
+                    "trigger": "value: {\"zone\": \"A\"..\"P\" or \"ALL\", \"magnitude\": 4.0-8.0}"
+                },
+                "FOCUS": {
+                    "device": "value: a device id - select it and frame its physical model in the viewport"
+                },
+                "HIGHLIGHT": {
+                    "clear": "remove the highlight",
+                    "show": "value: an asset kind (see ui_state.highlight_kinds) - frame those assets in the city"
+                },
+                "INCIDENTS": {
+                    "dispatch": "value: {id, kind: police|ambulance|fire|tow}",
+                    "resolve": "value: incident id",
+                    "resolve_all": "fast-forward every open incident",
+                    "trigger": "value: incident kind (rear_end, red_light_tbone, unsafe_overtake, breakdown, vehicle_fire, lost_load, building_fire, water_main_break, signal_failure, garbage_collection)",
+                    "watch": "value: incident id"
+                },
+                "LIGHTS": {
+                    "auto": "return every street light to the adaptive schedule",
+                    "dim": "value: 0.0-1.0 output scale for every street light",
+                    "off": "force every street light off",
+                    "on": "force every street light on"
+                },
+                "REPLAY": {
+                    "camera": "value: orbit, chase, driver, street or overhead",
+                    "pause": "pause playback",
+                    "play": "value: incident id",
+                    "restart": "seek to the beginning",
+                    "resume": "resume playback",
+                    "seek": "value: seconds",
+                    "speed": "value: 0.25-4",
+                    "stop": "stop"
+                },
+                "SIGNALS": {
+                    "phase": "value: ns_green, ns_yellow, all_red, ew_green, ew_yellow, reset_cycle"
+                },
+                "UTILITY": {
+                    "auto_recharge_off": "turn automatic energy recharge off",
+                    "auto_recharge_on": "turn automatic energy recharge on",
+                    "recharge_all": "refill every utility reserve now"
+                },
+                "VIEWPORT": {
+                    "full": "make the simulation canvas fill the Godot window",
+                    "panel": "restore the control-room panels"
+                },
+                "WEATHER": {
+                    "set": "value: clear, cloudy, rain, fog, storm, auto"
+                },
+                "ZONES": {
+                    "hide": "value: the same - hide them (all are hidden by default)",
+                    "show": "value: a zone letter, a list of letters or \"ALL\" - show the zone tint and letter on the ground"
+                }
+            }
+        },
+        "error": null
+    },
+    {
+        "timestamp": "2026-11-07T00:39:44.914170+00:00",
+        "event": "list_commands",
+        "status": "success",
+        "duration_ms": 22.87,
+        "arguments": {},
+        "data": {
+            "source": "city_ground_zero",
+            "tool": "list_commands",
+            "timestamp": "2026-11-07T00:39:44.913Z",
+            "by_family": {
+                "irrigation": {
+                    "close": "close the valve",
+                    "open": "open the valve"
+                },
+                "lighting": {
+                    "auto": "return to the adaptive night schedule",
+                    "dim": "value: 0.0-1.0 output scale",
+                    "off": "force the luminaire off",
+                    "on": "force the luminaire on"
+                },
+                "parking": {
+                    "auto": "barrier opens for arriving cars while there is room",
+                    "closed": "keep the barrier shut: arriving cars are turned away",
+                    "open": "admit every arriving car while there is room"
+                },
+                "power_switch": {
+                    "close": "close the switch (energise its feeder)",
+                    "open": "open the switch (isolate its feeder)"
+                },
+                "service_zone": {
+                    "cut_power": "cut the zone's power",
+                    "cut_water": "cut the zone's water",
+                    "restore_power": "restore the zone's power",
+                    "restore_water": "restore the zone's water"
+                },
+                "signal": {
+                    "all_red": "all-red clearance",
+                    "ew_green": "east-west green, north-south red",
+                    "ew_yellow": "east-west amber",
+                    "ns_green": "north-south green, east-west red",
+                    "ns_yellow": "north-south amber",
+                    "reset_cycle": "restart the normal cycle"
+                },
+                "waste": {
+                    "empty": "send a crew to empty the bin (weight returns to the liner residue)"
+                },
+                "water_valve": {
+                    "close": "close the valve",
+                    "open": "open the valve"
+                }
+            },
+            "global": {
+                "CAMERA": {
+                    "follow": "value: person or car (random one), or a citizen/vehicle id",
+                    "view": "value: CAM-01..CAM-16, overview, street, reset or city"
+                },
+                "CLOCK": {
+                    "pause": "pause SUMO and the city",
+                    "resume": "resume SUMO and the city",
+                    "set_rate": "value: clock seconds per simulated second",
+                    "set_speed": "value: simulation speed 1-8",
+                    "set_time": "value: minute of day 0-1439 or 'HH:MM'"
+                },
+                "EARTHQUAKE": {
+                    "clear": "remove every earthquake and restore every collapsed building",
+                    "trigger": "value: {\"zone\": \"A\"..\"P\" or \"ALL\", \"magnitude\": 4.0-8.0}"
+                },
+                "FOCUS": {
+                    "device": "value: a device id - select it and frame its physical model in the viewport"
+                },
+                "HIGHLIGHT": {
+                    "clear": "remove the highlight",
+                    "show": "value: an asset kind (see ui_state.highlight_kinds) - frame those assets in the city"
+                },
+                "INCIDENTS": {
+                    "dispatch": "value: {id, kind: police|ambulance|fire|tow}",
+                    "resolve": "value: incident id",
+                    "resolve_all": "fast-forward every open incident",
+                    "trigger": "value: incident kind (rear_end, red_light_tbone, unsafe_overtake, breakdown, vehicle_fire, lost_load, building_fire, water_main_break, signal_failure, garbage_collection)",
+                    "watch": "value: incident id"
+                },
+                "LIGHTS": {
+                    "auto": "return every street light to the adaptive schedule",
+                    "dim": "value: 0.0-1.0 output scale for every street light",
+                    "off": "force every street light off",
+                    "on": "force every street light on"
+                },
+                "REPLAY": {
+                    "camera": "value: orbit, chase, driver, street or overhead",
+                    "pause": "pause playback",
+                    "play": "value: incident id",
+                    "restart": "seek to the beginning",
+                    "resume": "resume playback",
+                    "seek": "value: seconds",
+                    "speed": "value: 0.25-4",
+                    "stop": "stop"
+                },
+                "SIGNALS": {
+                    "phase": "value: ns_green, ns_yellow, all_red, ew_green, ew_yellow, reset_cycle"
+                },
+                "UTILITY": {
+                    "auto_recharge_off": "turn automatic energy recharge off",
+                    "auto_recharge_on": "turn automatic energy recharge on",
+                    "recharge_all": "refill every utility reserve now"
+                },
+                "VIEWPORT": {
+                    "full": "make the simulation canvas fill the Godot window",
+                    "panel": "restore the control-room panels"
+                },
+                "WEATHER": {
+                    "set": "value: clear, cloudy, rain, fog, storm, auto"
+                },
+                "ZONES": {
+                    "hide": "value: the same - hide them (all are hidden by default)",
+                    "show": "value: a zone letter, a list of letters or \"ALL\" - show the zone tint and letter on the ground"
+                }
+            }
+        },
+        "error": null
+    }
+]

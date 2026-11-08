@@ -1,0 +1,258 @@
+{"ts": "2026-11-01T06:05:00Z", "layer": "twin", "event": "truck_state", "truck_id": "t1", "status": "idle", "load_kg": 0.0, "lat": 36.8, "lon": 10.18}
+{"ts": "2026-11-01T06:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 20.333333333333332, "capacity_kg": 50.0, "fill_pct": 40.7, "zone": "zoneE"}
+{"ts": "2026-11-01T06:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:05:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "far", "color": "yellow", "fill_pct": 40.7, "projected_pct": null, "reason": "fill 41%, rate unknown yet (need 2 readings)", "emptied": false}
+{"ts": "2026-11-01T06:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 5.041666666666667, "capacity_kg": 50.0, "fill_pct": 10.1, "zone": "zoneA"}
+{"ts": "2026-11-01T06:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:05:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "near", "color": "yellow", "fill_pct": 10.1, "projected_pct": null, "reason": "fill 10%, rate unknown yet (need 2 readings)", "emptied": false}
+{"ts": "2026-11-01T06:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 20.666666666666664, "capacity_kg": 50.0, "fill_pct": 41.3, "zone": "zoneE"}
+{"ts": "2026-11-01T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:10:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "far", "color": "orange", "fill_pct": 41.3, "projected_pct": 100.0, "reason": "fill 41% at +8.0%/h reaches 100% within 8 h", "emptied": false}
+{"ts": "2026-11-01T06:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 5.083333333333334, "capacity_kg": 50.0, "fill_pct": 10.2, "zone": "zoneA"}
+{"ts": "2026-11-01T06:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:10:00Z", "layer": "city_brain", "event": "dispatch", "truck_id": "t1", "stop": "far", "kind": "bin", "color": "orange", "next_after": [], "message": {"tool": "dispatch_truck", "truck_id": "t1", "next_stop": {"kind": "bin", "sensor_id": "far", "lat": 36.84, "lon": 10.22}, "route": [{"lat": 36.8, "lon": 10.18}, {"lat": 36.81, "lon": 10.18}, {"lat": 36.82, "lon": 10.18}, {"lat": 36.83, "lon": 10.18}, {"lat": 36.84, "lon": 10.18}, {"lat": 36.84, "lon": 10.19}, {"lat": 36.84, "lon": 10.2}, {"lat": 36.84, "lon": 10.21}, {"lat": 36.84, "lon": 10.22}], "timestamp": "2026-11-01T06:10:00Z"}}
+{"ts": "2026-11-01T06:15:00Z", "layer": "twin", "event": "truck_state", "truck_id": "t1", "status": "en_route", "load_kg": 0.0, "lat": 36.82, "lon": 10.18}
+{"ts": "2026-11-01T06:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 20.999999999999996, "capacity_kg": 50.0, "fill_pct": 42.0, "zone": "zoneE"}
+{"ts": "2026-11-01T06:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 47.041666666666664, "capacity_kg": 50.0, "fill_pct": 94.1, "zone": "zoneA"}
+{"ts": "2026-11-01T06:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:15:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "near", "color": "red", "fill_pct": 94.1, "projected_pct": 100.0, "reason": "fill 94% >= 90%", "emptied": false}
+{"ts": "2026-11-01T06:15:00Z", "layer": "city_brain", "event": "dispatch", "truck_id": "t1", "stop": "near", "kind": "bin", "color": "red", "next_after": ["far"], "message": {"tool": "dispatch_truck", "truck_id": "t1", "next_stop": {"kind": "bin", "sensor_id": "near", "lat": 36.81, "lon": 10.19}, "route": [{"lat": 36.82, "lon": 10.18}, {"lat": 36.82, "lon": 10.19}, {"lat": 36.81, "lon": 10.19}], "timestamp": "2026-11-01T06:15:00Z"}}
+{"ts": "2026-11-01T06:20:00Z", "layer": "twin", "event": "truck_state", "truck_id": "t1", "status": "idle", "load_kg": 47.041666666666664, "lat": 36.81, "lon": 10.19}
+{"ts": "2026-11-01T06:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 21.33333333333333, "capacity_kg": 50.0, "fill_pct": 42.7, "zone": "zoneE"}
+{"ts": "2026-11-01T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.041666666666666664, "capacity_kg": 50.0, "fill_pct": 0.1, "zone": "zoneA"}
+{"ts": "2026-11-01T06:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:20:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "near", "color": "green", "fill_pct": 0.1, "projected_pct": null, "reason": "fill 0% < 10%", "emptied": true}
+{"ts": "2026-11-01T06:20:00Z", "layer": "city_brain", "event": "dispatch", "truck_id": "t1", "stop": "far", "kind": "bin", "color": "orange", "next_after": [], "message": {"tool": "dispatch_truck", "truck_id": "t1", "next_stop": {"kind": "bin", "sensor_id": "far", "lat": 36.84, "lon": 10.22}, "route": [{"lat": 36.81, "lon": 10.19}, {"lat": 36.82, "lon": 10.19}, {"lat": 36.83, "lon": 10.19}, {"lat": 36.84, "lon": 10.19}, {"lat": 36.84, "lon": 10.2}, {"lat": 36.84, "lon": 10.21}, {"lat": 36.84, "lon": 10.22}], "timestamp": "2026-11-01T06:20:00Z"}}
+{"ts": "2026-11-01T06:25:00Z", "layer": "twin", "event": "truck_state", "truck_id": "t1", "status": "en_route", "load_kg": 47.041666666666664, "lat": 36.83, "lon": 10.19}
+{"ts": "2026-11-01T06:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 21.66666666666666, "capacity_kg": 50.0, "fill_pct": 43.3, "zone": "zoneE"}
+{"ts": "2026-11-01T06:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.08333333333333333, "capacity_kg": 50.0, "fill_pct": 0.2, "zone": "zoneA"}
+{"ts": "2026-11-01T06:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 21.999999999999993, "capacity_kg": 50.0, "fill_pct": 44.0, "zone": "zoneE"}
+{"ts": "2026-11-01T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.125, "capacity_kg": 50.0, "fill_pct": 0.2, "zone": "zoneA"}
+{"ts": "2026-11-01T06:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:35:00Z", "layer": "twin", "event": "truck_state", "truck_id": "t1", "status": "idle", "load_kg": 69.04166666666666, "lat": 36.84, "lon": 10.22}
+{"ts": "2026-11-01T06:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 0.3333333333333333, "capacity_kg": 50.0, "fill_pct": 0.7, "zone": "zoneE"}
+{"ts": "2026-11-01T06:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:35:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "far", "color": "green", "fill_pct": 0.7, "projected_pct": null, "reason": "fill 1% < 10%", "emptied": true}
+{"ts": "2026-11-01T06:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.16666666666666666, "capacity_kg": 50.0, "fill_pct": 0.3, "zone": "zoneA"}
+{"ts": "2026-11-01T06:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 0.6666666666666666, "capacity_kg": 50.0, "fill_pct": 1.3, "zone": "zoneE"}
+{"ts": "2026-11-01T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.20833333333333331, "capacity_kg": 50.0, "fill_pct": 0.4, "zone": "zoneA"}
+{"ts": "2026-11-01T06:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.0, "capacity_kg": 50.0, "fill_pct": 2.0, "zone": "zoneE"}
+{"ts": "2026-11-01T06:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.24999999999999997, "capacity_kg": 50.0, "fill_pct": 0.5, "zone": "zoneA"}
+{"ts": "2026-11-01T06:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.3333333333333333, "capacity_kg": 50.0, "fill_pct": 2.7, "zone": "zoneE"}
+{"ts": "2026-11-01T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.29166666666666663, "capacity_kg": 50.0, "fill_pct": 0.6, "zone": "zoneA"}
+{"ts": "2026-11-01T06:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.6666666666666665, "capacity_kg": 50.0, "fill_pct": 3.3, "zone": "zoneE"}
+{"ts": "2026-11-01T06:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T06:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.3333333333333333, "capacity_kg": 50.0, "fill_pct": 0.7, "zone": "zoneA"}
+{"ts": "2026-11-01T06:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.9999999999999998, "capacity_kg": 50.0, "fill_pct": 4.0, "zone": "zoneE"}
+{"ts": "2026-11-01T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.375, "capacity_kg": 50.0, "fill_pct": 0.8, "zone": "zoneA"}
+{"ts": "2026-11-01T07:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 2.333333333333333, "capacity_kg": 50.0, "fill_pct": 4.7, "zone": "zoneE"}
+{"ts": "2026-11-01T07:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.4166666666666667, "capacity_kg": 50.0, "fill_pct": 0.8, "zone": "zoneA"}
+{"ts": "2026-11-01T07:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 2.6666666666666665, "capacity_kg": 50.0, "fill_pct": 5.3, "zone": "zoneE"}
+{"ts": "2026-11-01T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.45833333333333337, "capacity_kg": 50.0, "fill_pct": 0.9, "zone": "zoneA"}
+{"ts": "2026-11-01T07:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 3.0, "capacity_kg": 50.0, "fill_pct": 6.0, "zone": "zoneE"}
+{"ts": "2026-11-01T07:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.5, "capacity_kg": 50.0, "fill_pct": 1.0, "zone": "zoneA"}
+{"ts": "2026-11-01T07:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 3.3333333333333335, "capacity_kg": 50.0, "fill_pct": 6.7, "zone": "zoneE"}
+{"ts": "2026-11-01T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.5416666666666666, "capacity_kg": 50.0, "fill_pct": 1.1, "zone": "zoneA"}
+{"ts": "2026-11-01T07:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 3.666666666666667, "capacity_kg": 50.0, "fill_pct": 7.3, "zone": "zoneE"}
+{"ts": "2026-11-01T07:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.5833333333333333, "capacity_kg": 50.0, "fill_pct": 1.2, "zone": "zoneA"}
+{"ts": "2026-11-01T07:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.0, "capacity_kg": 50.0, "fill_pct": 8.0, "zone": "zoneE"}
+{"ts": "2026-11-01T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.6249999999999999, "capacity_kg": 50.0, "fill_pct": 1.2, "zone": "zoneA"}
+{"ts": "2026-11-01T07:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.333333333333333, "capacity_kg": 50.0, "fill_pct": 8.7, "zone": "zoneE"}
+{"ts": "2026-11-01T07:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.6666666666666665, "capacity_kg": 50.0, "fill_pct": 1.3, "zone": "zoneA"}
+{"ts": "2026-11-01T07:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.666666666666666, "capacity_kg": 50.0, "fill_pct": 9.3, "zone": "zoneE"}
+{"ts": "2026-11-01T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.7083333333333331, "capacity_kg": 50.0, "fill_pct": 1.4, "zone": "zoneA"}
+{"ts": "2026-11-01T07:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.999999999999999, "capacity_kg": 50.0, "fill_pct": 10.0, "zone": "zoneE"}
+{"ts": "2026-11-01T07:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.7499999999999998, "capacity_kg": 50.0, "fill_pct": 1.5, "zone": "zoneA"}
+{"ts": "2026-11-01T07:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 5.333333333333332, "capacity_kg": 50.0, "fill_pct": 10.7, "zone": "zoneE"}
+{"ts": "2026-11-01T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:50:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "far", "color": "yellow", "fill_pct": 10.7, "projected_pct": 74.7, "reason": "fill 11% at +8.0%/h only reaches 75% within 8 h", "emptied": false}
+{"ts": "2026-11-01T07:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.7916666666666664, "capacity_kg": 50.0, "fill_pct": 1.6, "zone": "zoneA"}
+{"ts": "2026-11-01T07:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 5.666666666666665, "capacity_kg": 50.0, "fill_pct": 11.3, "zone": "zoneE"}
+{"ts": "2026-11-01T07:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T07:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.833333333333333, "capacity_kg": 50.0, "fill_pct": 1.7, "zone": "zoneA"}
+{"ts": "2026-11-01T07:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 5.999999999999998, "capacity_kg": 50.0, "fill_pct": 12.0, "zone": "zoneE"}
+{"ts": "2026-11-01T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.8749999999999997, "capacity_kg": 50.0, "fill_pct": 1.7, "zone": "zoneA"}
+{"ts": "2026-11-01T08:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 6.333333333333331, "capacity_kg": 50.0, "fill_pct": 12.7, "zone": "zoneE"}
+{"ts": "2026-11-01T08:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.9166666666666663, "capacity_kg": 50.0, "fill_pct": 1.8, "zone": "zoneA"}
+{"ts": "2026-11-01T08:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 6.666666666666664, "capacity_kg": 50.0, "fill_pct": 13.3, "zone": "zoneE"}
+{"ts": "2026-11-01T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.9583333333333329, "capacity_kg": 50.0, "fill_pct": 1.9, "zone": "zoneA"}
+{"ts": "2026-11-01T08:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 6.999999999999997, "capacity_kg": 50.0, "fill_pct": 14.0, "zone": "zoneE"}
+{"ts": "2026-11-01T08:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 0.9999999999999996, "capacity_kg": 50.0, "fill_pct": 2.0, "zone": "zoneA"}
+{"ts": "2026-11-01T08:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 7.33333333333333, "capacity_kg": 50.0, "fill_pct": 14.7, "zone": "zoneE"}
+{"ts": "2026-11-01T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.0416666666666663, "capacity_kg": 50.0, "fill_pct": 2.1, "zone": "zoneA"}
+{"ts": "2026-11-01T08:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 7.666666666666663, "capacity_kg": 50.0, "fill_pct": 15.3, "zone": "zoneE"}
+{"ts": "2026-11-01T08:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.083333333333333, "capacity_kg": 50.0, "fill_pct": 2.2, "zone": "zoneA"}
+{"ts": "2026-11-01T08:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 7.9999999999999964, "capacity_kg": 50.0, "fill_pct": 16.0, "zone": "zoneE"}
+{"ts": "2026-11-01T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.1249999999999998, "capacity_kg": 50.0, "fill_pct": 2.2, "zone": "zoneA"}
+{"ts": "2026-11-01T08:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 8.33333333333333, "capacity_kg": 50.0, "fill_pct": 16.7, "zone": "zoneE"}
+{"ts": "2026-11-01T08:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.1666666666666665, "capacity_kg": 50.0, "fill_pct": 2.3, "zone": "zoneA"}
+{"ts": "2026-11-01T08:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 8.666666666666664, "capacity_kg": 50.0, "fill_pct": 17.3, "zone": "zoneE"}
+{"ts": "2026-11-01T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.2083333333333333, "capacity_kg": 50.0, "fill_pct": 2.4, "zone": "zoneA"}
+{"ts": "2026-11-01T08:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 8.999999999999998, "capacity_kg": 50.0, "fill_pct": 18.0, "zone": "zoneE"}
+{"ts": "2026-11-01T08:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.25, "capacity_kg": 50.0, "fill_pct": 2.5, "zone": "zoneA"}
+{"ts": "2026-11-01T08:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 9.333333333333332, "capacity_kg": 50.0, "fill_pct": 18.7, "zone": "zoneE"}
+{"ts": "2026-11-01T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.2916666666666667, "capacity_kg": 50.0, "fill_pct": 2.6, "zone": "zoneA"}
+{"ts": "2026-11-01T08:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 9.666666666666666, "capacity_kg": 50.0, "fill_pct": 19.3, "zone": "zoneE"}
+{"ts": "2026-11-01T08:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T08:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.3333333333333335, "capacity_kg": 50.0, "fill_pct": 2.7, "zone": "zoneA"}
+{"ts": "2026-11-01T08:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 10.0, "capacity_kg": 50.0, "fill_pct": 20.0, "zone": "zoneE"}
+{"ts": "2026-11-01T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.3750000000000002, "capacity_kg": 50.0, "fill_pct": 2.8, "zone": "zoneA"}
+{"ts": "2026-11-01T09:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 10.333333333333334, "capacity_kg": 50.0, "fill_pct": 20.7, "zone": "zoneE"}
+{"ts": "2026-11-01T09:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.416666666666667, "capacity_kg": 50.0, "fill_pct": 2.8, "zone": "zoneA"}
+{"ts": "2026-11-01T09:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 10.666666666666668, "capacity_kg": 50.0, "fill_pct": 21.3, "zone": "zoneE"}
+{"ts": "2026-11-01T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.4583333333333337, "capacity_kg": 50.0, "fill_pct": 2.9, "zone": "zoneA"}
+{"ts": "2026-11-01T09:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 11.000000000000002, "capacity_kg": 50.0, "fill_pct": 22.0, "zone": "zoneE"}
+{"ts": "2026-11-01T09:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.5000000000000004, "capacity_kg": 50.0, "fill_pct": 3.0, "zone": "zoneA"}
+{"ts": "2026-11-01T09:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 11.333333333333336, "capacity_kg": 50.0, "fill_pct": 22.7, "zone": "zoneE"}
+{"ts": "2026-11-01T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.5416666666666672, "capacity_kg": 50.0, "fill_pct": 3.1, "zone": "zoneA"}
+{"ts": "2026-11-01T09:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 11.66666666666667, "capacity_kg": 50.0, "fill_pct": 23.3, "zone": "zoneE"}
+{"ts": "2026-11-01T09:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.583333333333334, "capacity_kg": 50.0, "fill_pct": 3.2, "zone": "zoneA"}
+{"ts": "2026-11-01T09:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 12.000000000000004, "capacity_kg": 50.0, "fill_pct": 24.0, "zone": "zoneE"}
+{"ts": "2026-11-01T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.6250000000000007, "capacity_kg": 50.0, "fill_pct": 3.3, "zone": "zoneA"}
+{"ts": "2026-11-01T09:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 12.333333333333337, "capacity_kg": 50.0, "fill_pct": 24.7, "zone": "zoneE"}
+{"ts": "2026-11-01T09:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.6666666666666674, "capacity_kg": 50.0, "fill_pct": 3.3, "zone": "zoneA"}
+{"ts": "2026-11-01T09:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 12.666666666666671, "capacity_kg": 50.0, "fill_pct": 25.3, "zone": "zoneE"}
+{"ts": "2026-11-01T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.7083333333333341, "capacity_kg": 50.0, "fill_pct": 3.4, "zone": "zoneA"}
+{"ts": "2026-11-01T09:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 13.000000000000005, "capacity_kg": 50.0, "fill_pct": 26.0, "zone": "zoneE"}
+{"ts": "2026-11-01T09:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:45:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "far", "color": "orange", "fill_pct": 26.0, "projected_pct": 90.0, "reason": "fill 26% at +8.0%/h reaches 90% within 8 h", "emptied": false}
+{"ts": "2026-11-01T09:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.7500000000000009, "capacity_kg": 50.0, "fill_pct": 3.5, "zone": "zoneA"}
+{"ts": "2026-11-01T09:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:45:00Z", "layer": "city_brain", "event": "dispatch", "truck_id": "t1", "stop": "far", "kind": "bin", "color": "orange", "next_after": [], "message": {"tool": "dispatch_truck", "truck_id": "t1", "next_stop": {"kind": "bin", "sensor_id": "far", "lat": 36.84, "lon": 10.22}, "route": [{"lat": 36.84, "lon": 10.22}], "timestamp": "2026-11-01T09:45:00Z"}}
+{"ts": "2026-11-01T09:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 0.3333333333333333, "capacity_kg": 50.0, "fill_pct": 0.7, "zone": "zoneE"}
+{"ts": "2026-11-01T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:50:00Z", "layer": "city_brain", "event": "bin_status", "sensor_id": "far", "color": "green", "fill_pct": 0.7, "projected_pct": 0.7, "reason": "fill 1% < 10%", "emptied": false}
+{"ts": "2026-11-01T09:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.7916666666666676, "capacity_kg": 50.0, "fill_pct": 3.6, "zone": "zoneA"}
+{"ts": "2026-11-01T09:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 0.6666666666666666, "capacity_kg": 50.0, "fill_pct": 1.3, "zone": "zoneE"}
+{"ts": "2026-11-01T09:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T09:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.8333333333333344, "capacity_kg": 50.0, "fill_pct": 3.7, "zone": "zoneA"}
+{"ts": "2026-11-01T09:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.0, "capacity_kg": 50.0, "fill_pct": 2.0, "zone": "zoneE"}
+{"ts": "2026-11-01T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.875000000000001, "capacity_kg": 50.0, "fill_pct": 3.8, "zone": "zoneA"}
+{"ts": "2026-11-01T10:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.3333333333333333, "capacity_kg": 50.0, "fill_pct": 2.7, "zone": "zoneE"}
+{"ts": "2026-11-01T10:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:05:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.9166666666666679, "capacity_kg": 50.0, "fill_pct": 3.8, "zone": "zoneA"}
+{"ts": "2026-11-01T10:05:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.6666666666666665, "capacity_kg": 50.0, "fill_pct": 3.3, "zone": "zoneE"}
+{"ts": "2026-11-01T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:10:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 1.9583333333333346, "capacity_kg": 50.0, "fill_pct": 3.9, "zone": "zoneA"}
+{"ts": "2026-11-01T10:10:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 1.9999999999999998, "capacity_kg": 50.0, "fill_pct": 4.0, "zone": "zoneE"}
+{"ts": "2026-11-01T10:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:15:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.0000000000000013, "capacity_kg": 50.0, "fill_pct": 4.0, "zone": "zoneA"}
+{"ts": "2026-11-01T10:15:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 2.333333333333333, "capacity_kg": 50.0, "fill_pct": 4.7, "zone": "zoneE"}
+{"ts": "2026-11-01T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:20:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.041666666666668, "capacity_kg": 50.0, "fill_pct": 4.1, "zone": "zoneA"}
+{"ts": "2026-11-01T10:20:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 2.6666666666666665, "capacity_kg": 50.0, "fill_pct": 5.3, "zone": "zoneE"}
+{"ts": "2026-11-01T10:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:25:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.0833333333333344, "capacity_kg": 50.0, "fill_pct": 4.2, "zone": "zoneA"}
+{"ts": "2026-11-01T10:25:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 3.0, "capacity_kg": 50.0, "fill_pct": 6.0, "zone": "zoneE"}
+{"ts": "2026-11-01T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:30:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.125000000000001, "capacity_kg": 50.0, "fill_pct": 4.3, "zone": "zoneA"}
+{"ts": "2026-11-01T10:30:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 3.3333333333333335, "capacity_kg": 50.0, "fill_pct": 6.7, "zone": "zoneE"}
+{"ts": "2026-11-01T10:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:35:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.1666666666666674, "capacity_kg": 50.0, "fill_pct": 4.3, "zone": "zoneA"}
+{"ts": "2026-11-01T10:35:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 3.666666666666667, "capacity_kg": 50.0, "fill_pct": 7.3, "zone": "zoneE"}
+{"ts": "2026-11-01T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:40:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.208333333333334, "capacity_kg": 50.0, "fill_pct": 4.4, "zone": "zoneA"}
+{"ts": "2026-11-01T10:40:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.0, "capacity_kg": 50.0, "fill_pct": 8.0, "zone": "zoneE"}
+{"ts": "2026-11-01T10:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:45:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.2500000000000004, "capacity_kg": 50.0, "fill_pct": 4.5, "zone": "zoneA"}
+{"ts": "2026-11-01T10:45:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.333333333333333, "capacity_kg": 50.0, "fill_pct": 8.7, "zone": "zoneE"}
+{"ts": "2026-11-01T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:50:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.291666666666667, "capacity_kg": 50.0, "fill_pct": 4.6, "zone": "zoneA"}
+{"ts": "2026-11-01T10:50:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.666666666666666, "capacity_kg": 50.0, "fill_pct": 9.3, "zone": "zoneE"}
+{"ts": "2026-11-01T10:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T10:55:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.3333333333333335, "capacity_kg": 50.0, "fill_pct": 4.7, "zone": "zoneA"}
+{"ts": "2026-11-01T10:55:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T11:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "far", "weight_kg": 4.999999999999999, "capacity_kg": 50.0, "fill_pct": 10.0, "zone": "zoneE"}
+{"ts": "2026-11-01T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "far", "status": "trusted", "confidence": 0.95, "reason": null}
+{"ts": "2026-11-01T11:00:00Z", "layer": "twin", "event": "sensor_reading", "sensor_id": "near", "weight_kg": 2.375, "capacity_kg": 50.0, "fill_pct": 4.8, "zone": "zoneA"}
+{"ts": "2026-11-01T11:00:00Z", "layer": "guardian", "event": "trust_verdict", "sensor_id": "near", "status": "trusted", "confidence": 0.95, "reason": null}

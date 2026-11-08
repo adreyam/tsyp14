@@ -1,0 +1,115 @@
+{
+  "id": "PO01",
+  "name": "Air pollution peak at evening rush",
+  "interaction": "Twin → Brain",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "The Twin's clock jumps to 17:30: traffic emissions raise PM2.5 across the city. On the mock, AIR-06 (zone J) also climbs to 30 µg/m³ (an industrial release) and falls back.",
+  "expected": {
+    "twin": "Evening traffic; PM2.5 follows the emissions.",
+    "guardian": "Trusted (gradual rise).",
+    "brain": "Computes the risk score per zone; above 100 closes the zone's car parks, under 70 for 3 readings reopens them. Below 100 it only watches."
+  },
+  "how_to_verify": "Top bar pollution; map arrow AIR-06 → LOT-06; logs/PO01-*.jsonl. On the live Twin the scenario adds a release on zone J's air monitor (AIR release, device API: it rises, holds and fades over 150 s), so zone J passes 100 and its car park closes, then reopens; traffic alone keeps the air under the alert level. Every closure carries its score in the reason.",
+  "duration_s": 100,
+  "speed": 4,
+  "live_duration_s": 240,
+  "steps": [
+    {
+      "at": 1,
+      "do": "twin_command",
+      "id": "CLOCK",
+      "command": "set_time",
+      "value": "17:30"
+    },
+    {
+      "at": 2,
+      "do": "ramp",
+      "device": "AIR-06",
+      "metric": "pm2_5",
+      "to": 30,
+      "over": 24,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 3,
+      "do": "twin_command",
+      "id": "AIR",
+      "command": "release",
+      "value": {
+        "zone": "J",
+        "ug": 24,
+        "seconds": 150
+      },
+      "modes": [
+        "live"
+      ]
+    },
+    {
+      "at": 55,
+      "do": "ramp",
+      "device": "AIR-06",
+      "metric": "pm2_5",
+      "to": 6,
+      "over": 12,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 75,
+      "do": "clear",
+      "device": "AIR-06",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "expect": "no_action",
+      "agent": "pollution",
+      "command": "open"
+    },
+    {
+      "expect": "action",
+      "actuator": "LOT-06",
+      "command": "closed",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "LOT-06",
+      "command": "auto",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "only_zone",
+      "zone": "J",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py PO01   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "pollution",
+  "focus": {
+    "zone": "J",
+    "devices": [
+      "AIR-06"
+    ],
+    "follow": "traffic"
+  }
+}

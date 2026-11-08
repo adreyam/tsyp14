@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3]
+
+; Municipal reservoir compound using bundled external Kenney City Kit Industrial
+; CC0 models. The compact layout fits a cleared 80 m city utility parcel.
+[ext_resource type="PackedScene" path="res://assets/kenney/city_industrial/water-tower.glb" id="1_tower"]
+[ext_resource type="PackedScene" path="res://assets/kenney/city_industrial/detail-tank-large.glb" id="2_large_tank"]
+[ext_resource type="PackedScene" path="res://assets/kenney/city_industrial/detail-tank.glb" id="3_small_tank"]
+
+[node name="MunicipalReservoirSite" type="Node3D"]
+metadata/purpose = "potable_water_storage"
+metadata/parcel_half_extent = 38.0
+
+[node name="WaterTower" parent="." groups=["water_reservoirs"] instance=ExtResource("1_tower")]
+position = Vector3(0, 0.17, 0)
+scale = Vector3(13, 13, 13)
+metadata/model_source = "Kenney City Kit Industrial CC0"
+metadata/component = "elevated_water_tower"
+
+[node name="GroundTankWest" parent="." groups=["water_reservoirs"] instance=ExtResource("2_large_tank")]
+position = Vector3(-22, 0.17, -18)
+rotation = Vector3(0, 0.55, 0)
+scale = Vector3(10, 10, 10)
+metadata/model_source = "Kenney City Kit Industrial CC0"
+metadata/component = "ground_storage_tank"
+
+[node name="GroundTankEast" parent="." groups=["water_reservoirs"] instance=ExtResource("2_large_tank")]
+position = Vector3(22, 0.17, -18)
+rotation = Vector3(0, -0.55, 0)
+scale = Vector3(10, 10, 10)
+metadata/model_source = "Kenney City Kit Industrial CC0"
+metadata/component = "ground_storage_tank"
+
+[node name="GroundTankSouth" parent="." groups=["water_reservoirs"] instance=ExtResource("3_small_tank")]
+position = Vector3(0, 0.17, 23)
+rotation = Vector3(0, 0.28, 0)
+scale = Vector3(12, 12, 12)
+metadata/model_source = "Kenney City Kit Industrial CC0"
+metadata/component = "ground_storage_tank"

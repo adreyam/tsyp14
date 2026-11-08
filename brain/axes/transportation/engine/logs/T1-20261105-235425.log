@@ -1,0 +1,25 @@
+# scenario T1 Calm day: normal readings, a Guardian that has nothing to say, a Brain that does nothing special.
+# started 2026-11-05T22:54:25.805Z
+2026-11-05T22:54:25.807Z [TEST    ] scenario_start: T1 Calm day: normal readings, a Guardian that has nothing to say, a Brain that does nothing special.  (ref T1)
+2026-11-05T22:54:25.825Z [TWIN    ] reading: sensor:P02:A1: space P02-A1 occupied=True
+2026-11-05T22:54:25.832Z [BRAIN   ] reading_applied: space P02-A1 sensor occupied (was vacant); device sensor:P02:A1 currently unknown
+2026-11-05T22:54:25.832Z [TWIN    ] reading: sensor:P02:counter: lot P02 counter=1
+2026-11-05T22:54:27.047Z [TWIN    ] reading: sensor:P02:A2: space P02-A2 occupied=True
+2026-11-05T22:54:27.105Z [BRAIN   ] reading_applied: space P02-A2 sensor occupied (was vacant); device sensor:P02:A2 currently unknown
+2026-11-05T22:54:27.105Z [TWIN    ] reading: sensor:P02:counter: lot P02 counter=2
+2026-11-05T22:54:28.316Z [TWIN    ] reading: sensor:P02:B1: space P02-B1 occupied=True
+2026-11-05T22:54:28.427Z [BRAIN   ] reading_applied: space P02-B1 sensor occupied (was vacant); device sensor:P02:B1 currently unknown
+2026-11-05T22:54:28.428Z [TWIN    ] reading: sensor:P02:counter: lot P02 counter=3 (+1 similar)
+2026-11-05T22:54:29.467Z [TWIN    ] reading: sensor:P02:counter: lot P02 counter=3
+2026-11-05T22:54:29.641Z [TWIN    ] reading: sensor:P02:A1: space P02-A1 occupied=False
+2026-11-05T22:54:29.657Z [BRAIN   ] reading_applied: space P02-A1 sensor vacant (was occupied); device sensor:P02:A1 currently unknown
+2026-11-05T22:54:30.863Z [TEST    ] check_pass: every reading was accepted by the Brain (HTTP 200)  (ref T1)
+2026-11-05T22:54:30.904Z [TEST    ] check_pass: Brain state matches the Twin: A2 and B1 occupied, A1 free again  (ref T1)
+2026-11-05T22:54:31.474Z [TWIN    ] reading: sensor:P02:counter: lot P02 counter=2 (+1 similar)
+2026-11-05T22:54:33.482Z [TWIN    ] reading: sensor:P02:counter: lot P02 counter=2
+2026-11-05T22:54:35.487Z [TWIN    ] reading: sensor:P02:counter: lot P02 counter=2
+2026-11-05T22:54:36.912Z [TEST    ] check_pass: the Guardian sent NO verdict (nothing suspicious)  (ref T1)
+2026-11-05T22:54:36.922Z [TEST    ] check_pass: the Brain did not overreact: no command withheld, no sensor isolated, no alert  (ref T1)
+2026-11-05T22:54:36.928Z [TEST    ] check_pass: Brain reports 0 untrusted devices  (ref T1)
+2026-11-05T22:54:36.930Z [TEST    ] scenario_end: T1 PASS (5/5 checks)  (ref T1)
+# finished 2026-11-05T22:54:36.931Z  RESULT PASS

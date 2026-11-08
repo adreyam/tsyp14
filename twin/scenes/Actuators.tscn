@@ -1,0 +1,642 @@
+[gd_scene load_steps=42 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_pack/Traffic light-Q6k7Izx6YD.glb" id="1_signal"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Fire hydrant.glb" id="2_hydrant"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Power Box.glb" id="3_power_box"]
+[ext_resource type="Shader" path="res://shaders/emissive_city_marker.gdshader" id="4_emissive_shader"]
+
+[sub_resource type="SphereMesh" id="BeaconMesh"]
+radius = 0.31
+height = 0.62
+
+[sub_resource type="CylinderMesh" id="ValveBeaconMesh"]
+top_radius = 0.25
+bottom_radius = 0.34
+height = 0.48
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r1_c1"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r1_c2"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r1_c3"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r1_c4"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r1_c5"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r2_c1"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r2_c2"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r2_c3"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r2_c4"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r2_c5"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r3_c1"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r3_c2"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r3_c3"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r3_c4"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r3_c5"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r4_c1"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r4_c2"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r4_c3"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r4_c4"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r4_c5"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r5_c1"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r5_c2"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r5_c3"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r5_c4"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="TrafficMaterial_r5_c5"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.96, 0.18, 0.045, 1)
+shader_parameter/emission_color = Color(1, 0.035, 0.004, 1)
+shader_parameter/emission_energy = 2.7
+
+[sub_resource type="ShaderMaterial" id="ValveMaterial_01"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.03, 0.385, 0.740, 1)
+shader_parameter/emission_color = Color(0.005, 0.22, 1, 1)
+shader_parameter/emission_energy = 1.4
+
+[sub_resource type="ShaderMaterial" id="ValveMaterial_02"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.03, 0.410, 0.760, 1)
+shader_parameter/emission_color = Color(0.005, 0.22, 1, 1)
+shader_parameter/emission_energy = 1.4
+
+[sub_resource type="ShaderMaterial" id="ValveMaterial_03"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.03, 0.435, 0.780, 1)
+shader_parameter/emission_color = Color(0.005, 0.22, 1, 1)
+shader_parameter/emission_energy = 1.4
+
+[sub_resource type="ShaderMaterial" id="ValveMaterial_04"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.03, 0.460, 0.800, 1)
+shader_parameter/emission_color = Color(0.005, 0.22, 1, 1)
+shader_parameter/emission_energy = 1.4
+
+[sub_resource type="ShaderMaterial" id="ValveMaterial_05"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.03, 0.485, 0.820, 1)
+shader_parameter/emission_color = Color(0.005, 0.22, 1, 1)
+shader_parameter/emission_energy = 1.4
+
+[sub_resource type="ShaderMaterial" id="PowerMaterial_01"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.95, 0.62, 0.06, 1)
+shader_parameter/emission_color = Color(1, 0.24, 0.005, 1)
+shader_parameter/emission_energy = 1.7
+
+[sub_resource type="ShaderMaterial" id="PowerMaterial_02"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.95, 0.62, 0.06, 1)
+shader_parameter/emission_color = Color(1, 0.24, 0.005, 1)
+shader_parameter/emission_energy = 1.7
+
+[sub_resource type="ShaderMaterial" id="PowerMaterial_03"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.95, 0.62, 0.06, 1)
+shader_parameter/emission_color = Color(1, 0.24, 0.005, 1)
+shader_parameter/emission_energy = 1.7
+
+[node name="Actuators" type="Node3D"]
+
+[node name="TrafficSignals" type="Node3D" parent="."]
+
+[node name="TrafficSignal_r1_c1" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-184.6, 0.15, -195.4)
+metadata/junction = "Junction_r1_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r1_c1" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r1_c1"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r1_c1")
+
+[node name="TrafficSignal_r1_c2" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-100.4, 0.15, -184.6)
+metadata/junction = "Junction_r1_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r1_c2" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r1_c2"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r1_c2")
+
+[node name="TrafficSignal_r1_c3" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(5.4, 0.15, -195.4)
+metadata/junction = "Junction_r1_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r1_c3" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r1_c3"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r1_c3")
+
+[node name="TrafficSignal_r1_c4" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(89.6, 0.15, -184.6)
+metadata/junction = "Junction_r1_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r1_c4" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r1_c4"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r1_c4")
+
+[node name="TrafficSignal_r1_c5" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(195.4, 0.15, -195.4)
+metadata/junction = "Junction_r1_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r1_c5" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r1_c5"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r1_c5")
+
+[node name="TrafficSignal_r2_c1" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-195.4, 0.15, -89.6)
+metadata/junction = "Junction_r2_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r2_c1" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r2_c1"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r2_c1")
+
+[node name="TrafficSignal_r2_c2" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-89.6, 0.15, -100.4)
+metadata/junction = "Junction_r2_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r2_c2" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r2_c2"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r2_c2")
+
+[node name="TrafficSignal_r2_c3" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-5.4, 0.15, -89.6)
+metadata/junction = "Junction_r2_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r2_c3" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r2_c3"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r2_c3")
+
+[node name="TrafficSignal_r2_c4" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(100.4, 0.15, -100.4)
+metadata/junction = "Junction_r2_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r2_c4" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r2_c4"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r2_c4")
+
+[node name="TrafficSignal_r2_c5" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(184.6, 0.15, -89.6)
+metadata/junction = "Junction_r2_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r2_c5" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r2_c5"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r2_c5")
+
+[node name="TrafficSignal_r3_c1" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-184.6, 0.15, -5.4)
+metadata/junction = "Junction_r3_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r3_c1" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r3_c1"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r3_c1")
+
+[node name="TrafficSignal_r3_c2" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-100.4, 0.15, 5.4)
+metadata/junction = "Junction_r3_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r3_c2" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r3_c2"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r3_c2")
+
+[node name="TrafficSignal_r3_c3" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(5.4, 0.15, -5.4)
+metadata/junction = "Junction_r3_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r3_c3" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r3_c3"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r3_c3")
+
+[node name="TrafficSignal_r3_c4" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(89.6, 0.15, 5.4)
+metadata/junction = "Junction_r3_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r3_c4" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r3_c4"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r3_c4")
+
+[node name="TrafficSignal_r3_c5" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(195.4, 0.15, -5.4)
+metadata/junction = "Junction_r3_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r3_c5" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r3_c5"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r3_c5")
+
+[node name="TrafficSignal_r4_c1" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-195.4, 0.15, 100.4)
+metadata/junction = "Junction_r4_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r4_c1" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r4_c1"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r4_c1")
+
+[node name="TrafficSignal_r4_c2" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-89.6, 0.15, 89.6)
+metadata/junction = "Junction_r4_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r4_c2" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r4_c2"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r4_c2")
+
+[node name="TrafficSignal_r4_c3" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-5.4, 0.15, 100.4)
+metadata/junction = "Junction_r4_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r4_c3" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r4_c3"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r4_c3")
+
+[node name="TrafficSignal_r4_c4" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(100.4, 0.15, 89.6)
+metadata/junction = "Junction_r4_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r4_c4" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r4_c4"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r4_c4")
+
+[node name="TrafficSignal_r4_c5" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(184.6, 0.15, 100.4)
+metadata/junction = "Junction_r4_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r4_c5" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r4_c5"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r4_c5")
+
+[node name="TrafficSignal_r5_c1" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-184.6, 0.15, 184.6)
+metadata/junction = "Junction_r5_c1"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r5_c1" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r5_c1"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r5_c1")
+
+[node name="TrafficSignal_r5_c2" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(-100.4, 0.15, 195.4)
+metadata/junction = "Junction_r5_c2"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r5_c2" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r5_c2"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r5_c2")
+
+[node name="TrafficSignal_r5_c3" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(5.4, 0.15, 184.6)
+metadata/junction = "Junction_r5_c3"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r5_c3" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r5_c3"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r5_c3")
+
+[node name="TrafficSignal_r5_c4" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(89.6, 0.15, 195.4)
+metadata/junction = "Junction_r5_c4"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r5_c4" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r5_c4"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r5_c4")
+
+[node name="TrafficSignal_r5_c5" type="Node3D" parent="TrafficSignals" groups=["traffic_signals"]]
+position = Vector3(195.4, 0.15, 184.6)
+metadata/junction = "Junction_r5_c5"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SignalModel" parent="TrafficSignals/TrafficSignal_r5_c5" instance=ExtResource("1_signal")]
+scale = Vector3(8, 8, 8)
+
+[node name="SignalHead" type="MeshInstance3D" parent="TrafficSignals/TrafficSignal_r5_c5"]
+position = Vector3(0, 5.55, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("TrafficMaterial_r5_c5")
+
+[node name="WaterValves" type="Node3D" parent="."]
+
+[node name="WaterValve_01" type="Node3D" parent="WaterValves" groups=["water_valves"]]
+position = Vector3(-174, 0.15, -142)
+metadata/model_family = "external_poly_pizza"
+
+[node name="HydrantModel" parent="WaterValves/WaterValve_01" instance=ExtResource("2_hydrant")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Indicator" type="MeshInstance3D" parent="WaterValves/WaterValve_01"]
+position = Vector3(0, 1.95, 0)
+mesh = SubResource("ValveBeaconMesh")
+material_override = SubResource("ValveMaterial_01")
+
+[node name="WaterValve_02" type="Node3D" parent="WaterValves" groups=["water_valves"]]
+position = Vector3(-79, 0.15, 47)
+metadata/model_family = "external_poly_pizza"
+
+[node name="HydrantModel" parent="WaterValves/WaterValve_02" instance=ExtResource("2_hydrant")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Indicator" type="MeshInstance3D" parent="WaterValves/WaterValve_02"]
+position = Vector3(0, 1.95, 0)
+mesh = SubResource("ValveBeaconMesh")
+material_override = SubResource("ValveMaterial_02")
+
+[node name="WaterValve_03" type="Node3D" parent="WaterValves" groups=["water_valves"]]
+position = Vector3(16, 0.15, 142)
+metadata/model_family = "external_poly_pizza"
+
+[node name="HydrantModel" parent="WaterValves/WaterValve_03" instance=ExtResource("2_hydrant")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Indicator" type="MeshInstance3D" parent="WaterValves/WaterValve_03"]
+position = Vector3(0, 1.95, 0)
+mesh = SubResource("ValveBeaconMesh")
+material_override = SubResource("ValveMaterial_03")
+
+[node name="WaterValve_04" type="Node3D" parent="WaterValves" groups=["water_valves"]]
+position = Vector3(111, 0.15, -47)
+metadata/model_family = "external_poly_pizza"
+
+[node name="HydrantModel" parent="WaterValves/WaterValve_04" instance=ExtResource("2_hydrant")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Indicator" type="MeshInstance3D" parent="WaterValves/WaterValve_04"]
+position = Vector3(0, 1.95, 0)
+mesh = SubResource("ValveBeaconMesh")
+material_override = SubResource("ValveMaterial_04")
+
+[node name="WaterValve_05" type="Node3D" parent="WaterValves" groups=["water_valves"]]
+position = Vector3(176, 0.15, 47)
+metadata/model_family = "external_poly_pizza"
+
+[node name="HydrantModel" parent="WaterValves/WaterValve_05" instance=ExtResource("2_hydrant")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Indicator" type="MeshInstance3D" parent="WaterValves/WaterValve_05"]
+position = Vector3(0, 1.95, 0)
+mesh = SubResource("ValveBeaconMesh")
+material_override = SubResource("ValveMaterial_05")
+
+[node name="PowerSwitches" type="Node3D" parent="."]
+
+[node name="PowerSwitch_01" type="Node3D" parent="PowerSwitches" groups=["power_switches"]]
+position = Vector3(-111, 0.15, -47)
+metadata/model_family = "external_poly_pizza"
+
+[node name="PowerBoxModel" parent="PowerSwitches/PowerSwitch_01" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Indicator" type="MeshInstance3D" parent="PowerSwitches/PowerSwitch_01"]
+position = Vector3(0, 2.05, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("PowerMaterial_01")
+
+[node name="PowerSwitch_02" type="Node3D" parent="PowerSwitches" groups=["power_switches"]]
+position = Vector3(79, 0.15, 47)
+metadata/model_family = "external_poly_pizza"
+
+[node name="PowerBoxModel" parent="PowerSwitches/PowerSwitch_02" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Indicator" type="MeshInstance3D" parent="PowerSwitches/PowerSwitch_02"]
+position = Vector3(0, 2.05, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("PowerMaterial_02")
+
+[node name="PowerSwitch_03" type="Node3D" parent="PowerSwitches" groups=["power_switches"]]
+position = Vector3(111, 0.15, 142)
+metadata/model_family = "external_poly_pizza"
+
+[node name="PowerBoxModel" parent="PowerSwitches/PowerSwitch_03" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Indicator" type="MeshInstance3D" parent="PowerSwitches/PowerSwitch_03"]
+position = Vector3(0, 2.05, 0)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("PowerMaterial_03")

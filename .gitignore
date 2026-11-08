@@ -1,0 +1,33 @@
+# --- Generated files -------------------------------------------------------------------------------
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# --- Twin: Godot import cache and bundled runtimes (Godot 4.7.2 + SUMO 1.25.0, about 650 MB, see twin/README.md)
+twin/.godot/
+twin/runtime/
+twin/screenshots/
+twin/tmp/
+
+# --- Local working copies, not part of the triplet ------------------------------------------------
+Claude outputs/
+brain/TSYP14BRAIN-v3/
+brain/src/citybrain/chain.py
+
+# --- Old scenario trigger scripts, replaced by the ones named after the current Test Book -----------
+scenarios/en01_the_grid_runs_dry.py
+scenarios/en02_grid_low_during_a_crash_energy_cut_vs_em.py
+scenarios/en03_feeder_isolation_for_a_burning_building.py
+
+# --- Logs: keep one file per Test Book scenario run (R2); leave out service consoles and old ids ---
+logs/*.log
+logs/brain-*.jsonl
+logs/CB*-*.jsonl
+twin/logs/sumo_bridge.log
+
+# --- Secrets ---------------------------------------------------------------------------------------
+.env
+twin/.env

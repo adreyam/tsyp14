@@ -1,0 +1,59 @@
+# scenario T3 A parking sensor reports 'occupied' while the space is empty. The Guardian must catch it, the Brain must ignore it.
+# started 2026-11-05T22:54:43.792Z
+2026-11-05T22:54:43.792Z [TEST    ] scenario_start: T3 A parking sensor reports 'occupied' while the space is empty. The Guardian must catch it, the Brain must ignore it.  (ref T3)
+2026-11-05T22:54:43.803Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=False
+2026-11-05T22:54:43.813Z [BRAIN   ] reading_applied: space P01-A3 sensor vacant (was vacant); device sensor:P01:A3 currently unknown
+2026-11-05T22:54:43.814Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:45.323Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True
+2026-11-05T22:54:45.359Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was vacant); device sensor:P01:A3 currently unknown
+2026-11-05T22:54:45.360Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently unknown
+2026-11-05T22:54:45.360Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:46.364Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True (+1 similar)
+2026-11-05T22:54:46.393Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently unknown
+2026-11-05T22:54:47.399Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True
+2026-11-05T22:54:47.502Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0 (+1 similar)
+2026-11-05T22:54:47.504Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently unknown
+2026-11-05T22:54:48.512Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True
+2026-11-05T22:54:48.572Z [GUARDIAN] verdict: sensor:P01:A3 -> UNTRUSTED: sensor says occupied but the gate counter of P01 says 0 occupied (sensors: 1)  (ref sensor:P01:A3)
+2026-11-05T22:54:48.582Z [BRAIN   ] reading_applied: space P01-A3 sensor occupied (was occupied); device sensor:P01:A3 currently untrusted
+2026-11-05T22:54:48.587Z [BRAIN   ] decision: ISOLATED sensor:P01:A3 (untrusted: sensor says occupied but the gate counter of P01 says 0 occupied (sensors: 1)); rolled space P01-A3 back to its last trusted state (vacant); the space stays assignable  (ref sensor:P01:A3)
+2026-11-05T22:54:48.927Z [TEST    ] check_pass: the Guardian marked the reading untrusted within 10 s (took 3.6 s)  (ref T3)
+2026-11-05T22:54:48.935Z [TEST    ] check_pass: the Brain recorded why it isolated the sensor and rolled the space back  (ref T3)
+2026-11-05T22:54:48.952Z [TEST    ] check_pass: space A3 is NOT shown as occupied: it stays assignable  (ref T3)
+2026-11-05T22:54:49.508Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:49.590Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device untrusted]
+2026-11-05T22:54:50.593Z [GUARDIAN] verdict: sensor:P01:A3 -> QUARANTINED: disagrees with the independent gate counter of P01 for 5 s (1 occupied by sensors, 0 by counter)  (ref sensor:P01:A3)
+2026-11-05T22:54:50.604Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:50.608Z [BRAIN   ] decision: ISOLATED sensor:P01:A3 (quarantined); its state already matched the last trusted one, nothing to roll back  (ref sensor:P01:A3)
+2026-11-05T22:54:50.960Z [TEST    ] check_pass: later readings of the device are ignored by the Brain  (ref T3)
+2026-11-05T22:54:50.966Z [TEST    ] check_pass: the Brain told the Guardian about its decision  (ref T3)
+2026-11-05T22:54:51.511Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:51.611Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:52.616Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:53.515Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:53.622Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:54.628Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:55.522Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:55.633Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:56.639Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:57.529Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:57.647Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:58.655Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:54:59.300Z [BRAIN   ] alert: UNIDENTIFIED_VEHICLE at P02: Space B1 is occupied but no RFID tag was identified.  (ref P02)
+2026-11-05T22:54:59.300Z [BRAIN   ] alert: UNIDENTIFIED_VEHICLE at P02: Space A2 is occupied but no RFID tag was identified.  (ref P02)
+2026-11-05T22:54:59.535Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:54:59.661Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:55:00.667Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=True [device quarantined]
+2026-11-05T22:55:01.542Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:55:01.671Z [TWIN    ] reading: sensor:P01:A3: space P01-A3 occupied=False [device quarantined]
+2026-11-05T22:55:03.549Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0 (+1 similar)
+2026-11-05T22:55:05.555Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:55:07.562Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:55:09.566Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:55:11.570Z [TWIN    ] reading: sensor:P01:counter: lot P01 counter=0
+2026-11-05T22:55:12.125Z [GUARDIAN] verdict: sensor:P01:A3 -> RELEASED: readings agree with the gate counter again  (ref sensor:P01:A3)
+2026-11-05T22:55:12.126Z [BRAIN   ] decision: sensor:P01:A3 is trusted again: its readings and commands are accepted  (ref sensor:P01:A3)
+2026-11-05T22:55:13.089Z [TEST    ] check_pass: the Guardian released the sensor once the readings agree again  (ref T3)
+2026-11-05T22:55:13.099Z [TEST    ] check_pass: the Brain trusts the sensor again  (ref T3)
+2026-11-05T22:55:13.103Z [TEST    ] scenario_end: T3 PASS (7/7 checks)  (ref T3)
+# finished 2026-11-05T22:55:13.103Z  RESULT PASS

@@ -1,0 +1,535 @@
+SCENARIO EM03 · Earthquake M6.5 under zone F
+Result: STOPPED   Source: live   Duration: 78 s   Stopped at 77.5 s
+
+What it tests: An M6.5 earthquake shakes zone F (EARTHQUAKE trigger). Several seismic stations record strong
+  shaking.
+
+Undone on the Twin after the stop: EARTHQUAKE clear, ZONES reopen {'zone': '', 'reason': ''}
+
+WHAT HAPPENED (time from the start of the run)
+
++   4 s  EMERGENCY      Requests between axes: emergency → transportation
+                   +   4 s  asks: emergency → transportation: green_wave (unit POL-3, incident LOCKDOWN-F,
+                     kind police) because POL-3 (police) is on its way to LOCKDOWN-F (incident): it needs
+                     green along its route
+                   +   4 s  asks: emergency → transportation: green_wave (unit POL-4, incident LOCKDOWN-F,
+                     kind police) because POL-4 (police) is on its way to LOCKDOWN-F (incident): it needs
+                     green along its route
+                   +   4 s  asks: emergency → transportation: green_wave (unit POL-2, incident LOCKDOWN-F,
+                     kind police) because POL-2 (police) is on its way to LOCKDOWN-F (incident): it needs
+                     green along its route
+                   +   4 s  asks: emergency → transportation: green_wave (unit FIRE-2, incident LOCKDOWN-F,
+                     kind fire) because FIRE-2 (fire) is on its way to LOCKDOWN-F (incident): it needs green
+                     along its route
+                   +  16 s  answer: transportation → emergency: green_wave completed: POL-4 arrived
+                     (on_scene); 4 junction(s) turned green on its way
+                   +  17 s  answer: transportation → emergency: green_wave completed: POL-2 arrived
+                     (on_scene); 9 junction(s) turned green on its way
+                   +  32 s  answer: transportation → emergency: green_wave completed: POL-3 arrived
+                     (on_scene); 3 junction(s) turned green on its way
+                   +  38 s  answer: transportation → emergency: green_wave completed: FIRE-2 arrived
+                     (on_scene); 0 junction(s) turned green on its way
+
++   4 s  TRANSPORTATION Green wave for POL-2 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-2 (POL-2 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x 106, z 192, heading west,
+                           en_route
+                   +   4 s  command: signal r7c6 east-west green -> done
+                   +   4 s  command: signal r7c5 east-west green -> done
+                   +   4 s  command: signal r7c4 east-west green -> done
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone B
+                         why: confirmed by 2 stations (SEIS-02 MMI 5.7, SEIS-01 MMI 5.3); strongest SEIS-02
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone B
+                         why: confirmed by 3 stations (SEIS-02 MMI 5.7, SEIS-01 MMI 5.3, SEIS-03 MMI 5.0);
+                           strongest SEIS-02
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone B
+                         why: confirmed by 3 stations (SEIS-02 MMI 5.7, SEIS-01 MMI 5.3, SEIS-03 MMI 5.0);
+                           strongest SEIS-02
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone B
+                         why: confirmed by 4 stations (SEIS-02 MMI 5.7, SEIS-05 MMI 5.7, SEIS-01 MMI 5.3,
+                           SEIS-03 MMI 5.0); strongest SEIS-02
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 5 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.3); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 6 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.3); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 6 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.3); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.3); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.7, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.8, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.8, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.8, SEIS-05 MMI 5.7,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.2, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.4); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+                   +   7 s  asks: emergency → transportation: stop_traffic (zone F) because confirmed
+                     earthquake (6.6 MMI, epicentre near zone F): stop all traffic until the shaking stops
+                   +   7 s  command: ZONES lockdown {"zone": "F", "reason": "earthquake"} -> done
+                   +   7 s  command: zone F power cut water -> done
+                   +   7 s  command: signal r3c4 all red -> done
+                   +   7 s  command: signal r4c4 all red -> done
+                   +   7 s  command: signal r4c5 all red -> done
+                   +   7 s  command: signal r5c3 all red -> done
+                   +   7 s  answer: transportation → emergency: stop_traffic completed: Twin applied signal
+                     r5c3 all red: signal r5c3 set to all red (sent to the SUMO controller)
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-02 MMI 5.8, SEIS-05 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-01 MMI 5.5); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 9 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-02 MMI 5.8,
+                           SEIS-07 MMI 5.5); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-07 MMI 5.5,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-07 MMI 5.5,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.9, SEIS-07 MMI 5.5,
+                           SEIS-10 MMI 5.4); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.6, SEIS-07 MMI 5.5, SEIS-10 MMI 5.4,
+                           SEIS-05 MMI 5.3); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.5, SEIS-07 MMI 5.5, SEIS-10 MMI 5.4,
+                           SEIS-05 MMI 5.3); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.4, SEIS-05 MMI 5.3,
+                           SEIS-09 MMI 5.2); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.4, SEIS-05 MMI 5.3,
+                           SEIS-09 MMI 5.2); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.4, SEIS-05 MMI 5.3,
+                           SEIS-03 MMI 5.1); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.6, SEIS-05 MMI 5.3,
+                           SEIS-03 MMI 5.1); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.6, SEIS-05 MMI 5.3,
+                           SEIS-03 MMI 5.1); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.6, SEIS-05 MMI 5.3,
+                           SEIS-03 MMI 5.1); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.6, SEIS-05 MMI 5.3,
+                           SEIS-03 MMI 5.1); strongest SEIS-06
+
++   8 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.6, SEIS-05 MMI 5.3,
+                           SEIS-03 MMI 5.1); strongest SEIS-06
+
++   8 s  TRANSPORTATION Green wave for POL-2 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-2 (POL-2 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x 68, z 192, heading west,
+                           en_route
+                   +   8 s  command: signal r7c6 back to normal cycle -> done
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-10 MMI 5.6, SEIS-01 MMI 5.3,
+                           SEIS-05 MMI 5.3); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 8 stations (SEIS-06 MMI 6.5, SEIS-02 MMI 5.7, SEIS-10 MMI 5.6,
+                           SEIS-01 MMI 5.3); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-02 MMI 5.7, SEIS-10 MMI 5.6,
+                           SEIS-01 MMI 5.3); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-02 MMI 5.7, SEIS-10 MMI 5.6,
+                           SEIS-01 MMI 5.3); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.5, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.6); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.6); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.6); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.6); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 6 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.6); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 6 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.5); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.5); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.5); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.5); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.5); strongest SEIS-06
+
++   9 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 7 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.5); strongest SEIS-06
+
++   9 s  TRANSPORTATION Traffic jam at TRAF-11, zone J
+                         why: TRAF-11: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 3 readings
+                           in a row
+
++   9 s  TRANSPORTATION Green wave for POL-2 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-2 (POL-2 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x 11, z 192, heading west,
+                           en_route
+                   +   9 s  command: signal r7c3 east-west green -> done
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 6 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-02 MMI 5.7,
+                           SEIS-10 MMI 5.5); strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 5 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-10 MMI 5.5,
+                           SEIS-07 MMI 5.2); strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 5 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-10 MMI 5.5,
+                           SEIS-07 MMI 5.2); strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 5 stations (SEIS-06 MMI 6.6, SEIS-05 MMI 5.8, SEIS-10 MMI 5.5,
+                           SEIS-07 MMI 5.2); strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 4 stations (SEIS-06 MMI 6.6, SEIS-10 MMI 5.5, SEIS-07 MMI 5.2,
+                           SEIS-11 MMI 5.0); strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 4 stations (SEIS-06 MMI 6.8, SEIS-10 MMI 5.5, SEIS-07 MMI 5.2,
+                           SEIS-11 MMI 5.0); strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.8, SEIS-10 MMI 5.5, SEIS-11 MMI 5.0);
+                           strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.8, SEIS-10 MMI 5.5, SEIS-11 MMI 5.0);
+                           strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.8, SEIS-10 MMI 5.5, SEIS-11 MMI 5.0);
+                           strongest SEIS-06
+
++  10 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 6.8, SEIS-11 MMI 5.0); strongest SEIS-06
+
++  10 s  TRANSPORTATION Traffic jam at TRAF-11, zone J
+                         why: TRAF-11: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 4 readings
+                           in a row
+
++  10 s  TRANSPORTATION Green wave for POL-2 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-2 (POL-2 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -2, z 147, heading north,
+                           en_route
+                   +  10 s  command: signal r6c5 north-south green -> done
+                   +  10 s  command: signal r5c5 north-south green -> done
+                   +  10 s  command: signal r7c5 back to normal cycle -> done
+                   +  10 s  command: signal r7c4 back to normal cycle -> done
+                   +  10 s  command: signal r7c3 back to normal cycle -> done
+
++  11 s  TRANSPORTATION Traffic jam at TRAF-11, zone J
+                         why: TRAF-11: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 5 readings
+                           in a row
+
++  12 s  EMERGENCY      Earthquake
+                         why: shaking back below MMI 5 on every station
+                   +  12 s  asks: emergency → transportation: resume_traffic because the shaking stopped:
+                     traffic can move again
+                   +  12 s  command: zone F power restore water -> done
+                   +  12 s  command: signal r3c4 back to normal cycle -> done
+                   +  12 s  command: signal r4c4 back to normal cycle -> done
+                   +  12 s  command: signal r4c5 back to normal cycle -> done
+                   +  12 s  command: signal r5c3 back to normal cycle -> done
+                   +  12 s  answer: transportation → emergency: resume_traffic completed: Twin applied signal
+                     r5c3 back to normal cycle: signal r5c3 set to back to normal cycle (sent to the SUMO
+                     controller)
+
++  12 s  TRANSPORTATION Traffic jam at TRAF-11, zone J
+                         why: TRAF-11: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 6 readings
+                           in a row
+                   +  12 s  command: signal r5c3 north-south green -> done
+
++  12 s  TRANSPORTATION Green wave for POL-4 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-4 (POL-4 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -13, z -188, heading north,
+                           en_route
+                   +  12 s  command: signal r2c5 north-south green -> done
+                   +  13 s  command: signal r4c5 north-south green -> done
+                   +  13 s  command: signal r6c5 back to normal cycle -> done
+
++  14 s  TRANSPORTATION Green wave for POL-4 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-4 (POL-4 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -71, z -188, heading west,
+                           en_route
+                   +  14 s  command: signal r3c4 east-west green -> done
+                   +  14 s  command: signal r3c3 east-west green -> done
+                   +  14 s  command: signal r3c2 east-west green -> done
+                   +  14 s  command: signal r3c5 north-south green -> done
+                   +  14 s  command: signal r2c5 back to normal cycle -> done
+
++  15 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 3 readings
+                           in a row
+                   +  15 s  command: signal r6c4 north-south green -> done
+
++  15 s  TRANSPORTATION Green wave for POL-4 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-4 (POL-4 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -93, z -168, heading west,
+                           en_route
+                   +  15 s  command: signal r2c5 north-south green -> done
+                   +  15 s  command: signal r3c4 back to normal cycle -> done
+                   +  15 s  command: signal r3c3 back to normal cycle -> done
+                   +  15 s  command: signal r3c2 back to normal cycle -> done
+                   +  15 s  command: signal r5c5 back to normal cycle -> done
+
++  15 s  TRANSPORTATION Green wave for POL-3 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -71, z -188, heading west,
+                           en_route
+                   +  15 s  command: signal r3c4 east-west green -> done
+                   +  15 s  command: signal r3c3 east-west green -> done
+                   +  15 s  command: signal r3c2 east-west green -> done
+
++  16 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 95 % (limit 70) and speed 12 km/h (limit 12) for 4 readings
+                           in a row
+
++  16 s  TRANSPORTATION Green wave for POL-3 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -108, z -188, heading west,
+                           en_route
+                   +  16 s  command: signal r3c4 back to normal cycle -> done
+
++  17 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 11 km/h (limit 12) for 5 readings
+                           in a row
+
++  17 s  TRANSPORTATION Green wave for POL-2 to LOCKDOWN-F
+                         why: POL-2 arrived (on_scene); 9 junction(s) given green
+                   +  17 s  command: signal r4c5 back to normal cycle -> done
+                   +  17 s  command: signal r3c5 back to normal cycle -> done
+                   +  17 s  command: signal r2c5 back to normal cycle -> done
+
++  24 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 8 km/h (limit 12) for 6 readings
+                           in a row
+
++  24 s  TRANSPORTATION Traffic jam at TRAF-11, zone J
+                         why: TRAF-11: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 3 readings
+                           in a row
+
++  24 s  TRANSPORTATION Green wave for POL-3 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-3 (POL-3 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -188, z -171, heading west,
+                           en_route
+                   +  24 s  command: signal r3c3 back to normal cycle -> done
+                   +  25 s  command: signal r3c2 back to normal cycle -> done
+
++  32 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 10 km/h (limit 12) for 7 readings
+                           in a row
+
++  32 s  TRANSPORTATION Traffic jam at TRAF-11, zone J
+                         why: TRAF-11: occupancy 100 % (limit 70) and speed 0 km/h (limit 12) for 4 readings
+                           in a row
+
++  50 s  TRANSPORTATION Traffic jam at TRAF-11, zone J
+                         why: TRAF-11: traffic flowing again (16 km/h, 35 %) for 3 readings
+                   +  50 s  command: signal r5c3 back to normal cycle -> done
+
++  74 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 85 % (limit 70) and speed 10 km/h (limit 12) for 3 readings
+                           in a row
+
++  75 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 11 km/h (limit 12) for 3 readings
+                           in a row
+                   +  75 s  command: signal r3c6 east-west green -> done
+
++  79 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 90 % (limit 70) and speed 7 km/h (limit 12) for 3 readings in
+                           a row
+
++  79 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 12 km/h (limit 12) for 4 readings
+                           in a row
+
+BY AXIS
+  emergency      112 decision(s),  11 command(s),  0 refused / not sent
+  pollution        5 decision(s),   0 command(s),  0 refused / not sent
+  transportation  35 decision(s),  36 command(s),  0 refused / not sent
+
+Full record (every reading, verdict and answer, one JSON per line): EM03-20261108-201506.jsonl

@@ -1,0 +1,159 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.1.20",
+    "version": "2.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "dustpan"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "dustpan",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "dustpan_nor_gl",
+      "uri": "textures/dustpan_nor_gl_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "dustpan_diff",
+      "uri": "textures/dustpan_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "dustpan_metal-dustpan_rough",
+      "uri": "textures/dustpan_arm_1k.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 2572,
+      "max": [
+        0.16605223715305328,
+        0.09955468028783798,
+        0.17567656934261322
+      ],
+      "min": [
+        -0.16605223715305328,
+        -0.0007561479578725994,
+        -0.19230026006698608
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2572,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 2572,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 12996,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 30864,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 30864,
+      "byteOffset": 30864,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 20576,
+      "byteOffset": 61728,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 25992,
+      "byteOffset": 82304,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 108296,
+      "uri": "dustpan.bin"
+    }
+  ]
+}

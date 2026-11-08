@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Car screen - Smart Parking</title>
+<style>
+  :root { --bg:#f4f6f9; --panel:#fff; --ink:#1c2733; --mute:#66758a; --line:#d9e0e8; --accent:#1f6feb; --ok:#2da44e; --warn:#d29922; --bad:#d1242f;
+          --map:#eaf0e6; --road:#cfd8cf; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#10161d; --panel:#18212b; --ink:#e6edf3; --mute:#8b9aab; --line:#2b3745; --accent:#58a6ff; --map:#16201a; --road:#26332a; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, Segoe UI, sans-serif; }
+  header { padding:10px 16px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; border-bottom:1px solid var(--line); background:var(--panel); }
+  header h1 { font-size:16px; margin:0 8px 0 0; }
+  header label { color:var(--mute); font-size:12px; display:flex; flex-direction:column; gap:2px; }
+  select, input, button, textarea { font:inherit; color:inherit; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:5px 8px; }
+  button { cursor:pointer; } button.primary { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+  button:disabled { opacity:.45; cursor:not-allowed; }
+  main { display:grid; grid-template-columns: minmax(380px, 1.25fr) minmax(340px, 1fr); gap:12px; padding:12px; }
+  @media (max-width: 960px) { main { grid-template-columns: 1fr; } }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px; }
+  .card h2 { font-size:13px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em; color:var(--mute); }
+  svg { width:100%; height:auto; display:block; background:var(--map); border-radius:8px; }
+  .steps { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; }
+  .step { padding:2px 8px; border-radius:99px; font-size:12px; border:1px solid var(--line); color:var(--mute); }
+  .step.on { background:var(--accent); color:#fff; border-color:var(--accent); } .step.done { color:var(--ok); border-color:var(--ok); }
+  .offer { border:1px solid var(--line); border-radius:8px; padding:10px; margin:8px 0; }
+  .offer.first { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset; }
+  .offer h3 { margin:0; font-size:15px; display:flex; justify-content:space-between; gap:8px; }
+  .bar { display:flex; height:12px; border-radius:6px; overflow:hidden; background:var(--line); margin:6px 0; }
+  .legend { display:flex; flex-wrap:wrap; gap:4px 10px; font-size:11px; color:var(--mute); }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:3px; vertical-align:middle; }
+  .facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:2px 10px; font-size:12px; margin:6px 0; }
+  .facts b { font-weight:600; }
+  .tag { font-size:11px; padding:1px 6px; border-radius:99px; background:var(--line); color:var(--ink); }
+  .tag.up { background:#d7f0dd; color:#155724; } .tag.down { background:#fbdada; color:#7a1620; }
+  .spaces { display:grid; grid-template-columns:repeat(auto-fill,minmax(54px,1fr)); gap:6px; margin:6px 0; }
+  .sp { text-align:center; padding:6px 2px; border-radius:6px; font-size:11px; color:#fff; border:2px solid transparent; }
+  .sp.AVAILABLE{background:var(--ok)} .sp.RESERVED{background:var(--warn)} .sp.OCCUPIED{background:var(--bad)}
+  .sp.RELEASING{background:#8250df} .sp.OUT_OF_SERVICE{background:#6e7781} .sp.mine{border-color:var(--accent); outline:2px solid var(--accent)}
+  .lane { font-size:12px; border-left:3px solid var(--line); padding:2px 8px; margin:4px 0; }
+  pre, .log { font:11.5px/1.45 ui-monospace, Consolas, monospace; background:var(--bg); border-radius:6px; padding:8px; margin:6px 0; overflow:auto; max-height:200px; white-space:pre-wrap; word-break:break-word; }
+  .log div.net{color:var(--accent)} .log div.lot{color:var(--warn)} .log div.err{color:var(--bad)} .log div.car{color:var(--ok)}
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:10px; } @media (max-width:700px){ .two{grid-template-columns:1fr;} }
+  .mute { color:var(--mute); } .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  table { border-collapse:collapse; width:100%; font-size:12px; } td, th { padding:3px 6px; border-bottom:1px solid var(--line); text-align:left; }
+  details summary { cursor:pointer; color:var(--mute); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🚗 Car screen</h1>
+  <label>Driver profile <select id="profile"></select></label>
+  <label>Day <select id="day">
+    <option value="1">Monday</option><option value="2" selected>Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option>
+    <option value="5">Friday</option><option value="6">Saturday</option><option value="0">Sunday</option></select></label>
+  <label>Time <input id="time" type="time" value="16:00"></label>
+  <label>Click on the map sets <select id="clickmode"><option value="dest">destination</option><option value="origin">car start</option></select></label>
+  <label>Simulation speed <select id="speed"><option value="1">1× real time</option><option value="10">10×</option><option value="30">30×</option>
+    <option value="60" selected>60×</option><option value="180">180×</option></select></label>
+  <button class="primary" id="btnRequest">Find parking</button>
+  <button id="btnReset" title="Resets the demo database (all lots) and the trip">Reset demo</button>
+</header>
+
+<main>
+  <section>
+    <div class="card">
+      <h2>Map (demo city, invented coordinates)</h2>
+      <svg id="map" viewBox="0 0 700 470"></svg>
+      <div class="legend" style="margin-top:6px">
+        <span>■ lot (number = free spaces)</span><span>⚑ destination</span><span>◉ car</span><span>◆ routine place (bright = active now)</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Live parking lot <span id="lotName" class="mute"></span></h2>
+      <div class="steps" id="steps"></div>
+      <div id="lotLive" class="mute">Choose a lot to follow it live. Open <a href="/admin" target="_blank">/admin</a> in another tab for the administrator view.</div>
+      <h2 style="margin-top:12px">All lots now (City Brain feed)</h2>
+      <div id="feed"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Parking offers (ranked in the car)</h2>
+      <div id="offers" class="mute">Press “Find parking”.</div>
+      <div class="row" id="tripActions" style="margin-top:8px"></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Privacy: what leaves the car</h2>
+      <div class="two">
+        <div><b>Sent to the City Brain</b><pre id="sent">nothing yet</pre></div>
+        <div><b>Stays in the car</b><pre id="kept"></pre></div>
+      </div>
+      <details><summary>Edit this driver's frequent places (JSON, saved only in this browser = the car)</summary>
+        <textarea id="placesJson" rows="10" style="width:100%; font:12px ui-monospace,Consolas,monospace"></textarea>
+        <div class="row"><button id="btnSavePlaces">Save</button><button id="btnDeletePlaces">Delete my places</button>
+          <span class="mute">Coordinates are rounded to 3 decimals (~100 m) when saved.</span></div>
+      </details>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Event log</h2>
+      <div class="log" id="log" style="max-height:340px"></div>
+      <details><summary>Demo keys (device / admin)</summary>
+        <div class="row"><label>Device key <input id="deviceKey" value="dev-device-key"></label>
+        <label>Admin key <input id="adminKey" value="dev-admin-key"></label>
+        <label>Vehicle tag <input id="tag" value="RFID_123"></label></div>
+        <div class="mute">The page plays the role of the car AND of the lot's ESP32 gateway (as /sim does), so the keys are typed here. Demo only.</div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<script src="/car/ranking.js"></script>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const CR = window.CarRanking;
+const LABELS = { drive_min:"Drive time", walk_m:"Walk to destination", free_now:"Free now", free_30:"Free in 30 min",
+                 pressure:"Low competition", reputation:"Reputation", routine_m:"Your routine" };
+const COLORS = { drive_min:"#4e79a7", walk_m:"#59a14f", free_now:"#edc948", free_30:"#f28e2b", pressure:"#e15759", reputation:"#b07aa1", routine_m:"#76b7b2" };
+const BOUNDS = { minLat:36.785, maxLat:36.835, minLon:10.160, maxLon:10.240 }, MW = 700, MH = 470;
+
+/* ------------------------------------------------------------ the car's own memory (driver profiles) */
+const EXAMPLE_PLACES = [   // INVENTED example driver "Amine": places are coarse (3 decimals), all near the demo lots
+  { label:"Workplace",            lat:36.810, lon:10.190, weight:3, schedule:[{days:"weekdays", from:"07:00", to:"13:00"}] },
+  { label:"Children's school",    lat:36.799, lon:10.171, weight:3, schedule:[{days:"weekdays", from:"15:30", to:"17:30"}] },
+  { label:"Spouse's workplace",   lat:36.806, lon:10.182, weight:2, schedule:[{days:"weekdays", from:"17:30", to:"19:30"}] },
+  { label:"Favourite café",       lat:36.795, lon:10.181, weight:1, schedule:[{days:"weekend", from:"09:00", to:"13:00"}, {days:"weekdays", from:"13:00", to:"15:00"}] },
+];
+const mem = {};   // fallback when localStorage is blocked
+function store(key, val) { try { if (val === undefined) return JSON.parse(localStorage.getItem(key)); localStorage.setItem(key, JSON.stringify(val)); } catch { if (val === undefined) return mem[key]; mem[key] = val; } }
+function profiles() {
+  let p = store("car.profiles.v1");
+  if (!p) { p = { "Amine (example)": { places: EXAMPLE_PLACES }, "Guest (no places)": { places: [] } }; store("car.profiles.v1", p); }
+  return p;
+}
+function currentPlaces() { return profiles()[$("profile").value]?.places ?? []; }
+function when() { const [h, m] = $("time").value.split(":").map(Number); return { dow: +$("day").value, minutes: h * 60 + m }; }
+
+/* ------------------------------------------------------------ state */
+const S = { origin:{lat:36.820, lon:10.210}, dest:{lat:36.8075, lon:10.186}, cands:[], excluded:[], ranked:null, baseline:null,
+            trip:0, lot:null, chosen:null, reservationId:null, space:null, stage:"idle", carPos:null, barrier:{}, leaveResolve:null, overview:null };
+const STEPS = ["Request","Choose","Drive","Entrance","Park","Parked","Exit","Done"];
+
+function log(cls, text) { const d = document.createElement("div"); d.className = cls; d.textContent = new Date().toLocaleTimeString() + "  " + text;
+  $("log").appendChild(d); $("log").scrollTop = $("log").scrollHeight; }
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+function alive(t) { if (t !== S.trip) throw new Error("trip cancelled"); }
+function setStage(name) { S.stage = name; renderSteps(); }
+
+async function api(method, path, body, opts = {}) {
+  const headers = { "Content-Type":"application/json" };
+  if (opts.admin) headers["X-Admin-Key"] = $("adminKey").value;
+  if (opts.device) headers["X-Device-Key"] = $("deviceKey").value;
+  const r = await fetch(path, { method, headers, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(`${r.status} ${typeof j.detail === "string" ? j.detail : JSON.stringify(j.detail)}`);
+  return j;
+}
+
+/* ------------------------------------------------------------ map */
+const px = (lon) => (lon - BOUNDS.minLon) / (BOUNDS.maxLon - BOUNDS.minLon) * MW;
+const py = (lat) => (BOUNDS.maxLat - lat) / (BOUNDS.maxLat - BOUNDS.minLat) * MH;
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+function drawMap() {
+  const active = CR.activePlaces(currentPlaces(), when()).map((p) => p.label);
+  let h = "";
+  for (let i = 1; i < 8; i++) h += `<line x1="${i*MW/8}" y1="0" x2="${i*MW/8}" y2="${MH}" stroke="var(--road)" stroke-width="1"/>`;
+  for (let i = 1; i < 6; i++) h += `<line x1="0" y1="${i*MH/6}" x2="${MW}" y2="${i*MH/6}" stroke="var(--road)" stroke-width="1"/>`;
+  for (const p of currentPlaces()) {
+    const on = active.includes(p.label), x = px(p.lon), y = py(p.lat);
+    h += `<g opacity="${on ? 1 : .3}"><rect x="${x-6}" y="${y-6}" width="12" height="12" transform="rotate(45 ${x} ${y})" fill="#76b7b2" stroke="#1c2733"/>
+          <text x="${x+10}" y="${y+4}" font-size="11" fill="var(--ink)">${esc(p.label)}</text></g>`;
+  }
+  const lots = [...S.cands.map((c) => ({ ...c, ok:true })), ...S.excluded.filter((e) => e.lat).map((e) => ({ ...e, ok:false }))];
+  for (const c of lots) {
+    const x = px(c.lon), y = py(c.lat), sel = S.lot === c.lot_id;
+    h += `<g><title>${esc(c.lot_id)} ${c.ok ? "" : esc(c.reason || "")}</title>
+      <rect x="${x-17}" y="${y-13}" width="34" height="26" rx="5" fill="${c.ok ? "#1f6feb" : "#8b949e"}" stroke="${sel ? "#f2b84b" : "#fff"}" stroke-width="${sel ? 3 : 1.5}"/>
+      <text x="${x}" y="${y+4}" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">${esc(c.lot_id)}</text>
+      ${c.ok ? `<text x="${x}" y="${y+27}" text-anchor="middle" font-size="10" fill="var(--ink)">${c.free_now} free</text>` : ""}</g>`;
+  }
+  h += `<text x="${px(S.dest.lon)}" y="${py(S.dest.lat)+5}" text-anchor="middle" font-size="20">⚑</text>
+        <text x="${px(S.dest.lon)+12}" y="${py(S.dest.lat)-6}" font-size="11" fill="var(--ink)">destination</text>`;
+  const car = S.carPos || S.origin;
+  h += `<circle cx="${px(car.lon)}" cy="${py(car.lat)}" r="8" fill="#e15759" stroke="#fff" stroke-width="2"/>`;
+  if (!S.carPos) h += `<text x="${px(car.lon)+11}" y="${py(car.lat)+4}" font-size="11" fill="var(--ink)">car</text>`;
+  $("map").innerHTML = h;
+}
+$("map").addEventListener("click", (e) => {
+  const r = $("map").getBoundingClientRect(), x = (e.clientX - r.left) / r.width * MW, y = (e.clientY - r.top) / r.height * MH;
+  const pt = { lat: +(BOUNDS.maxLat - y / MH * (BOUNDS.maxLat - BOUNDS.minLat)).toFixed(4), lon: +(BOUNDS.minLon + x / MW * (BOUNDS.maxLon - BOUNDS.minLon)).toFixed(4) };
+  if (S.stage !== "idle" && S.stage !== "Request" && S.stage !== "Choose") return;
+  if ($("clickmode").value === "dest") S.dest = pt; else { S.origin = pt; S.carPos = null; }
+  drawMap();
+});
+
+/* ------------------------------------------------------------ render offers */
+function renderSteps() {
+  const idx = STEPS.indexOf(S.stage);
+  $("steps").innerHTML = STEPS.map((s, i) => `<span class="step ${i === idx ? "on" : (idx > i ? "done" : "")}">${s}</span>`).join("");
+}
+function offerHtml(r, i) {
+  const keys = Object.keys(r.contributions);
+  const bar = keys.map((k) => `<div title="${LABELS[k]}: ${r.contributions[k]}" style="width:${r.contributions[k] * 100}%;background:${COLORS[k]}"></div>`).join("");
+  const legend = keys.map((k) => `<span><span class="dot" style="background:${COLORS[k]}"></span>${LABELS[k]} ${(r.contributions[k] * 100).toFixed(0)}</span>`).join("");
+  let delta = "";
+  if (S.baseline) {
+    const b = S.baseline.findIndex((x) => x.lot_id === r.lot_id) + 1;
+    if (b && b !== r.rank) delta = `<span class="tag ${b > r.rank ? "up" : "down"}">your routine moved it from #${b} to #${r.rank}</span>`;
+  }
+  const near = (r.routine_m !== undefined && S.ranked.routine.used) ? `<div><b>${(r.routine_m / 1000).toFixed(2)} km</b> avg. from your routine</div>` : "";
+  return `<div class="offer ${i === 0 ? "first" : ""}">
+    <h3><span>#${r.rank} ${esc(r.name)} <span class="mute">(${r.lot_id})</span></span><span>score ${(r.score * 100).toFixed(0)}</span></h3>
+    <div class="bar">${bar}</div><div class="legend">${legend}</div>
+    <div class="facts"><div><b>${r.drive_min.toFixed(1)} min</b> drive</div><div><b>${Math.round(r.walk_m)} m</b> walk</div>
+      <div><b>${r.free_now}</b> free now</div><div><b>${r.free_30.toFixed(1)}</b> free in 30 min</div>
+      <div><b>${r.details.drivers_heading_there}</b> drivers heading there</div><div><b>${Math.round(r.reputation * 100)}%</b> reputation</div>${near}</div>
+    <div class="row">${delta}<button class="primary" data-lot="${r.lot_id}" ${S.stage === "Choose" ? "" : "disabled"}>Choose this lot</button></div></div>`;
+}
+function renderOffers() {
+  const R = S.ranked;
+  if (!R) return;
+  let head = `<div class="mute">Weights: ${R.weights_source.toUpperCase()}${R.routine.used ? "" : " · routine criterion off (no place matches this day/time)"}${R.routine.cap_applied ? " · routine weight capped at 25%" : ""}.
+    ${R.routine.used ? `Active places now: <b>${R.routine.active.map(esc).join(", ")}</b>.` : ""}</div>`;
+  const ex = S.excluded.length ? `<details><summary>${S.excluded.length} lot(s) not offered</summary>${S.excluded.map((e) => `<div class="mute">${e.lot_id}: ${esc(e.reason)}</div>`).join("")}</details>` : "";
+  $("offers").innerHTML = head + R.ranking.map(offerHtml).join("") + ex;
+  $("offers").querySelectorAll("button[data-lot]").forEach((b) => b.addEventListener("click", () => choose(b.dataset.lot)));
+}
+function renderKept() {
+  const w = when(), act = CR.activePlaces(currentPlaces(), w).map((p) => p.label);
+  $("kept").textContent = currentPlaces().length
+    ? currentPlaces().map((p) => `${act.includes(p.label) ? "● " : "○ "}${p.label}  (${p.lat}, ${p.lon})  weight ${p.weight}`).join("\n") + "\n\n● = counts now, ○ = not at this day/time"
+    : "no frequent places for this profile";
+  $("placesJson").value = JSON.stringify(currentPlaces(), null, 1);
+}
+
+/* ------------------------------------------------------------ 1. request + local ranking */
+async function findParking() {
+  S.trip++; const t = S.trip;
+  await cancelReservation();
+  Object.assign(S, { lot:null, chosen:null, space:null, carPos:null, ranked:null });
+  $("tripActions").innerHTML = ""; $("lotLive").innerHTML = ""; $("lotName").textContent = "";
+  setStage("Request");
+  const body = { origin:S.origin, destination:S.dest, exclude:S.excludeList || [] };
+  $("sent").textContent = "POST /api/city/candidates\n" + JSON.stringify(body, null, 1);
+  log("net", `car → City Brain: POST /candidates  (only the start point and the destination)`);
+  try {
+    const res = await api("POST", "/api/city/candidates", body);
+    alive(t);
+    S.cands = res.candidates; S.excluded = res.excluded.map((e) => ({ ...e, ...(S.cands.find((c) => c.lot_id === e.lot_id) || {}) }));
+    log("net", `City Brain → car: ${S.cands.length} lots with their raw values, ${S.excluded.length} not offered`);
+    const places = currentPlaces(), w = when();
+    S.baseline = CR.rank(S.cands, { topN:99 }).ranking;
+    S.ranked = CR.rank(S.cands, { topN:3, places, when:w });
+    log("car", `car ranks locally: weights ${S.ranked.weights_source}` + (S.ranked.routine.used ? `, routine places active: ${S.ranked.routine.active.join(", ")}` : ", no routine place active"));
+    setStage("Choose"); renderOffers(); drawMap(); renderKept();
+    if (!S.ranked.ranking.length) $("offers").innerHTML = '<div class="err">No lot can be offered right now.</div>';
+  } catch (e) { if (e.message !== "trip cancelled") log("err", "request failed: " + e.message); }
+}
+
+/* ------------------------------------------------------------ 2. choose, drive, enter, park, exit */
+async function cancelReservation() {
+  if (S.reservationId) { try { await api("POST", `/api/city/reservations/${S.reservationId}/cancel`); } catch {} S.reservationId = null; }
+}
+async function choose(lotId) {
+  const t = S.trip, lot = S.ranked.ranking.find((r) => r.lot_id === lotId);
+  S.lot = lotId; S.chosen = lot; setStage("Drive"); renderOffers(); drawMap();
+  $("lotName").textContent = `· ${lot.name}`;
+  try {
+    const body = { lot_id:lotId, eta_min:lot.drive_min };
+    $("sent").textContent += "\n\nPOST /api/city/reserve\n" + JSON.stringify(body);
+    const rs = await api("POST", "/api/city/reserve", body); alive(t);
+    S.reservationId = rs.reservation_id;
+    log("net", `car → City Brain: reserve ${lotId} (drivers heading there +1, valid until ${rs.valid_until})`);
+    await driveTo(t, lot);
+    await enterLot(t, lot);
+  } catch (e) {
+    if (e.message === "trip cancelled") return;
+    log("err", e.message);
+    if (/full/i.test(e.message)) { S.excludeList = [...(S.excludeList || []), lotId]; log("car", "lot is full → asking for a new ranking without it"); await sleep(1200); findParking(); }
+  }
+}
+function driveTo(t, lot) {
+  const speed = +$("speed").value, ms = Math.max(1500, lot.drive_min * 60 * 1000 / speed), a = { ...S.origin }, b = { lat:lot.lat, lon:lot.lon };
+  log("car", `driving to ${lot.lot_id}: ETA ${lot.drive_min.toFixed(1)} min → ${(ms / 1000).toFixed(1)} s at ${speed}×`);
+  return new Promise((resolve, reject) => {
+    const t0 = performance.now();
+    (function step(now) {
+      if (t !== S.trip) return reject(new Error("trip cancelled"));
+      const f = Math.min(1, (now - t0) / ms);
+      S.carPos = { lat:a.lat + (b.lat - a.lat) * f, lon:a.lon + (b.lon - a.lon) * f }; drawMap();
+      f < 1 ? requestAnimationFrame(step) : resolve();
+    })(t0);
+  });
+}
+
+let gw = null, polling = null;
+const cfg = (lot) => ({ gw:`GW-${lot}`, ent:`${lot}-ENT1`, exit:`${lot}-EXIT1`, lot });
+async function ev(t, type, body) {
+  alive(t);
+  log("lot", `car/gateway → ${gw.gw}: ${type} ${Object.entries(body).map(([k, v]) => k + "=" + v).join(" ")}`);
+  const j = await api("POST", `/api/gateways/${gw.gw}/events`, { type, ...body }, { device:true });
+  log("lot", `        lot replies: ${j.lane_state ? "lane " + j.lane_state : "space " + j.space_status}`);
+  refreshLot(); return j;
+}
+async function pollCommands() {
+  try {
+    const r = await api("GET", `/api/gateways/${gw.gw}/commands`, null, { device:true });
+    for (const c of r.commands) { if (c.type === "OPEN_BARRIER") { S.barrier[c.lane_id] = true; log("lot", `lot → barrier: OPEN ${c.lane_id}`); }
+                                  else if (c.type === "SPACE_INDICATOR") log("lot", `lot → LED at ${c.space_code}: ${c.mode}`); }
+  } catch {}
+}
+async function waitBarrier(t, lane) {
+  for (let i = 0; i < 60; i++) { alive(t); await pollCommands(); if (S.barrier[lane]) { S.barrier[lane] = false; return true; } await sleep(250); }
+  log("err", `barrier ${lane} never opened`); return false;
+}
+
+async function enterLot(t, lot) {
+  gw = cfg(lot.lot_id); S.barrier = {};
+  clearInterval(polling); await pollCommands(); S.barrier = {};   // drop stale commands
+  refreshLot(); clearInterval(S.ovTimer); S.ovTimer = setInterval(refreshLot, 800);
+  setStage("Entrance");
+  log("car", `arrived at ${lot.lot_id}: entrance detection loop`);
+  await ev(t, "LANE_VEHICLE_DETECTED", { lane_id:gw.ent });
+  await sleep(700); alive(t);
+  const res = await ev(t, "LANE_RFID_READ", { lane_id:gw.ent, uid:$("tag").value });
+  const view = await api("GET", `/api/terminal/${gw.ent}`); alive(t);
+  if (res.lane_state !== "TICKET_SHOWN") {
+    log("err", `entrance refused: ${view.message}`);
+    await ev(t, "LANE_VEHICLE_CLEARED", { lane_id:gw.ent });
+    await cancelReservation();
+    S.excludeList = [...(S.excludeList || []), lot.lot_id];
+    $("tripActions").innerHTML = `<span class="err">Refused: ${esc(view.message)}</span>`;
+    log("car", "redirect: asking for a new ranking without this lot"); await sleep(1500); alive(t); return findParking();
+  }
+  S.space = view.ticket.space; S.reservationId = null;   // the arrival consumed the reservation on the server
+  log("car", `ticket ${view.ticket.ticket_id} → park in space ${S.space}`);
+  await waitBarrier(t, gw.ent); await sleep(500); alive(t);
+  await ev(t, "LANE_VEHICLE_CLEARED", { lane_id:gw.ent });
+
+  setStage("Park");
+  await sleep(1400); alive(t);
+  await ev(t, "SPACE_OCCUPANCY", { space_code:S.space, occupied:true, magnitude:1900 });
+  await sleep(700); alive(t);
+  await ev(t, "SPACE_RFID_READ", { space_code:S.space, uid:$("tag").value });
+  setStage("Parked"); refreshLot();
+  log("car", "parked. Press “Leave parking” when you want to go.");
+  await new Promise((resolve) => { S.leaveResolve = resolve;
+    $("tripActions").innerHTML = '<button class="primary" id="btnLeave">Leave parking</button>';
+    $("btnLeave").onclick = () => { $("tripActions").innerHTML = ""; resolve(); }; });
+  alive(t);
+
+  setStage("Exit");
+  await ev(t, "SPACE_OCCUPANCY", { space_code:S.space, occupied:false });
+  await sleep(1200); alive(t);
+  await ev(t, "LANE_VEHICLE_DETECTED", { lane_id:gw.exit });
+  await sleep(700); alive(t);
+  const x = await ev(t, "LANE_RFID_READ", { lane_id:gw.exit, uid:$("tag").value });
+  if (x.lane_state === "EXIT_AUTHORIZED") { await waitBarrier(t, gw.exit); await sleep(500); }
+  else log("err", "exit not authorized automatically: " + (await api("GET", `/api/terminal/${gw.exit}`)).message);
+  await ev(t, "LANE_VEHICLE_CLEARED", { lane_id:gw.exit });
+  setStage("Done"); refreshLot();
+  log("car", "left the lot. Session closed by the lot system.");
+  $("tripActions").innerHTML = '<button class="primary" id="btnAgain">New trip</button>';
+  $("btnAgain").onclick = () => { S.excludeList = []; S.carPos = null; S.origin = { lat:S.dest.lat, lon:S.dest.lon }; findParking(); };
+  clearInterval(S.ovTimer); setTimeout(refreshLot, 600);
+}
+
+/* ------------------------------------------------------------ live lot panel + city feed */
+async function refreshLot() {
+  if (S.lot) {
+    try {
+      const o = await api("GET", `/api/admin/overview?lot_id=${S.lot}`, null, { admin:true });
+      $("lotLive").innerHTML = `<div class="spaces">${o.spaces.map((s) => `<div class="sp ${s.status} ${s.code === S.space ? "mine" : ""}" title="${esc(s.status)}">${esc(s.code)}<br>${esc(s.status.slice(0, 5))}</div>`).join("")}</div>
+        ${o.lanes.map((l) => `<div class="lane"><b>${l.kind === "ENTRANCE" ? "Entrance" : "Exit"} (${l.id})</b> · ${l.state}${l.message ? " — " + esc(l.message) : ""}</div>`).join("")}
+        ${o.sessions.length ? `<div class="mute">Active session(s): ${o.sessions.map((s) => `${s.ticket_id} ${s.status} space ${s.space}`).join("; ")}</div>` : ""}
+        ${o.alerts.length ? `<div class="err">${o.alerts.length} open alert(s): ${o.alerts.slice(0, 2).map((a) => esc(a.type)).join(", ")}</div>` : ""}`;
+    } catch {}
+  }
+}
+async function refreshFeed() {
+  try {
+    const j = await api("GET", "/api/city/lots");
+    $("feed").innerHTML = `<table><tr><th>Lot</th><th>Free</th><th>Reserved</th><th>Occupied</th><th>Total</th></tr>${j.lots.map((l) =>
+      `<tr><td>${l.lot_id}</td><td>${l.available}</td><td>${l.reserved}</td><td>${l.occupied}</td><td>${l.total}</td></tr>`).join("")}</table>`;
+  } catch {}
+}
+
+/* ------------------------------------------------------------ profile editor, wiring */
+function fillProfiles(sel) {
+  $("profile").innerHTML = Object.keys(profiles()).map((n) => `<option>${esc(n)}</option>`).join("");
+  if (sel) $("profile").value = sel;
+}
+$("btnSavePlaces").onclick = () => {
+  try {
+    const arr = JSON.parse($("placesJson").value);
+    if (!Array.isArray(arr)) throw new Error("must be a list");
+    for (const p of arr) { if (!p.label || !Number.isFinite(p.lat) || !Number.isFinite(p.lon)) throw new Error("each place needs label, lat, lon");
+      p.lat = +p.lat.toFixed(3); p.lon = +p.lon.toFixed(3); p.weight = Math.min(3, Math.max(1, p.weight || 1)); }
+    const all = profiles(); all[$("profile").value] = { places:arr }; store("car.profiles.v1", all);
+    renderKept(); drawMap(); log("car", "places saved in the car (rounded to ~100 m)");
+  } catch (e) { log("err", "not saved: " + e.message); }
+};
+$("btnDeletePlaces").onclick = () => { const all = profiles(); all[$("profile").value] = { places:[] }; store("car.profiles.v1", all); renderKept(); drawMap(); log("car", "frequent places deleted from the car"); };
+$("btnRequest").onclick = () => { S.excludeList = []; findParking(); };
+$("btnReset").onclick = async () => {
+  S.trip++; clearInterval(S.ovTimer); S.excludeList = [];
+  try { await api("POST", "/api/admin/reset-demo", null, { admin:true }); log("net", "demo database reset"); } catch (e) { log("err", "reset failed: " + e.message); }
+  Object.assign(S, { cands:[], excluded:[], ranked:null, lot:null, space:null, carPos:null, reservationId:null }); setStage("idle");
+  $("offers").textContent = "Press “Find parking”."; $("lotLive").textContent = ""; $("tripActions").innerHTML = ""; drawMap(); refreshFeed();
+};
+for (const id of ["profile", "day", "time"]) $(id).addEventListener("change", () => { renderKept(); drawMap();
+  if (S.stage === "Choose") { S.ranked = CR.rank(S.cands, { topN:3, places:currentPlaces(), when:when() }); renderOffers(); } });
+
+fillProfiles(); renderSteps(); renderKept(); drawMap(); refreshFeed(); setInterval(refreshFeed, 1500);
+window.__car = S;   // for tests
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<routes>
+    <vType id="ambulance" vClass="emergency" guiShape="emergency" color="1,0,0" length="6.5" width="2.4"
+           accel="3.5" decel="5.0" maxSpeed="22" speedFactor="1.2" lcStrategic="1" lcSpeedGain="2">
+        <param key="has.bluelight.device" value="true"/>
+    </vType>
+    <!-- On the single intersection the signal gives 42 s green to one road, then 42 s to the other.
+         amb_we reaches the stop line at about t=30 and amb_ns at about t=100: each arrives while its road is red. -->
+    <flow id="amb_we" type="ambulance" from="w_t" to="t_e" begin="20" number="1" departSpeed="max" departLane="best"/>
+    <flow id="amb_ns" type="ambulance" from="n_t" to="t_s" begin="90" number="1" departSpeed="max" departLane="best"/>
+</routes>

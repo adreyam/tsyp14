@@ -1,0 +1,231 @@
+{
+ "id": "SY05",
+ "name": "Industrial fire with a toxic smoke plume (all axes)",
+ "interaction": "Twin → Brain (emergency × transportation × pollution × energy)",
+ "layers": [
+  "Twin",
+  "City Brain"
+ ],
+ "description": "At the evening rush a fire breaks out in an industrial building in zone G (INCIDENTS trigger building_fire). Its smoke plume makes zone G's air critical and drifts downwind into the hospital district (zone F). Every axis has to act on the same event, through the A2A requests between them.",
+ "expected": {
+  "twin": "Building fire in zone G with its first response (2 fire engines, ambulance, police). Smoke: zone G's air monitors rise far over the guideline (AIR release +40 µg/m³), zone F's less (+12 µg/m³). The fire is put out and the smoke clears.",
+  "guardian": "Trusted (the fire explains the smoke).",
+  "brain": "Emergency: one more fire engine, ambulance and police car; asks transportation (A2A green_wave) for every unit on its way and energy (A2A isolate_feeder) for the building. Transportation: the junctions ahead of each unit turn green; on pollution's request (A2A close_car_parks) zone G's car park closes so no more cars drive into the smoke. Pollution: air critical in zone G, alert in zone F (the hospital district). Energy: isolates zone G's feeder for the firefighters and re-energises it when the fire is out. When the air clears the car parks reopen."
+ },
+ "how_to_verify": "Top bar: an emergency, a transportation, a pollution and an energy situation at the same time; A2A panel: emergency → transportation green_wave, emergency → energy isolate_feeder, pollution → transportation close_car_parks; City map: zone G's feeder cut, LOT-04 closed, arrows from the fire; logs/SY05-*.jsonl. On the live Twin the Twin chooses the burning building in zone G, so the checks that depend on the exact place run on the mock.",
+ "duration_s": 120,
+ "speed": 3,
+ "live_duration_s": 240,
+ "steps": [
+  {
+   "at": 1,
+   "do": "twin_command",
+   "id": "CLOCK",
+   "command": "set_time",
+   "value": "17:45"
+  },
+  {
+   "at": 2,
+   "do": "twin_command",
+   "id": "INCIDENTS",
+   "command": "trigger",
+   "value": {
+    "kind": "building_fire",
+    "zone": "G",
+    "x": 100,
+    "z": -110
+   }
+  },
+  {
+   "at": 5,
+   "do": "ramp",
+   "device": "AIR-07",
+   "metric": "pm2_5",
+   "to": 48,
+   "over": 12,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 5,
+   "do": "ramp",
+   "device": "AIR-08",
+   "metric": "pm2_5",
+   "to": 44,
+   "over": 12,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 9,
+   "do": "ramp",
+   "device": "AIR-02",
+   "metric": "pm2_5",
+   "to": 18,
+   "over": 14,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 6,
+   "do": "twin_command",
+   "id": "AIR",
+   "command": "release",
+   "value": {
+    "zone": "G",
+    "ug": 40,
+    "seconds": 200
+   },
+   "live_at": 10,
+   "modes": [
+    "live"
+   ]
+  },
+  {
+   "at": 12,
+   "do": "twin_command",
+   "id": "AIR",
+   "command": "release",
+   "value": {
+    "zone": "F",
+    "ug": 12,
+    "seconds": 160
+   },
+   "live_at": 20,
+   "modes": [
+    "live"
+   ]
+  },
+  {
+   "at": 70,
+   "do": "ramp",
+   "device": "AIR-07",
+   "metric": "pm2_5",
+   "to": 6,
+   "over": 12,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 70,
+   "do": "ramp",
+   "device": "AIR-08",
+   "metric": "pm2_5",
+   "to": 6,
+   "over": 12,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 70,
+   "do": "ramp",
+   "device": "AIR-02",
+   "metric": "pm2_5",
+   "to": 6,
+   "over": 12,
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "at": 100,
+   "do": "clear",
+   "modes": [
+    "mock"
+   ]
+  }
+ ],
+ "checks": [
+  {
+   "expect": "situation",
+   "axis": "emergency",
+   "kind": "incident"
+  },
+  {
+   "expect": "action",
+   "agent": "emergency",
+   "action_type": "dispatch_unit"
+  },
+  {
+   "expect": "record",
+   "kind": "a2a",
+   "contains": "emergency → transportation: green_wave"
+  },
+  {
+   "expect": "action",
+   "agent": "transportation",
+   "action_type": "green_wave"
+  },
+  {
+   "expect": "record",
+   "kind": "a2a",
+   "contains": "emergency → energy: isolate_feeder"
+  },
+  {
+   "expect": "situation",
+   "axis": "pollution"
+  },
+  {
+   "expect": "record",
+   "kind": "a2a",
+   "contains": "pollution → transportation: close_car_parks"
+  },
+  {
+   "expect": "action",
+   "actuator": "ZONE-Zone_NorthCentral_3",
+   "command": "cut_power",
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "expect": "action",
+   "actuator": "ZONE-Zone_NorthCentral_3",
+   "command": "restore_power",
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "expect": "action",
+   "actuator": "LOT-04",
+   "command": "closed",
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "expect": "action",
+   "actuator": "LOT-04",
+   "command": "auto",
+   "modes": [
+    "mock"
+   ]
+  },
+  {
+   "expect": "no_action",
+   "actuator": "ZONE-Zone_NorthCentral_2",
+   "command": "cut_power"
+  }
+ ],
+ "modes": [
+  "mock",
+  "live"
+ ],
+ "trigger": "python scenarios/run.py SY05   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+ "axis": "system",
+ "focus": {
+  "zone": "G",
+  "devices": [
+   "AIR-07",
+   "AIR-08",
+   "LOT-04"
+  ],
+  "follow": "units"
+ }
+}

@@ -1,0 +1,12 @@
+# Mock city B -- a different, poorly described Twin (used for scenario E7 "new city").
+# It advertises zone IDs and switch IDs only: no capacities, no switch effects.
+# Without a local knowledge file the Brain must stay at L0 (alerts only).
+city_id: mock-city-b
+expose: {capacity: false, switch_effects: false, tags: false}
+zones:
+  - {zone_id: north,  capacity_kw: 900, tags: [residential], base_kw: 520, amplitude_kw: 40, period_s: 200, noise_kw: 6}
+  - {zone_id: south,  capacity_kw: 700, tags: [residential],  base_kw: 300, amplitude_kw: 20, period_s: 260, noise_kw: 5}
+  - {zone_id: port,   capacity_kw: 800, tags: [flood_pump],  base_kw: 450, amplitude_kw: 35, period_s: 150, noise_kw: 6}
+switches:
+  - {switch_id: T-NS, kind: tie, from_zone: north, to_zone: south, transfer_fraction: 0.30}
+  - {switch_id: T-PN, kind: tie, from_zone: port,  to_zone: north, transfer_fraction: 0.20}

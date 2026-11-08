@@ -1,0 +1,65 @@
+City Ground Zero Fix 80 — Smart-City Asset Map + Purpose-Built Devices + Black Exhaust
+Verified: 2026-09-13
+Godot: bundled 4.7.2 Linux x86_64
+Traffic: bundled SUMO 1.25.0 + TraCI; 68 rendered vehicles; 49 protected four-way controllers
+
+Version safety: Fix 80 is a new folder copied from Fix 79; Fix 79 and all older folders remain preserved
+Asset Map: 19 individually colored categories with exact live counts, explanatory tooltips and one-category-at-a-time 3D frames
+Sensors: 12 traffic radar, 8 air-quality, 4 noise, 4 weather, 4 flood-level, 8 utility telemetry and 16 physical cameras
+Actuators: 49 signal controllers, 5 water valves, 3 power switches, 12 adaptive street lights and 4 irrigation valves
+Meters: complete live unions for every zone, technician-job and citizen-interaction power/water meter
+Emergency assets: 7 hospitals, 1 identified police facility, 8 police cars and 2 grounded moving Kenney ambulances
+Vehicle emissions: 6 deterministic non-emergency cars with rear-mounted, soft procedural black-smoke particles and PM metadata
+Future interaction contract: every new device/facility/fleet asset has typed operational metadata and a stable service Marker3D
+Placement: every registered device grounded to 0.17 m; zero road, building, device or NPC job-prop intersections
+Pedestrian integration: new devices participate in the spatial hash; 150 samples found zero building/road/prop/device/tree conflicts
+Highlight performance: each 12-edge box uses one MultiMesh draw call; small device detail distance-LODs at 360 m
+Runtime diagnostic: Fix 80 p50 15.89 ms / p95 23.16 ms versus Fix 79 p50 14.93 ms / p95 24.00 ms
+Visual evidence: screenshots/fix80_asset_map_smoke_qa/ (8 freshly rendered 1600x900 views)
+Population: 200 persistent citizens; 80 households; 13 institutions
+Embodiment: 32 stable citizens; 19 distinct Microsoft Rocketbox models; 12 wardrobe-readable roles
+Models/rig: verified 81-bone Bip01 hierarchy; no foreign rig, scale animation, runtime skeletal IK or limb stretching
+Animation library: 62 semantic clips; authored upper-body work retained; lower body planted for the standing forward-inspection clip
+
+Visible prop work: at least 10 stationary citizens continuously perform physical work on matching props
+Meter work: at least 5 concurrent meter workers, with at least 2 water-meter and 2 power-meter workers
+Excluded: poles, walking, walking while carrying, conversation, recording-only work, pointing and passive proximity do not count
+Measured occupancy: 13–16 stationary prop workers; 10 roles; 12 prop kinds; 13 physical poses
+Random Citizen: 48/48 selections were currently stationary, readable actions; walking/travelling/yielding citizens are ineligible
+
+Forward-bend correction: PickUp_Table keeps pelvis, structural spine base, thighs, calves, feet and toes on the neutral planted stance
+Pose measurement: 32/32 rigs; maximum lower-chain drift 0.0102 m / 0.64 degrees
+Motion retained: minimum hand motion 0.489 m; minimum head motion 0.119 m
+Grounding: 32/32 citizens including 3 crouched workers; maximum settled foot error 0.000 m
+Crouch transition gate: 531 live rendered frames + 3,552 explicit entry/hold/exit samples; maximum foot-contact error 0.0000 m
+Crouch scheduling: Rocketbox animation evaluates first, root-only foot lock second, camera/control readers third
+
+Handheld correction: each tool/item uses a right-finger cradle derived from the first articulated finger joints
+Per-asset contact: device/paper side edge, box edge, bag/cone top, and watering-can handle; broad-face centering is rejected
+Grip measurement: 81/81 held objects; minimum wrist-to-grip distance 0.122 m
+Palm exclusion: minimum solid-object wrist clearance 0.0337 m; maximum wrist penetration 0.0000 m
+Contact: maximum rendered-frame object gap 0.0289 m; maximum contact-surface depth 0.0160 m
+Visual evidence: screenshots/fix78_finger_edge_grips_verified_final/
+Crouch evidence: screenshots/fix78_live_crouch_grounding_verified_v2/
+
+Camera controls: first-person captures unmodified mouse movement; yaw is unrestricted and pitch is clamped to -82/+78 degrees
+First-person safety: 102 people + 68 vehicle assets audited; minimum model-bound clearance 0.180 m
+Blender navigation: MMB orbit; Shift+MMB pan; Ctrl+MMB dolly; wheel bounded zoom; WASD + Q/E translation
+Street-camera Escape: all 16 direct feeds release to a nearby unobstructed exterior view and restore free-camera ownership
+Traffic-camera placement: 16/16 physical rigs clear 214 building/tree obstacle assets after nearest-safe-site placement
+Power highlight: all grid poles, all 16 utility zone meters, every technician power-meter cabinet, and all live cable spans
+Highlight rendering: asset-scaled frame margin and line thickness; compact meters remain visible inside their outlines
+Camera/power evidence: screenshots/fix79_camera_power_qa/
+Runtime diagnostic: Fix 79 p50 15.01 ms / p95 25.48 ms versus Fix 78 p50 15.31 ms / p95 26.27 ms in the same parallel comparison; no regression detected
+
+Spatial safety: 150 samples; zero citizen/building/road/prop/tree conflicts
+Prop grounding: 198 visible props; zero overlaps
+Trip continuity: 720 accelerated physics ticks; maximum horizontal step 0.775 m
+Activity flow: 16 complete work sequences; 18 communication phases; all 12 event participants released and dispersed
+
+Traffic acceptance: 68 stable identities; zero replacements; 29 continuations; zero mid-turn stops
+Signal stopping: lead red p95 1.0 m; queue-tail red p95 16.5 m; zero emergency stops or harsh braking
+Camera lifecycle: followed cars coast 2.2 s and camera detaches before pooled models hide
+
+Regression command: ./test_headless.sh
+Regression result: PASS / exit 0 from the first SUMO test through the final live TraCI integration after all Fix 80 changes

@@ -1,0 +1,23 @@
+# The City Brain and the control center in containers (mock source by default).
+# The Godot Twin needs a GPU and a window, so it runs on the host: ./start_city.sh for the live demo.
+#   docker compose up        then http://127.0.0.1:8765/#/city
+# With the Twin on the host: CITY_BRAIN_SOURCE=live docker compose up (network_mode host reaches 127.0.0.1).
+services:
+  brain:
+    image: python:3.12-slim
+    working_dir: /triplet/brain
+    volumes: [".:/triplet", "/tmp:/tmp"]
+    environment:
+      CITY_BRAIN_SOURCE: ${CITY_BRAIN_SOURCE:-mock}
+      BRAIN_TOKEN: ${BRAIN_TOKEN:-tsyp14-brain-dev-token}
+    command: sh -c "pip install --quiet -r requirements.txt && python run_brain.py"
+    network_mode: host
+  control-center:
+    image: python:3.12-slim
+    working_dir: /triplet/brain/control_center
+    volumes: [".:/triplet"]
+    environment:
+      BRAIN_TOKEN: ${BRAIN_TOKEN:-tsyp14-brain-dev-token}
+    command: python server.py
+    network_mode: host
+    depends_on: [brain]

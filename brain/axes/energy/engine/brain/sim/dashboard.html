@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Energy Brain — Simulation</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #6250d6;
+  --good: #0ca30c; --warn: #fab219; --serious: #ec835a; --crit: #d03b3b; --good-text: #006300;
+  --wash: rgba(11,11,11,0.04); --accent-wash: rgba(42,120,214,0.10); --plan: #8a6d3b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #9085e9; --good-text: #0ca30c;
+    --wash: rgba(255,255,255,0.05); --accent-wash: rgba(57,135,229,0.16); --plan: #c9a46a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #9085e9; --good-text: #0ca30c;
+  --wash: rgba(255,255,255,0.05); --accent-wash: rgba(57,135,229,0.16); --plan: #c9a46a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--page); color: var(--ink); font: 13px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+button, select, input { font: inherit; color: inherit; }
+.num { font-variant-numeric: tabular-nums; }
+svg text { fill: var(--ink); }
+
+header { display: flex; align-items: center; gap: 12px; padding: 10px 20px; border-bottom: 1px solid var(--ring);
+  background: var(--surface); position: sticky; top: 0; z-index: 5; flex-wrap: wrap; }
+header h1 { font-size: 15px; font-weight: 650; margin: 0; white-space: nowrap; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--ring);
+  font-size: 12px; font-weight: 600; white-space: nowrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.spacer { flex: 1; }
+.seg { display: inline-flex; border: 1px solid var(--ring); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; background: none; padding: 4px 9px; cursor: pointer; border-right: 1px solid var(--ring); }
+.seg button:last-child { border-right: 0; }
+.seg button:hover { background: var(--wash); }
+.seg button[aria-pressed="true"] { background: var(--accent-wash); font-weight: 650; }
+.iconbtn { border: 1px solid var(--ring); background: none; border-radius: 8px; padding: 4px 12px; cursor: pointer; min-width: 40px; }
+.iconbtn:hover { background: var(--wash); }
+
+.scen { display: flex; gap: 6px; padding: 10px 20px 0; flex-wrap: wrap; }
+.scen button { border: 1px solid var(--ring); background: var(--surface); border-radius: 8px; padding: 5px 9px; cursor: pointer; }
+.scen button:hover { background: var(--wash); }
+.scen button[aria-pressed="true"] { border-color: var(--s1); box-shadow: inset 0 0 0 1px var(--s1); }
+.scen b { font-weight: 650; margin-right: 5px; }
+.scen span { color: var(--ink2); }
+.story { margin: 10px 20px 0; padding: 10px 14px; background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
+  display: flex; gap: 16px; align-items: center; }
+.story p { margin: 0; flex: 1; color: var(--ink2); }
+.story p b { color: var(--ink); }
+.progress { width: 200px; height: 6px; border-radius: 3px; background: var(--grid); overflow: hidden; flex: none; }
+.progress > div { height: 100%; background: var(--s1); width: 0; }
+.scrub { width: 100%; accent-color: var(--s1); }
+.result { font-weight: 650; }
+
+main { display: grid; grid-template-columns: minmax(500px, 5fr) 7fr; gap: 16px; padding: 14px 20px 24px; align-items: start; }
+@media (max-width: 1180px) { main { grid-template-columns: 1fr; } }
+.panel { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 14px 16px; min-width: 0; }
+.panel h2 { font-size: 13.5px; font-weight: 650; margin: 0 0 2px; }
+.panel .sub { color: var(--ink2); margin: 0 0 10px; font-size: 12px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; color: var(--ink2); font-size: 12px; margin-top: 6px; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 5px; }
+
+/* zone tabs */
+.tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 10px; }
+.tab { border: 1px solid var(--ring); border-radius: 10px; padding: 6px 8px 4px; background: var(--page); cursor: pointer; text-align: left; }
+.tab:hover { background: var(--wash); }
+.tab[aria-pressed="true"] { border-color: var(--s1); box-shadow: inset 0 0 0 1px var(--s1); background: var(--surface); }
+.tab .top { display: flex; align-items: center; gap: 6px; font-weight: 650; }
+.tab .pct { margin-left: auto; font-weight: 650; }
+.tab svg { display: block; width: 100%; height: 26px; }
+
+.chartwrap { position: relative; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--ring); border-radius: 8px;
+  padding: 7px 9px; font-size: 11.5px; box-shadow: 0 4px 14px rgba(0,0,0,.14); white-space: nowrap; display: none; z-index: 3; }
+.tip div { display: flex; gap: 12px; justify-content: space-between; }
+.tip span { color: var(--ink2); }
+.kpis { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; color: var(--ink2); font-size: 12px; }
+.kpis b { color: var(--ink); font-weight: 650; }
+
+/* story */
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; padding: 7px 0; border-top: 1px solid var(--grid); }
+.steps li:first-child { border-top: 0; }
+.steps .ic { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; font-size: 12px; font-weight: 700; border: 1.5px solid; }
+.steps .when { color: var(--muted); font-size: 11.5px; margin-left: 6px; }
+.steps p { margin: 1px 0 0; color: var(--ink2); }
+.steps p b { color: var(--ink); }
+.chip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--ring); border-radius: 6px; padding: 0 6px; margin: 3px 4px 0 0; font-size: 11.5px; }
+.opts { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; }
+.opts th { text-align: left; color: var(--muted); font-weight: 600; padding: 3px 6px; border-bottom: 1px solid var(--grid); }
+.opts td { padding: 4px 6px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+.opts tr.best td { background: var(--accent-wash); }
+.empty { color: var(--muted); padding: 8px 0; margin: 0; }
+
+/* switches */
+.sw { display: grid; grid-template-columns: 210px 1fr; gap: 6px 14px; padding: 10px 0; border-top: 1px solid var(--grid); }
+.sw:first-of-type { border-top: 0; }
+.sw .name { display: flex; align-items: center; gap: 8px; font-weight: 650; }
+.state { font-size: 11px; font-weight: 700; letter-spacing: .03em; padding: 1px 7px; border-radius: 5px; border: 1px solid; }
+.sw .what { color: var(--ink2); font-size: 12px; margin-top: 2px; }
+.sw .last { grid-column: 1 / -1; color: var(--ink2); font-size: 12px; }
+.sw .last b { color: var(--ink); }
+.sw svg { width: 100%; height: 34px; display: block; }
+
+/* timeline */
+.tl-head { display: flex; align-items: center; gap: 10px; }
+.feed { list-style: none; margin: 8px 0 0; padding: 0; max-height: 380px; overflow: auto; }
+.feed li { display: grid; grid-template-columns: 48px 104px 1fr; gap: 8px; padding: 5px 0; border-top: 1px solid var(--grid); align-items: baseline; }
+.feed .t { color: var(--muted); }
+.layer { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; padding: 1px 6px; border-radius: 5px; border: 1px solid; text-align: center; }
+.feed .k { color: var(--muted); font-size: 11px; }
+.feed li.hot { background: var(--accent-wash); }
+
+/* console */
+.console { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.console label { display: flex; flex-direction: column; gap: 3px; color: var(--ink2); font-size: 12px; }
+.console select, .console input { background: var(--page); border: 1px solid var(--ring); border-radius: 6px; padding: 4px 6px; }
+.console button { border: 1px solid var(--ring); background: var(--page); border-radius: 8px; padding: 7px 10px; cursor: pointer; text-align: left; }
+.console button:hover { background: var(--wash); }
+.console button b { display: block; font-weight: 650; }
+.console button span { color: var(--ink2); font-size: 11.5px; }
+.toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--surface);
+  padding: 8px 14px; border-radius: 8px; display: none; z-index: 9; }
+
+@keyframes flow { to { stroke-dashoffset: -20; } }
+.flow { animation: flow 1s linear infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+.pulse { animation: pulse 1s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .flow, .pulse { animation: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Energy Brain · Simulation</h1>
+  <span class="badge" id="mode"></span>
+  <span class="badge" id="level" title="How much the Brain knows about this city"></span>
+  <span class="badge" id="guardian"></span>
+  <span class="badge" id="agentmode" title="Who acts: the agent (autonomous) or the orchestrator approving its proposals (advisory)"></span>
+  <span class="spacer"></span>
+  <span class="num" id="clock">t = 0 s</span>
+  <button class="iconbtn" id="play" aria-label="Pause">❚❚</button>
+  <div class="seg" id="speed" role="group" aria-label="Speed"></div>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme">◐</button>
+</header>
+
+<nav class="scen" id="scenarios" aria-label="Scenarios"></nav>
+<section class="story">
+  <p id="story"></p>
+  <span class="result" id="result"></span>
+  <div class="progress"><div id="prog"></div></div>
+</section>
+<div style="padding: 6px 20px 0" id="scrubwrap"><input type="range" class="scrub" id="scrub" min="0" max="0" value="0" aria-label="Replay position"></div>
+
+<main>
+  <section class="panel">
+    <h2>Grid</h2>
+    <p class="sub">Click a zone to focus the chart. Tie switches move load between zones; feeder breakers switch a whole zone off.</p>
+    <svg id="map" viewBox="0 0 640 430" role="img" aria-label="Grid map"></svg>
+    <div class="legend">
+      <span><i style="border-color:var(--ink)"></i>closed tie: load flowing (kW)</span>
+      <span><i style="border-color:var(--muted);border-top-style:dashed"></i>open tie</span>
+      <span><i style="border-color:var(--muted);border-top-style:dotted"></i>effect unknown to the Brain</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="row" style="justify-content:space-between">
+      <div><h2 id="chartTitle">Load, J-1 plan and forecasts</h2>
+        <p class="sub" style="margin:0">Measured load in real time, yesterday's plan for today, and the 45 s forecast re-issued on a fixed period.</p></div>
+      <label class="row" style="gap:6px;color:var(--ink2);font-size:12px">Re-issue forecast every
+        <div class="seg" id="refresh" role="group" aria-label="Forecast refresh period"></div></label>
+    </div>
+    <div class="tabs" id="tabs" style="margin-top:10px"></div>
+    <div class="chartwrap" id="chartwrap">
+      <svg id="chart" viewBox="0 0 860 330" role="img" aria-label="Load chart"></svg>
+      <div class="tip" id="tip"></div>
+    </div>
+    <div class="legend" id="chartLegend"></div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section class="panel">
+    <h2>What happened, in order</h2>
+    <p class="sub">The Brain's latest episode in plain words: what it saw, the futures it compared, what the gate said, what it did, and whether it worked.</p>
+    <div id="storyBox"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Grid switches</h2>
+    <p class="sub">What each switch does, its state over time, and the last thing that happened to it.
+      <span style="white-space:nowrap">▲ Brain · ◆ operator · ↺ restored · ⚡ shed · ✕ failed · ⊘ blocked</span></p>
+    <div id="switches"></div>
+  </section>
+
+  <section class="panel" id="consolePanel">
+    <h2>Inject an event</h2>
+    <p class="sub">Acts on the mock Twin or Guardian exactly like a scenario script. The Brain is not told.</p>
+    <div class="console" id="console"></div>
+  </section>
+
+  <section class="panel">
+    <div class="tl-head">
+      <h2 style="margin:0">Timeline</h2><span class="spacer"></span>
+      <div class="seg" id="filter" role="group" aria-label="Filter layers"></div>
+    </div>
+    <ul class="feed" id="feed"></ul>
+  </section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const REPLAY = /*__REPLAY_DATA__*/null;
+const LIVE = /*__LIVE__*/false;
+const $ = id => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent, text) => {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) if (v !== undefined && v !== null) e.setAttribute(k, v);
+  if (text !== undefined) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SERIES = ['var(--s1)', 'var(--s2)', 'var(--s3)', 'var(--s4)'];
+const TAGS = { hospital: 'Hospital', flood_pump: 'Flood pump', traffic_signals: 'Signals', residential: 'Residential',
+               commercial: 'Commercial', industrial: 'Industrial' };
+const LEVEL_TXT = { L0: 'L0 blind · alerts only', L1: 'L1 bounded · no switching', L2: 'L2 mapped · full loop' };
+const fmt = v => v == null ? '—' : Math.round(v);
+const pctOf = (v, cap) => cap ? Math.round(100 * v / cap) : null;
+
+const S = { mode: LIVE ? 'live' : 'replay', frames: [], idx: -1, city: null, cities: {}, playing: true, speed: 2,
+  scenario: LIVE ? 'FREE' : 'E2', filter: 'all', timer: null, result: null, focus: null, refresh: 15 };
+
+/* ================================================================== controls */
+function setPlaying(p) {
+  S.playing = p; $('play').textContent = p ? '❚❚' : '▶'; $('play').setAttribute('aria-label', p ? 'Pause' : 'Play');
+  if (S.mode === 'live') post('/api/control', { paused: !p });
+}
+$('play').onclick = () => { if (S.mode === 'replay' && !S.playing && S.idx >= S.frames.length - 1) S.idx = -1; setPlaying(!S.playing); };
+function seg(id, values, cur, label, onpick) {
+  const box = $(id); box.innerHTML = '';
+  values.forEach(v => { const b = document.createElement('button'); b.textContent = label(v); b.setAttribute('aria-pressed', v === cur);
+    b.onclick = () => { [...box.children].forEach(c => c.setAttribute('aria-pressed', c === b)); onpick(v); }; box.appendChild(b); });
+}
+seg('speed', [0.5, 1, 2, 4, 8], S.speed, v => v + '×', v => { S.speed = v; if (S.mode === 'live') post('/api/control', { speed: v }); });
+seg('refresh', [1, 5, 15, 30, 60], S.refresh, v => v === 1 ? 'each s' : v + ' s', v => { S.refresh = v; renderChart(); });
+seg('filter', ['all', 'Twin', 'Guardian', 'Brain', 'Orchestrator', 'Other'], 'all', v => v === 'all' ? 'All' : v === 'Other' ? 'Other domains' : v,
+  v => { S.filter = v; renderFeed(); });
+$('theme').onclick = () => { const r = document.documentElement, dark = getComputedStyle(r).colorScheme === 'dark';
+  r.setAttribute('data-theme', dark ? 'light' : 'dark'); renderAll(); };
+
+function scenarioList() {
+  const list = REPLAY ? Object.entries(REPLAY).map(([id, r]) => ({ id, name: r.city.scenario.name })) : [];
+  if (S.mode === 'live') list.unshift({ id: 'FREE', name: 'Free play' });
+  $('scenarios').innerHTML = '';
+  for (const s of list) {
+    const b = document.createElement('button'); b.innerHTML = `<b>${esc(s.id)}</b><span>${esc(s.name)}</span>`;
+    b.setAttribute('aria-pressed', s.id === S.scenario); b.onclick = () => selectScenario(s.id); $('scenarios').appendChild(b);
+  }
+}
+function selectScenario(id) {
+  S.scenario = id; scenarioList();
+  if (S.mode === 'live') { post('/api/scenario/' + id); return; }
+  const r = REPLAY[id];
+  S.frames = r.frames; S.cities = r.cities || {}; S.city = r.city; S.idx = -1; S.result = r.result; S.focus = defaultFocus(r);
+  $('scrub').max = S.frames.length - 1; setPlaying(true); step();
+}
+function defaultFocus(r) {      // the zone the scenario is about: first zone with a risk event, else first zone
+  for (const f of r.frames) for (const e of f.events) if (e.k === 'risk_detected' && e.p && e.p.zone_id) return e.p.zone_id;
+  for (const f of r.frames) for (const e of f.events) if (e.k === 'scenario_marker' && /^(\w+) demand rises/.test(e.s)) return e.s.split(' ')[0];
+  return r.city.zones[0].id;
+}
+
+/* ================================================================== live */
+async function post(url, body) {
+  try { const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+    if (!r.ok) toast((await r.json()).detail || r.statusText); } catch (e) { toast('Simulation server unreachable'); }
+}
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(t._h); t._h = setTimeout(() => t.style.display = 'none', 3000); }
+function connectLive() {
+  fetch('/api/health').then(r => r.json()).then(h => { S.speed = h.speed;
+    [...$('speed').children].forEach(c => c.setAttribute('aria-pressed', c.textContent === h.speed + '×')); }).catch(() => {});
+  const es = new EventSource('/api/stream');
+  es.onmessage = m => {
+    const d = JSON.parse(m.data);
+    if (d.type === 'reset') { S.city = d.city; S.cities = { 0: d.city }; S.frames = []; S.idx = -1; S.result = null;
+      S.scenario = d.city.scenario.id; S.focus = S.focus && d.city.zones.some(z => z.id === S.focus) ? S.focus : d.city.zones[0].id;
+      scenarioList(); buildConsole(); return; }
+    if (d.city) { S.cities[d.cycle] = d.city; S.city = d.city; }
+    if (d.result) S.result = d.result;
+    S.frames.push(d); if (S.frames.length > 600) S.frames.shift();
+    S.idx = S.frames.length - 1; renderAll();
+  };
+  es.onerror = () => { $('mode').innerHTML = '<span class="dot" style="background:var(--crit)"></span>Disconnected'; };
+}
+
+/* ================================================================== replay */
+function step() {
+  if (S.mode !== 'replay') return;
+  clearTimeout(S.timer);
+  if (S.playing && S.idx < S.frames.length - 1) S.idx++; else if (S.idx >= S.frames.length - 1) setPlaying(false);
+  renderAll(); S.timer = setTimeout(step, 1000 / S.speed);
+}
+$('scrub').oninput = e => { S.idx = +e.target.value; setPlaying(false); renderAll(); };
+
+/* ================================================================== helpers */
+function cityAt(i) {
+  let c = S.city; const f = S.frames[i]; if (!f) return c;
+  for (const [cyc, cc] of Object.entries(S.cities)) if (+cyc <= f.cycle) c = cc;
+  return c;
+}
+const zoneById = (city, id) => city.zones.find(z => z.id === id);
+const zoneIdx = (city, id) => city.zones.findIndex(z => z.id === id);
+function planAt(city, zid, t) {
+  const p = city.plan && city.plan[zid]; if (!p || !p.length) return null;
+  const period = p[p.length - 1][0] + (p.length > 1 ? p[1][0] - p[0][0] : 1);
+  const tt = ((t % period) + period) % period;
+  let i = 0; while (i < p.length - 1 && p[i + 1][0] <= tt) i++;
+  const a = p[i], b = p[Math.min(i + 1, p.length - 1)];
+  return b[0] === a[0] ? a[1] : a[1] + (b[1] - a[1]) * (tt - a[0]) / (b[0] - a[0]);
+}
+function allEvents(upto) { const out = []; for (const f of S.frames.slice(0, upto + 1)) for (const e of f.events) out.push(e); return out; }
+function latestEval(upto) {
+  // prefer the comparison that led to an action (its futures are the interesting ones) if still within the horizon
+  const H = (cityAt(upto) || {}).horizon || 45, now = S.frames[upto] ? S.frames[upto].t : 0;
+  let any = null;
+  for (let i = upto; i >= 0; i--) {
+    const f = S.frames[i]; if (!f || !f.eval) continue;
+    const hit = { ev: f.eval, age: now - f.t, frame: f };
+    if (!any) any = hit;
+    if (now - f.t > H) break;
+    if (f.eval.ranked && f.eval.ranked.length) return hit;
+  }
+  return any;
+}
+function capOf(z) { return z.cap || z.true_cap || null; }
+
+/* ================================================================== render */
+function renderAll() {
+  const f = S.frames[S.idx], city = cityAt(S.idx);
+  if (!city) return;
+  if (!S.focus || !zoneById(city, S.focus)) S.focus = city.zones[0].id;
+  $('mode').innerHTML = S.mode === 'live' ? '<span class="dot pulse" style="background:var(--good)"></span>Live · real Brain'
+    : '<span class="dot" style="background:var(--s1)"></span>Replay · recorded run';
+  const lvl = f ? f.level : city.level;
+  $('level').innerHTML = `<span class="dot" style="background:${lvl === 'L2' ? 'var(--good)' : lvl === 'L1' ? 'var(--warn)' : 'var(--crit)'}"></span>${LEVEL_TXT[lvl]}`;
+  $('guardian').innerHTML = f && f.guardian_ok === false ? '<span class="dot" style="background:var(--crit)"></span>Guardian unreachable · degraded mode'
+    : '<span class="dot" style="background:var(--good)"></span>Guardian online';
+  $('agentmode').innerHTML = f && f.mode === 'advisory' ? '<span class="dot" style="background:var(--warn)"></span>Advisory · orchestrator approves'
+    : '<span class="dot" style="background:var(--s1)"></span>Autonomous agent';
+  const dur = city.scenario.duration, t = f ? f.t : 0;
+  $('clock').textContent = `t = ${Math.round(t)} s` + (dur < 1e6 ? ` / ${dur} s` : '');
+  $('prog').style.width = dur < 1e6 ? `${Math.min(100, 100 * t / dur)}%` : '0';
+  $('story').innerHTML = `<b>${esc(city.scenario.id)} · ${esc(city.scenario.name)}.</b> ${esc(city.scenario.description)}`;
+  const done = S.result && (S.mode === 'live' || S.idx >= S.frames.length - 1);
+  $('result').innerHTML = done ? (S.result.passed ? `<span style="color:var(--good-text)">✓ All ${S.result.checks.length} checks pass</span>`
+    : `<span style="color:var(--crit)">✕ ${S.result.checks.filter(c => !c.ok).length} check(s) fail</span>`)
+    + (S.result.modified ? '<span style="color:var(--ink2);font-weight:500"> · run changed by manual events</span>' : '') : '';
+  $('result').title = done ? S.result.checks.map(c => `${c.ok ? '✓' : '✕'} ${c.expect}`).join('\n') : '';
+  if (S.mode === 'replay') $('scrub').value = S.idx;
+  renderMap(city, f); renderTabs(city); renderChart(); renderStory(); renderSwitches(city); renderFeed();
+}
+
+/* ---------------------------------------------------------------- map */
+const CARD_W = 196, CARD_H = 150;
+function layout(zones) {
+  const n = zones.length, P = {};
+  const spots = n === 4 ? [[180, 96], [460, 96], [180, 318], [460, 318]] : n === 3 ? [[180, 96], [460, 96], [320, 318]]
+    : zones.map((_, i) => [180 + (i % 2) * 280, 96 + Math.floor(i / 2) * 222]);
+  zones.forEach((z, i) => P[z.id] = { x: spots[i][0], y: spots[i][1], i }); return P;
+}
+function zoneState(z, zf, off) {
+  if (off) return { c: 'var(--crit)', label: 'Switched off (shed)', off: true };
+  if (!zf || zf.read == null) return { c: 'var(--axis)', label: 'no data' };
+  if (zf.trust === 'untrusted') return { c: 'var(--serious)', label: 'Reading ignored', ignored: true };
+  if (zf.suspect) return { c: 'var(--serious)', label: 'Jump held as suspect', ignored: true };
+  if (z.cap && zf.read > z.cap) return { c: 'var(--crit)', label: 'Overload' };
+  if (zf.risk) return { c: 'var(--warn)', label: z.cap ? 'Overload predicted' : 'Unusual rise' };
+  return { c: 'var(--good)', label: 'Normal' };
+}
+function renderMap(city, f) {
+  const svg = $('map'); svg.innerHTML = ''; const P = layout(city.zones);
+  const defs = el('defs', {}, svg);
+  const mk = el('marker', { id: 'arr', viewBox: '0 0 10 10', refX: 5, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto' }, defs);
+  el('path', { d: 'M0 0L10 5L0 10z', fill: 'var(--ink)' }, mk);
+  for (const s of city.switches.filter(s => s.kind === 'tie')) {
+    const a = P[s.from], b = P[s.to]; if (!a || !b) continue;
+    const sf = f ? f.switches[s.id] : null, closed = sf && sf.state === 'closed', known = sf ? sf.known : s.known;
+    const g = el('g', {}, svg);
+    el('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: closed ? 'var(--ink)' : 'var(--muted)', 'stroke-width': closed ? 2.5 : 1.5,
+      'stroke-dasharray': !known ? '2 4' : closed ? '6 4' : '5 5', class: closed ? 'flow' : '' }, g);
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    const bad = sf && (sf.failed || sf.quar), busy = sf && sf.pending;
+    const stroke = bad ? 'var(--crit)' : busy ? 'var(--s1)' : closed ? 'var(--ink)' : 'var(--axis)';
+    const pill = el('g', { class: busy ? 'pulse' : '' }, g);
+    const w = closed && sf.flow ? 92 : 76;
+    el('rect', { x: mx - w / 2, y: my - 20, width: w, height: 40, rx: 8, fill: 'var(--surface)', stroke, 'stroke-width': bad || busy ? 2 : 1.25 }, pill);
+    el('text', { x: mx, y: my - 4, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 650 }, pill, s.id);
+    const st = !sf ? '' : sf.failed ? 'FAILED' : sf.quar ? 'quarantined' : sf.pending ? 'verifying…' : closed && sf.flow ? `${Math.round(sf.flow)} kW →` : sf.state;
+    el('text', { x: mx, y: my + 12, 'text-anchor': 'middle', 'font-size': 10.5, 'font-weight': closed ? 650 : 400, fill: bad ? 'var(--crit)' : 'var(--ink2)' }, pill, st);
+    el('title', {}, pill, `${s.id}: tie ${s.from} → ${s.to}` + (s.frac ? `, closing moves ${Math.round(100 * s.frac)}% of ${s.from}'s load` : '')
+      + (known ? '' : '\nEffect unknown to the Brain') + (sf && sf.stuck ? '\nSimulation truth: jammed' : '') + (sf && sf.cool ? `\nCooldown ${sf.cool} s` : ''));
+    if (closed) {
+      const dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, o = w / 2 + 6;
+      el('line', { x1: mx + ux * o, y1: my + uy * o, x2: mx + ux * (o + 16), y2: my + uy * (o + 16), stroke: 'var(--ink)', 'stroke-width': 2, 'marker-end': 'url(#arr)' }, g);
+    }
+  }
+  for (const z of city.zones) {
+    const p = P[z.id], zf = f ? f.zones[z.id] : null, color = SERIES[p.i % 4];
+    const feeder = city.switches.find(s => s.kind === 'feeder' && s.from === z.id);
+    const ff = feeder && f ? f.switches[feeder.id] : null, off = ff && ff.state === 'open';
+    const st = zoneState(z, zf, off), x0 = p.x - CARD_W / 2, y0 = p.y - CARD_H / 2, focus = z.id === S.focus;
+    const g = el('g', { style: 'cursor:pointer' }, svg);
+    g.onclick = () => { S.focus = z.id; renderAll(); };
+    if (focus) el('rect', { x: x0 - 5, y: y0 - 5, width: CARD_W + 10, height: CARD_H + 10, rx: 13, fill: 'none', stroke: 'var(--s1)', 'stroke-width': 1.5, 'stroke-dasharray': '3 3' }, g);
+    el('rect', { x: x0, y: y0, width: CARD_W, height: CARD_H, rx: 10, fill: 'var(--surface)', stroke: st.c, 'stroke-width': st.label === 'Normal' ? 1.25 : 2.5 }, g);
+    el('rect', { x: x0, y: y0 + 10, width: 4, height: 22, rx: 2, fill: color }, g);
+    el('text', { x: x0 + 14, y: y0 + 26, 'font-size': 14, 'font-weight': 700 }, g, z.id);
+    const tagTxt = z.tags.map(t => TAGS[t] || t).join(', ');
+    el('text', { x: x0 + 22 + 8 * z.id.length, y: y0 + 26, 'font-size': 11.5, fill: 'var(--ink2)' }, g, tagTxt);
+    if (zf && zf.prio) { el('rect', { x: x0 + CARD_W - 70, y: y0 + 12, width: 60, height: 18, rx: 5, fill: 'none', stroke: 'var(--ink2)' }, g);
+      el('text', { x: x0 + CARD_W - 40, y: y0 + 25, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': 700, fill: 'var(--ink2)' }, g, 'PRIORITY'); }
+    const read = zf ? zf.read : null, cap = z.cap;
+    const big = read == null ? '—' : cap ? `${Math.round(100 * read / cap)}%` : `${Math.round(read)} kW`;
+    const bigEl = el('text', { x: x0 + 14, y: y0 + 60, 'font-size': 24, 'font-weight': 650, class: 'num', fill: st.ignored ? 'var(--muted)' : undefined,
+      'text-decoration': st.ignored ? 'line-through' : undefined }, g, off ? 'OFF' : big);
+    let bw = 0; try { bw = bigEl.getComputedTextLength(); } catch (e) {}
+    el('text', { x: x0 + 14 + (bw || 15 * big.length) + 8, y: y0 + 60, 'font-size': 11.5, fill: 'var(--ink2)', class: 'num' }, g,
+      read == null ? '' : cap ? `${Math.round(read)} / ${cap} kW` : 'capacity unknown');
+    const gx = x0 + 14, gy = y0 + 72, gw = CARD_W - 28, scaleMax = (cap || z.true_cap || (read || 1)) * 1.4;
+    const X = v => gx + Math.min(1, v / scaleMax) * gw;
+    el('rect', { x: gx, y: gy, width: gw, height: 10, rx: 5, fill: 'var(--grid)' }, g);
+    if (read != null && !off) el('rect', { x: gx, y: gy, width: Math.max(4, X(read) - gx), height: 10, rx: 5, fill: color }, g);
+    const capV = capOf(z);
+    if (capV) el('line', { x1: X(capV), x2: X(capV), y1: gy - 4, y2: gy + 14, stroke: 'var(--crit)', 'stroke-width': 2, 'stroke-dasharray': cap ? '' : '2 2' }, g);
+    if (zf && zf.up != null) el('path', { d: `M${X(zf.up)} ${gy - 2}l-5 -7h10z`, fill: 'var(--ink)' }, g);
+    if (zf && zf.j1 != null) el('line', { x1: X(zf.j1), x2: X(zf.j1), y1: gy + 1, y2: gy + 9, stroke: 'var(--plan)', 'stroke-width': 2.5 }, g);
+    el('circle', { cx: x0 + 18, cy: y0 + 101, r: 4, fill: st.c }, g);
+    el('text', { x: x0 + 28, y: y0 + 105, 'font-size': 11.5, 'font-weight': 600 }, g, st.label);
+    if (zf) {
+      const tr = zf.suspect ? ['⚠ reading suspect', 'var(--serious)'] : zf.trust === 'trusted' ? ['✓ sensor trusted', 'var(--good-text)']
+        : zf.trust === 'untrusted' ? ['✕ sensor untrusted', 'var(--crit)'] : ['? no verdict', 'var(--ink2)'];
+      el('text', { x: x0 + 14, y: y0 + 123, 'font-size': 11.5, 'font-weight': 600, fill: tr[1] }, g, tr[0]);
+      el('text', { x: x0 + 14, y: y0 + 141, 'font-size': 10.5, fill: 'var(--ink2)' }, g,
+        zf.up != null ? `▼ up to ${Math.round(zf.up)} kW by +${city.horizon} s` + (zf.j1 != null ? ` · J-1 ${Math.round(zf.j1)}` : '') : 'forecast warming up');
+    }
+    if (feeder) {
+      const right = p.x > 320 || (city.zones.length === 3 && p.y > 200);
+      const bx = right ? x0 + CARD_W + 8 : x0 - 64, by = y0 + 40, fb = ff && (ff.failed || ff.quar);
+      el('line', { x1: right ? x0 + CARD_W : x0, y1: by + 18, x2: right ? bx : bx + 56, y2: by + 18, stroke: off ? 'var(--crit)' : 'var(--axis)', 'stroke-width': 1.5 }, g);
+      el('rect', { x: bx, y: by, width: 56, height: 36, rx: 8, fill: 'var(--surface)', stroke: fb || off ? 'var(--crit)' : 'var(--axis)', 'stroke-width': off ? 2 : 1.25 }, g);
+      el('text', { x: bx + 28, y: by + 15, 'text-anchor': 'middle', 'font-size': 11.5, 'font-weight': 650 }, g, feeder.id);
+      el('text', { x: bx + 28, y: by + 29, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': off ? 700 : 400, fill: off ? 'var(--crit)' : 'var(--ink2)' }, g, ff ? (off ? 'OPEN' : 'feeding') : '');
+    }
+    el('title', {}, g, `${z.id}${tagTxt ? ' (' + tagTxt + ')' : ''} · click to focus the chart`);
+  }
+}
+
+/* ---------------------------------------------------------------- zone tabs */
+function renderTabs(city) {
+  const box = $('tabs'), f = S.frames[S.idx];
+  box.innerHTML = '';
+  city.zones.forEach((z, i) => {
+    const b = document.createElement('button'); b.className = 'tab'; b.setAttribute('aria-pressed', z.id === S.focus);
+    const fd = S.city.switches.find(x => x.kind === 'feeder' && x.from === z.id), fo = fd && f && f.switches[fd.id] && f.switches[fd.id].state === 'open';
+    const zf = f ? f.zones[z.id] : null, st = zoneState(z, zf, fo), p = zf && zf.read != null && z.cap ? `${Math.round(100 * zf.read / z.cap)}%` : zf && zf.read != null ? `${Math.round(zf.read)} kW` : '—';
+    b.innerHTML = `<div class="top"><span class="dot" style="background:${SERIES[i % 4]}"></span>${esc(z.id)}<span class="dot" title="${esc(st.label)}" style="background:${st.c};width:7px;height:7px"></span><span class="pct num">${p}</span></div>`;
+    const sv = el('svg', { viewBox: '0 0 120 26', preserveAspectRatio: 'none' }, b);
+    const hist = S.frames.slice(Math.max(0, S.idx - 90), S.idx + 1);
+    const cap = capOf(z) || 1, ymax = cap * 1.35;
+    if (hist.length > 1) {
+      const t0 = hist[0].t, t1 = Math.max(hist[hist.length - 1].t, t0 + 1);
+      el('line', { x1: 0, x2: 120, y1: 26 - cap / ymax * 24, y2: 26 - cap / ymax * 24, stroke: 'var(--crit)', 'stroke-width': 0.8, 'stroke-dasharray': '3 2' }, sv);
+      el('path', { d: hist.filter(h => h.zones[z.id] && h.zones[z.id].read != null).map((h, k) => `${k ? 'L' : 'M'}${((h.t - t0) / (t1 - t0) * 120).toFixed(1)} ${(26 - Math.min(h.zones[z.id].read, ymax) / ymax * 24).toFixed(1)}`).join(''),
+        fill: 'none', stroke: SERIES[i % 4], 'stroke-width': 1.6 }, sv);
+    }
+    b.onclick = () => { S.focus = z.id; renderAll(); };
+    box.appendChild(b);
+  });
+}
+
+/* ---------------------------------------------------------------- main chart */
+function renderChart() {
+  const city = cityAt(S.idx), f = S.frames[S.idx];
+  const svg = $('chart'); svg.innerHTML = '';
+  if (!city || !f) return;
+  const z = zoneById(city, S.focus), zi = zoneIdx(city, S.focus), color = SERIES[zi % 4], H = city.horizon;
+  const cap = capOf(z), capKnown = !!z.cap, prio = f.zones[z.id] && f.zones[z.id].prio;
+  $('chartTitle').textContent = `${z.id}${z.tags.length ? ' · ' + z.tags.map(t => TAGS[t] || t).join(', ') : ''}: load, J-1 plan and forecasts`;
+  const dur = city.scenario.duration, now = f.t;
+  const t0 = S.mode === 'replay' && dur < 1e6 ? 0 : Math.max(0, now - 200), t1 = S.mode === 'replay' && dur < 1e6 ? Math.max(dur, now + H) : now + H + 15;
+  const hist = S.frames.slice(0, S.idx + 1).filter(x => x.t >= t0);
+  let ymax = (cap || 100) * 1.35;
+  for (const h of hist) { const v = h.zones[z.id]; if (v) ymax = Math.max(ymax, v.read || 0, v.true || 0, v.up || 0); }
+  for (let t = t0; t <= t1; t += 5) { const p = planAt(city, z.id, t); if (p) ymax = Math.max(ymax, p); }
+  const ev = latestEval(S.idx);
+  if (ev && ev.age <= H) for (const c of [ev.ev.no_action, ...ev.ev.ranked, ...ev.ev.rejected]) if (c.central_kw && c.central_kw[z.id] != null) ymax = Math.max(ymax, c.central_kw[z.id]);
+  ymax = Math.ceil(ymax * 1.05 / 100) * 100;
+  const L = 62, R = 690, T = 16, B = 290;
+  const X = t => L + (t - t0) / (t1 - t0) * (R - L), Y = v => B - Math.max(0, v) / ymax * (B - T);
+  // grid
+  const step = ymax > 900 ? 200 : 100;
+  for (let v = 0; v <= ymax; v += step) {
+    el('line', { x1: L, x2: R, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--axis)' : 'var(--grid)' }, svg);
+    el('text', { x: L - 6, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg, v + (v + step > ymax ? ' kW' : ''));
+  }
+  const tstep = (t1 - t0) > 400 ? 60 : (t1 - t0) > 160 ? 30 : 15;
+  for (let t = Math.ceil(t0 / tstep) * tstep; t <= t1; t += tstep)
+    el('text', { x: X(t), y: B + 16, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg, `${t} s`);
+  // future
+  el('rect', { x: X(now), y: T, width: Math.max(0, R - X(now)), height: B - T, fill: 'var(--wash)' }, svg);
+  // capacity & headroom
+  if (cap) {
+    el('line', { x1: L, x2: R, y1: Y(cap), y2: Y(cap), stroke: 'var(--crit)', 'stroke-width': 1.5, 'stroke-dasharray': capKnown ? '6 4' : '2 3' }, svg);
+    el('text', { x: L + 6, y: Y(cap) - 5, 'font-size': 11, fill: 'var(--crit)', 'font-weight': 600 }, svg, capKnown ? `capacity ${cap} kW` : `capacity ${cap} kW (unknown to the Brain)`);
+    if (prio && city.policy) {
+      const hv = cap * city.policy.headroom;
+      el('line', { x1: L, x2: R, y1: Y(hv), y2: Y(hv), stroke: 'var(--warn)', 'stroke-width': 1, 'stroke-dasharray': '2 3' }, svg);
+      el('text', { x: L + 6, y: Y(hv) - 4, 'font-size': 10.5, fill: 'var(--ink2)' }, svg, `priority headroom ${Math.round(100 * city.policy.headroom)}%`);
+    }
+  }
+  // J-1 plan (known in advance for the whole span)
+  const plan = []; for (let t = t0; t <= t1; t += 2) { const p = planAt(city, z.id, t); if (p != null) plan.push([t, p]); }
+  if (plan.length) el('path', { d: plan.map(([t, v], k) => `${k ? 'L' : 'M'}${X(t).toFixed(1)} ${Y(v).toFixed(1)}`).join(''), fill: 'none',
+    stroke: 'var(--plan)', 'stroke-width': 2, 'stroke-dasharray': '10 4', opacity: 0.9 }, svg);
+  // re-issued forecasts
+  const issued = hist.filter(h => h.zones[z.id] && h.zones[z.id].lvl != null && (S.refresh === 1 || Math.round(h.t) % S.refresh === 0));
+  const shown = S.refresh === 1 ? issued.slice(-1) : issued;
+  shown.forEach((h, k) => {
+    const v = h.zones[z.id], last = k === shown.length - 1, age = shown.length - 1 - k;
+    const op = last ? 1 : Math.max(0.18, 0.75 - age * 0.08);
+    if (last) el('path', { d: `M${X(h.t)} ${Y(v.lvl)}L${X(h.t + H)} ${Y(v.up)}L${X(h.t + H)} ${Y(Math.max(0, 2 * v.fc - v.up))}Z`, fill: color, 'fill-opacity': 0.14 }, svg);
+    el('line', { x1: X(h.t), y1: Y(v.lvl), x2: X(Math.min(h.t + H, t1)), y2: Y(v.lvl + (v.fc - v.lvl) * (Math.min(h.t + H, t1) - h.t) / H), stroke: color,
+      'stroke-width': last ? 2 : 1.2, 'stroke-dasharray': '5 3', opacity: op }, svg);
+    if (!last) el('circle', { cx: X(h.t), cy: Y(v.lvl), r: 2, fill: color, opacity: op }, svg);
+  });
+  // switching events
+  const marks = switchMarks(S.idx).filter(m => m.t >= t0);
+  const rowEnd = [-1e9, -1e9, -1e9];
+  marks.forEach(m => {
+    const x = X(m.t), txt = `${m.icon} ${m.label}`, w = 7.2 * txt.length + 10;
+    el('line', { x1: x, x2: x, y1: T, y2: B, stroke: m.c, 'stroke-width': 1.2, 'stroke-dasharray': '2 3' }, svg);
+    const row = rowEnd.findIndex(e => e < x);
+    const g = el('g', {}, svg);
+    if (row >= 0 && x + w < 860) { rowEnd[row] = x + w; el('text', { x: x + 4, y: T + 12 + row * 13, 'font-size': 11, 'font-weight': 600, fill: m.c }, g, txt); }
+    else el('text', { x: x, y: T + 8, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 700, fill: m.c }, g, m.icon);
+    el('title', {}, g, `t = ${Math.round(m.t)} s: ${m.label}`);
+  });
+  // truth + reading
+  const path = key => hist.filter(h => h.zones[z.id] && h.zones[z.id][key] != null).map((h, k) => `${k ? 'L' : 'M'}${X(h.t).toFixed(1)} ${Y(h.zones[z.id][key]).toFixed(1)}`).join('');
+  el('path', { d: path('true'), fill: 'none', stroke: 'var(--muted)', 'stroke-width': 1.3, 'stroke-dasharray': '2 2' }, svg);
+  el('path', { d: path('read'), fill: 'none', stroke: color, 'stroke-width': 2.4, 'stroke-linejoin': 'round' }, svg);
+  const zf = f.zones[z.id];
+  // branching futures (latest options comparison, if fresh)
+  const futures = [];
+  const zfe = ev && ev.frame.zones[z.id];
+  if (ev && ev.age <= H && zfe && zfe.acc != null) {
+    const opts = [{ ...ev.ev.no_action, label: 'do nothing', role: 'base' },
+      ...ev.ev.ranked.map((c, i) => ({ ...c, label: c.action, role: i === 0 ? 'best' : 'ok' })),
+      ...ev.ev.rejected.filter(c => c.shift_kw && c.shift_kw[z.id] != null && c.central_kw && c.central_kw[z.id] != null).map(c => ({ ...c, label: c.action, role: 'no' }))];
+    for (const o of opts) {
+      const v = o.central_kw && o.central_kw[z.id]; if (v == null) continue;
+      if (o.role !== 'base' && !(o.shift_kw && o.shift_kw[z.id] != null)) continue;
+      futures.push({ v, o });
+    }
+    const te = ev.frame.t, x0 = X(te), x1 = X(Math.min(te + H, t1));
+    const fade = ev.age <= 5 ? 1 : Math.max(0.35, 1 - (ev.age - 5) / H);
+    el('text', { x: x0 + 4, y: B - 6, 'font-size': 10.5, fill: 'var(--ink2)' }, svg, `futures compared at ${Math.round(te)} s`);
+    futures.sort((a, b) => b.v - a.v);
+    let lastY = -99;
+    for (const { v, o } of futures) {
+      const c = o.role === 'best' ? 'var(--good)' : o.role === 'base' ? 'var(--crit)' : 'var(--muted)';
+      el('line', { x1: x0, y1: Y(zfe.acc), x2: x1, y2: Y(v), stroke: c, 'stroke-width': o.role === 'best' ? 3 : o.role === 'base' ? 2 : 1.3,
+        'stroke-dasharray': o.role === 'no' ? '3 3' : '' , opacity: (o.role === 'no' ? 0.8 : 1) * fade }, svg);
+      el('circle', { cx: x1, cy: Y(v), r: o.role === 'best' ? 4.5 : 3, fill: c, opacity: fade }, svg);
+      let ly = Math.max(Y(v) + 4, lastY + 13); lastY = ly;
+      const pct = cap ? ` ${Math.round(100 * v / cap)}%` : '';
+      const why = o.role === 'best' ? ' ✓ chosen' : o.role === 'base' ? '' : o.role === 'no' ? ' ✕' : '';
+      el('text', { x: x1 + 8, y: ly, 'font-size': 11, 'font-weight': o.role === 'best' ? 700 : 500, opacity: fade, fill: o.role === 'no' ? 'var(--ink2)' : 'var(--ink)' }, svg,
+        `${o.label}${pct}${why}`);
+    }
+  }
+  // now marker
+  el('line', { x1: X(now), x2: X(now), y1: T, y2: B, stroke: 'var(--ink)', 'stroke-width': 1 }, svg);
+  el('text', { x: X(now), y: B + 30, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 650 }, svg, 'now');
+  if (zf && zf.read != null) el('circle', { cx: X(now), cy: Y(zf.read), r: 5, fill: color, stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+  // legend + kpis
+  $('chartLegend').innerHTML = `<span><i style="border-color:${color};border-top-width:3px"></i>measured (what the Brain receives)</span>
+    <span><i style="border-color:var(--muted);border-top-style:dotted"></i>true load (simulation only)</span>
+    <span><i style="border-color:var(--plan);border-top-style:dashed"></i>J-1 plan (made yesterday)</span>
+    <span><i style="border-color:${color};border-top-style:dashed"></i>45 s forecast, re-issued every ${S.refresh === 1 ? 'second (latest only)' : S.refresh + ' s'}</span>
+    ${futures.length ? '<span><i style="border-color:var(--good);border-top-width:3px"></i>branching futures: chosen / <i style="border-color:var(--crit)"></i>do nothing / <i style="border-color:var(--muted);border-top-style:dashed"></i>rejected</span>' : ''}`;
+  renderKpis(city, z, hist, H);
+  // hover
+  const tip = $('tip'), wrap = $('chartwrap');
+  const cross = el('line', { y1: T, y2: B, stroke: 'var(--ink2)', 'stroke-width': 1, visibility: 'hidden' }, svg);
+  const hit = el('rect', { x: L, y: T, width: R - L, height: B - T, fill: 'transparent' }, svg);
+  hit.onmousemove = e => {
+    const r = svg.getBoundingClientRect(), sx = (e.clientX - r.left) / r.width * 860, t = t0 + (sx - L) / (R - L) * (t1 - t0);
+    cross.setAttribute('x1', sx); cross.setAttribute('x2', sx); cross.setAttribute('visibility', 'visible');
+    const p = planAt(city, z.id, t);
+    let html;
+    if (t <= now) {
+      let best = null; for (const h of hist) if (!best || Math.abs(h.t - t) < Math.abs(best.t - t)) best = h;
+      const v = best && best.zones[z.id];
+      let fcv = null; for (const h of issued) if (h.t <= best.t && best.t <= h.t + H) { const q = h.zones[z.id]; fcv = q.lvl + (q.fc - q.lvl) * (best.t - h.t) / H; }
+      html = `<div><b>t = ${best.t.toFixed(0)} s</b></div><div><span>measured</span><b class="num">${fmt(v.read)} kW</b></div>
+        <div><span>true load</span><b class="num">${fmt(v.true)} kW</b></div>` + (p != null ? `<div><span>J-1 plan</span><b class="num">${fmt(p)} kW</b></div>` : '')
+        + (fcv != null ? `<div><span>forecast for this moment</span><b class="num">${fmt(fcv)} kW</b></div>` : '') + `<div><span>sensor</span><b>${v.suspect ? 'suspect' : v.trust}</b></div>`;
+    } else {
+      const dt = Math.min(t - now, H);
+      html = `<div><b>+${(t - now).toFixed(0)} s ahead</b></div>` + (zf.lvl != null && t - now <= H ? `<div><span>forecast</span><b class="num">${fmt(zf.lvl + (zf.fc - zf.lvl) * dt / H)} kW</b></div>
+        <div><span>upper band</span><b class="num">${fmt(zf.lvl + (zf.up - zf.lvl) * dt / H)} kW</b></div>` : '') + (p != null ? `<div><span>J-1 plan</span><b class="num">${fmt(p)} kW</b></div>` : '')
+        + (zfe ? futures.map(({ v, o }) => { const d2 = Math.min(Math.max(t - ev.frame.t, 0), H);
+            return `<div><span>future: ${esc(o.label)}</span><b class="num">${fmt(zfe.acc + (v - zfe.acc) * d2 / H)} kW</b></div>`; }).join('') : '');
+    }
+    tip.innerHTML = html; tip.style.display = 'block';
+    const px = e.clientX - wrap.getBoundingClientRect().left;
+    tip.style.left = Math.min(px + 14, wrap.clientWidth - tip.offsetWidth - 4) + 'px'; tip.style.top = '10px';
+  };
+  hit.onmouseleave = () => { tip.style.display = 'none'; cross.setAttribute('visibility', 'hidden'); };
+}
+function renderKpis(city, z, hist, H) {
+  const errs = [], perr = [];
+  const byT = new Map(S.frames.slice(0, S.idx + 1).map(h => [Math.round(h.t), h]));
+  const sw = switchMarks(S.idx).map(m => m.t);
+  for (const h of S.frames.slice(0, S.idx + 1)) {
+    const v = h.zones[z.id]; if (!v) continue;
+    const later = byT.get(Math.round(h.t + H));
+    const switched = sw.some(t => t >= h.t && t <= h.t + H);
+    if (!switched && v.fc != null && later && later.zones[z.id] && later.zones[z.id].true != null) errs.push(Math.abs(v.fc - later.zones[z.id].true));
+    if (v.j1 != null && v.true != null && v.true > 1) perr.push(Math.abs(v.true - v.j1));
+  }
+  const avg = a => a.length ? Math.round(a.reduce((x, y) => x + y, 0) / a.length) : null;
+  const f = S.frames[S.idx], zf = f.zones[z.id];
+  const dev = zf && zf.j1 && zf.read != null && zf.read > 1 ? Math.round(100 * (zf.read - zf.j1) / zf.j1) : null;
+  $('kpis').innerHTML = `<span>Now vs J-1 plan: <b class="num">${dev == null ? '—' : (dev > 0 ? '+' : '') + dev + '%'}</b></span>
+    <span>J-1 plan average error: <b class="num">${avg(perr) ?? '—'} kW</b></span>
+    <span>45 s forecast average error so far: <b class="num">${avg(errs) ?? '—'} kW</b> <span style="color:var(--muted)">(windows containing a switching action are left out: the forecast is not meant to know about it)</span></span>`;
+}
+function switchMarks(upto) {
+  const out = [];
+  for (const e of allEvents(upto)) {
+    if (e.k === 'command_sent' && e.p) {
+      const kind = e.p.action_kind, label = (e.s.split(': ')[1] || e.s);
+      out.push({ t: e.t, label, icon: kind === 'restore' ? '↺' : kind === 'shed' ? '⚡' : '▲',
+        c: kind === 'shed' ? 'var(--crit)' : kind === 'restore' ? 'var(--good-text)' : 'var(--ink)' });
+    } else if (e.k === 'scenario_marker' && /^Operator sets /.test(e.s)) {
+      const m = e.s.match(/^Operator sets (\S+) (\w+)/); out.push({ t: e.t, label: `${m[1]} ${m[2]}`, icon: '◆', c: 'var(--s4)' });
+    } else if (e.k === 'verification' && e.p && e.p.outcome === 'FAILED') {
+      out.push({ t: e.t, label: `${(e.p.action || '').split(' ')[1]} failed`, icon: '✕', c: 'var(--crit)' });
+    }
+  }
+  return out;
+}
+
+/* ---------------------------------------------------------------- story */
+const STEP_STYLE = { see: ['!', 'var(--warn)'], compare: ['≡', 'var(--s1)'], gate_ok: ['✓', 'var(--good)'], gate_no: ['⊘', 'var(--crit)'],
+  act: ['▲', 'var(--ink)'], ok: ['✓', 'var(--good)'], bad: ['✕', 'var(--crit)'], alert: ['☎', 'var(--serious)'], info: ['i', 'var(--ink2)'],
+  restore: ['↺', 'var(--good)'], shed: ['⚡', 'var(--crit)'], learn: ['✎', 'var(--s4)'], degraded: ['◐', 'var(--serious)'], clear: ['○', 'var(--good)'] };
+function sentence(e) {
+  const p = e.p || {};
+  switch (e.k) {
+    case 'risk_detected': {
+      const m = e.s.match(/^(\S+): (predicted|actual) overload within (\d+) s \((\d+) kW vs capacity (\d+) kW/);
+      if (m) return ['see', `<b>${m[1]}</b> is heading for <b>${Math.round(100 * m[4] / m[5])}%</b> of its capacity within ${m[3]} s (${m[4]} of ${m[5]} kW)`
+        + (p.p_overload != null ? `, overload probability <b>${Math.round(100 * p.p_overload)}%</b>` : '') + '.'];
+      return ['see', esc(e.s)];
+    }
+    case 'candidates_evaluated': {
+      const all = [...(p.ranked || []).map((c, i) => ({ ...c, best: i === 0 })), ...(p.rejected || [])];
+      const zones = p.risky || [];
+      const city = cityAt(S.idx);
+      const pc = c => zones.map(z => { const zz = zoneById(city, z), v = c.central_kw && c.central_kw[z];
+        return v != null && zz && zz.cap ? `${z} ${Math.round(100 * v / zz.cap)}%` : ''; }).filter(Boolean).join(', ');
+      const rows = [`<tr><td>do nothing</td><td>${esc(pc(p.no_action || {}))}</td><td>${esc(probTxt(p.no_action, zones))}</td><td>baseline</td></tr>`]
+        .concat(all.map(c => `<tr class="${c.best ? 'best' : ''}"><td>${esc(c.action)}${c.kind === 'shed' ? ' (shed)' : ''}</td><td>${esc(pc(c))}</td><td>${esc(probTxt(c, zones))}</td>
+          <td>${c.best ? '<b>chosen</b>' : c.feasible && !c.why_not ? 'also better' : esc(c.why_not || '')}</td></tr>`));
+      return ['compare', `It compared <b>${all.length + 1} futures</b> ${(p.ranked || []).length ? `and found <b>${p.ranked.length}</b> better than doing nothing` : 'and <b>none</b> is safely better than doing nothing'}:
+        <table class="opts"><tr><th>Future</th><th>Expected peak</th><th>P(overload)</th><th>Verdict</th></tr>${rows.join('')}</table>`];
+    }
+    case 'gate_passed': return [p.degraded ? 'degraded' : 'gate_ok', `Safety & trust gate: <b>passed</b>${p.degraded ? ' in <b>degraded mode</b> (Guardian unreachable)' : ''}. ` + trustChips(p.trust)];
+    case 'gate_blocked': return ['gate_no', `Safety & trust gate <b>blocked ${esc(p.action || '')}</b>: ${esc((e.s.split(': ').slice(1).join(': ')) || e.s)}. ` + trustChips(p.trust)];
+    case 'decision': return [null, null];
+    case 'command_sent': {
+      const kind = p.action_kind, a = e.s.split(': ')[1] || e.s;
+      return [kind === 'shed' ? 'shed' : kind === 'restore' ? 'restore' : 'act', `Command sent to the Twin: <b>${esc(a)}</b>` + (kind === 'shed' ? ' (last-resort load shedding)' : kind === 'restore' ? ' (back to normal)' : '') + '.'];
+    }
+    case 'verification': {
+      const ob = p.observed || {}, parts = Object.entries(ob).map(([z, v]) => `${z} ${v > 0 ? '+' : ''}${Math.round(v)} kW`).join(', ');
+      const o = p.outcome;
+      return [o === 'SUCCESS' ? 'ok' : 'bad', o === 'SUCCESS' ? `Checked on the sensors: <b>it worked</b>${parts ? ` (${parts}, as predicted)` : ''}.`
+        : o === 'FAILED' && e.s.includes('no load moved') ? `Checked on the sensors: the switch <b>reports moving but no power moved</b>. Its status is not believed; it is excluded and reported to the Guardian.`
+        : o === 'FAILED' ? `Checked on the sensors: <b>the switch never moved</b>. It is excluded and reported to the Guardian.`
+        : o === 'MISMATCH' ? `The switch moved but the load did not respond as modelled${parts ? ` (${parts})` : ''}; reported to the Guardian.`
+        : `Switch moved; the load could not be verified (no trusted sensor).`];
+    }
+    case 'plan': return ['compare', `Multi-zone plan: ${esc(e.s.replace(/^risk in [^:]*: /, ''))}`];
+    case 'consistency': return [p.flagged ? 'gate_no' : 'clear', p.flagged ? `Physics check: <b>power balance broken</b>. ${esc(e.s)}` : `Physics check: ${esc(e.s)}`];
+    case 'proposal': return ['compare', `Advisory mode: the agent <b>proposes ${esc(p.action || '')}</b> and waits for the orchestrator's approval.`];
+    case 'orchestrator': return ['info', `Orchestrator: <b>${esc(e.s.replace(/^orchestrator: /, ''))}</b>`];
+    case 'operator_alert': return ['alert', `Operator alerted: ${esc(e.s)}`];
+    case 'restoration': return ['restore', esc(e.s)];
+    case 'risk_cleared': return ['clear', `${esc(e.s.split(':')[0])} is back within limits.`];
+    case 'degraded_mode': return ['degraded', esc(e.s)];
+    case 'learned_effect': return ['learn', esc(e.s)];
+    case 'plan_deviation': return ['info', esc(e.s)];
+    case 'verdict_flapping': return ['gate_no', esc(e.s)];
+    case 'reading_suspect': return ['info', esc(e.s)];
+    case 'verdict_change': return ['info', `Guardian: ${esc(e.s)}`];
+    default: return ['info', esc(e.s)];
+  }
+}
+function probTxt(c, zones) { if (!c || !c.p_overload) return '—'; const v = zones.map(z => c.p_overload[z] != null ? `${Math.round(100 * c.p_overload[z])}%` : '0%'); return v.join(', '); }
+function trustChips(tr) {
+  if (!tr || !Object.keys(tr).length) return '';
+  return Object.entries(tr).map(([s, v]) => `<span class="chip"><span class="dot" style="background:${v === 'trusted' ? 'var(--good)' : v === 'untrusted' ? 'var(--crit)' : 'var(--warn)'}"></span>${esc(s)} ${esc(v)}</span>`).join('');
+}
+const STORY_KINDS = new Set(['proposal', 'orchestrator', 'risk_detected', 'candidates_evaluated', 'gate_passed', 'gate_blocked', 'command_sent', 'verification',
+  'operator_alert', 'restoration', 'risk_cleared', 'degraded_mode', 'learned_effect', 'plan_deviation', 'verdict_flapping', 'reading_suspect', 'verdict_change', 'plan', 'consistency']);
+function renderStory() {
+  const evs = allEvents(S.idx).filter(e => STORY_KINDS.has(e.k));
+  let start = 0;
+  for (let i = evs.length - 1; i >= 0; i--) if (evs[i].k === 'risk_detected' || evs[i].k === 'restoration') { start = i; break; }
+  // include context right before the episode (suspect readings, verdict changes, learning)
+  let list = evs.slice(Math.max(0, start - 3));
+  const seen = new Set();
+  list = list.filter(e => { if (e.k !== 'candidates_evaluated') return true; const k = JSON.stringify((e.p && e.p.ranked || []).map(c => c.action));
+    if (seen.has(k)) return false; seen.add(k); return true; }).slice(-10);
+  if (!list.length) { $('storyBox').innerHTML = '<p class="empty">Nothing to report yet: the Brain is watching every zone and doing nothing, which is the right answer on a normal day.</p>'; return; }
+  $('storyBox').innerHTML = '<ol class="steps">' + list.map(e => {
+    const [kind, html] = sentence(e); if (!html) return '';
+    const [ic, c] = STEP_STYLE[kind] || STEP_STYLE.info;
+    return `<li><span class="ic" style="color:${c};border-color:${c}">${ic}</span><div><span class="when num">t = ${Math.round(e.t)} s</span><p>${html}</p></div></li>`;
+  }).join('') + '</ol>';
+}
+
+/* ---------------------------------------------------------------- switches */
+function switchStory(sid, evs) {
+  let last = null;
+  for (const e of evs) {
+    const p = e.p || {};
+    if (e.k === 'command_sent' && (e.s.split(': ')[1] || '').endsWith(' ' + sid)) last = { t: e.t, txt: `<b>${esc(e.s.split(': ')[1])}</b> by the Brain` + (p.action_kind === 'restore' ? ' (back to normal)' : p.action_kind === 'shed' ? ' (last-resort shedding)' : '') };
+    else if (e.k === 'verification' && p.action && p.action.endsWith(' ' + sid) && last) {
+      const ob = p.observed || {}; const parts = Object.entries(ob).map(([z, v]) => `${z} ${v > 0 ? '+' : ''}${Math.round(v)} kW`).join(', ');
+      last.txt += p.outcome === 'SUCCESS' ? ` · verified ✓ ${parts}` : p.outcome === 'FAILED' ? ' · <b style="color:var(--crit)">never moved ✕</b> (excluded, Guardian told)' : ` · ${esc(p.outcome.toLowerCase())}`;
+    } else if (e.k === 'gate_blocked' && p.action && p.action.endsWith(' ' + sid)) last = { t: e.t, txt: `<b>${esc(p.action)}</b> blocked by the gate: ${esc(e.s.split(': ').slice(1).join(': '))}` };
+    else if (e.k === 'scenario_marker' && e.s.startsWith(`Operator sets ${sid} `)) last = { t: e.t, txt: `set <b>${esc(e.s.split(' ')[3])}</b> by an operator` };
+    else if (e.k === 'scenario_marker' && e.s.startsWith(`Switch ${sid} jams`)) last = { t: e.t, txt: '<b>jammed</b> (simulation event; the Brain does not know)' };
+    else if (e.k === 'verdict_change' && e.s.startsWith(sid + ':')) last = { t: e.t, txt: `Guardian: ${esc(e.s.split(': ')[1])}` };
+    else if (e.k === 'learned_effect' && e.s.startsWith(sid) && e.s.includes('adopted')) last = { t: e.t, txt: `effect <b>learned</b> by watching: ${esc(e.s.split('adopted: ')[1] || '')}` };
+  }
+  return last;
+}
+function renderSwitches(city) {
+  const f = S.frames[S.idx]; if (!f) return;
+  const evs = allEvents(S.idx), dur = city.scenario.duration, now = f.t;
+  const t0 = S.mode === 'replay' && dur < 1e6 ? 0 : Math.max(0, now - 200), t1 = S.mode === 'replay' && dur < 1e6 ? Math.max(dur, now) : now + city.horizon + 15;
+  const marks = switchMarks(S.idx);
+  $('switches').innerHTML = city.switches.map(s => {
+    const sf = f.switches[s.id] || {}, tie = s.kind === 'tie';
+    const abnormal = tie ? sf.state === 'closed' : sf.state === 'open';
+    const stateTxt = sf.failed ? 'FAILED' : sf.quar ? 'QUARANTINED' : (sf.state || '').toUpperCase();
+    const sc = sf.failed || sf.quar ? 'var(--crit)' : abnormal ? (tie ? 'var(--ink)' : 'var(--crit)') : 'var(--muted)';
+    const what = tie ? (sf.known ? `Tie ${s.from} → ${s.to}: closing moves ~${Math.round(100 * (s.frac || 0))}% of ${s.from}'s load into ${s.to}.` : `Tie between zones; its effect is unknown to the Brain (not advertised, not learned yet).`)
+      : `Feeder breaker of ${s.from}: opening switches the whole zone off.`;
+    const flow = tie && sf.state === 'closed' && sf.flow ? ` Now carrying <b>${Math.round(sf.flow)} kW</b> ${s.from} → ${s.to}.` : '';
+    const last = switchStory(s.id, evs);
+    return `<div class="sw"><div><div class="name">${esc(s.id)}<span class="state" style="color:${sc};border-color:${sc}">${esc(stateTxt)}</span>
+      ${sf.pending ? '<span class="state pulse" style="color:var(--s1);border-color:var(--s1)">VERIFYING</span>' : ''}${sf.cool ? `<span class="num" style="color:var(--muted);font-size:11px">cooldown ${sf.cool} s</span>` : ''}</div>
+      <div class="what">${what}${flow}</div></div>
+      <div>${laneSvg(s, t0, t1, now)}</div>
+      <div class="last">${last ? `Last: ${last.txt} <span class="num" style="color:var(--muted)">at t = ${Math.round(last.t)} s</span>` : 'No change so far.'}</div></div>`;
+  }).join('');
+  function laneSvg(s, t0, t1, now) {
+    const W = 600, H = 34, X = t => (t - t0) / (t1 - t0) * W;
+    const tie = s.kind === 'tie';
+    let segs = '', start = null, prevT = null;
+    for (const h of S.frames.slice(0, S.idx + 1)) {
+      if (h.t < t0) continue;
+      const st = h.switches[s.id] && h.switches[s.id].state, ab = tie ? st === 'closed' : st === 'open';
+      if (ab && start == null) start = h.t;
+      if (!ab && start != null) { segs += seg(start, h.t); start = null; }
+      prevT = h.t;
+    }
+    if (start != null) segs += seg(start, prevT);
+    function seg(a, b) { return `<rect x="${X(a).toFixed(1)}" y="11" width="${Math.max(2, X(b) - X(a)).toFixed(1)}" height="12" rx="4" fill="${tie ? 'var(--ink)' : 'var(--crit)'}" fill-opacity="${tie ? 0.75 : 0.6}"/>`; }
+    const mk = marks.filter(m => m.label.split(' ').includes(s.id) || m.label.startsWith(s.id + ' ')).map(m =>
+      `<text x="${X(m.t).toFixed(1)}" y="9" text-anchor="middle" font-size="10" font-weight="700" style="fill:${m.c}">${m.icon}</text>`).join('');
+    const blocked = allEvents(S.idx).filter(e => e.k === 'gate_blocked' && e.p && e.p.action && e.p.action.endsWith(' ' + s.id))
+      .map(e => `<text x="${X(e.t).toFixed(1)}" y="33" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--crit)">⊘</text>`).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="0" x2="${W}" y1="17" y2="17" style="stroke:var(--grid)" stroke-width="12" stroke-linecap="round"/>${segs}${mk}${blocked}
+      <line x1="${X(now)}" x2="${X(now)}" y1="2" y2="32" style="stroke:var(--ink)" stroke-width="1"/></svg>`;
+  }
+}
+
+/* ---------------------------------------------------------------- timeline */
+function layerOf(e) { if (e.L) return e.L; if (e.k === 'orchestrator' || e.k === 'proposal') return 'Orchestrator'; if (e.k === 'scenario_marker') return 'Twin'; if (e.k === 'verdict_change' || e.k === 'verdict_flapping') return 'Guardian'; return 'Brain'; }
+const LAYER_C = { Twin: 'var(--s3)', Guardian: 'var(--s4)', Brain: 'var(--s1)', Other: 'var(--s2)', Orchestrator: 'var(--ink)' };
+const SKIP = new Set(['forecast', 'command_ack']);
+function renderFeed() {
+  const out = [], frames = S.frames.slice(0, S.idx + 1);
+  for (let i = frames.length - 1; i >= 0 && out.length < 150; i--) {
+    const evs = frames[i].events;
+    for (let j = evs.length - 1; j >= 0; j--) {
+      const e = evs[j]; if (SKIP.has(e.k)) continue;
+      const L = layerOf(e); if (S.filter !== 'all' && L !== S.filter) continue;
+      const s = e.k === 'scenario_marker' ? e.s.replace(/^START \S+ /, 'Scenario start: ') : e.s;
+      out.push(`<li class="${i === frames.length - 1 ? 'hot' : ''}"><span class="t num">${Math.round(e.t)} s</span>
+        <span class="layer" style="color:${LAYER_C[L]};border-color:${LAYER_C[L]}">${L.toUpperCase()}</span>
+        <span>${esc(s)} <span class="k">${e.k === 'scenario_marker' ? '' : e.k.replace(/_/g, ' ')}</span></span></li>`);
+    }
+  }
+  $('feed').innerHTML = out.join('') || '<li><span></span><span></span><span class="empty">Nothing yet.</span></li>';
+}
+
+/* ---------------------------------------------------------------- console (live only) */
+function buildConsole() {
+  const c = $('console'); c.innerHTML = '';
+  if (S.mode !== 'live') { $('consolePanel').style.display = 'none'; return; }
+  $('consolePanel').style.display = '';
+  const zones = S.city.zones.map(z => z.id), sws = S.city.switches.map(s => s.id);
+  const sel = (id, opts) => `<select id="${id}">${opts.map(o => `<option>${esc(o)}</option>`).join('')}</select>`;
+  c.innerHTML = `<label>Zone ${sel('cz', zones)}</label><label>Switch ${sel('cs', sws)}</label>
+    <label>Surge (kW) <input id="ck" type="number" value="280" step="20"></label><label>Surge lasts (s) <input id="cd" type="number" value="120" step="30"></label>
+    <button data-a="surge"><b>Demand surge</b><span>real load rises over 60 s</span></button>
+    <button data-a="spoof"><b>Spoof the sensor</b><span>fake reading for 40 s</span></button>
+    <button data-a="untrust"><b>Guardian flags sensor</b><span>untrusted verdict</span></button>
+    <button data-a="trust"><b>Guardian clears sensor</b><span>trusted again</span></button>
+    <button data-a="flap"><b>Guardian flaps</b><span>verdict flips every call</span></button>
+    <button data-a="stuck"><b>Jam the switch</b><span>accepts commands, never moves</span></button>
+    <button data-a="toggle"><b>Operator toggles switch</b><span>the Brain can learn from it</span></button>
+    <button data-a="quar"><b>Guardian quarantines switch</b><span>untrusted + quarantined</span></button>
+    <button data-a="gdown"><b>Guardian goes down</b><span>verdicts expire after 10 s</span></button>
+    <button data-a="gup"><b>Guardian back up</b><span>leave degraded mode</span></button>
+    <button data-a="restart"><b>Twin restarts</b><span>reading counters reset</span></button>
+    <button data-a="hint"><b>Flood pump running</b><span>priority hint for the zone</span></button>`;
+  c.querySelectorAll('button').forEach(b => b.onclick = () => {
+    const z = $('cz').value, s = $('cs').value, k = +$('ck').value, d = +$('cd').value, f = S.frames[S.idx];
+    const read = f && f.zones[z] ? (f.zones[z].read || 0) : 300;
+    const A = { surge: ['ramp', { zone_id: z, add_kw: k, rise_s: 60, hold_s: Math.max(0, d - 60) }],
+      spoof: ['spoof', { sensor_id: 'PL-' + z, value_kw: Math.round(read * 2), duration_s: 40 }],
+      untrust: ['guardian_override', { subject_id: 'PL-' + z, verdict: 'untrusted', reason: 'flagged from console' }],
+      trust: ['guardian_override', { subject_id: 'PL-' + z, verdict: 'trusted' }],
+      flap: ['guardian_flap', { subject_id: 'PL-' + z }],
+      stuck: ['stuck', { switch_id: s, stuck: true }],
+      toggle: ['switch', { switch_id: s, state: f && f.switches[s] && f.switches[s].state === 'closed' ? 'open' : 'closed' }],
+      quar: ['guardian_override', { subject_id: s, verdict: 'untrusted', quarantined: true, reason: 'quarantined from console' }],
+      gdown: ['guardian_mode', { mode: 'silent' }], gup: ['guardian_mode', { mode: 'trusted' }],
+      restart: ['twin_restart', {}], hint: ['hint', { zone_id: z, reason: 'flood pump running (console)' }] }[b.dataset.a];
+    post('/api/inject', { action: A[0], args: A[1] });
+  });
+}
+
+/* ================================================================== boot */
+if (S.mode === 'live') { $('scrubwrap').style.display = 'none'; connectLive(); scenarioList(); }
+else if (REPLAY) {
+  buildConsole();
+  const m = location.hash.match(/^#([A-Za-z0-9]+?)(?:-(\d+))?$/);
+  const sid = m && REPLAY[m[1].toUpperCase()] ? m[1].toUpperCase() : 'E2';
+  selectScenario(sid);
+  if (m && m[2]) { S.idx = Math.min(+m[2], S.frames.length - 1); setPlaying(false); renderAll(); }
+} else document.body.innerHTML = '<p style="padding:40px">No recordings embedded and no live server. Run <code>python -m sim.server</code>.</p>';
+</script>
+</body>
+</html>

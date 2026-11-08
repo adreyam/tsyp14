@@ -1,0 +1,125 @@
+{
+  "id": "TR01",
+  "name": "Traffic jam at rush hour",
+  "interaction": "Twin → Brain (transportation)",
+  "layers": [
+    "Twin",
+    "City Brain"
+  ],
+  "description": "Morning rush (CLOCK 08:15) and a broken-down car just south of the junction at the city centre. It is rush hour, so the traffic is not sent round the block: about 24 cars of the surrounding streets drive into its lane and queue behind it, and the police wave them past only in short batches. The queue grows back over the traffic detector TRAF-03 (occupancy up, speed down) for several readings.",
+  "expected": {
+    "twin": "Rush-hour traffic; the broken-down car blocks its lane and a long queue (around 20 cars) builds behind it; the police officer lets them past in short batches; a tow truck drives there from the tow yard, loads the car and the queue drains.",
+    "guardian": "Detector readings trusted.",
+    "brain": "Transportation: a jam after 3 readings in a row (not a short peak); the detector sits on the north-south road, so the junction r5_c5 holds north-south green to drain the queue; back to its cycle once the traffic flows again."
+  },
+  "how_to_verify": "Map: zone K highlighted, the camera follows a car driving into the queue; the junction at the centre turns north-south green; logs/TR01-*.jsonl. On the live Twin the queue depends on the traffic of the moment: the live check only asks for the road incident.",
+  "duration_s": 60,
+  "speed": 2,
+  "live_duration_s": 300,
+  "steps": [
+    {
+      "at": 1,
+      "do": "twin_command",
+      "id": "CLOCK",
+      "command": "set_time",
+      "value": "08:15"
+    },
+    {
+      "at": 2,
+      "do": "twin_command",
+      "id": "INCIDENTS",
+      "command": "trigger",
+      "value": {
+        "kind": "breakdown",
+        "x": 3,
+        "z": 45,
+        "near": {
+          "x": 3,
+          "z": 45
+        },
+        "jam": 24
+      }
+    },
+    {
+      "at": 2,
+      "do": "ramp",
+      "device": "TRAF-03",
+      "metric": "occupancy",
+      "to": 88,
+      "over": 6,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 2,
+      "do": "ramp",
+      "device": "TRAF-03",
+      "metric": "speed",
+      "to": 6,
+      "over": 6,
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "at": 40,
+      "do": "clear",
+      "device": "TRAF-03",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "expect": "situation",
+      "axis": "transportation",
+      "kind": "jam",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "SIG-Junction_r5_c5",
+      "command": "ns_green",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "action",
+      "actuator": "SIG-Junction_r5_c5",
+      "command": "reset_cycle",
+      "modes": [
+        "mock"
+      ]
+    },
+    {
+      "expect": "situation",
+      "axis": "transportation",
+      "kind": "road_incident"
+    },
+    {
+      "expect": "only_zone",
+      "zone": "K",
+      "modes": [
+        "mock"
+      ]
+    }
+  ],
+  "modes": [
+    "mock",
+    "live"
+  ],
+  "trigger": "python scenarios/run.py TR01   (or the Run button on the control center; --server to play it on the running Brain, live or mock)",
+  "axis": "transportation",
+  "focus": {
+    "zone": "K",
+    "devices": [
+      "TRAF-03"
+    ],
+    "follow": "traffic"
+  }
+}

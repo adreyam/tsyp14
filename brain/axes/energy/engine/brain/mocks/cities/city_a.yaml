@@ -1,0 +1,21 @@
+# Mock city A -- fully described Twin (Brain should reach L2 "mapped").
+city_id: mock-city-a
+expose: {capacity: true, switch_effects: true, tags: true}
+zones:
+  - {zone_id: Z1, capacity_kw: 500, tags: [commercial],      base_kw: 320, amplitude_kw: 30, period_s: 180, noise_kw: 4, customers: 800}
+  - {zone_id: Z2, capacity_kw: 600, tags: [residential],     base_kw: 300, amplitude_kw: 25, period_s: 240, noise_kw: 4, customers: 2400}
+  - {zone_id: Z3, capacity_kw: 400, tags: [hospital],        base_kw: 240, amplitude_kw: 10, period_s: 300, noise_kw: 3, customers: 300}
+  - {zone_id: Z4, capacity_kw: 450, tags: [industrial],      base_kw: 280, amplitude_kw: 20, period_s: 200, noise_kw: 5, customers: 40}
+# substation meters: each measures the real total of its zones (power-balance check)
+aggregate_meters:
+  - {sensor_id: SUB-N, zones: [Z1, Z2]}
+  - {sensor_id: SUB-S, zones: [Z3, Z4]}
+switches:
+  # tie switches: normally open, closing transfers a fraction of from_zone demand to to_zone
+  - {switch_id: S12, kind: tie,    from_zone: Z1, to_zone: Z2, transfer_fraction: 0.35}
+  - {switch_id: S43, kind: tie,    from_zone: Z4, to_zone: Z3, transfer_fraction: 0.30}
+  - {switch_id: S42, kind: tie,    from_zone: Z4, to_zone: Z2, transfer_fraction: 0.25}
+  - {switch_id: S32, kind: tie,    from_zone: Z3, to_zone: Z2, transfer_fraction: 0.30}
+  # feeder switches: normally closed, opening de-energizes the zone
+  - {switch_id: F3,  kind: feeder, from_zone: Z3}
+  - {switch_id: F4,  kind: feeder, from_zone: Z4}

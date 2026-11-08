@@ -1,0 +1,36 @@
+# City Brain with its mock Twin and mock Guardian (R1). From the triplet root:
+#
+#   docker compose run --rm scenarios     every Test Book scenario (G1-G6, A1-A5), logs in ./logs
+#   docker compose up live                live demo: http://localhost:8100/timeline
+#                                         and the controls: http://localhost:8200/control
+#   docker compose run --rm tests         the 113 automated tests
+#
+# To start the whole city, add the real Twin and Guardian services below once they exist.
+services:
+  scenarios:
+    build: ./brain
+    volumes:
+      - ./logs:/logs
+
+  live:
+    build: ./brain
+    command: ["python", "-m", "demo.live", "--no-browser"]
+    environment:
+      BRAIN_CONFIG: /app/config/brain.docker.json
+      MOCKS_CONFIG: /app/config/mocks.docker.json
+    ports:
+      - "8100:8100"
+      - "8200:8200"
+    volumes:
+      - ./logs:/logs
+    profiles: ["live"]
+
+  tests:
+    build: ./brain
+    command: ["python", "-m", "pytest", "-q"]
+    profiles: ["tests"]
+
+  # twin:
+  #   build: ./twin
+  # guardian:
+  #   build: ./guardian

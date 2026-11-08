@@ -1,0 +1,48 @@
+{
+  "_comment": "City Brain on the Twin team's Linux machine, reading City Ground Zero over MCP (stdio). 1) start the city (./run_control_room.sh); 2) put the Twin repo folder in twin.mcp.cwd and the city's device-API port in twin.mcp.env.CITY_SIM_API_PORT (cat /tmp/city_ground_zero_api_ready_*); 3) python3 -m src.service --config config/brain.ground-zero.json",
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 8100
+  },
+  "twin": {
+    "transport": "mcp_stdio",
+    "mcp": {
+      "command": [
+        "python3",
+        "tools/mcp/city_mcp_server.py"
+      ],
+      "cwd": "/CHANGE/ME/TSYP14-Smart-City-Challenge",
+      "env": {
+        "CITY_SIM_API_PORT": "CHANGE_ME"
+      },
+      "timeout_s": 10,
+      "origin_lat": 36.8,
+      "origin_lon": 10.18,
+      "default_capacity_kg": {
+        "WGT-T": 25.0,
+        "WGT-C": 120.0
+      },
+      "zone_types": {},
+      "focus_on_order": true
+    }
+  },
+  "guardian": {
+    "url": "http://127.0.0.1:8300",
+    "verdict_path": "/v1/trust-verdict",
+    "timeout_s": 2.0,
+    "retry_after_s": 5.0
+  },
+  "auth": {
+    "brain_token_env": "BRAIN_TOKEN",
+    "twin_token_env": "TWIN_TOKEN"
+  },
+  "city": {
+    "decision": "crew",
+    "crew_max_orders_per_cycle": 3,
+    "crew_reorder_after_s": 600,
+    "reading_interval_s": 5
+  },
+  "cycle_s": 5.0,
+  "clock": "twin",
+  "log_path": "../../logs/GROUND-ZERO.jsonl"
+}

@@ -1,0 +1,11 @@
+# Local knowledge file for mock city B (optional). Supplies what that Twin does
+# not advertise. Here: capacities and priority tags only -> Brain reaches L1
+# (bounded) but still cannot switch, because no switch effect is known yet.
+city_id: mock-city-b
+zones:
+  - {zone_id: north, capacity_kw: 900, tags: [residential]}
+  - {zone_id: south, capacity_kw: 700, tags: [residential]}
+  - {zone_id: port,  capacity_kw: 800, tags: [flood_pump]}
+switches:
+  - {switch_id: T-NS}
+  - {switch_id: T-PN}

@@ -1,0 +1,3580 @@
+{
+ "seed": 7,
+ "origin": {
+  "lat0": 36.8065,
+  "lon0": 10.1815,
+  "cx": 700.0,
+  "cy": 700.0
+ },
+ "bbox": [
+  0.0,
+  0.0,
+  1400.0,
+  1400.0
+ ],
+ "net_file": "world/city.net.xml",
+ "lots": [
+  {
+   "id": "P01",
+   "name": "Central Garage",
+   "capacity": 20,
+   "review_sum": 82,
+   "review_count": 20,
+   "lat": 36.80410330578513,
+   "lon": 10.179233643683839,
+   "access_edge": "J3_2__J2_2",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     551.6,
+     412.2
+    ],
+    [
+     444.4,
+     412.2
+    ],
+    [
+     444.4,
+     454.2
+    ],
+    [
+     551.6,
+     454.2
+    ]
+   ],
+   "gate_in": [
+    539.6,
+    412.2
+   ],
+   "gate_out": [
+    456.4,
+    412.2
+   ],
+   "aisle_in": [
+    539.6,
+    433.2
+   ],
+   "aisle_out": [
+    456.4,
+    433.2
+   ],
+   "centre": [
+    498.0,
+    433.2
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 538.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 543.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 533.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 528.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 528.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 523.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 523.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 518.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 518.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 513.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 513.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 508.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 11
+    },
+    {
+     "code": "B8",
+     "u": 43.0,
+     "v": 32.0,
+     "x": 508.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 12
+    },
+    {
+     "code": "A6",
+     "u": 48.0,
+     "v": 10.0,
+     "x": 503.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 13
+    },
+    {
+     "code": "B9",
+     "u": 48.0,
+     "v": 32.0,
+     "x": 503.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 14
+    },
+    {
+     "code": "A7",
+     "u": 53.0,
+     "v": 10.0,
+     "x": 498.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 15
+    },
+    {
+     "code": "B10",
+     "u": 53.0,
+     "v": 32.0,
+     "x": 498.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 16
+    },
+    {
+     "code": "A8",
+     "u": 58.0,
+     "v": 10.0,
+     "x": 493.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 17
+    },
+    {
+     "code": "B11",
+     "u": 58.0,
+     "v": 32.0,
+     "x": 493.6,
+     "y": 444.2,
+     "row": "B",
+     "position": 18
+    },
+    {
+     "code": "A9",
+     "u": 63.0,
+     "v": 10.0,
+     "x": 488.6,
+     "y": 422.2,
+     "row": "A",
+     "position": 19
+    }
+   ]
+  },
+  {
+   "id": "P02",
+   "name": "Station Parking",
+   "capacity": 16,
+   "review_sum": 55,
+   "review_count": 14,
+   "lat": 36.811289795185054,
+   "lon": 10.18596539511798,
+   "access_edge": "J6_6__J5_6",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     1151.6,
+     1212.2
+    ],
+    [
+     1044.4,
+     1212.2
+    ],
+    [
+     1044.4,
+     1254.2
+    ],
+    [
+     1151.6,
+     1254.2
+    ]
+   ],
+   "gate_in": [
+    1139.6,
+    1212.2
+   ],
+   "gate_out": [
+    1056.4,
+    1212.2
+   ],
+   "aisle_in": [
+    1139.6,
+    1233.2
+   ],
+   "aisle_out": [
+    1056.4,
+    1233.2
+   ],
+   "centre": [
+    1098.0,
+    1233.2
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 1138.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 1143.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 1133.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 1128.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 1128.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 1123.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 1123.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 1118.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 1118.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 1113.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 1113.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 1108.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 11
+    },
+    {
+     "code": "B8",
+     "u": 43.0,
+     "v": 32.0,
+     "x": 1108.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 12
+    },
+    {
+     "code": "A6",
+     "u": 48.0,
+     "v": 10.0,
+     "x": 1103.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 13
+    },
+    {
+     "code": "B9",
+     "u": 48.0,
+     "v": 32.0,
+     "x": 1103.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 14
+    },
+    {
+     "code": "A7",
+     "u": 53.0,
+     "v": 10.0,
+     "x": 1098.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 15
+    }
+   ]
+  },
+  {
+   "id": "P03",
+   "name": "Medina Parking",
+   "capacity": 12,
+   "review_sum": 38,
+   "review_count": 9,
+   "lat": 36.811289795185054,
+   "lon": 10.176989726539125,
+   "access_edge": "J2_6__J1_6",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     351.6,
+     1212.2
+    ],
+    [
+     244.4,
+     1212.2
+    ],
+    [
+     244.4,
+     1254.2
+    ],
+    [
+     351.6,
+     1254.2
+    ]
+   ],
+   "gate_in": [
+    339.6,
+    1212.2
+   ],
+   "gate_out": [
+    256.4,
+    1212.2
+   ],
+   "aisle_in": [
+    339.6,
+    1233.2
+   ],
+   "aisle_out": [
+    256.4,
+    1233.2
+   ],
+   "centre": [
+    298.0,
+    1233.2
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 338.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 343.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 333.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 328.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 328.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 323.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 323.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 318.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 318.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 313.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 313.6,
+     "y": 1244.2,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 308.6,
+     "y": 1222.2,
+     "row": "A",
+     "position": 11
+    }
+   ]
+  },
+  {
+   "id": "P04",
+   "name": "Market Parking",
+   "capacity": 24,
+   "review_sum": 80,
+   "review_count": 20,
+   "lat": 36.80292472152354,
+   "lon": 10.187482283107807,
+   "access_edge": "J6_1__J6_2",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     1212.2,
+     248.4
+    ],
+    [
+     1212.2,
+     355.6
+    ],
+    [
+     1254.2,
+     355.6
+    ],
+    [
+     1254.2,
+     248.4
+    ]
+   ],
+   "gate_in": [
+    1212.2,
+    260.4
+   ],
+   "gate_out": [
+    1212.2,
+    343.6
+   ],
+   "aisle_in": [
+    1233.2,
+    260.4
+   ],
+   "aisle_out": [
+    1233.2,
+    343.6
+   ],
+   "centre": [
+    1233.2,
+    302.0
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 261.4,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 256.4,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 266.4,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 271.4,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 271.4,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 276.4,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 276.4,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 281.4,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 281.4,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 286.4,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 286.4,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 291.4,
+     "row": "A",
+     "position": 11
+    },
+    {
+     "code": "B8",
+     "u": 43.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 291.4,
+     "row": "B",
+     "position": 12
+    },
+    {
+     "code": "A6",
+     "u": 48.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 296.4,
+     "row": "A",
+     "position": 13
+    },
+    {
+     "code": "B9",
+     "u": 48.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 296.4,
+     "row": "B",
+     "position": 14
+    },
+    {
+     "code": "A7",
+     "u": 53.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 301.4,
+     "row": "A",
+     "position": 15
+    },
+    {
+     "code": "B10",
+     "u": 53.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 301.4,
+     "row": "B",
+     "position": 16
+    },
+    {
+     "code": "A8",
+     "u": 58.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 306.4,
+     "row": "A",
+     "position": 17
+    },
+    {
+     "code": "B11",
+     "u": 58.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 306.4,
+     "row": "B",
+     "position": 18
+    },
+    {
+     "code": "A9",
+     "u": 63.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 311.4,
+     "row": "A",
+     "position": 19
+    },
+    {
+     "code": "B12",
+     "u": 63.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 311.4,
+     "row": "B",
+     "position": 20
+    },
+    {
+     "code": "A10",
+     "u": 68.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 316.4,
+     "row": "A",
+     "position": 21
+    },
+    {
+     "code": "B13",
+     "u": 68.0,
+     "v": 32.0,
+     "x": 1244.2,
+     "y": 316.4,
+     "row": "B",
+     "position": 22
+    },
+    {
+     "code": "A11",
+     "u": 73.0,
+     "v": 10.0,
+     "x": 1222.2,
+     "y": 321.4,
+     "row": "A",
+     "position": 23
+    }
+   ]
+  },
+  {
+   "id": "P05",
+   "name": "Lake Parking",
+   "capacity": 18,
+   "review_sum": 4,
+   "review_count": 1,
+   "lat": 36.8064820337765,
+   "lon": 10.184493385471049,
+   "access_edge": "J5_4__J5_3",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     987.8,
+     751.6
+    ],
+    [
+     987.8,
+     644.4
+    ],
+    [
+     945.8,
+     644.4
+    ],
+    [
+     945.8,
+     751.6
+    ]
+   ],
+   "gate_in": [
+    987.8,
+    739.6
+   ],
+   "gate_out": [
+    987.8,
+    656.4
+   ],
+   "aisle_in": [
+    966.8,
+    739.6
+   ],
+   "aisle_out": [
+    966.8,
+    656.4
+   ],
+   "centre": [
+    966.8,
+    698.0
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 738.6,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 743.6,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 733.6,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 728.6,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 728.6,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 723.6,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 723.6,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 718.6,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 718.6,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 713.6,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 713.6,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 708.6,
+     "row": "A",
+     "position": 11
+    },
+    {
+     "code": "B8",
+     "u": 43.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 708.6,
+     "row": "B",
+     "position": 12
+    },
+    {
+     "code": "A6",
+     "u": 48.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 703.6,
+     "row": "A",
+     "position": 13
+    },
+    {
+     "code": "B9",
+     "u": 48.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 703.6,
+     "row": "B",
+     "position": 14
+    },
+    {
+     "code": "A7",
+     "u": 53.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 698.6,
+     "row": "A",
+     "position": 15
+    },
+    {
+     "code": "B10",
+     "u": 53.0,
+     "v": 32.0,
+     "x": 955.8,
+     "y": 698.6,
+     "row": "B",
+     "position": 16
+    },
+    {
+     "code": "A8",
+     "u": 58.0,
+     "v": 10.0,
+     "x": 977.8,
+     "y": 693.6,
+     "row": "A",
+     "position": 17
+    }
+   ]
+  },
+  {
+   "id": "P06",
+   "name": "Hospital Parking",
+   "capacity": 14,
+   "review_sum": 60,
+   "review_count": 15,
+   "lat": 36.80831458857348,
+   "lon": 10.180750531673665,
+   "access_edge": "J3_4__J3_5",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     612.2,
+     848.4
+    ],
+    [
+     612.2,
+     955.6
+    ],
+    [
+     654.2,
+     955.6
+    ],
+    [
+     654.2,
+     848.4
+    ]
+   ],
+   "gate_in": [
+    612.2,
+    860.4
+   ],
+   "gate_out": [
+    612.2,
+    943.6
+   ],
+   "aisle_in": [
+    633.2,
+    860.4
+   ],
+   "aisle_out": [
+    633.2,
+    943.6
+   ],
+   "centre": [
+    633.2,
+    902.0
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 861.4,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 856.4,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 866.4,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 622.2,
+     "y": 871.4,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 871.4,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 622.2,
+     "y": 876.4,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 876.4,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 622.2,
+     "y": 881.4,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 881.4,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 622.2,
+     "y": 886.4,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 886.4,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 622.2,
+     "y": 891.4,
+     "row": "A",
+     "position": 11
+    },
+    {
+     "code": "B8",
+     "u": 43.0,
+     "v": 32.0,
+     "x": 644.2,
+     "y": 891.4,
+     "row": "B",
+     "position": 12
+    },
+    {
+     "code": "A6",
+     "u": 48.0,
+     "v": 10.0,
+     "x": 622.2,
+     "y": 896.4,
+     "row": "A",
+     "position": 13
+    }
+   ]
+  },
+  {
+   "id": "P07",
+   "name": "University Parking",
+   "capacity": 22,
+   "review_sum": 70,
+   "review_count": 18,
+   "lat": 36.8065179662235,
+   "lon": 10.176262697384237,
+   "access_edge": "J1_3__J1_4",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     212.2,
+     648.4
+    ],
+    [
+     212.2,
+     755.6
+    ],
+    [
+     254.2,
+     755.6
+    ],
+    [
+     254.2,
+     648.4
+    ]
+   ],
+   "gate_in": [
+    212.2,
+    660.4
+   ],
+   "gate_out": [
+    212.2,
+    743.6
+   ],
+   "aisle_in": [
+    233.2,
+    660.4
+   ],
+   "aisle_out": [
+    233.2,
+    743.6
+   ],
+   "centre": [
+    233.2,
+    702.0
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 661.4,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 656.4,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 666.4,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 671.4,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 671.4,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 676.4,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 676.4,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 681.4,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 681.4,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 686.4,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 686.4,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 691.4,
+     "row": "A",
+     "position": 11
+    },
+    {
+     "code": "B8",
+     "u": 43.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 691.4,
+     "row": "B",
+     "position": 12
+    },
+    {
+     "code": "A6",
+     "u": 48.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 696.4,
+     "row": "A",
+     "position": 13
+    },
+    {
+     "code": "B9",
+     "u": 48.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 696.4,
+     "row": "B",
+     "position": 14
+    },
+    {
+     "code": "A7",
+     "u": 53.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 701.4,
+     "row": "A",
+     "position": 15
+    },
+    {
+     "code": "B10",
+     "u": 53.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 701.4,
+     "row": "B",
+     "position": 16
+    },
+    {
+     "code": "A8",
+     "u": 58.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 706.4,
+     "row": "A",
+     "position": 17
+    },
+    {
+     "code": "B11",
+     "u": 58.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 706.4,
+     "row": "B",
+     "position": 18
+    },
+    {
+     "code": "A9",
+     "u": 63.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 711.4,
+     "row": "A",
+     "position": 19
+    },
+    {
+     "code": "B12",
+     "u": 63.0,
+     "v": 32.0,
+     "x": 244.2,
+     "y": 711.4,
+     "row": "B",
+     "position": 20
+    },
+    {
+     "code": "A10",
+     "u": 68.0,
+     "v": 10.0,
+     "x": 222.2,
+     "y": 716.4,
+     "row": "A",
+     "position": 21
+    }
+   ]
+  },
+  {
+   "id": "P08",
+   "name": "Harbor Parking",
+   "capacity": 16,
+   "review_sum": 30,
+   "review_count": 8,
+   "lat": 36.80292472152354,
+   "lon": 10.182994448818379,
+   "access_edge": "J4_1__J4_2",
+   "s0": 38.0,
+   "L": 107.19999999999999,
+   "D": 42.0,
+   "u_in": 12.0,
+   "u_out": 95.19999999999999,
+   "entry_pos": 50.0,
+   "exit_pos": 133.2,
+   "aisle_v": 21.0,
+   "corners": [
+    [
+     812.2,
+     248.4
+    ],
+    [
+     812.2,
+     355.6
+    ],
+    [
+     854.2,
+     355.6
+    ],
+    [
+     854.2,
+     248.4
+    ]
+   ],
+   "gate_in": [
+    812.2,
+    260.4
+   ],
+   "gate_out": [
+    812.2,
+    343.6
+   ],
+   "aisle_in": [
+    833.2,
+    260.4
+   ],
+   "aisle_out": [
+    833.2,
+    343.6
+   ],
+   "centre": [
+    833.2,
+    302.0
+   ],
+   "spaces": [
+    {
+     "code": "B2",
+     "u": 13.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 261.4,
+     "row": "B",
+     "position": 0
+    },
+    {
+     "code": "B1",
+     "u": 8.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 256.4,
+     "row": "B",
+     "position": 1
+    },
+    {
+     "code": "B3",
+     "u": 18.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 266.4,
+     "row": "B",
+     "position": 2
+    },
+    {
+     "code": "A1",
+     "u": 23.0,
+     "v": 10.0,
+     "x": 822.2,
+     "y": 271.4,
+     "row": "A",
+     "position": 3
+    },
+    {
+     "code": "B4",
+     "u": 23.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 271.4,
+     "row": "B",
+     "position": 4
+    },
+    {
+     "code": "A2",
+     "u": 28.0,
+     "v": 10.0,
+     "x": 822.2,
+     "y": 276.4,
+     "row": "A",
+     "position": 5
+    },
+    {
+     "code": "B5",
+     "u": 28.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 276.4,
+     "row": "B",
+     "position": 6
+    },
+    {
+     "code": "A3",
+     "u": 33.0,
+     "v": 10.0,
+     "x": 822.2,
+     "y": 281.4,
+     "row": "A",
+     "position": 7
+    },
+    {
+     "code": "B6",
+     "u": 33.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 281.4,
+     "row": "B",
+     "position": 8
+    },
+    {
+     "code": "A4",
+     "u": 38.0,
+     "v": 10.0,
+     "x": 822.2,
+     "y": 286.4,
+     "row": "A",
+     "position": 9
+    },
+    {
+     "code": "B7",
+     "u": 38.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 286.4,
+     "row": "B",
+     "position": 10
+    },
+    {
+     "code": "A5",
+     "u": 43.0,
+     "v": 10.0,
+     "x": 822.2,
+     "y": 291.4,
+     "row": "A",
+     "position": 11
+    },
+    {
+     "code": "B8",
+     "u": 43.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 291.4,
+     "row": "B",
+     "position": 12
+    },
+    {
+     "code": "A6",
+     "u": 48.0,
+     "v": 10.0,
+     "x": 822.2,
+     "y": 296.4,
+     "row": "A",
+     "position": 13
+    },
+    {
+     "code": "B9",
+     "u": 48.0,
+     "v": 32.0,
+     "x": 844.2,
+     "y": 296.4,
+     "row": "B",
+     "position": 14
+    },
+    {
+     "code": "A7",
+     "u": 53.0,
+     "v": 10.0,
+     "x": 822.2,
+     "y": 301.4,
+     "row": "A",
+     "position": 15
+    }
+   ]
+  }
+ ],
+ "drivers": [
+  {
+   "id": "d1",
+   "name": "Amine",
+   "rfid": "RFID_D01",
+   "plate": "107 TU 1113",
+   "married": true,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d2",
+   "name": "Sara",
+   "rfid": "RFID_D02",
+   "plate": "114 TU 1226",
+   "married": true,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d3",
+   "name": "Youssef",
+   "rfid": "RFID_D03",
+   "plate": "121 TU 1339",
+   "married": true,
+   "kids": false,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d4",
+   "name": "Ines",
+   "rfid": "RFID_D04",
+   "plate": "128 TU 1452",
+   "married": true,
+   "kids": false,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d5",
+   "name": "Karim",
+   "rfid": "RFID_D05",
+   "plate": "135 TU 1565",
+   "married": false,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d6",
+   "name": "Nour",
+   "rfid": "RFID_D06",
+   "plate": "142 TU 1678",
+   "married": false,
+   "kids": false,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d7",
+   "name": "Omar",
+   "rfid": "RFID_D07",
+   "plate": "149 TU 1791",
+   "married": false,
+   "kids": false,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d8",
+   "name": "Leila",
+   "rfid": "RFID_D08",
+   "plate": "156 TU 1904",
+   "married": true,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d9",
+   "name": "Hamza",
+   "rfid": "RFID_D09",
+   "plate": "163 TU 2017",
+   "married": false,
+   "kids": false,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d10",
+   "name": "Rim",
+   "rfid": "RFID_D10",
+   "plate": "170 TU 2130",
+   "married": true,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d11",
+   "name": "Walid",
+   "rfid": "RFID_D11",
+   "plate": "177 TU 2243",
+   "married": true,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d12",
+   "name": "Mariem",
+   "rfid": "RFID_D12",
+   "plate": "184 TU 2356",
+   "married": true,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d13",
+   "name": "Slim",
+   "rfid": "RFID_D06",
+   "plate": "191 TU 2469",
+   "married": false,
+   "kids": false,
+   "shares_tag_with": "d6",
+   "registered_tag": false
+  },
+  {
+   "id": "d14",
+   "name": "Hela",
+   "rfid": "RFID_D14",
+   "plate": "198 TU 2582",
+   "married": true,
+   "kids": false,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d15",
+   "name": "Fares",
+   "rfid": "RFID_D15",
+   "plate": "205 TU 2695",
+   "married": true,
+   "kids": true,
+   "shares_tag_with": null,
+   "registered_tag": true
+  },
+  {
+   "id": "d16",
+   "name": "Salma",
+   "rfid": "RFID_D16",
+   "plate": "212 TU 2808",
+   "married": false,
+   "kids": false,
+   "shares_tag_with": null,
+   "registered_tag": true
+  }
+ ],
+ "places": [
+  {
+   "id": "d1-work",
+   "driver": "d1",
+   "kind": "work",
+   "label": "d1 workplace",
+   "x": 460.0,
+   "y": 1034.0,
+   "lat": 36.80950035932447,
+   "lon": 10.178807299426342,
+   "edge": "J2_5__J3_5",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "13:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d1-cafe",
+   "driver": "d1",
+   "kind": "cafe",
+   "label": "d1 favourite cafe",
+   "x": 234.0,
+   "y": 1060.0,
+   "lat": 36.80973392022997,
+   "lon": 10.176271673052817,
+   "edge": "J1_5__J1_6",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d1-school",
+   "driver": "d1",
+   "kind": "school",
+   "label": "d1 children's school",
+   "x": 1166.0,
+   "y": 1060.0,
+   "lat": 36.80973392022997,
+   "lon": 10.186728326947183,
+   "edge": "J6_5__J6_6",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "15:30",
+     "to": "17:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d1-spouse",
+   "driver": "d1",
+   "kind": "spouse",
+   "label": "d1 spouse's workplace",
+   "x": 234.0,
+   "y": 260.0,
+   "lat": 36.80254743083004,
+   "lon": 10.176271673052817,
+   "edge": "J1_1__J1_2",
+   "pos": 60.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d2-work",
+   "driver": "d2",
+   "kind": "work",
+   "label": "d2 workplace",
+   "x": 1234.0,
+   "y": 1140.0,
+   "lat": 36.81045256916996,
+   "lon": 10.187491258776387,
+   "edge": "J6_5__J6_6",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "16:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d2-cafe",
+   "driver": "d2",
+   "kind": "cafe",
+   "label": "d2 favourite cafe",
+   "x": 1060.0,
+   "y": 834.0,
+   "lat": 36.80770373697449,
+   "lon": 10.185539050860484,
+   "edge": "J5_4__J6_4",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d2-cafe2",
+   "driver": "d2",
+   "kind": "cafe",
+   "label": "d2 favourite cafe (2nd)",
+   "x": 366.0,
+   "y": 740.0,
+   "lat": 36.80685932447,
+   "lon": 10.177752658368327,
+   "edge": "J2_3__J2_4",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d2-school",
+   "driver": "d2",
+   "kind": "school",
+   "label": "d2 children's school",
+   "x": 1140.0,
+   "y": 566.0,
+   "lat": 36.80529626302551,
+   "lon": 10.18643661771837,
+   "edge": "J5_3__J6_3",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "15:30",
+     "to": "17:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d2-spouse",
+   "driver": "d2",
+   "kind": "spouse",
+   "label": "d2 spouse's workplace",
+   "x": 340.0,
+   "y": 834.0,
+   "lat": 36.80770373697449,
+   "lon": 10.177460949139515,
+   "edge": "J1_4__J2_4",
+   "pos": 140.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d3-work",
+   "driver": "d3",
+   "kind": "work",
+   "label": "d3 workplace",
+   "x": 834.0,
+   "y": 1060.0,
+   "lat": 36.80973392022997,
+   "lon": 10.183003424486959,
+   "edge": "J4_5__J4_6",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "16:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d3-cafe",
+   "driver": "d3",
+   "kind": "cafe",
+   "label": "d3 favourite cafe",
+   "x": 740.0,
+   "y": 766.0,
+   "lat": 36.807092885375496,
+   "lon": 10.181948783428943,
+   "edge": "J3_4__J4_4",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d3-cafe2",
+   "driver": "d3",
+   "kind": "cafe",
+   "label": "d3 favourite cafe (2nd)",
+   "x": 966.0,
+   "y": 860.0,
+   "lat": 36.80793729787999,
+   "lon": 10.184484409802469,
+   "edge": "J5_4__J5_5",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d3-spouse",
+   "driver": "d3",
+   "kind": "spouse",
+   "label": "d3 spouse's workplace",
+   "x": 860.0,
+   "y": 166.0,
+   "lat": 36.80170301832555,
+   "lon": 10.18329513371577,
+   "edge": "J4_1__J5_1",
+   "pos": 60.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d4-work",
+   "driver": "d4",
+   "kind": "work",
+   "label": "d4 workplace",
+   "x": 566.0,
+   "y": 1140.0,
+   "lat": 36.81045256916996,
+   "lon": 10.17999657551304,
+   "edge": "J3_5__J3_6",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "08:00",
+     "to": "17:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d4-cafe",
+   "driver": "d4",
+   "kind": "cafe",
+   "label": "d4 favourite cafe",
+   "x": 740.0,
+   "y": 634.0,
+   "lat": 36.8059071146245,
+   "lon": 10.181948783428943,
+   "edge": "J3_3__J4_3",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d4-cafe2",
+   "driver": "d4",
+   "kind": "cafe",
+   "label": "d4 favourite cafe (2nd)",
+   "x": 634.0,
+   "y": 1060.0,
+   "lat": 36.80973392022997,
+   "lon": 10.180759507342245,
+   "edge": "J3_5__J3_6",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d4-spouse",
+   "driver": "d4",
+   "kind": "spouse",
+   "label": "d4 spouse's workplace",
+   "x": 566.0,
+   "y": 740.0,
+   "lat": 36.80685932447,
+   "lon": 10.17999657551304,
+   "edge": "J3_3__J3_4",
+   "pos": 140.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d5-work",
+   "driver": "d5",
+   "kind": "work",
+   "label": "d5 workplace",
+   "x": 860.0,
+   "y": 1166.0,
+   "lat": 36.81068613007546,
+   "lon": 10.18329513371577,
+   "edge": "J4_6__J5_6",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "08:00",
+     "to": "17:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d5-cafe",
+   "driver": "d5",
+   "kind": "cafe",
+   "label": "d5 favourite cafe",
+   "x": 940.0,
+   "y": 1234.0,
+   "lat": 36.81129698167445,
+   "lon": 10.184192700573657,
+   "edge": "J4_6__J5_6",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d5-school",
+   "driver": "d5",
+   "kind": "school",
+   "label": "d5 children's school",
+   "x": 860.0,
+   "y": 766.0,
+   "lat": 36.807092885375496,
+   "lon": 10.18329513371577,
+   "edge": "J4_4__J5_4",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "12:00",
+     "to": "13:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d6-work",
+   "driver": "d6",
+   "kind": "work",
+   "label": "d6 workplace",
+   "x": 1060.0,
+   "y": 434.0,
+   "lat": 36.804110492274525,
+   "lon": 10.185539050860484,
+   "edge": "J5_2__J6_2",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "09:00",
+     "to": "18:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d6-cafe",
+   "driver": "d6",
+   "kind": "cafe",
+   "label": "d6 favourite cafe",
+   "x": 834.0,
+   "y": 660.0,
+   "lat": 36.80614067553,
+   "lon": 10.183003424486959,
+   "edge": "J4_3__J4_4",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d6-cafe2",
+   "driver": "d6",
+   "kind": "cafe",
+   "label": "d6 favourite cafe (2nd)",
+   "x": 860.0,
+   "y": 566.0,
+   "lat": 36.80529626302551,
+   "lon": 10.18329513371577,
+   "edge": "J4_3__J5_3",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d7-work",
+   "driver": "d7",
+   "kind": "work",
+   "label": "d7 workplace",
+   "x": 460.0,
+   "y": 166.0,
+   "lat": 36.80170301832555,
+   "lon": 10.178807299426342,
+   "edge": "J2_1__J3_1",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "16:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d7-cafe",
+   "driver": "d7",
+   "kind": "cafe",
+   "label": "d7 favourite cafe",
+   "x": 340.0,
+   "y": 634.0,
+   "lat": 36.8059071146245,
+   "lon": 10.177460949139515,
+   "edge": "J1_3__J2_3",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d7-cafe2",
+   "driver": "d7",
+   "kind": "cafe",
+   "label": "d7 favourite cafe (2nd)",
+   "x": 660.0,
+   "y": 1234.0,
+   "lat": 36.81129698167445,
+   "lon": 10.181051216571056,
+   "edge": "J3_6__J4_6",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d8-work",
+   "driver": "d8",
+   "kind": "work",
+   "label": "d8 workplace",
+   "x": 940.0,
+   "y": 434.0,
+   "lat": 36.804110492274525,
+   "lon": 10.184192700573657,
+   "edge": "J4_2__J5_2",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "16:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d8-cafe",
+   "driver": "d8",
+   "kind": "cafe",
+   "label": "d8 favourite cafe",
+   "x": 460.0,
+   "y": 1166.0,
+   "lat": 36.81068613007546,
+   "lon": 10.178807299426342,
+   "edge": "J2_6__J3_6",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d8-school",
+   "driver": "d8",
+   "kind": "school",
+   "label": "d8 children's school",
+   "x": 1034.0,
+   "y": 940.0,
+   "lat": 36.808655946819975,
+   "lon": 10.185247341631673,
+   "edge": "J5_4__J5_5",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "12:00",
+     "to": "13:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d8-spouse",
+   "driver": "d8",
+   "kind": "spouse",
+   "label": "d8 spouse's workplace",
+   "x": 834.0,
+   "y": 940.0,
+   "lat": 36.808655946819975,
+   "lon": 10.183003424486959,
+   "edge": "J4_4__J4_5",
+   "pos": 140.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d9-work",
+   "driver": "d9",
+   "kind": "work",
+   "label": "d9 workplace",
+   "x": 1166.0,
+   "y": 740.0,
+   "lat": 36.80685932447,
+   "lon": 10.186728326947183,
+   "edge": "J6_3__J6_4",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "13:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d9-cafe",
+   "driver": "d9",
+   "kind": "cafe",
+   "label": "d9 favourite cafe",
+   "x": 660.0,
+   "y": 566.0,
+   "lat": 36.80529626302551,
+   "lon": 10.181051216571056,
+   "edge": "J3_3__J4_3",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d9-cafe2",
+   "driver": "d9",
+   "kind": "cafe",
+   "label": "d9 favourite cafe (2nd)",
+   "x": 660.0,
+   "y": 434.0,
+   "lat": 36.804110492274525,
+   "lon": 10.181051216571056,
+   "edge": "J3_2__J4_2",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d10-work",
+   "driver": "d10",
+   "kind": "work",
+   "label": "d10 workplace",
+   "x": 166.0,
+   "y": 940.0,
+   "lat": 36.808655946819975,
+   "lon": 10.175508741223613,
+   "edge": "J1_4__J1_5",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "08:00",
+     "to": "17:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d10-cafe",
+   "driver": "d10",
+   "kind": "cafe",
+   "label": "d10 favourite cafe",
+   "x": 260.0,
+   "y": 966.0,
+   "lat": 36.808889507725475,
+   "lon": 10.17656338228163,
+   "edge": "J1_5__J2_5",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d10-cafe2",
+   "driver": "d10",
+   "kind": "cafe",
+   "label": "d10 favourite cafe (2nd)",
+   "x": 460.0,
+   "y": 766.0,
+   "lat": 36.807092885375496,
+   "lon": 10.178807299426342,
+   "edge": "J2_4__J3_4",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d10-school",
+   "driver": "d10",
+   "kind": "school",
+   "label": "d10 children's school",
+   "x": 166.0,
+   "y": 340.0,
+   "lat": 36.80326607977003,
+   "lon": 10.175508741223613,
+   "edge": "J1_1__J1_2",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "15:30",
+     "to": "17:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d10-spouse",
+   "driver": "d10",
+   "kind": "spouse",
+   "label": "d10 spouse's workplace",
+   "x": 834.0,
+   "y": 460.0,
+   "lat": 36.804344053180024,
+   "lon": 10.183003424486959,
+   "edge": "J4_2__J4_3",
+   "pos": 60.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d11-work",
+   "driver": "d11",
+   "kind": "work",
+   "label": "d11 workplace",
+   "x": 166.0,
+   "y": 540.0,
+   "lat": 36.80506270212001,
+   "lon": 10.175508741223613,
+   "edge": "J1_2__J1_3",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "08:00",
+     "to": "17:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d11-cafe",
+   "driver": "d11",
+   "kind": "cafe",
+   "label": "d11 favourite cafe",
+   "x": 260.0,
+   "y": 434.0,
+   "lat": 36.804110492274525,
+   "lon": 10.17656338228163,
+   "edge": "J1_2__J2_2",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d11-cafe2",
+   "driver": "d11",
+   "kind": "cafe",
+   "label": "d11 favourite cafe (2nd)",
+   "x": 434.0,
+   "y": 660.0,
+   "lat": 36.80614067553,
+   "lon": 10.17851559019753,
+   "edge": "J2_3__J2_4",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d11-school",
+   "driver": "d11",
+   "kind": "school",
+   "label": "d11 children's school",
+   "x": 540.0,
+   "y": 634.0,
+   "lat": 36.8059071146245,
+   "lon": 10.17970486628423,
+   "edge": "J2_3__J3_3",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "12:00",
+     "to": "13:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d11-spouse",
+   "driver": "d11",
+   "kind": "spouse",
+   "label": "d11 spouse's workplace",
+   "x": 434.0,
+   "y": 260.0,
+   "lat": 36.80254743083004,
+   "lon": 10.17851559019753,
+   "edge": "J2_1__J2_2",
+   "pos": 60.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d12-work",
+   "driver": "d12",
+   "kind": "work",
+   "label": "d12 workplace",
+   "x": 540.0,
+   "y": 234.0,
+   "lat": 36.80231386992454,
+   "lon": 10.17970486628423,
+   "edge": "J2_1__J3_1",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "16:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d12-cafe",
+   "driver": "d12",
+   "kind": "cafe",
+   "label": "d12 favourite cafe",
+   "x": 966.0,
+   "y": 340.0,
+   "lat": 36.80326607977003,
+   "lon": 10.184484409802469,
+   "edge": "J5_1__J5_2",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d12-cafe2",
+   "driver": "d12",
+   "kind": "cafe",
+   "label": "d12 favourite cafe (2nd)",
+   "x": 740.0,
+   "y": 166.0,
+   "lat": 36.80170301832555,
+   "lon": 10.181948783428943,
+   "edge": "J3_1__J4_1",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d12-school",
+   "driver": "d12",
+   "kind": "school",
+   "label": "d12 children's school",
+   "x": 766.0,
+   "y": 860.0,
+   "lat": 36.80793729787999,
+   "lon": 10.182240492657755,
+   "edge": "J4_4__J4_5",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "15:30",
+     "to": "17:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d12-spouse",
+   "driver": "d12",
+   "kind": "spouse",
+   "label": "d12 spouse's workplace",
+   "x": 1034.0,
+   "y": 260.0,
+   "lat": 36.80254743083004,
+   "lon": 10.185247341631673,
+   "edge": "J5_1__J5_2",
+   "pos": 60.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d13-work",
+   "driver": "d13",
+   "kind": "work",
+   "label": "d13 workplace",
+   "x": 366.0,
+   "y": 1060.0,
+   "lat": 36.80973392022997,
+   "lon": 10.177752658368327,
+   "edge": "J2_5__J2_6",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "09:00",
+     "to": "18:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d13-cafe",
+   "driver": "d13",
+   "kind": "cafe",
+   "label": "d13 favourite cafe",
+   "x": 940.0,
+   "y": 966.0,
+   "lat": 36.808889507725475,
+   "lon": 10.184192700573657,
+   "edge": "J4_5__J5_5",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d14-work",
+   "driver": "d14",
+   "kind": "work",
+   "label": "d14 workplace",
+   "x": 660.0,
+   "y": 234.0,
+   "lat": 36.80231386992454,
+   "lon": 10.181051216571056,
+   "edge": "J3_1__J4_1",
+   "pos": 60.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "16:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d14-cafe",
+   "driver": "d14",
+   "kind": "cafe",
+   "label": "d14 favourite cafe",
+   "x": 1234.0,
+   "y": 540.0,
+   "lat": 36.80506270212001,
+   "lon": 10.187491258776387,
+   "edge": "J6_2__J6_3",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d14-cafe2",
+   "driver": "d14",
+   "kind": "cafe",
+   "label": "d14 favourite cafe (2nd)",
+   "x": 1234.0,
+   "y": 940.0,
+   "lat": 36.808655946819975,
+   "lon": 10.187491258776387,
+   "edge": "J6_4__J6_5",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d14-spouse",
+   "driver": "d14",
+   "kind": "spouse",
+   "label": "d14 spouse's workplace",
+   "x": 1234.0,
+   "y": 660.0,
+   "lat": 36.80614067553,
+   "lon": 10.187491258776387,
+   "edge": "J6_3__J6_4",
+   "pos": 60.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d15-work",
+   "driver": "d15",
+   "kind": "work",
+   "label": "d15 workplace",
+   "x": 340.0,
+   "y": 166.0,
+   "lat": 36.80170301832555,
+   "lon": 10.177460949139515,
+   "edge": "J1_1__J2_1",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "09:00",
+     "to": "18:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d15-cafe",
+   "driver": "d15",
+   "kind": "cafe",
+   "label": "d15 favourite cafe",
+   "x": 634.0,
+   "y": 660.0,
+   "lat": 36.80614067553,
+   "lon": 10.180759507342245,
+   "edge": "J3_3__J3_4",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d15-cafe2",
+   "driver": "d15",
+   "kind": "cafe",
+   "label": "d15 favourite cafe (2nd)",
+   "x": 1166.0,
+   "y": 460.0,
+   "lat": 36.804344053180024,
+   "lon": 10.186728326947183,
+   "edge": "J6_2__J6_3",
+   "pos": 60.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "15:00",
+     "to": "20:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "18:00",
+     "to": "21:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  },
+  {
+   "id": "d15-school",
+   "driver": "d15",
+   "kind": "school",
+   "label": "d15 children's school",
+   "x": 434.0,
+   "y": 940.0,
+   "lat": 36.808655946819975,
+   "lon": 10.17851559019753,
+   "edge": "J2_4__J2_5",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "15:30",
+     "to": "17:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d15-spouse",
+   "driver": "d15",
+   "kind": "spouse",
+   "label": "d15 spouse's workplace",
+   "x": 966.0,
+   "y": 1060.0,
+   "lat": 36.80973392022997,
+   "lon": 10.184484409802469,
+   "edge": "J5_5__J5_6",
+   "pos": 60.0,
+   "weight": 2,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "17:30",
+     "to": "19:30"
+    }
+   ],
+   "dwell_clock_min": [
+    20,
+    40
+   ]
+  },
+  {
+   "id": "d16-work",
+   "driver": "d16",
+   "kind": "work",
+   "label": "d16 workplace",
+   "x": 1140.0,
+   "y": 966.0,
+   "lat": 36.808889507725475,
+   "lon": 10.18643661771837,
+   "edge": "J5_5__J6_5",
+   "pos": 140.0,
+   "weight": 3,
+   "schedule": [
+    {
+     "days": "weekdays",
+     "from": "07:00",
+     "to": "16:00"
+    }
+   ],
+   "dwell_clock_min": [
+    180,
+    360
+   ]
+  },
+  {
+   "id": "d16-cafe",
+   "driver": "d16",
+   "kind": "cafe",
+   "label": "d16 favourite cafe",
+   "x": 740.0,
+   "y": 1166.0,
+   "lat": 36.81068613007546,
+   "lon": 10.181948783428943,
+   "edge": "J3_6__J4_6",
+   "pos": 140.0,
+   "weight": 1,
+   "schedule": [
+    {
+     "days": "weekend",
+     "from": "09:00",
+     "to": "13:00"
+    },
+    {
+     "days": "weekdays",
+     "from": "13:00",
+     "to": "15:00"
+    }
+   ],
+   "dwell_clock_min": [
+    45,
+    90
+   ]
+  }
+ ],
+ "border_in": [
+  "B0_1__J1_1",
+  "B0_2__J1_2",
+  "B0_3__J1_3",
+  "B0_4__J1_4",
+  "B0_5__J1_5",
+  "B0_6__J1_6",
+  "B1_0__J1_1",
+  "B1_7__J1_6",
+  "B2_0__J2_1",
+  "B2_7__J2_6",
+  "B3_0__J3_1",
+  "B3_7__J3_6",
+  "B4_0__J4_1",
+  "B4_7__J4_6",
+  "B5_0__J5_1",
+  "B5_7__J5_6",
+  "B6_0__J6_1",
+  "B6_7__J6_6",
+  "B7_1__J6_1",
+  "B7_2__J6_2",
+  "B7_3__J6_3",
+  "B7_4__J6_4",
+  "B7_5__J6_5",
+  "B7_6__J6_6"
+ ],
+ "border_out": [
+  "J1_1__B0_1",
+  "J1_1__B1_0",
+  "J1_2__B0_2",
+  "J1_3__B0_3",
+  "J1_4__B0_4",
+  "J1_5__B0_5",
+  "J1_6__B0_6",
+  "J1_6__B1_7",
+  "J2_1__B2_0",
+  "J2_6__B2_7",
+  "J3_1__B3_0",
+  "J3_6__B3_7",
+  "J4_1__B4_0",
+  "J4_6__B4_7",
+  "J5_1__B5_0",
+  "J5_6__B5_7",
+  "J6_1__B6_0",
+  "J6_1__B7_1",
+  "J6_2__B7_2",
+  "J6_3__B7_3",
+  "J6_4__B7_4",
+  "J6_5__B7_5",
+  "J6_6__B6_7",
+  "J6_6__B7_6"
+ ],
+ "emergency": {
+  "ambulance": 3,
+  "police": 3,
+  "fire": 2
+ }
+}

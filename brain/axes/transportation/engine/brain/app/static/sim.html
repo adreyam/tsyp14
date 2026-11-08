@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parking Live Sim</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { --bg:#0d1218; --panel:#151d26; --line:#26323f; --text:#e9eef4; --muted:#8b9aab;
+          --accent:#2fb380; --blue:#3b82f6; --red:#e5484d; --amber:#e8a33a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:14px system-ui, Segoe UI, Roboto, sans-serif; }
+  header { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:10px 16px; border-bottom:1px solid var(--line); }
+  header h1 { font-size:16px; margin:0 auto 0 0; }
+  header a { color:var(--muted); font-size:13px; }
+  .layout { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:12px; padding:12px 16px; }
+  @media (max-width:1050px) { .layout { grid-template-columns:1fr; } }
+  canvas { width:100%; height:auto; border-radius:12px; display:block; background:#1b232c; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; }
+  h2 { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
+  button { font:inherit; font-size:13px; padding:7px 10px; border-radius:8px; border:1px solid var(--line);
+           background:#1f2a36; color:var(--text); cursor:pointer; }
+  button:hover { border-color:#3d4f63; }
+  button.primary { background:var(--accent); color:#04140d; border-color:transparent; font-weight:600; }
+  button.small { font-size:12px; padding:4px 8px; }
+  .btns { display:flex; flex-wrap:wrap; gap:6px; }
+  label.opt { display:flex; gap:6px; align-items:center; font-size:13px; color:#c9d3de; margin-top:6px; }
+  .term { background:#0a0f14; border:1px solid var(--line); border-radius:10px; padding:10px; min-height:84px; margin-bottom:8px; }
+  .term .head { display:flex; justify-content:space-between; font-size:11px; color:var(--muted); }
+  .term .msg { font-size:15px; margin:6px 0; line-height:1.35; }
+  .term.warn .msg { color:var(--amber); }
+  .ticket { border:1px dashed var(--accent); border-radius:8px; padding:8px; font-size:12px; color:#c9d3de; }
+  .ticket b { font-size:24px; color:var(--accent); margin-right:8px; }
+  .car { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:7px 0; border-top:1px solid var(--line); }
+  .car:first-child { border-top:0; }
+  .car .dot { width:10px; height:10px; border-radius:3px; display:inline-block; margin-right:6px; }
+  .car small { color:var(--muted); display:block; }
+  .alert { font-size:12px; padding:5px 0; border-top:1px solid var(--line); }
+  .alert b { color:var(--amber); } .alert.CRITICAL b { color:#ff7b7f; }
+  #log { height:240px; overflow:auto; font:12px ui-monospace, Consolas, monospace; background:#0a0f14;
+         border-radius:10px; padding:8px; margin:0; white-space:pre-wrap; }
+  .ev { color:#9ec9ff; } .cmd { color:#7ee2b8; } .err { color:#ff8a8a; } .info { color:var(--muted); } .note { color:#f0c674; }
+  .legend { display:flex; flex-wrap:wrap; gap:10px; font-size:12px; color:var(--muted); margin-top:8px; }
+  .legend span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; background:var(--c); vertical-align:-1px; }
+  details summary { cursor:pointer; color:var(--muted); font-size:12px; }
+  input { font:inherit; padding:5px; border-radius:6px; border:1px solid var(--line); background:#0a0f14; color:var(--text); width:100%; }
+  .empty { color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Smart Parking — live simulation (lot P01)</h1>
+  <a href="/admin" target="_blank">Admin dashboard ↗</a>
+  <a href="/terminal/P01-ENT1" target="_blank">Entrance screen ↗</a>
+  <a href="/terminal/P01-EXIT1" target="_blank">Exit screen ↗</a>
+</header>
+
+<div class="layout">
+  <div>
+    <canvas id="lot" width="1000" height="580"></canvas>
+    <div class="legend">
+      <span style="--c:#2fb380">AVAILABLE</span><span style="--c:#3b82f6">RESERVED</span>
+      <span style="--c:#e5484d">OCCUPIED</span><span style="--c:#e8a33a">RELEASING</span>
+      <span style="--c:#6b7685">OUT OF SERVICE</span>
+      <span>Space colours = backend status · rings = magnetic sensor deviation · small dot = guidance LED</span>
+    </div>
+    <div class="panel" style="margin-top:12px">
+      <h2>Live traffic: gateway ⇄ backend</h2>
+      <pre id="log"></pre>
+    </div>
+  </div>
+
+  <aside>
+    <div class="panel">
+      <h2>Send a car</h2>
+      <div class="btns">
+        <button class="primary" data-spawn="V001">Registered V001</button>
+        <button class="primary" data-spawn="V002">Registered V002</button>
+        <button class="primary" data-spawn="visitor">Visitor (no tag)</button>
+        <button data-spawn="unknown">Unregistered tag</button>
+      </div>
+      <label class="opt"><input type="checkbox" id="optWrong" style="width:auto"> Driver parks in the wrong space first</label>
+      <label class="opt"><input type="checkbox" id="optUnreadable" style="width:auto"> Tag unreadable at the exit (registered)</label>
+      <label class="opt"><input type="checkbox" id="optLose" style="width:auto"> Visitor loses the temporary card</label>
+      <label class="opt"><input type="checkbox" id="optAuto" style="width:auto" checked> Driver presses "Request a ticket" automatically</label>
+      <label class="opt"><input type="checkbox" id="optAutoLeave" style="width:auto"> Cars leave automatically after 15 s</label>
+      <div class="btns" style="margin-top:10px">
+        <button id="tour">▶ Guided demo</button>
+        <button id="reset">Reset everything</button>
+      </div>
+      <details style="margin-top:10px">
+        <summary>Keys</summary>
+        <label class="opt">Device key <input id="deviceKey" value="dev-device-key"></label>
+        <label class="opt">Admin key <input id="adminKey" value="dev-admin-key"></label>
+      </details>
+    </div>
+
+    <div class="panel">
+      <h2>Terminals (live from backend)</h2>
+      <div id="termEnt" class="term"></div>
+      <div id="termExit" class="term"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Cars</h2>
+      <div id="cars"><div class="empty">No car yet. Send one above.</div></div>
+    </div>
+
+    <div class="panel">
+      <h2>Open alerts</h2>
+      <div id="alerts"><div class="empty">None</div></div>
+    </div>
+  </aside>
+</div>
+
+<script>
+// ===================================================================== config
+const CFG = { lot: "P01", gw: "GW-P01", ent: "P01-ENT1", exit: "P01-EXIT1" };
+const W = 1000, H = 580, ROAD_Y = 530, AISLE_Y = 285, FENCE_Y = 445;
+const ENT_X = 180, EXIT_X = 820, ENT_LOOP_Y = 488, EXIT_LOOP_Y = 392, SPACE_Y = 112;
+const SPEED = 170;                 // px per second
+const MAG_ON = 1200;               // firmware threshold (counts)
+const CAR_TYPES = {
+  V001:    { label: "V001", tag: "RFID_123", color: "#4f8cff", kind: "registered" },
+  V002:    { label: "V002", tag: "RFID_456", color: "#b07cff", kind: "registered" },
+  visitor: { label: "Visitor", tag: null, color: "#f2b84b", kind: "visitor" },
+  unknown: { label: "Unreg.", tag: "RFID_999", color: "#ff7a59", kind: "visitor" },
+};
+const STATUS_COLOR = { AVAILABLE: "#2fb380", RESERVED: "#3b82f6", OCCUPIED: "#e5484d",
+                       RELEASING: "#e8a33a", OUT_OF_SERVICE: "#6b7685" };
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// ===================================================================== state
+let epoch = 0;                     // bumped on reset: stops every running car script
+let cars = [], carSeq = 0, dispensePending = 0;
+let overview = null, laneView = {}, spaceViz = {}, pulses = [], claimedCards = new Set();
+let firstPoll = true;
+const barriers = { [CFG.ent]: { open: false, angle: 0 }, [CFG.exit]: { open: false, angle: 0 } };
+const mutexes = {};
+function makeMutex() {
+  let busy = false; const q = [];
+  return { async lock() { if (!busy) { busy = true; return; } await new Promise((r) => q.push(r)); },
+           unlock() { const next = q.shift(); if (next) next(); else busy = false; } };
+}
+function resetMutexes() { mutexes[CFG.ent] = makeMutex(); mutexes[CFG.exit] = makeMutex(); }
+resetMutexes();
+
+// ===================================================================== backend calls
+function log(cls, text) {
+  const el = $("log");
+  const line = document.createElement("div");
+  line.className = cls;
+  line.textContent = `${new Date().toLocaleTimeString()}  ${text}`;
+  el.appendChild(line);
+  while (el.childNodes.length > 300) el.removeChild(el.firstChild);
+  el.scrollTop = el.scrollHeight;
+}
+
+async function api(method, path, body, admin = false) {
+  const headers = { "Content-Type": "application/json" };
+  if (admin) headers["X-Admin-Key"] = $("adminKey").value;
+  const r = await fetch(path, { method, headers, body: body ? JSON.stringify(body) : undefined });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail ?? r.status));
+  return data;
+}
+
+async function sendEvent(type, body) {
+  const fields = Object.entries(body).map(([k, v]) => `${k}=${v}`).join(" ");
+  log("ev", `ESP32 → ${type}  ${fields}`);
+  const r = await fetch(`/api/gateways/${CFG.gw}/events`, {
+    method: "POST", headers: { "Content-Type": "application/json", "X-Device-Key": $("deviceKey").value },
+    body: JSON.stringify({ type, ...body }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { log("err", `        ✖ ${r.status} ${JSON.stringify(j.detail)}`); throw new Error(`event rejected (${r.status})`); }
+  log("info", `        backend → ${j.lane_state ? "lane " + j.lane_state : "space " + j.space_status}`);
+  refreshNow();
+  return j;
+}
+
+let polling = false;
+async function pollCommands() {
+  if (polling) return;
+  polling = true;
+  try {
+    const r = await fetch(`/api/gateways/${CFG.gw}/commands`, { headers: { "X-Device-Key": $("deviceKey").value } });
+    const { commands = [] } = await r.json();
+    if (firstPoll) { if (commands.length) log("info", `(ignored ${commands.length} stale commands)`); firstPoll = false; return; }
+    for (const c of commands) handleCommand(c);
+  } catch { /* backend restarting */ } finally { polling = false; }
+}
+
+function handleCommand(c) {
+  if (c.type === "OPEN_BARRIER") {
+    log("cmd", `backend → ESP32  OPEN_BARRIER ${c.lane_id}`);
+    if (barriers[c.lane_id]) barriers[c.lane_id].open = true;
+  } else if (c.type === "DISPENSE_CARD") {
+    log("cmd", `backend → ESP32  DISPENSE_CARD ${c.lane_id}`);
+    dispensePending++;
+    pulse(ENT_X + 48, ENT_LOOP_Y - 6, "#f2b84b");
+  } else if (c.type === "SPACE_INDICATOR") {
+    log("cmd", `backend → ESP32  SPACE_INDICATOR ${c.space_code} ${c.mode}${c.text ? "  “" + c.text + "”" : ""}`);
+    const sv = spaceViz[c.space_code];
+    if (sv) { sv.led = c.mode; sv.ledUntil = Date.now() + 3000; sv.ledText = c.text || ""; }
+  }
+}
+
+async function refreshTerminals() {
+  for (const lane of [CFG.ent, CFG.exit]) {
+    try { laneView[lane] = await api("GET", `/api/terminal/${lane}`); } catch {}
+  }
+  renderTerminals();
+}
+async function refreshOverview() {
+  try {
+    overview = await api("GET", `/api/admin/overview?lot_id=${CFG.lot}`, null, true);
+    if (!Object.keys(spaceViz).length) layoutSpaces();
+    renderAlerts();
+  } catch (e) { $("alerts").innerHTML = `<div class="empty">Admin API: ${esc(e.message)}</div>`; }
+}
+let refreshQueued = false;
+function refreshNow() {
+  if (refreshQueued) return;
+  refreshQueued = true;
+  setTimeout(() => { refreshQueued = false; refreshTerminals(); refreshOverview(); }, 50);
+}
+
+// ===================================================================== geometry
+function layoutSpaces() {
+  spaceViz = {};
+  const list = overview.spaces, n = list.length, start = 290, end = 730;
+  const w = Math.min(110, (end - start) / n - 14);
+  list.forEach((s, i) => {
+    spaceViz[s.code] = { x: start + ((end - start) * (i + 0.5)) / n, w, mag: 0, target: 0, led: "OFF", ledUntil: 0, car: null };
+  });
+}
+function spaceStatus(code) { return overview?.spaces.find((s) => s.code === code)?.status ?? "AVAILABLE"; }
+function pulse(x, y, color = "#9ec9ff") { pulses.push({ x, y, t0: performance.now(), color }); }
+
+// ===================================================================== car motion
+function driveTo(car, points, reverse = false) {
+  return new Promise((resolve) => {
+    car.path = points.map(([x, y]) => ({ x, y }));
+    car.reverse = reverse;
+    car.onArrive = resolve;
+  }).then(() => alive(car));
+}
+function alive(car) { if (car.epoch !== epoch) throw new Error("reset"); }
+async function wait(car, ms) { await sleep(ms); alive(car); }
+async function until(car, fn) { while (!fn()) { alive(car); await sleep(100); } alive(car); }
+function laneState(lane) { return laneView[lane]?.state; }
+
+// ===================================================================== car scripts
+function spawn(type, overrides = {}) {
+  const t = CAR_TYPES[type];
+  carSeq++;
+  const car = {
+    id: carSeq, ...t, label: t.kind === "visitor" ? `${t.label} #${carSeq}` : t.label,
+    x: -40, y: ROAD_Y, heading: 0, path: [], epoch, status: "Arriving",
+    wrongSpace: $("optWrong").checked, unreadableExit: $("optUnreadable").checked, loseCard: $("optLose").checked,
+    card: null, ticket: null, space: null, inSpace: null, phase: "arriving", leaveRequested: false, needsAdmin: false,
+    ...overrides,
+  };
+  cars.push(car);
+  log("note", `— ${car.label} arrives${car.tag ? " with tag " + car.tag : " without tag"}`);
+  runCar(car);
+}
+
+async function runCar(car) {
+  try {
+    const entered = await enter(car);
+    if (entered) {
+      await parkFlow(car);
+      car.phase = "parked";
+      car.parkedAt = Date.now();
+      car.status = `Parked in ${car.space} ✔ (validated by magnetic sensor + local RFID)`;
+      await until(car, () => car.leaveRequested || ($("optAutoLeave").checked && Date.now() - car.parkedAt > 15000));
+      await exitFlow(car);
+      log("note", `— ${car.label} left the parking lot`);
+    }
+    cars = cars.filter((c) => c !== car);
+  } catch (e) {
+    if (e.message === "reset") return;
+    car.status = "Error: " + e.message;
+    log("err", `${car.label}: ${e.message}`);
+  }
+}
+
+async function enter(car) {
+  car.status = "Driving to the entrance";
+  await driveTo(car, [[ENT_X - 110, ROAD_Y]]);
+  car.status = "Queueing for the entrance lane";
+  const m = mutexes[CFG.ent];
+  await m.lock();
+  try {
+    alive(car);
+    await driveTo(car, [[ENT_X, ROAD_Y], [ENT_X, ENT_LOOP_Y]]);
+    car.status = "On the entrance detection loop";
+    await sendEvent("LANE_VEHICLE_DETECTED", { lane_id: CFG.ent });
+
+    let res;
+    if (car.tag) {
+      await wait(car, 700);
+      pulse(ENT_X - 46, ENT_LOOP_Y);
+      car.status = `Entrance reader reads ${car.tag}`;
+      res = await sendEvent("LANE_RFID_READ", { lane_id: CFG.ent, uid: car.tag });
+    } else {
+      car.status = "Reader scanning… no tag found (3 s window)";
+      car.scanning = true;
+      await wait(car, 3000);
+      car.scanning = false;
+      res = await sendEvent("LANE_RFID_TIMEOUT", { lane_id: CFG.ent });
+    }
+    let state = res.lane_state;
+
+    if (state === "AWAITING_TICKET_REQUEST") {
+      car.status = "Terminal asks: temporary card? → press “Request a ticket”";
+      if ($("optAuto").checked) { await wait(car, 1800); await requestTicket(); }
+      await until(car, () => ["AWAITING_CARD", "BLOCKED"].includes(laneState(CFG.ent)));
+      state = laneState(CFG.ent);
+      if (state === "AWAITING_CARD") {
+        car.status = "Dispenser issuing a temporary card…";
+        await until(car, () => dispensePending > 0);
+        dispensePending--;
+        const uid = await pickCard();
+        if (!uid) {
+          res = await sendEvent("DISPENSE_FAILED", { lane_id: CFG.ent, detail: "simulated dispenser empty" });
+          state = res.lane_state;
+        } else {
+          claimedCards.add(uid);
+          car.card = uid;
+          car.status = `Driver takes card ${uid} and presents it`;
+          await wait(car, 1300);
+          pulse(ENT_X - 46, ENT_LOOP_Y);
+          res = await sendEvent("LANE_RFID_READ", { lane_id: CFG.ent, uid });
+          claimedCards.delete(uid);
+          state = res.lane_state;
+        }
+      }
+    }
+
+    const view = await api("GET", `/api/terminal/${CFG.ent}`);
+    laneView[CFG.ent] = view;
+    if (state === "TICKET_SHOWN" && view.ticket) {
+      car.ticket = view.ticket;
+      car.space = view.ticket.space;
+      car.status = `Ticket ${view.ticket.ticket_id}: go to ${car.space}. Waiting for the barrier…`;
+      await until(car, () => barriers[CFG.ent].open);
+      await wait(car, 500);
+      await driveTo(car, [[ENT_X, FENCE_Y - 70]]);
+      await sendEvent("LANE_VEHICLE_CLEARED", { lane_id: CFG.ent });
+      barriers[CFG.ent].open = false;           // firmware closes the barrier once the loop is clear
+      return true;
+    }
+
+    car.status = "Refused: " + (view.message || state);
+    await wait(car, 4000);
+    await driveTo(car, [[ENT_X, ROAD_Y]], true);
+    await sendEvent("LANE_VEHICLE_CLEARED", { lane_id: CFG.ent });
+    await driveTo(car, [[-60, ROAD_Y]]);
+    return false;
+  } finally {
+    if (car.epoch === epoch) m.unlock();
+  }
+}
+
+async function requestTicket() {
+  log("note", "— driver presses “Request a ticket” on the entrance terminal");
+  try { laneView[CFG.ent] = await api("POST", `/api/terminal/${CFG.ent}/request-ticket`); renderTerminals(); }
+  catch (e) { log("err", "request-ticket: " + e.message); }
+}
+
+async function pickCard() {
+  await refreshOverview();
+  const card = overview?.cards.find((c) => c.status === "AVAILABLE" && !claimedCards.has(c.uid));
+  return card?.uid ?? null;
+}
+
+async function parkFlow(car) {
+  const target = car.space;
+  if (car.wrongSpace) {
+    const wrong = Object.keys(spaceViz).find((code) => code !== target && !spaceViz[code].car && spaceStatus(code) === "AVAILABLE");
+    if (wrong) {
+      car.status = `Driver parks in ${wrong} by mistake (assigned ${target})`;
+      await parkAt(car, wrong);
+      car.status = `MISPLACED in ${wrong}: blinking LED tells the driver to go to ${target}`;
+      await wait(car, 6000);
+      car.status = `Moving to ${target}`;
+      await leaveSpace(car, wrong);
+    }
+  }
+  car.status = `Driving to space ${target}`;
+  await parkAt(car, target);
+}
+
+async function parkAt(car, code) {
+  const sv = spaceViz[code];
+  await driveTo(car, [[car.x, AISLE_Y], [sv.x, AISLE_Y], [sv.x, SPACE_Y]]);
+  car.inSpace = code;
+  sv.car = car;
+  sv.target = 1600 + Math.random() * 900;      // field distortion caused by the car body
+  await wait(car, 700);                          // firmware debounce (5 samples)
+  await sendEvent("SPACE_OCCUPANCY", { space_code: code, occupied: true, magnitude: Math.round(sv.target) });
+  await wait(car, 600);
+  pulse(sv.x - sv.w / 2 + 10, 182);
+  await sendEvent("SPACE_RFID_READ", { space_code: code, uid: car.card || car.tag });
+}
+
+async function leaveSpace(car, code) {
+  const sv = spaceViz[code];
+  await driveTo(car, [[sv.x, AISLE_Y]], true);
+  sv.target = 0;
+  sv.car = null;
+  car.inSpace = null;
+  await wait(car, 500);
+  await sendEvent("SPACE_OCCUPANCY", { space_code: code, occupied: false });
+}
+
+async function exitFlow(car) {
+  car.phase = "leaving";
+  car.status = "Leaving the space (session stays open)";
+  await leaveSpace(car, car.inSpace);
+  car.status = "Driving to the exit";
+  await driveTo(car, [[EXIT_X - 70, AISLE_Y]]);
+  car.status = "Queueing for the exit lane";
+  const m = mutexes[CFG.exit];
+  await m.lock();
+  try {
+    alive(car);
+    await driveTo(car, [[EXIT_X, AISLE_Y], [EXIT_X, EXIT_LOOP_Y]]);
+    car.status = "On the exit detection loop";
+    await sendEvent("LANE_VEHICLE_DETECTED", { lane_id: CFG.exit });
+
+    const uid = car.card ? (car.loseCard ? null : car.card) : (car.unreadableExit ? null : car.tag);
+    let res;
+    if (uid) {
+      await wait(car, 700);
+      pulse(EXIT_X - 46, EXIT_LOOP_Y);
+      car.status = `Exit reader reads ${uid}`;
+      res = await sendEvent("LANE_RFID_READ", { lane_id: CFG.exit, uid });
+    } else {
+      car.status = car.card ? "Card lost: exit reader finds nothing (3 s)" : "Tag unreadable: exit reader finds nothing (3 s)";
+      car.scanning = true;
+      await wait(car, 3000);
+      car.scanning = false;
+      res = await sendEvent("LANE_RFID_TIMEOUT", { lane_id: CFG.exit });
+    }
+    let state = res.lane_state;
+
+    if (state === "AWAITING_CARD_RETURN") {
+      car.status = "Inserting the card into the return unit";
+      await wait(car, 1300);
+      pulse(EXIT_X + 48, EXIT_LOOP_Y, "#f2b84b");
+      res = await sendEvent("CARD_RETURNED", { lane_id: CFG.exit, uid: car.card });
+      car.card = null;
+      state = res.lane_state;
+    }
+    if (state === "MANUAL_VERIFICATION") {
+      car.needsAdmin = true;
+      car.status = "Waiting for the administrator (manual verification)";
+    } else if (state === "EXIT_AUTHORIZED") {
+      car.status = "Exit authorized, waiting for the barrier";
+    }
+    await until(car, () => barriers[CFG.exit].open);
+    car.needsAdmin = false;
+    await wait(car, 500);
+    await driveTo(car, [[EXIT_X, FENCE_Y + 40]]);
+    await sendEvent("LANE_VEHICLE_CLEARED", { lane_id: CFG.exit });
+    barriers[CFG.exit].open = false;
+  } finally {
+    if (car.epoch === epoch) m.unlock();
+  }
+  car.status = "Gone";
+  await driveTo(car, [[EXIT_X, ROAD_Y], [W + 60, ROAD_Y]]);
+}
+
+async function adminManualExit(car) {
+  const visitor = car.kind === "visitor";
+  const body = {
+    ticket_id: car.ticket?.ticket_id, lane_id: CFG.exit, manual_vehicle_check_confirmed: true,
+    card_status: visitor ? (car.card && !car.loseCard ? "RETURNED" : "LOST") : "NOT_APPLICABLE",
+    note: "Simulator: administrator checked the ticket ID and the plate on site",
+  };
+  log("note", `— administrator authorizes a manual exit for ticket ${body.ticket_id} (card ${body.card_status})`);
+  try { await api("POST", "/api/admin/manual-exit", body, true); if (visitor) car.card = null; refreshNow(); }
+  catch (e) { log("err", "manual exit: " + e.message); }
+}
+
+// ===================================================================== drawing
+const canvas = $("lot"), ctx = canvas.getContext("2d");
+function setupCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function rr(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+function text(t, x, y, { size = 12, color = "#8b9aab", align = "center", weight = 500 } = {}) {
+  ctx.font = `${weight} ${size}px system-ui, Segoe UI, sans-serif`;
+  ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = "middle";
+  ctx.fillText(t, x, y);
+}
+
+function drawScene(now) {
+  ctx.fillStyle = "#1b232c"; ctx.fillRect(0, 0, W, H);
+
+  // road
+  ctx.fillStyle = "#2b343e"; ctx.fillRect(0, ROAD_Y - 34, W, 68);
+  ctx.strokeStyle = "#566270"; ctx.setLineDash([18, 14]); ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, ROAD_Y + 26); ctx.lineTo(W, ROAD_Y + 26); ctx.stroke(); ctx.setLineDash([]);
+  text("City street", 60, ROAD_Y + 20, { size: 11 });
+
+  // lot surface + fence
+  ctx.fillStyle = "#222c37"; rr(110, 18, 780, FENCE_Y - 18, 14); ctx.fill();
+  ctx.strokeStyle = "#3a4857"; ctx.lineWidth = 3; ctx.stroke();
+  text(`Parking lot ${CFG.lot}`, 500, AISLE_Y + 70, { size: 13, color: "#566270", weight: 700 });
+  ctx.strokeStyle = "#3a4857"; ctx.setLineDash([10, 10]); ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(150, AISLE_Y); ctx.lineTo(860, AISLE_Y); ctx.stroke(); ctx.setLineDash([]);
+
+  // lane aprons
+  for (const x of [ENT_X, EXIT_X]) { ctx.fillStyle = "#26303b"; ctx.fillRect(x - 36, FENCE_Y - 4, 72, ROAD_Y - 34 - FENCE_Y + 8); }
+
+  // detection loops (amber when the backend knows a vehicle is on them)
+  drawLoop(ENT_X, ENT_LOOP_Y, laneView[CFG.ent]?.vehicle_present);
+  drawLoop(EXIT_X, EXIT_LOOP_Y, laneView[CFG.exit]?.vehicle_present);
+
+  // spaces
+  for (const [code, sv] of Object.entries(spaceViz)) drawSpace(code, sv, now);
+
+  // equipment
+  drawBox(ENT_X - 46, ENT_LOOP_Y, 16, 16, "#9ec9ff", "RFID");
+  drawKiosk(ENT_X + 48, ENT_LOOP_Y - 4);
+  drawBox(EXIT_X - 46, EXIT_LOOP_Y, 16, 16, "#9ec9ff", "RFID");
+  drawBox(EXIT_X + 48, EXIT_LOOP_Y, 20, 26, "#f2b84b", "Card return");
+  drawBarrier(ENT_X - 38, FENCE_Y, barriers[CFG.ent]);
+  drawBarrier(EXIT_X - 38, FENCE_Y, barriers[CFG.exit]);
+  text("▲ ENTRANCE", ENT_X, ROAD_Y + 14, { size: 10, color: "#7a8899", weight: 700 });
+  text("▼ EXIT", EXIT_X, ROAD_Y + 14, { size: 10, color: "#7a8899", weight: 700 });
+
+  // RFID pulses
+  for (const p of pulses) {
+    const t = (now - p.t0) / 600;
+    if (t > 1) continue;
+    ctx.strokeStyle = p.color; ctx.globalAlpha = 1 - t; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(p.x, p.y, 8 + t * 26, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  pulses = pulses.filter((p) => now - p.t0 < 600);
+
+  for (const car of cars) drawCar(car, now);
+}
+
+function drawLoop(x, y, active) {
+  ctx.strokeStyle = active ? "#e8a33a" : "#4a5868"; ctx.lineWidth = 2; ctx.setLineDash([4, 4]);
+  rr(x - 24, y - 30, 48, 60, 8); ctx.stroke(); ctx.setLineDash([]);
+}
+
+function drawSpace(code, sv, now) {
+  const x = sv.x - sv.w / 2, y = 34, h = 160;
+  const status = spaceStatus(code);
+  const fault = overview?.spaces.find((s) => s.code === code)?.sensor_fault;
+  ctx.fillStyle = (fault ? "#6b7685" : STATUS_COLOR[status] || "#2fb380") + "33";
+  rr(x, y, sv.w, h, 8); ctx.fill();
+  ctx.strokeStyle = STATUS_COLOR[status] || "#2fb380"; ctx.lineWidth = 2; ctx.stroke();
+  text(code, sv.x, y + h + 16, { size: 13, color: "#e9eef4", weight: 700 });
+  text(status, sv.x, y + h + 31, { size: 10, color: STATUS_COLOR[status] });
+
+  // magnetic sensor at the centre of the space (rings grow with the field deviation)
+  const sx = sv.x, sy = SPACE_Y + 26;
+  const level = Math.min(1, sv.mag / 2500);
+  for (let i = 1; i <= 3; i++) {
+    ctx.strokeStyle = `rgba(232,163,58,${level * (0.9 - i * 0.22)})`; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(sx, sy, 8 + i * 9 * level, 0, Math.PI * 2); ctx.stroke();
+  }
+  ctx.fillStyle = sv.mag > MAG_ON ? "#e8a33a" : "#5c6b7b";
+  ctx.beginPath(); ctx.arc(sx, sy, 5, 0, Math.PI * 2); ctx.fill();
+  if (!sv.car || sv.mag > 50) text(`mag Δ ${Math.round(sv.mag)}`, sx, y + h - 10, { size: 10, color: sv.mag > MAG_ON ? "#f0c674" : "#6f7f90" });
+
+  // local RFID reader
+  ctx.fillStyle = "#9ec9ff55"; ctx.fillRect(x + 4, y + h - 22, 12, 12);
+
+  // guidance LED
+  let ledColor = "#3a4857";
+  if (sv.led === "ASSIGNED") ledColor = "#3b82f6";
+  else if (sv.led === "OK" && Date.now() < sv.ledUntil) ledColor = "#2fb380";
+  else if (sv.led === "WRONG") ledColor = Math.floor(now / 250) % 2 ? "#e5484d" : "#3a4857";
+  ctx.fillStyle = ledColor; ctx.beginPath(); ctx.arc(x + sv.w - 10, y + 10, 6, 0, Math.PI * 2); ctx.fill();
+  if (sv.led === "WRONG" && sv.ledText) text(sv.ledText, sv.x, y - 8, { size: 10, color: "#ff8a8a" });
+}
+
+function drawBox(x, y, w, h, color, label) {
+  ctx.fillStyle = color + "55"; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+  rr(x - w / 2, y - h / 2, w, h, 3); ctx.fill(); ctx.stroke();
+  text(label, x, y + h / 2 + 9, { size: 9 });
+}
+
+function drawKiosk(x, y) {
+  const v = laneView[CFG.ent];
+  const lit = v && v.state !== "IDLE";
+  ctx.fillStyle = "#11171e"; ctx.strokeStyle = "#5c6b7b"; ctx.lineWidth = 1.5;
+  rr(x - 13, y - 22, 26, 44, 4); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = lit ? (v.show_request_button ? "#f2b84b" : "#2fb380") : "#26303b";
+  ctx.fillRect(x - 9, y - 18, 18, 14);
+  text("Terminal", x, y + 31, { size: 9 });
+}
+
+function drawBarrier(x, y, b) {
+  ctx.fillStyle = "#c9d3de"; ctx.fillRect(x - 5, y - 5, 10, 10);
+  ctx.save(); ctx.translate(x, y); ctx.rotate(-b.angle * Math.PI / 180);
+  ctx.fillStyle = "#e9eef4"; ctx.fillRect(0, -3, 76, 6);
+  ctx.fillStyle = "#e5484d"; for (let i = 10; i < 76; i += 22) ctx.fillRect(i, -3, 10, 6);
+  ctx.restore();
+}
+
+function drawCar(car, now) {
+  ctx.save(); ctx.translate(car.x, car.y); ctx.rotate(car.heading + Math.PI / 2);
+  ctx.fillStyle = "rgba(0,0,0,.35)"; rr(-15, -24, 32, 52, 7); ctx.fill();
+  ctx.fillStyle = car.color; rr(-14, -26, 28, 52, 7); ctx.fill();
+  ctx.fillStyle = "rgba(15,22,30,.85)"; rr(-10, -16, 20, 9, 3); ctx.fill(); rr(-10, 12, 20, 6, 2); ctx.fill();
+  ctx.fillStyle = "#fff8c8"; ctx.fillRect(-11, -26, 6, 3); ctx.fillRect(5, -26, 6, 3);
+  if (car.tag) { ctx.fillStyle = "#9ec9ff"; ctx.fillRect(-3, -15, 6, 4); }          // windshield tag
+  if (car.card) { ctx.fillStyle = "#ffffff"; ctx.fillRect(4, -3, 8, 11); }           // temporary card on dashboard
+  ctx.restore();
+  if (car.scanning) { ctx.strokeStyle = `rgba(158,201,255,${0.4 + 0.4 * Math.sin(now / 120)})`; ctx.lineWidth = 2;
+                      ctx.beginPath(); ctx.arc(car.x, car.y, 36, 0, Math.PI * 2); ctx.stroke(); }
+  const w = ctx.measureText(car.label).width;
+  ctx.font = "600 11px system-ui"; const tw = ctx.measureText(car.label).width + 10;
+  ctx.fillStyle = "rgba(10,15,20,.8)"; rr(car.x - tw / 2, car.y - 46, tw, 16, 5); ctx.fill();
+  text(car.label, car.x, car.y - 38, { size: 11, color: car.color, weight: 600 });
+  if (car.needsAdmin) text("needs admin", car.x, car.y + 40, { size: 10, color: "#ff8a8a", weight: 600 });
+}
+
+// ===================================================================== animation loop
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  for (const car of cars) {
+    if (car.path.length) {
+      const t = car.path[0], dx = t.x - car.x, dy = t.y - car.y, d = Math.hypot(dx, dy), step = SPEED * dt;
+      if (d > 0.5) {
+        const target = car.reverse ? Math.atan2(-dy, -dx) : Math.atan2(dy, dx);
+        let diff = target - car.heading;
+        while (diff > Math.PI) diff -= 2 * Math.PI;
+        while (diff < -Math.PI) diff += 2 * Math.PI;
+        car.heading += diff * Math.min(1, dt * 9);
+      }
+      if (d <= step) {
+        car.x = t.x; car.y = t.y; car.path.shift();
+        if (!car.path.length && car.onArrive) { const f = car.onArrive; car.onArrive = null; f(); }
+      } else { car.x += (dx / d) * step; car.y += (dy / d) * step; }
+    }
+  }
+  for (const b of Object.values(barriers)) {
+    const target = b.open ? 85 : 0;
+    b.angle += Math.sign(target - b.angle) * Math.min(Math.abs(target - b.angle), 160 * dt);
+  }
+  for (const sv of Object.values(spaceViz)) sv.mag += (sv.target + (sv.target ? (Math.random() - 0.5) * 60 : Math.random() * 20) - sv.mag) * Math.min(1, dt * 3);
+  drawScene(now);
+  requestAnimationFrame(frame);
+}
+
+// ===================================================================== side panels
+function renderTerminals() {
+  for (const [lane, el] of [[CFG.ent, $("termEnt")], [CFG.exit, $("termExit")]]) {
+    const v = laneView[lane];
+    if (!v) { el.innerHTML = '<div class="empty">Connecting…</div>'; continue; }
+    const idle = v.kind === "ENTRANCE" ? "Welcome. Please drive up to the barrier." : "Please drive up to the barrier to exit.";
+    el.className = "term" + (["BLOCKED", "MANUAL_VERIFICATION"].includes(v.state) ? " warn" : "");
+    const sig = JSON.stringify(v);
+    if (el.dataset.sig === sig) continue;
+    el.dataset.sig = sig;
+    el.innerHTML = `
+      <div class="head"><span>${v.kind === "ENTRANCE" ? "Entrance" : "Exit"} terminal ${esc(lane)}</span><span>${esc(v.state)}</span></div>
+      <div class="msg">${esc(v.message || idle)}</div>
+      ${v.ticket ? `<div class="ticket"><b>${esc(v.ticket.space)}</b>${esc(v.ticket.ticket_id)}<br>RFID ${esc(v.ticket.rfid)} · lot ${esc(v.ticket.lot_id)} · ${esc(new Date(v.ticket.entry_time).toLocaleTimeString())}</div>` : ""}
+      ${v.show_request_button ? '<button class="primary" style="width:100%;margin-top:6px" id="reqBtn">Request a ticket</button>' : ""}`;
+    const btn = el.querySelector("#reqBtn");
+    if (btn) btn.onclick = requestTicket;
+  }
+}
+
+let carsSig = "";
+function renderCars() {
+  const sig = JSON.stringify(cars.map((c) => [c.id, c.status, c.phase, c.needsAdmin, c.ticket?.ticket_id, c.leaveRequested]));
+  if (sig === carsSig) return;
+  carsSig = sig;
+  $("cars").innerHTML = cars.length ? cars.map((c) => `
+    <div class="car">
+      <div><span class="dot" style="background:${c.color}"></span><b>${esc(c.label)}</b>
+        ${c.ticket ? `<small>${esc(c.ticket.ticket_id)} · space ${esc(c.ticket.space)}</small>` : ""}
+        <small>${esc(c.status)}</small></div>
+      <div>
+        ${c.phase === "parked" && !c.leaveRequested ? `<button class="small" data-leave="${c.id}">Leave</button>` : ""}
+        ${c.needsAdmin ? `<button class="small" data-admin="${c.id}">Admin: manual exit</button>` : ""}
+      </div>
+    </div>`).join("") : '<div class="empty">No car in the scene.</div>';
+}
+$("cars").addEventListener("click", (e) => {
+  const leave = e.target.closest("[data-leave]"), adm = e.target.closest("[data-admin]");
+  if (leave) { const car = cars.find((c) => c.id === +leave.dataset.leave); if (car) car.leaveRequested = true; }
+  if (adm) { const car = cars.find((c) => c.id === +adm.dataset.admin); if (car) adminManualExit(car); }
+});
+
+function renderAlerts() {
+  const alerts = overview?.alerts ?? [];
+  $("alerts").innerHTML = alerts.length ? alerts.slice(0, 6).map((a) => `
+    <div class="alert ${esc(a.severity)}"><b>${esc(a.type)}</b> ${esc(a.message)}</div>`).join("")
+    : '<div class="empty">None</div>';
+}
+
+// ===================================================================== controls
+document.querySelectorAll("[data-spawn]").forEach((b) => b.addEventListener("click", () => spawn(b.dataset.spawn)));
+
+$("reset").addEventListener("click", async () => {
+  epoch++;
+  cars = []; dispensePending = 0; claimedCards.clear(); spaceViz = {}; carsSig = "";
+  for (const b of Object.values(barriers)) b.open = false;
+  resetMutexes();
+  try { await api("POST", "/api/admin/reset-demo", null, true); } catch (e) { log("err", "reset: " + e.message); }
+  firstPoll = true;
+  $("log").innerHTML = "";
+  log("note", "— database reset to the demo data");
+  await refreshOverview(); await refreshTerminals();
+});
+
+$("tour").addEventListener("click", async () => {
+  const myEpoch = epoch;
+  const step = async (ms) => { await sleep(ms); if (epoch !== myEpoch) throw new Error("reset"); };
+  $("optAuto").checked = true;
+  try {
+    log("note", "=== Guided demo: registered car, visitor who parks in the wrong space, duplicate entry, both exits");
+    spawn("V001", { wrongSpace: false, unreadableExit: false, loseCard: false });
+    await step(9000);
+    spawn("visitor", { wrongSpace: true, unreadableExit: false, loseCard: false });
+    await step(16000);
+    log("note", "=== V001 is already inside: a second V001 tries to enter (should be refused)");
+    spawn("V001", { label: "V001 (copy)", wrongSpace: false });
+    await step(14000);
+    log("note", "=== Cars leave");
+    cars.filter((c) => c.phase === "parked").forEach((c, i) => setTimeout(() => (c.leaveRequested = true), i * 7000));
+  } catch {}
+});
+
+// ===================================================================== start
+setupCanvas();
+requestAnimationFrame(frame);
+setInterval(pollCommands, 300);
+setInterval(refreshTerminals, 600);
+setInterval(refreshOverview, 1200);
+setInterval(renderCars, 300);
+refreshOverview().then(refreshTerminals);
+log("note", "Simulation ready. This page plays the ESP32 gateway GW-P01: every event below is sent to the real backend.");
+</script>
+</body>
+</html>

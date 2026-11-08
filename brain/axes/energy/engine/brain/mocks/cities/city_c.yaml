@@ -1,0 +1,20 @@
+# Mock city C -- meshed grid for multi-zone coordination tests.
+# D can be relieved into B or C; A can only be relieved into B. E is a hospital.
+city_id: mock-city-c
+expose: {capacity: true, switch_effects: true, tags: true}
+zones:
+  - {zone_id: A, capacity_kw: 500, tags: [commercial],  base_kw: 330, amplitude_kw: 20, period_s: 200, noise_kw: 4, customers: 900}
+  - {zone_id: B, capacity_kw: 600, tags: [residential], base_kw: 340, amplitude_kw: 20, period_s: 240, noise_kw: 4, customers: 2600}
+  - {zone_id: C, capacity_kw: 500, tags: [residential], base_kw: 300, amplitude_kw: 10, period_s: 260, noise_kw: 3, customers: 1800}
+  - {zone_id: D, capacity_kw: 450, tags: [industrial],  base_kw: 280, amplitude_kw: 15, period_s: 220, noise_kw: 5, customers: 60}
+  - {zone_id: E, capacity_kw: 400, tags: [hospital],    base_kw: 250, amplitude_kw: 10, period_s: 300, noise_kw: 3, customers: 300}
+aggregate_meters:
+  - {sensor_id: SUB-1, zones: [A, B]}
+  - {sensor_id: SUB-2, zones: [C, D, E]}
+switches:
+  - {switch_id: T-AB, kind: tie,    from_zone: A, to_zone: B, transfer_fraction: 0.35}
+  - {switch_id: T-DB, kind: tie,    from_zone: D, to_zone: B, transfer_fraction: 0.30}
+  - {switch_id: T-DC, kind: tie,    from_zone: D, to_zone: C, transfer_fraction: 0.30}
+  - {switch_id: T-EC, kind: tie,    from_zone: E, to_zone: C, transfer_fraction: 0.30}
+  - {switch_id: F-A,  kind: feeder, from_zone: A}
+  - {switch_id: F-D,  kind: feeder, from_zone: D}

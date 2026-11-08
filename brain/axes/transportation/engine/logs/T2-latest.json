@@ -1,0 +1,29 @@
+{
+ "id": "T2",
+ "started": "2026-11-06T18:13:54.110Z",
+ "finished": "2026-11-06T18:13:59.782Z",
+ "pass": true,
+ "checks": [
+  {
+   "text": "the Brain accepted the call and dispatched a vehicle",
+   "ok": true
+  },
+  {
+   "text": "the dispatch decision appears on the timeline",
+   "ok": true
+  },
+  {
+   "text": "the Twin received the 'dispatch' actuator command",
+   "ok": true
+  },
+  {
+   "text": "signals gave the vehicle priority and the Twin received 'priority_green' commands for it",
+   "ok": true
+  },
+  {
+   "text": "the vehicle reached the scene",
+   "ok": true
+  }
+ ],
+ "log": "T2-20261106-191354.log"
+}

@@ -1,0 +1,360 @@
+SCENARIO EM03 · Earthquake M6.5 under zone F
+Result: STOPPED   Source: live   Duration: 26 s   Stopped at 26.5 s
+
+What it tests: An M6.5 earthquake shakes zone F (EARTHQUAKE trigger). Several seismic stations record strong
+  shaking.
+
+Undone on the Twin after the stop: EARTHQUAKE clear, ZONES reopen {'zone': '', 'reason': ''}
+
+WHAT HAPPENED (time from the start of the run)
+
++   0 s  EMERGENCY      Requests between axes: emergency → transportation
+                   +   0 s  asks: emergency → transportation: green_wave (unit AMB-1, kind ambulance) because
+                     AMB-1 carries a patient to hospital: it needs green along its route
+                   +   5 s  answer: transportation → emergency: green_wave completed: AMB-1 arrived
+                     (entering_depot); 1 junction(s) turned green on its way
+
++   2 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 3 readings
+                           in a row
+                   +   2 s  command: signal r3c6 east-west green -> done
+
++   3 s  TRANSPORTATION Green wave for AMB-1
+                         why: emergency asked (A2A) for AMB-1 (AMB-1 carries a patient to hospital: it needs
+                           green along its route); now at x -93, z -15, heading south, returning
+                   +   3 s  command: signal r5c4 north-south green -> done
+
++   4 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   4 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   4 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   4 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   4 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   4 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   4 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   4 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 4 readings
+                           in a row
+
++   4 s  EMERGENCY      Requests between axes: emergency → transportation
+                   +   4 s  asks: emergency → transportation: green_wave (unit POL-4, incident LOCKDOWN-F,
+                     kind police) because POL-4 (police) is on its way to LOCKDOWN-F (incident): it needs
+                     green along its route
+                   +   4 s  asks: emergency → transportation: green_wave (unit POL-1, incident LOCKDOWN-F,
+                     kind police) because POL-1 (police) is on its way to LOCKDOWN-F (incident): it needs
+                     green along its route
+                   +   4 s  asks: emergency → transportation: green_wave (unit FIRE-2, incident LOCKDOWN-F,
+                     kind fire) because FIRE-2 (fire) is on its way to LOCKDOWN-F (incident): it needs green
+                     along its route
+                   +   8 s  answer: transportation → emergency: green_wave completed: POL-1 arrived
+                     (on_scene); 4 junction(s) turned green on its way
+                   +   9 s  answer: transportation → emergency: green_wave completed: POL-4 arrived
+                     (on_scene); 0 junction(s) turned green on its way
+                   +  14 s  answer: transportation → emergency: green_wave completed: FIRE-2 arrived
+                     (on_scene); 3 junction(s) turned green on its way
+
++   5 s  TRANSPORTATION Green wave for POL-1 to LOCKDOWN-F
+                         why: emergency asked (A2A) for POL-1 (POL-1 (police) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x -192, z 86, heading west,
+                           en_route
+                   +   5 s  command: signal r6c2 east-west green -> done
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 5.2, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+
++   5 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 5 readings
+                           in a row
+
++   5 s  TRANSPORTATION Green wave for AMB-1
+                         why: AMB-1 arrived (entering_depot); 1 junction(s) given green
+                   +   5 s  command: signal r4c3 north-south green -> done
+                   +   5 s  command: signal r3c3 north-south green -> done
+                   +   5 s  command: signal r2c3 north-south green -> done
+                   +   5 s  command: signal r5c4 back to normal cycle -> done
+                   +   6 s  command: signal r6c2 back to normal cycle -> done
+
++   6 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 3 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1, SEIS-02 MMI 5.1);
+                           strongest SEIS-06
+                   +   6 s  asks: emergency → transportation: stop_traffic (zone F) because confirmed
+                     earthquake (6.9 MMI, epicentre near zone F): stop all traffic until the shaking stops
+                   +   6 s  command: ZONES lockdown {"zone": "F", "reason": "earthquake"} -> done
+                   +   6 s  command: zone F power cut water -> done
+                   +   7 s  command: signal r3c4 all red -> done
+                   +   7 s  command: signal r4c4 all red -> done
+                   +   7 s  command: signal r4c5 all red -> done
+                   +   7 s  command: signal r5c3 all red -> done
+                   +   7 s  answer: transportation → emergency: stop_traffic completed: Twin applied signal
+                     r5c3 all red: signal r5c3 set to all red (sent to the SUMO controller)
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 6.9, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.7, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.7, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.7, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  EMERGENCY      Earthquake, epicentre near zone F
+                         why: confirmed by 2 stations (SEIS-06 MMI 5.7, SEIS-10 MMI 5.1); strongest SEIS-06
+
++   7 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 6 readings
+                           in a row
+
++   8 s  EMERGENCY      Earthquake
+                         why: shaking back below MMI 5 on every station
+                   +   8 s  asks: emergency → transportation: resume_traffic because the shaking stopped:
+                     traffic can move again
+                   +   8 s  command: zone F power restore water -> done
+                   +   8 s  command: signal r3c4 back to normal cycle -> done
+                   +   8 s  command: signal r4c4 back to normal cycle -> done
+                   +   8 s  command: signal r4c5 back to normal cycle -> done
+                   +   8 s  command: signal r5c3 back to normal cycle -> done
+                   +   8 s  answer: transportation → emergency: resume_traffic completed: Twin applied signal
+                     r5c3 back to normal cycle: signal r5c3 set to back to normal cycle (sent to the SUMO
+                     controller)
+
++   8 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 10 km/h (limit 12) for 3 readings
+                           in a row
+                   +   8 s  command: signal r6c4 north-south green -> done
+
++   8 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 71 % (limit 70) and speed 12 km/h (limit 12) for 3 readings
+                           in a row
+                   +   8 s  command: signal r4c5 east-west green -> done
+
++   8 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 7 readings
+                           in a row
+
++   8 s  TRANSPORTATION Green wave for POL-1 to LOCKDOWN-F
+                         why: POL-1 arrived (on_scene); 4 junction(s) given green
+                   +   8 s  command: signal r4c3 back to normal cycle -> done
+                   +   8 s  command: signal r3c3 back to normal cycle -> done
+                   +   8 s  command: signal r2c3 back to normal cycle -> done
+
++   9 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 4 readings
+                           in a row
+
++   9 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 86 % (limit 70) and speed 2 km/h (limit 12) for 4 readings in
+                           a row
+
++   9 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 8 readings
+                           in a row
+
++  10 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 5 readings
+                           in a row
+
++  10 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 1 km/h (limit 12) for 9 readings
+                           in a row
+
++  11 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 10 readings
+                           in a row
+
++  12 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 11 readings
+                           in a row
+
++  13 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 12 readings
+                           in a row
+
++  13 s  TRANSPORTATION Green wave for FIRE-2 to LOCKDOWN-F
+                         why: emergency asked (A2A) for FIRE-2 (FIRE-2 (fire) is on its way to LOCKDOWN-F
+                           (incident): it needs green along its route); now at x 41, z -93, heading west,
+                           en_route
+                   +  13 s  command: signal r4c4 east-west green -> done
+                   +  13 s  command: signal r4c3 east-west green -> done
+
++  14 s  TRANSPORTATION Traffic jam at TRAF-08, zone G
+                         why: TRAF-08: occupancy 85 % (limit 70) and speed 6 km/h (limit 12) for 4 readings in
+                           a row
+
++  14 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 13 readings
+                           in a row
+
++  14 s  TRANSPORTATION Green wave for FIRE-2 to LOCKDOWN-F
+                         why: FIRE-2 arrived (on_scene); 3 junction(s) given green
+                   +  14 s  command: signal r4c5 back to normal cycle -> done
+                   +  14 s  command: signal r4c4 back to normal cycle -> done
+                   +  14 s  command: signal r4c3 back to normal cycle -> done
+
++  15 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 3 readings
+                           in a row
+
++  15 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 14 readings
+                           in a row
+
++  16 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 15 readings
+                           in a row
+
++  17 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 16 readings
+                           in a row
+
++  18 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 17 readings
+                           in a row
+
++  19 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 97 % (limit 70) and speed 2 km/h (limit 12) for 3 readings in
+                           a row
+
++  19 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 18 readings
+                           in a row
+
++  20 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 19 readings
+                           in a row
+
++  21 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 90 % (limit 70) and speed 8 km/h (limit 12) for 5 readings in
+                           a row
+
++  21 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 20 readings
+                           in a row
+
++  22 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 90 % (limit 70) and speed 7 km/h (limit 12) for 6 readings in
+                           a row
+
++  22 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 21 readings
+                           in a row
+
++  23 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 7 readings
+                           in a row
+
++  23 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 4 km/h (limit 12) for 22 readings
+                           in a row
+
++  24 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 95 % (limit 70) and speed 12 km/h (limit 12) for 8 readings
+                           in a row
+
++  24 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 6 km/h (limit 12) for 23 readings
+                           in a row
+
++  25 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 9 readings
+                           in a row
+
++  25 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 2 km/h (limit 12) for 24 readings
+                           in a row
+
++  26 s  TRANSPORTATION Traffic jam at TRAF-07, zone J
+                         why: TRAF-07: occupancy 85 % (limit 70) and speed 10 km/h (limit 12) for 10 readings
+                           in a row
+
++  26 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 25 readings
+                           in a row
+
++  28 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 3 km/h (limit 12) for 26 readings
+                           in a row
+
++  29 s  TRANSPORTATION Traffic jam at TRAF-09, zone G
+                         why: TRAF-09: occupancy 100 % (limit 70) and speed 5 km/h (limit 12) for 27 readings
+                           in a row
+
+BY AXIS
+  emergency       48 decision(s),  11 command(s),  0 refused / not sent
+  pollution        4 decision(s),   0 command(s),  0 refused / not sent
+  transportation  53 decision(s),  18 command(s),  0 refused / not sent
+
+Full record (every reading, verdict and answer, one JSON per line): EM03-20261108-203227.jsonl

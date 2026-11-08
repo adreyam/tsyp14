@@ -1,0 +1,695 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Shader" path="res://shaders/road_marking.gdshader" id="90_marking_shader"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/asphalt_01/asphalt_01_diff_1k.jpg" id="1_asphalt_diff"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/asphalt_01/asphalt_01_nor_gl_1k.jpg" id="2_asphalt_normal"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/asphalt_01/asphalt_01_rough_1k.jpg" id="3_asphalt_rough"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/concrete_floor_01/concrete_floor_01_diff_1k.jpg" id="4_concrete_diff"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/concrete_floor_01/concrete_floor_01_nor_gl_1k.jpg" id="5_concrete_normal"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/concrete_floor_01/concrete_floor_01_rough_1k.jpg" id="6_concrete_rough"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/leafy_grass/leafy_grass_diff_1k.jpg" id="7_grass_diff"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/leafy_grass/leafy_grass_nor_gl_1k.jpg" id="8_grass_normal"]
+[ext_resource type="Texture2D" path="res://assets/polyhaven/leafy_grass/leafy_grass_rough_1k.jpg" id="9_grass_rough"]
+[ext_resource type="Shader" path="res://shaders/city_surface_pbr.gdshader" id="10_surface_shader"]
+
+[sub_resource type="ShaderMaterial" id="AsphaltMaterial"]
+shader = ExtResource("10_surface_shader")
+shader_parameter/albedo_texture = ExtResource("1_asphalt_diff")
+shader_parameter/normal_texture = ExtResource("2_asphalt_normal")
+shader_parameter/roughness_texture = ExtResource("3_asphalt_rough")
+shader_parameter/tint = Color(0.74, 0.76, 0.8, 1)
+shader_parameter/uv_scale = Vector2(12, 12)
+shader_parameter/normal_strength = 0.72
+shader_parameter/roughness_strength = 1.05
+shader_parameter/macro_variation = 0.045
+
+[sub_resource type="ShaderMaterial" id="ConcreteMaterial"]
+shader = ExtResource("10_surface_shader")
+shader_parameter/albedo_texture = ExtResource("4_concrete_diff")
+shader_parameter/normal_texture = ExtResource("5_concrete_normal")
+shader_parameter/roughness_texture = ExtResource("6_concrete_rough")
+shader_parameter/tint = Color(0.88, 0.9, 0.94, 1)
+shader_parameter/uv_scale = Vector2(10, 10)
+shader_parameter/normal_strength = 0.55
+shader_parameter/roughness_strength = 1.0
+shader_parameter/macro_variation = 0.024
+
+[sub_resource type="ShaderMaterial" id="MarkingMaterial"]
+shader = ExtResource("90_marking_shader")
+shader_parameter/paint = Color(0.95, 0.79, 0.25, 1)
+
+[sub_resource type="BoxMesh" id="JunctionMesh"]
+material = SubResource("AsphaltMaterial")
+size = Vector3(15, 0.04, 15)
+
+[sub_resource type="BoxMesh" id="RoadHMesh"]
+material = SubResource("AsphaltMaterial")
+size = Vector3(80, 0.04, 11.5)
+
+[sub_resource type="BoxMesh" id="RoadVMesh"]
+material = SubResource("AsphaltMaterial")
+size = Vector3(11.5, 0.04, 80)
+
+[sub_resource type="BoxMesh" id="MarkHMesh"]
+material = SubResource("MarkingMaterial")
+size = Vector3(80, 0.015, 0.16)
+
+[sub_resource type="BoxMesh" id="MarkVMesh"]
+material = SubResource("MarkingMaterial")
+size = Vector3(0.16, 0.015, 80)
+
+[node name="Roads" type="Node3D"]
+
+[node name="Junctions" type="Node3D" parent="."]
+
+[node name="Junction_r1_c1" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-190, 0.135, -190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 1
+metadata/grid_column = 1
+
+[node name="Junction_r1_c2" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-95, 0.135, -190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 1
+metadata/grid_column = 2
+
+[node name="Junction_r1_c3" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(0, 0.135, -190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 1
+metadata/grid_column = 3
+
+[node name="Junction_r1_c4" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(95, 0.135, -190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 1
+metadata/grid_column = 4
+
+[node name="Junction_r1_c5" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(190, 0.135, -190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 1
+metadata/grid_column = 5
+
+[node name="Junction_r2_c1" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-190, 0.135, -95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 2
+metadata/grid_column = 1
+
+[node name="Junction_r2_c2" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-95, 0.135, -95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 2
+metadata/grid_column = 2
+
+[node name="Junction_r2_c3" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(0, 0.135, -95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 2
+metadata/grid_column = 3
+
+[node name="Junction_r2_c4" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(95, 0.135, -95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 2
+metadata/grid_column = 4
+
+[node name="Junction_r2_c5" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(190, 0.135, -95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 2
+metadata/grid_column = 5
+
+[node name="Junction_r3_c1" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-190, 0.135, 0)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 3
+metadata/grid_column = 1
+
+[node name="Junction_r3_c2" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-95, 0.135, 0)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 3
+metadata/grid_column = 2
+
+[node name="Junction_r3_c3" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(0, 0.135, 0)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 3
+metadata/grid_column = 3
+
+[node name="Junction_r3_c4" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(95, 0.135, 0)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 3
+metadata/grid_column = 4
+
+[node name="Junction_r3_c5" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(190, 0.135, 0)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 3
+metadata/grid_column = 5
+
+[node name="Junction_r4_c1" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-190, 0.135, 95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 4
+metadata/grid_column = 1
+
+[node name="Junction_r4_c2" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-95, 0.135, 95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 4
+metadata/grid_column = 2
+
+[node name="Junction_r4_c3" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(0, 0.135, 95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 4
+metadata/grid_column = 3
+
+[node name="Junction_r4_c4" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(95, 0.135, 95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 4
+metadata/grid_column = 4
+
+[node name="Junction_r4_c5" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(190, 0.135, 95)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 4
+metadata/grid_column = 5
+
+[node name="Junction_r5_c1" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-190, 0.135, 190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 5
+metadata/grid_column = 1
+
+[node name="Junction_r5_c2" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(-95, 0.135, 190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 5
+metadata/grid_column = 2
+
+[node name="Junction_r5_c3" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(0, 0.135, 190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 5
+metadata/grid_column = 3
+
+[node name="Junction_r5_c4" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(95, 0.135, 190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 5
+metadata/grid_column = 4
+
+[node name="Junction_r5_c5" type="MeshInstance3D" parent="Junctions" groups=["junctions"]]
+position = Vector3(190, 0.135, 190)
+mesh = SubResource("JunctionMesh")
+metadata/grid_row = 5
+metadata/grid_column = 5
+
+[node name="RoadSegments" type="Node3D" parent="."]
+
+[node name="Road_r1c1_r1c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c1"
+metadata/to_junction = "Junction_r1_c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c1_r1c2"]
+position = Vector3(-142.5, 0.135, -190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c1_r1c2"]
+position = Vector3(-142.5, 0.168, -190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r1c2_r1c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c2"
+metadata/to_junction = "Junction_r1_c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c2_r1c3"]
+position = Vector3(-47.5, 0.135, -190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c2_r1c3"]
+position = Vector3(-47.5, 0.168, -190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r1c3_r1c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c3"
+metadata/to_junction = "Junction_r1_c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c3_r1c4"]
+position = Vector3(47.5, 0.135, -190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c3_r1c4"]
+position = Vector3(47.5, 0.168, -190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r1c4_r1c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c4"
+metadata/to_junction = "Junction_r1_c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c4_r1c5"]
+position = Vector3(142.5, 0.135, -190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c4_r1c5"]
+position = Vector3(142.5, 0.168, -190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r2c1_r2c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c1"
+metadata/to_junction = "Junction_r2_c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c1_r2c2"]
+position = Vector3(-142.5, 0.135, -95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c1_r2c2"]
+position = Vector3(-142.5, 0.168, -95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r2c2_r2c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c2"
+metadata/to_junction = "Junction_r2_c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c2_r2c3"]
+position = Vector3(-47.5, 0.135, -95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c2_r2c3"]
+position = Vector3(-47.5, 0.168, -95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r2c3_r2c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c3"
+metadata/to_junction = "Junction_r2_c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c3_r2c4"]
+position = Vector3(47.5, 0.135, -95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c3_r2c4"]
+position = Vector3(47.5, 0.168, -95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r2c4_r2c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c4"
+metadata/to_junction = "Junction_r2_c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c4_r2c5"]
+position = Vector3(142.5, 0.135, -95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c4_r2c5"]
+position = Vector3(142.5, 0.168, -95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r3c1_r3c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c1"
+metadata/to_junction = "Junction_r3_c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c1_r3c2"]
+position = Vector3(-142.5, 0.135, 0)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c1_r3c2"]
+position = Vector3(-142.5, 0.168, 0)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r3c2_r3c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c2"
+metadata/to_junction = "Junction_r3_c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c2_r3c3"]
+position = Vector3(-47.5, 0.135, 0)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c2_r3c3"]
+position = Vector3(-47.5, 0.168, 0)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r3c3_r3c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c3"
+metadata/to_junction = "Junction_r3_c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c3_r3c4"]
+position = Vector3(47.5, 0.135, 0)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c3_r3c4"]
+position = Vector3(47.5, 0.168, 0)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r3c4_r3c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c4"
+metadata/to_junction = "Junction_r3_c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c4_r3c5"]
+position = Vector3(142.5, 0.135, 0)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c4_r3c5"]
+position = Vector3(142.5, 0.168, 0)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r4c1_r4c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c1"
+metadata/to_junction = "Junction_r4_c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c1_r4c2"]
+position = Vector3(-142.5, 0.135, 95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c1_r4c2"]
+position = Vector3(-142.5, 0.168, 95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r4c2_r4c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c2"
+metadata/to_junction = "Junction_r4_c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c2_r4c3"]
+position = Vector3(-47.5, 0.135, 95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c2_r4c3"]
+position = Vector3(-47.5, 0.168, 95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r4c3_r4c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c3"
+metadata/to_junction = "Junction_r4_c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c3_r4c4"]
+position = Vector3(47.5, 0.135, 95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c3_r4c4"]
+position = Vector3(47.5, 0.168, 95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r4c4_r4c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c4"
+metadata/to_junction = "Junction_r4_c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c4_r4c5"]
+position = Vector3(142.5, 0.135, 95)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c4_r4c5"]
+position = Vector3(142.5, 0.168, 95)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r5c1_r5c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r5_c1"
+metadata/to_junction = "Junction_r5_c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r5c1_r5c2"]
+position = Vector3(-142.5, 0.135, 190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r5c1_r5c2"]
+position = Vector3(-142.5, 0.168, 190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r5c2_r5c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r5_c2"
+metadata/to_junction = "Junction_r5_c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r5c2_r5c3"]
+position = Vector3(-47.5, 0.135, 190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r5c2_r5c3"]
+position = Vector3(-47.5, 0.168, 190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r5c3_r5c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r5_c3"
+metadata/to_junction = "Junction_r5_c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r5c3_r5c4"]
+position = Vector3(47.5, 0.135, 190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r5c3_r5c4"]
+position = Vector3(47.5, 0.168, 190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r5c4_r5c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r5_c4"
+metadata/to_junction = "Junction_r5_c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r5c4_r5c5"]
+position = Vector3(142.5, 0.135, 190)
+mesh = SubResource("RoadHMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r5c4_r5c5"]
+position = Vector3(142.5, 0.168, 190)
+mesh = SubResource("MarkHMesh")
+
+[node name="Road_r1c1_r2c1" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c1"
+metadata/to_junction = "Junction_r2c1"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c1_r2c1"]
+position = Vector3(-190, 0.135, -142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c1_r2c1"]
+position = Vector3(-190, 0.168, -142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r2c1_r3c1" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c1"
+metadata/to_junction = "Junction_r3c1"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c1_r3c1"]
+position = Vector3(-190, 0.135, -47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c1_r3c1"]
+position = Vector3(-190, 0.168, -47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r3c1_r4c1" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c1"
+metadata/to_junction = "Junction_r4c1"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c1_r4c1"]
+position = Vector3(-190, 0.135, 47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c1_r4c1"]
+position = Vector3(-190, 0.168, 47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r4c1_r5c1" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c1"
+metadata/to_junction = "Junction_r5c1"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c1_r5c1"]
+position = Vector3(-190, 0.135, 142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c1_r5c1"]
+position = Vector3(-190, 0.168, 142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r1c2_r2c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c2"
+metadata/to_junction = "Junction_r2c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c2_r2c2"]
+position = Vector3(-95, 0.135, -142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c2_r2c2"]
+position = Vector3(-95, 0.168, -142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r2c2_r3c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c2"
+metadata/to_junction = "Junction_r3c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c2_r3c2"]
+position = Vector3(-95, 0.135, -47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c2_r3c2"]
+position = Vector3(-95, 0.168, -47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r3c2_r4c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c2"
+metadata/to_junction = "Junction_r4c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c2_r4c2"]
+position = Vector3(-95, 0.135, 47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c2_r4c2"]
+position = Vector3(-95, 0.168, 47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r4c2_r5c2" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c2"
+metadata/to_junction = "Junction_r5c2"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c2_r5c2"]
+position = Vector3(-95, 0.135, 142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c2_r5c2"]
+position = Vector3(-95, 0.168, 142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r1c3_r2c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c3"
+metadata/to_junction = "Junction_r2c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c3_r2c3"]
+position = Vector3(0, 0.135, -142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c3_r2c3"]
+position = Vector3(0, 0.168, -142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r2c3_r3c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c3"
+metadata/to_junction = "Junction_r3c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c3_r3c3"]
+position = Vector3(0, 0.135, -47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c3_r3c3"]
+position = Vector3(0, 0.168, -47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r3c3_r4c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c3"
+metadata/to_junction = "Junction_r4c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c3_r4c3"]
+position = Vector3(0, 0.135, 47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c3_r4c3"]
+position = Vector3(0, 0.168, 47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r4c3_r5c3" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c3"
+metadata/to_junction = "Junction_r5c3"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c3_r5c3"]
+position = Vector3(0, 0.135, 142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c3_r5c3"]
+position = Vector3(0, 0.168, 142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r1c4_r2c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c4"
+metadata/to_junction = "Junction_r2c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c4_r2c4"]
+position = Vector3(95, 0.135, -142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c4_r2c4"]
+position = Vector3(95, 0.168, -142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r2c4_r3c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c4"
+metadata/to_junction = "Junction_r3c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c4_r3c4"]
+position = Vector3(95, 0.135, -47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c4_r3c4"]
+position = Vector3(95, 0.168, -47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r3c4_r4c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c4"
+metadata/to_junction = "Junction_r4c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c4_r4c4"]
+position = Vector3(95, 0.135, 47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c4_r4c4"]
+position = Vector3(95, 0.168, 47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r4c4_r5c4" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c4"
+metadata/to_junction = "Junction_r5c4"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c4_r5c4"]
+position = Vector3(95, 0.135, 142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c4_r5c4"]
+position = Vector3(95, 0.168, 142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r1c5_r2c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r1_c5"
+metadata/to_junction = "Junction_r2c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r1c5_r2c5"]
+position = Vector3(190, 0.135, -142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r1c5_r2c5"]
+position = Vector3(190, 0.168, -142.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r2c5_r3c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r2_c5"
+metadata/to_junction = "Junction_r3c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r2c5_r3c5"]
+position = Vector3(190, 0.135, -47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r2c5_r3c5"]
+position = Vector3(190, 0.168, -47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r3c5_r4c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r3_c5"
+metadata/to_junction = "Junction_r4c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r3c5_r4c5"]
+position = Vector3(190, 0.135, 47.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r3c5_r4c5"]
+position = Vector3(190, 0.168, 47.5)
+mesh = SubResource("MarkVMesh")
+
+[node name="Road_r4c5_r5c5" type="Node3D" parent="RoadSegments" groups=["roads"]]
+metadata/from_junction = "Junction_r4_c5"
+metadata/to_junction = "Junction_r5c5"
+
+[node name="Surface" type="MeshInstance3D" parent="RoadSegments/Road_r4c5_r5c5"]
+position = Vector3(190, 0.135, 142.5)
+mesh = SubResource("RoadVMesh")
+
+[node name="CenterLine" type="MeshInstance3D" parent="RoadSegments/Road_r4c5_r5c5"]
+position = Vector3(190, 0.168, 142.5)
+mesh = SubResource("MarkVMesh")

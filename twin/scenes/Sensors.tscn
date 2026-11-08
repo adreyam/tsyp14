@@ -1,0 +1,388 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_pack/Bus stop sign.glb" id="1_bus_sign"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Air conditioner.glb" id="2_ac_unit"]
+[ext_resource type="PackedScene" path="res://assets/poly_pizza/city_props/Power Box.glb" id="3_power_box"]
+[ext_resource type="Shader" path="res://shaders/emissive_city_marker.gdshader" id="4_emissive_shader"]
+
+[sub_resource type="SphereMesh" id="SensorBeaconMesh"]
+radius = 0.16
+height = 0.32
+
+[sub_resource type="ShaderMaterial" id="SensorMaterial"]
+shader = ExtResource("4_emissive_shader")
+shader_parameter/base_color = Color(0.04, 0.84, 1, 1)
+shader_parameter/emission_color = Color(0, 0.78, 1, 1)
+shader_parameter/emission_energy = 2.2
+
+[node name="Sensors" type="Node3D"]
+
+[node name="TrafficSensors" type="Node3D" parent="."]
+
+[node name="TrafficSensor_01" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(-184, 0.15, -184)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_01" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_01"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_02" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(-89, 0.15, -89)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_02" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_02"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_03" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(6, 0.15, 6)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_03" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_03"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_04" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(101, 0.15, 101)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_04" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_04"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_05" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(196, 0.15, 196)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_05" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_05"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_06" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(-184, 0.15, 196)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_06" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_06"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_07" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(-89, 0.15, 101)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_07" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_07"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_08" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(6, 0.15, -89)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_08" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_08"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_09" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(101, 0.15, -184)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_09" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_09"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_10" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(196, 0.15, -89)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_10" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_10"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_11" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(-184, 0.15, 6)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_11" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_11"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="TrafficSensor_12" type="Node3D" parent="TrafficSensors" groups=["sensors", "traffic_sensors"]]
+position = Vector3(196, 0.15, 101)
+metadata/type = "traffic_counting_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="SensorPole" parent="TrafficSensors/TrafficSensor_12" instance=ExtResource("1_bus_sign")]
+scale = Vector3(0.17, 0.17, 0.17)
+
+[node name="Beacon" type="MeshInstance3D" parent="TrafficSensors/TrafficSensor_12"]
+position = Vector3(0, 4.25, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensors" type="Node3D" parent="."]
+
+[node name="EnvironmentalSensor_01" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(-137, 1.15, -130)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_01" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_01"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensor_02" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(-42, 1.15, -35)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_02" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_02"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensor_03" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(53, 1.15, 60)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_03" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_03"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensor_04" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(148, 1.15, 155)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_04" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_04"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensor_05" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(-137, 1.15, 155)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_05" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_05"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensor_06" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(-42, 1.15, 60)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_06" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_06"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensor_07" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(53, 1.15, -35)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_07" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_07"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="EnvironmentalSensor_08" type="Node3D" parent="EnvironmentalSensors" groups=["sensors", "environment_sensors"]]
+position = Vector3(148, 1.15, -130)
+metadata/type = "air_quality_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryUnit" parent="EnvironmentalSensors/EnvironmentalSensor_08" instance=ExtResource("2_ac_unit")]
+scale = Vector3(0.008, 0.008, 0.008)
+
+[node name="Beacon" type="MeshInstance3D" parent="EnvironmentalSensors/EnvironmentalSensor_08"]
+position = Vector3(0, 1.55, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensors" type="Node3D" parent="."]
+
+[node name="InfrastructureSensor_01" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(-150, 0.15, 47)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_01" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_01"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensor_02" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(-55, 0.15, 142)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_02" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_02"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensor_03" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(40, 0.15, -142)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_03" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_03"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensor_04" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(135, 0.15, -47)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_04" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_04"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensor_05" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(-150, 0.15, -47)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_05" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_05"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensor_06" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(-55, 0.15, -142)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_06" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_06"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensor_07" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(40, 0.15, 142)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_07" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_07"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")
+
+[node name="InfrastructureSensor_08" type="Node3D" parent="InfrastructureSensors" groups=["sensors", "infrastructure_sensors"]]
+position = Vector3(135, 0.15, 47)
+metadata/type = "utility_telemetry_gateway"
+metadata/model_family = "external_poly_pizza"
+
+[node name="TelemetryBox" parent="InfrastructureSensors/InfrastructureSensor_08" instance=ExtResource("3_power_box")]
+scale = Vector3(4, 4, 4)
+
+[node name="Beacon" type="MeshInstance3D" parent="InfrastructureSensors/InfrastructureSensor_08"]
+position = Vector3(0, 1.9, 0)
+mesh = SubResource("SensorBeaconMesh")
+material_override = SubResource("SensorMaterial")

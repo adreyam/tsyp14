@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parking Admin</title>
+<style>
+  :root { --bg:#f4f6f8; --panel:#fff; --text:#18212b; --muted:#66768a; --line:#e2e7ed;
+          --AVAILABLE:#2fb380; --RESERVED:#3b82f6; --OCCUPIED:#e5484d; --RELEASING:#e8a33a; --OUT_OF_SERVICE:#8892a0; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui, Segoe UI, Roboto, sans-serif; background:var(--bg); color:var(--text); }
+  header { display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:14px 16px; background:var(--panel);
+           border-bottom:1px solid var(--line); }
+  header h1 { font-size:18px; margin:0 auto 0 0; }
+  main { padding:16px; display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px; overflow:auto; }
+  h2 { font-size:14px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:0 0 10px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(96px, 1fr)); gap:8px; }
+  .space { border-radius:10px; padding:10px; color:#fff; font-size:12px; }
+  .space b { display:block; font-size:22px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td, th { text-align:left; padding:6px; border-top:1px solid var(--line); vertical-align:top; }
+  .CRITICAL { color:#b4232a; font-weight:600; } .WARNING { color:#a8660f; } .INFO { color:var(--muted); }
+  button { font:inherit; font-size:12px; padding:4px 8px; border-radius:6px; border:1px solid var(--line);
+           background:#fff; cursor:pointer; margin:2px; }
+  input, select { font:inherit; padding:6px; border:1px solid var(--line); border-radius:6px; }
+  form { display:grid; gap:8px; }
+  .counts { display:flex; gap:16px; flex-wrap:wrap; font-size:13px; margin-bottom:10px; }
+  .err { color:#b4232a; font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Smart Parking - Administration</h1>
+  <label>Lot <select id="lot"></select></label>
+  <label>Admin key <input id="key" type="password" size="14"></label>
+  <span class="err" id="err"></span>
+</header>
+<main>
+  <section><h2>Spaces</h2><div class="counts" id="counts"></div><div class="grid" id="spaces"></div></section>
+  <section><h2>Lanes</h2><table id="lanes"></table></section>
+  <section style="grid-column:1/-1"><h2>Active sessions</h2><table id="sessions"></table></section>
+  <section style="grid-column:1/-1"><h2>Open alerts</h2><table id="alerts"></table></section>
+  <section>
+    <h2>Manual exit (lost card / unreadable tag)</h2>
+    <form id="manual">
+      <input name="ticket_id" placeholder="Ticket ID" required>
+      <select name="lane_id" id="exitLanes"></select>
+      <select name="card_status">
+        <option value="NOT_APPLICABLE">Registered vehicle (no card)</option>
+        <option value="RETURNED">Visitor - card returned to admin</option>
+        <option value="LOST">Visitor - card lost</option>
+      </select>
+      <input name="note" placeholder="What did you check? (plate, ticket, ID)" required>
+      <label><input type="checkbox" name="confirm"> I checked the vehicle manually</label>
+      <button>Authorize exit</button>
+    </form>
+  </section>
+  <section><h2>Temporary cards</h2><table id="cards"></table></section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+try { $("key").value = localStorage.getItem("adminKey") || "dev-admin-key"; } catch { $("key").value = "dev-admin-key"; }
+$("key").addEventListener("change", () => { try { localStorage.setItem("adminKey", $("key").value); } catch {} });
+
+async function api(method, path, body) {
+  const r = await fetch(path, { method, headers: { "Content-Type": "application/json", "X-Admin-Key": $("key").value },
+                                body: body ? JSON.stringify(body) : undefined });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail || r.status));
+  return data;
+}
+async function act(method, path, body) {
+  try { await api(method, path, body); $("err").textContent = ""; refresh(); }
+  catch (e) { $("err").textContent = e.message; }
+}
+
+async function loadLots() {
+  const d = await (await fetch("/api/city/lots")).json();
+  $("lot").innerHTML = d.lots.map((l) => `<option value="${esc(l.lot_id)}">${esc(l.lot_id)} - ${esc(l.name)}</option>`).join("");
+}
+
+function render(o) {
+  const c = o.counts;
+  $("counts").innerHTML = `<span>Total <b>${c.total}</b></span><span>Available <b>${c.available}</b></span>
+    <span>Occupied <b>${c.occupied}</b></span><span>Reserved <b>${c.reserved}</b></span><span>Out of service <b>${c.out_of_service}</b></span>`;
+  $("spaces").innerHTML = o.spaces.map((s) => `
+    <div class="space" style="background:var(--${s.sensor_fault ? "OUT_OF_SERVICE" : s.status})">
+      <b>${esc(s.code)}</b>${esc(s.status)}<br>magnet: ${s.sensor_fault ? "FAULT" : s.sensor_occupied ? "car" : "empty"}
+      ${s.occupant_ticket ? "<br>" + esc(s.occupant_ticket.slice(-6)) : ""}<br>
+      <button onclick="act('POST','/api/admin/spaces/${esc(s.id)}/service',{in_service:${s.status === "OUT_OF_SERVICE"}})">
+        ${s.status === "OUT_OF_SERVICE" ? "Enable" : "Disable"}</button>
+    </div>`).join("");
+  $("lanes").innerHTML = "<tr><th>Lane</th><th>State</th><th>Message</th><th></th></tr>" + o.lanes.map((l) => `
+    <tr><td>${esc(l.id)}</td><td>${esc(l.state)}</td><td>${esc(l.message)}</td>
+    <td><button onclick="act('POST','/api/admin/lanes/${esc(l.id)}/reset')">Reset</button>
+        <button onclick="openBarrier('${esc(l.id)}')">Open barrier</button></td></tr>`).join("");
+  $("exitLanes").innerHTML = o.lanes.filter((l) => l.kind === "EXIT").map((l) => `<option>${esc(l.id)}</option>`).join("");
+  $("sessions").innerHTML = "<tr><th>Ticket</th><th>Vehicle</th><th>RFID</th><th>Space</th><th>Status</th><th>Entry</th><th></th></tr>" +
+    o.sessions.map((s) => `<tr><td>${esc(s.ticket_id)}</td><td>${esc(s.vehicle_id)} (${esc(s.category)})</td>
+      <td>${esc(s.rfid)}</td><td>${esc(s.space)}</td><td>${esc(s.status)} ${esc(s.verification_reason || "")}</td>
+      <td>${esc(new Date(s.entry_time).toLocaleTimeString())}</td>
+      <td>${s.status === "MISPLACED" ? `<button onclick="reassign(${s.id})">Reassign</button>` : ""}
+          ${s.status === "VERIFICATION" ? `<button onclick="act('POST','/api/admin/sessions/${s.id}/verify',{note:'Checked on site'})">Verified</button>` : ""}
+          <button onclick="cancelSession(${s.id})">Cancel</button></td></tr>`).join("");
+  $("alerts").innerHTML = "<tr><th>Time</th><th>Type</th><th>Message</th><th></th></tr>" + o.alerts.map((a) => `
+    <tr><td>${esc(new Date(a.created_at).toLocaleTimeString())}</td><td class="${esc(a.severity)}">${esc(a.type)}</td>
+    <td>${esc(a.message)}</td><td>${a.type === "DUPLICATE_ENTRY" && a.lane_id ? `<button onclick="allowVisitorCard('${esc(a.lane_id)}')">Allow visitor RFID card</button> ` : ""}<button onclick="act('POST','/api/admin/alerts/${a.id}/resolve',{note:'Handled by administrator'})">Resolve</button></td></tr>`).join("");
+  $("cards").innerHTML = "<tr><th>Card</th><th>Status</th><th>Ticket</th></tr>" +
+    o.cards.map((c) => `<tr><td>${esc(c.uid)}</td><td>${esc(c.status)}</td><td>${esc(c.ticket || "")}</td></tr>`).join("");
+}
+
+function reassign(id) {
+  const code = prompt("Authorize this vehicle in which space? (usually the space it is in)");
+  if (code) act("POST", `/api/admin/sessions/${id}/reassign`, { space_code: code.trim().toUpperCase(), note: "Admin authorized" });
+}
+function cancelSession(id) {
+  const note = prompt("Reason for cancelling this session?");
+  if (note) act("POST", `/api/admin/sessions/${id}/cancel`, { note });
+}
+function allowVisitorCard(laneId) {
+  const note = prompt("Why may this car get a temporary visitor RFID card? (what did you check?)");
+  if (note) act("POST", `/api/admin/lanes/${laneId}/allow-visitor-card`, { note });
+}
+function openBarrier(id) {
+  const note = prompt("Reason for opening the barrier manually?");
+  if (note) act("POST", `/api/admin/lanes/${id}/open-barrier`, { note });
+}
+
+$("manual").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  act("POST", "/api/admin/manual-exit", { ticket_id: f.get("ticket_id"), lane_id: f.get("lane_id"),
+      card_status: f.get("card_status"), note: f.get("note"), manual_vehicle_check_confirmed: f.get("confirm") === "on" });
+});
+
+async function refresh() {
+  if (!$("lot").value) return;
+  try { render(await api("GET", `/api/admin/overview?lot_id=${encodeURIComponent($("lot").value)}`)); }
+  catch (e) { $("err").textContent = e.message; }
+}
+$("lot").addEventListener("change", refresh);
+loadLots().then(refresh);
+setInterval(refresh, 2000);
+</script>
+</body>
+</html>
