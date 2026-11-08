@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLUM Test Bench</title>
+<style>
+  :root {
+    --bg: #070b13; --panel: #0e1522; --panel2: #131c2c; --line: #1f2a3d; --line2: #2a3850;
+    --text: #e2e8f0; --muted: #8392a8; --dim: #56647a; --cyan: #22d3ee; --amber: #f59e0b; --ok: #34d399; --red: #f05252;
+    --mono: "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font: 13px/1.45 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 14px 16px 28px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  h1 { margin: 0; font-size: 19px; }
+  .sub { color: var(--muted); font-size: 12px; }
+  .badge { font: 600 10.5px var(--mono); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line2); color: var(--muted); white-space: nowrap; }
+  .badge.mock { color: #fbbf24; border-color: #f59e0b88; }
+  main { display: grid; grid-template-columns: 340px 1fr; gap: 14px; margin-top: 14px; align-items: start; }
+  @media (max-width: 1000px) { main { grid-template-columns: 1fr; } }
+  .col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .card h2 { margin: 0 0 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .9px; color: var(--muted); font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .presets { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .preset { text-align: left; padding: 8px 10px; border-radius: 9px; background: var(--panel2); border: 1px solid var(--line2); color: var(--text); cursor: pointer; font: inherit; }
+  .preset:hover { border-color: var(--cyan); }
+  .preset.on { border-color: var(--cyan); background: #10324a; }
+  .preset b { display: block; font-size: 12.5px; } .preset span { font-size: 11px; color: var(--muted); }
+  label.f { display: block; margin-top: 10px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
+  label.f .v { float: right; font: 12px var(--mono); color: var(--text); text-transform: none; letter-spacing: 0; }
+  input[type=range] { width: 100%; accent-color: #22d3ee; margin-top: 4px; }
+  select { width: 100%; margin-top: 4px; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 7px; padding: 6px; font: 12px var(--mono); }
+  .chk { display: flex; gap: 8px; align-items: center; margin-top: 12px; font-size: 12.5px; }
+  .run { width: 100%; margin-top: 14px; padding: 10px; border-radius: 10px; border: 1px solid #0e7490; background: #0c4a6e; color: #e0f2fe; font: 600 13px inherit; cursor: pointer; }
+  .run:hover { background: #075985; } .run:disabled { opacity: .5; cursor: progress; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font: 11.5px var(--mono); color: #cbd5e1; }
+  .kv span:nth-child(odd) { color: var(--muted); }
+  .note { font-size: 11.5px; color: #b9c6d8; background: #070c15; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin-top: 10px; }
+  .top { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 1250px) { .top { grid-template-columns: 1fr; } }
+  .lvl { font: 700 11px var(--mono); padding: 3px 9px; border-radius: 6px; text-transform: uppercase; letter-spacing: .5px; border: 1px solid; }
+  .big { display: flex; gap: 16px; flex-wrap: wrap; margin: 6px 0 4px; font: 12px var(--mono); color: #cbd5e1; }
+  .big b { font-size: 16px; color: #fff; }
+  .acts { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+  .act { font: 11px var(--mono); padding: 6px 8px; background: var(--panel2); border-radius: 6px; border-left: 3px solid var(--line2); color: #cbd5e1; }
+  .ev { margin: 8px 0 0; padding-left: 16px; font: 11px/1.5 var(--mono); color: #b9c6d8; max-height: 210px; overflow: auto; }
+  svg { display: block; width: 100%; height: auto; background: #0a101b; border-radius: 9px; border: 1px solid var(--line2); }
+  canvas { display: block; width: 100%; height: 260px; background: #0a101b; border-radius: 9px; border: 1px solid var(--line2); }
+  .steps { display: flex; flex-direction: column; gap: 4px; }
+  .step { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 7px; background: #0b1220;
+    font: 11.5px var(--mono); color: #cbd5e1; cursor: pointer; border: 1px solid transparent; }
+  .step:hover, .step.on { border-color: var(--line2); }
+  .step .no { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #1e293b; font-size: 10px; color: var(--muted); }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; font: 10.5px var(--mono); color: var(--muted); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+  .empty { color: var(--dim); text-align: center; padding: 18px; }
+  .err { color: #fca5a5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>PLUM Test Bench</h1>
+      <div class="sub">One algorithm: full PLUM network detection (Kilb et al. 2021) · trigger MMI ≥ 4.0 confirmed by a neighbour ≥ 3.0 within 15 s · run by the City Brain emergency agent</div>
+    </div>
+    <div style="display:flex;gap:6px"><span class="badge mock">MOCK SENSOR DATA</span><span class="badge" id="srv">server: …</span></div>
+  </header>
+
+  <main>
+    <div class="col">
+      <div class="card">
+        <h2>Simulated input</h2>
+        <div class="presets" id="presets">
+          <button class="preset on" data-p="local"><b>Local quake</b><span>epicentre under the network</span></button>
+          <button class="preset" data-p="distant"><b>Distant quake</b><span>epicentre tens of km away</span></button>
+          <button class="preset" data-p="spike"><b>Isolated spike</b><span>one sensor bumped, rest quiet</span></button>
+          <button class="preset" data-p="clipped"><b>Clipped sensor</b><span>spike + clipping flag</span></button>
+        </div>
+        <label class="f">Magnitude <span class="v" id="v-mag">6.5</span><input type="range" id="mag" min="4" max="7.5" step="0.1" value="6.5"></label>
+        <label class="f">Epicentre distance <span class="v" id="v-dist">0 km</span><input type="range" id="dist" min="0" max="80" step="1" value="0"></label>
+        <label class="f">Epicentre direction
+          <select id="bearing"><option value="0">North</option><option value="90">East</option><option value="180">South</option><option value="270">West</option></select></label>
+        <label class="chk"><input type="checkbox" id="stream" checked> Stream sensors one at a time (each sends its own packet)</label>
+        <label class="f">Arrival order
+          <select id="order"><option value="nearest">nearest to the epicentre first</option><option value="farthest">farthest first</option><option value="id">by sensor id</option></select></label>
+        <button class="run" id="run">Run PLUM</button>
+        <div class="note">The page only sends simulation settings. The server builds mock accelerograms, feeds them to the emergency agent's PLUM stream and returns what the algorithm concluded after each packet.</div>
+      </div>
+      <div class="card">
+        <h2>Algorithm settings <span class="badge">plum_engine.PlumConfig</span></h2>
+        <div class="kv" id="cfg"><span>loading…</span><span></span></div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="top">
+        <div class="card">
+          <h2>Decision <span id="b-level"></span></h2>
+          <div id="decision"><div class="empty">Run a simulation.</div></div>
+        </div>
+        <div class="card">
+          <h2>Station network <span class="badge" id="b-step">final state</span></h2>
+          <svg id="net" viewBox="0 0 420 300"></svg>
+          <div class="legend"><span><i style="background:#64748b"></i>MMI &lt; 3</span><span><i style="background:#22c55e"></i>3–4</span><span><i style="background:#facc15"></i>4–5</span>
+            <span><i style="background:#f97316"></i>5–6</span><span><i style="background:#ef4444"></i>≥ 6</span><span>— — trigger → confirm</span><span>✕ suppressed</span><span>◌ pending</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Packets as they arrive <span class="badge">click a step to see the network at that moment</span></h2>
+        <div class="steps" id="steps"><div class="empty">—</div></div>
+      </div>
+      <div class="card">
+        <h2>Per-second intensity (MMI) per station <span class="badge">station_intensity()</span></h2>
+        <canvas id="chart" width="1000" height="260"></canvas>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const LVL = { low: "#22c55e", watch: "#facc15", warning: "#f97316", critical: "#ef4444" };
+const MMI_COLOR = m => m >= 6 ? "#ef4444" : m >= 5 ? "#f97316" : m >= 4 ? "#facc15" : m >= 3 ? "#22c55e" : "#64748b";
+const PALETTE = ["#22d3ee", "#a78bfa", "#f472b6", "#34d399", "#fbbf24", "#60a5fa", "#fb7185", "#4ade80"];
+let preset = "local", last = null;
+
+document.querySelectorAll(".preset").forEach(b => b.addEventListener("click", () => {
+  preset = b.dataset.p;
+  document.querySelectorAll(".preset").forEach(x => x.classList.toggle("on", x === b));
+  if (preset === "distant" && +$("dist").value < 20) { $("dist").value = 40; }
+  if (preset === "local") $("dist").value = 0;
+  syncLabels();
+}));
+["mag", "dist"].forEach(id => $(id).addEventListener("input", syncLabels));
+function syncLabels() { $("v-mag").textContent = (+$("mag").value).toFixed(1); $("v-dist").textContent = $("dist").value + " km"; }
+$("run").addEventListener("click", run);
+
+async function run() {
+  $("run").disabled = true;
+  try {
+    const body = { preset, magnitude: +$("mag").value, distance_km: +$("dist").value, bearing_deg: +$("bearing").value,
+      stream: $("stream").checked, order: $("order").value };
+    const r = await fetch("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const res = await r.json();
+    if (!r.ok) throw new Error(res.error || r.status);
+    last = res;
+    renderCfg(res.thresholds); renderDecision(res.final); renderSteps(res.steps); renderNet(res, res.steps.length - 1); renderChart(res);
+  } catch (e) {
+    $("decision").innerHTML = `<div class="err">Run failed: ${esc(e.message)} — is python src/plum_dashboard.py running?</div>`;
+  } finally { $("run").disabled = false; }
+}
+
+function renderCfg(t) {
+  $("cfg").innerHTML = `<span>trigger (primary)</span><span>MMI ≥ ${t.primary_mmi}</span><span>confirmation (secondary)</span><span>MMI ≥ ${t.secondary_mmi}</span>
+    <span>confirmation window</span><span>${t.confirm_window_s} s</span><span>neighbour distance cap</span><span>${t.max_neighbor_km} km</span>
+    <span>critical (merged result)</span><span>confirmed + peak MMI ≥ 6</span>`;
+}
+
+function plumState(s) {
+  const det = (s.plumDetections || [])[0];
+  if (det) return `confirmed: ${det.trigger_station} → ${det.confirming_station}`;
+  if ((s.plumPending || []).length) return `${s.plumPending.length} trigger pending`;
+  if ((s.plumSuppressed || []).length) return `${s.plumSuppressed.length} trigger suppressed`;
+  return "no trigger";
+}
+
+function renderDecision(f) {
+  const lc = LVL[f.risk_level] || "#64748b", ha = f.hazard_assessment || {};
+  $("b-level").innerHTML = `<span class="lvl" style="color:${lc};border-color:${lc}88">${esc(f.risk_level)}</span>`;
+  $("decision").innerHTML = `
+    <div class="big"><span>risk index <b>${(f.risk_score ?? 0).toFixed(2)}</b></span><span>peak MMI <b>${(f.peakMMI ?? 0).toFixed(2)}</b></span>
+      <span>sources <b>${ha.independent_source_count ?? 0}</b></span><span>severity <b>${f.severity}/5</b></span></div>
+    <div style="font:12px var(--mono);color:#a5f3fc">${esc(plumState(f))}${f.requires_human_approval ? ` · <span style="color:#fbbf24">operator approval required</span>` : ""}</div>
+    <div class="acts">${(f.actions || []).map(a => `<div class="act" style="border-left-color:${a.priority === 0 ? "#f87171" : a.priority === 1 ? "#fbbf24" : "#475569"}">
+      <b style="color:#67e8f9">${esc(a.type)}</b> · ${esc(a.resource)}${(a.units || []).length ? ` · [${a.units.map(esc).join(", ")}]` : ""}<br>${esc(a.detail)}</div>`).join("") || `<div class="act">no action</div>`}</div>
+    <ul class="ev">${(f.evidence || []).map(e => `<li>${esc(e)}</li>`).join("")}</ul>`;
+}
+
+function renderSteps(steps) {
+  $("steps").innerHTML = steps.map((s, i) => `<div class="step${i === steps.length - 1 ? " on" : ""}" data-i="${i}">
+    <span class="no">${i + 1}</span><span>+ ${esc(s.added)} <span style="color:var(--muted)">· ${esc(plumState(s))}</span></span>
+    <span class="lvl" style="color:${LVL[s.risk_level]};border-color:${LVL[s.risk_level]}88">${esc(s.risk_level)}</span></div>`).join("");
+  document.querySelectorAll(".step").forEach(el => el.addEventListener("click", () => {
+    document.querySelectorAll(".step").forEach(x => x.classList.toggle("on", x === el));
+    renderNet(last, +el.dataset.i);
+  }));
+}
+
+function renderNet(res, k) {
+  const svg = $("net"), st = res.stations, s = res.steps[k], peaks = s.stationPeakMMI || {};
+  const epi = res.simulation.epicenter;
+  const pts = st.map(x => [x.lon, x.lat]).concat(res.simulation.preset === "spike" || res.simulation.preset === "clipped" ? [] : [[epi[1], epi[0]]]);
+  const lons = pts.map(p => p[0]), lats = pts.map(p => p[1]);
+  const pad = .004, x0 = Math.min(...lons) - pad, x1 = Math.max(...lons) + pad, y0 = Math.min(...lats) - pad, y1 = Math.max(...lats) + pad;
+  const sc = Math.min(380 / (x1 - x0), 260 / (y1 - y0));
+  const X = lon => 20 + (lon - x0) * sc, Y = lat => 280 - (lat - y0) * sc;
+  const pos = Object.fromEntries(st.map(x => [x.sensor_id, [X(x.lon), Y(x.lat)]]));
+  let h = "";
+  if (pts.length > st.length) {
+    const ex = X(epi[1]), ey = Y(epi[0]);
+    h += `<circle cx="${ex}" cy="${ey}" r="7" fill="none" stroke="#f97316" stroke-width="2"/><path d="M${ex - 4} ${ey} h8 M${ex} ${ey - 4} v8" stroke="#f97316"/>
+      <text x="${ex}" y="${ey - 12}" text-anchor="middle" fill="#fdba74" font-size="9" font-family="Consolas,monospace">simulated epicentre (${res.simulation.distance_km} km)</text>`;
+  }
+  for (const d of s.plumDetections || []) {
+    const a = pos[d.trigger_station], c = pos[d.confirming_station];
+    if (a && c) h += `<line x1="${a[0]}" y1="${a[1]}" x2="${c[0]}" y2="${c[1]}" stroke="#facc15" stroke-width="2" stroke-dasharray="5 3"/>`;
+  }
+  const sup = new Set((s.plumSuppressed || []).map(x => x.station)), pend = new Set((s.plumPending || []).map(x => x.station));
+  for (const x of st) {
+    const [px, py] = pos[x.sensor_id], m = peaks[x.sensor_id], has = m !== undefined;
+    h += `<g transform="translate(${px},${py})" opacity="${has ? 1 : .3}"><path d="M0 -9 L8 6 L-8 6 Z" fill="${has ? MMI_COLOR(m) : "#334155"}" stroke="#0b1120"/>
+      <text y="18" text-anchor="middle" fill="#cbd5e1" font-size="9" font-family="Consolas,monospace">${esc(x.sensor_id.replace("MOCK-SEIS-", "S"))}${has ? " " + m.toFixed(1) : " (no data yet)"}</text>
+      ${sup.has(x.sensor_id) ? `<path d="M-10 -12 L10 8 M10 -12 L-10 8" stroke="#94a3b8" stroke-width="1.8"/>` : ""}
+      ${pend.has(x.sensor_id) ? `<circle r="13" fill="none" stroke="#fbbf24" stroke-dasharray="3 2"/>` : ""}</g>`;
+  }
+  svg.innerHTML = h;
+  $("b-step").textContent = k === res.steps.length - 1 ? "final state" : `after packet ${k + 1}`;
+}
+
+function renderChart(res) {
+  const cv = $("chart"), ctx = cv.getContext("2d"), W = cv.width, H = cv.height, L = 34, B = 22;
+  ctx.clearRect(0, 0, W, H);
+  const ids = Object.keys(res.mmi_series), n = Math.max(...ids.map(i => res.mmi_series[i].length));
+  const X = t => L + t / Math.max(1, n - 1) * (W - L - 10), Y = m => H - B - (Math.min(m, 9) - 1) / 8 * (H - B - 10);
+  ctx.font = "11px Consolas, monospace"; ctx.fillStyle = "#56647a"; ctx.strokeStyle = "#1f2a3d";
+  for (let m = 1; m <= 9; m++) { ctx.beginPath(); ctx.moveTo(L, Y(m)); ctx.lineTo(W - 10, Y(m)); ctx.stroke(); ctx.fillText(m, 12, Y(m) + 4); }
+  for (let t = 0; t < n; t += 4) ctx.fillText(t + " s", X(t) - 8, H - 6);
+  const thr = (m, col, label) => { ctx.setLineDash([6, 4]); ctx.strokeStyle = col; ctx.beginPath(); ctx.moveTo(L, Y(m)); ctx.lineTo(W - 10, Y(m)); ctx.stroke();
+    ctx.setLineDash([]); ctx.fillStyle = col; ctx.fillText(label, W - 170, Y(m) - 4); };
+  thr(res.thresholds.primary_mmi, "#f87171", `trigger MMI ${res.thresholds.primary_mmi}`);
+  thr(res.thresholds.secondary_mmi, "#fbbf24", `confirmation MMI ${res.thresholds.secondary_mmi}`);
+  const det = (res.final.plumDetections || [])[0];
+  if (det) { ctx.strokeStyle = "#facc15"; ctx.beginPath(); ctx.moveTo(X(det.detection_time_s), 8); ctx.lineTo(X(det.detection_time_s), H - B); ctx.stroke();
+    ctx.fillStyle = "#facc15"; ctx.fillText("event declared", X(det.detection_time_s) + 4, 18); }
+  ids.forEach((id, k) => {
+    const s = res.mmi_series[id]; ctx.strokeStyle = PALETTE[k % PALETTE.length]; ctx.lineWidth = 1.6; ctx.beginPath();
+    s.forEach((m, t) => t ? ctx.lineTo(X(t), Y(m)) : ctx.moveTo(X(t), Y(m))); ctx.stroke(); ctx.lineWidth = 1;
+    ctx.fillStyle = PALETTE[k % PALETTE.length]; ctx.fillText(id.replace("MOCK-SEIS-", "S"), L + 6 + k * 40, 18);
+  });
+}
+
+fetch("/api/health").then(r => r.json()).then(h => { $("srv").textContent = h.engine; }).catch(() => { $("srv").textContent = "server offline"; });
+syncLabels(); run();
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "scenarios": {
+    "active_fire": {
+      "id": "evt-fire-structural-001",
+      "source": "cv_camera_edge",
+      "kind": "vision_fire_smoke",
+      "lat": 36.8010,
+      "lon": 10.1840,
+      "data": {
+        "camera_id": "CAM-F4-02",
+        "block_id": "F4",
+        "fire_detected": true,
+        "smoke_detected": true,
+        "confidence": 0.94,
+        "flame_area_pct": 14.2
+      }
+    },
+    "smoke_plume": {
+      "id": "evt-smoke-recon-002",
+      "source": "cv_camera_edge",
+      "kind": "vision_fire_smoke",
+      "lat": 36.8040,
+      "lon": 10.1810,
+      "data": {
+        "camera_id": "CAM-B6-01",
+        "block_id": "B6",
+        "fire_detected": false,
+        "smoke_detected": true,
+        "confidence": 0.78,
+        "flame_area_pct": 0.0
+      }
+    },
+    "clear_nominal": {
+      "id": "evt-fire-nominal-003",
+      "source": "cv_camera_edge",
+      "kind": "vision_fire_smoke",
+      "lat": 36.8000,
+      "lon": 10.1800,
+      "data": {
+        "camera_id": "CAM-A1-01",
+        "block_id": "A1",
+        "fire_detected": false,
+        "smoke_detected": false,
+        "confidence": 0.12,
+        "flame_area_pct": 0.0
+      }
+    }
+  }
+}
